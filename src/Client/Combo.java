@@ -1,6 +1,8 @@
 package Client;
 
 
+
+
 //그냥 간단한 프레임위의 목표란( 콤보박스포함)
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,7 +18,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 
 
 
@@ -45,7 +49,7 @@ public class Combo extends JFrame implements ActionListener{
 	private JButton buttonUpload = new JButton("업로드");
 	 
 	private JButton buttonClose = new JButton("홈으로");
-
+	private JButton buttonclear = new JButton("선택완료");
 
 
 	private JPanel panelWest = new JPanel(new GridLayout(7,1)); //사이드바 
@@ -61,15 +65,15 @@ public class Combo extends JFrame implements ActionListener{
 	private JLabel today3 = new JLabel("오늘의 목표를 3개 선택하세요");
 	private JLabel waterchecklabel = new JLabel("물마신 횟수를 체크해보세요");
 
-	private JButton fullcup = new JButton(new ImageIcon("full.JPG"));
+	private JButton fullcup = new JButton(new ImageIcon("full2.PNG"));
 
-	private JButton cupb1 = new JButton(new ImageIcon("empty.JPG"));
+	private JButton cupb1 = new JButton(new ImageIcon("empty2.PNG"));
 
-	private JButton cupb2= new JButton(new ImageIcon("empty.JPG"));
-	private JButton cupb3 = new JButton(new ImageIcon("empty.JPG"));
+	private JButton cupb2= new JButton(new ImageIcon("empty2.PNG"));
+	private JButton cupb3 = new JButton(new ImageIcon("empty2.PNG"));
 
-	private JButton cupb4 = new JButton(new ImageIcon("empty.JPG"));
-	private JButton cupb5 = new JButton(new ImageIcon("empty.JPG"));
+	private JButton cupb4 = new JButton(new ImageIcon("empty2.PNG"));
+	private JButton cupb5 = new JButton(new ImageIcon("empty2.PNG"));
 
 
 
@@ -166,6 +170,8 @@ public class Combo extends JFrame implements ActionListener{
 		this.panelSouth.add(buttonUpload);
 		
 		this.panelSouth.add(buttonClose);
+		this.panelCombo.add(buttonclear);
+		
 
 		this.add(panelWest, BorderLayout.WEST);
 		this.add(panelCenter, BorderLayout.CENTER);
@@ -195,6 +201,8 @@ public class Combo extends JFrame implements ActionListener{
 	public void eventInit(){
 
 
+		
+		
 		cupb1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if((e.getSource()).equals(cupb1)){
@@ -210,6 +218,35 @@ public class Combo extends JFrame implements ActionListener{
 			}
 
 		});
+		
+		buttonclear.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 String msg = buttonclear.getText();
+	               if(JOptionPane.showConfirmDialog(null, msg, "선택완료!",  JOptionPane.OK_CANCEL_OPTION)==0) {
+	                  //System.out.println("확인");
+				
+			}
+			
+		}
+			
+		});
+		
+		this.buttonClose.addActionListener(new ActionListener(){
+
+			//버튼No가 눌렸을때의 이벤트처리
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//다이얼로그창 닫기 . - 클래스.this 는 인스턴스 스스로를 가키림
+				// JDialog를 상속받아 만든 클래스로 인스턴화되어있기떄문에
+				//이 인스턴스는 여러가지 메소드를 쓸수있다.
+				//클래스에 . 찍으면 JDialog를 상속받은 클래스를 가리키기 때문에 클래스에 . 찍어서 쓸수있는 Static Field만 보인다.
+				Combo.this.dispose();
+				
+			}
+		});
+	
 
 		//업로드버튼 누를시
 		//		buttonUpload.addActionListener(new ActionListener(){

@@ -32,6 +32,7 @@ public class SingUp extends  JDialog {
 	private JLabel gender = new JLabel("성별 : ");
 	private JRadioButton male = new JRadioButton("남자");
 	private JRadioButton female = new JRadioButton("여자");
+	
 	private JLabel id = new JLabel("ID : ");
 	private JTextField inputId = new JTextField();
 	private JLabel pw = new JLabel("PW : ");
