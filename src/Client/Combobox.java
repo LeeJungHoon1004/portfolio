@@ -1,9 +1,11 @@
 package Client;
 
+//콤보박스 저번 메인 포함한 목표란
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -225,9 +227,15 @@ public class Combobox extends JFrame{
 		comp();
 		setVisible(true);
 
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//
+////			if(e.getSource()==bt){ JOptionPane }
 
 
-	}
+		}
+
+	
 
 	public static void main(String[] args) {
 		try {
