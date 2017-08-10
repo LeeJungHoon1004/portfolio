@@ -1,7 +1,7 @@
 package Client;
 
 
-
+//그냥 간단한 프레임위의 목표란( 콤보박스포함)
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
