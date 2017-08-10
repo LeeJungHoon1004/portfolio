@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 
 public class Combo extends JFrame implements ActionListener{
 
-
+	Container con;
 
 
 	private Combo self = this;
@@ -38,17 +38,13 @@ public class Combo extends JFrame implements ActionListener{
 	private JButton buttonInfo = new JButton("info");
 	private JButton buttonDailyGoal = new JButton("하루목표");
 	private JButton buttonGoal = new JButton("목표");
-	private JButton buttonphoto = new JButton("사진"); // 나자신선택
+	private JButton buttonphoto = new JButton("사진"); 
 	private JButton buttonvideo = new JButton("비디오");
 	private JButton buttonCommunity = new JButton("커뮤니티");
 
 	private JButton buttonUpload = new JButton("업로드");
-	private JButton buttonRemove = new JButton("사진삭제"); //사진삭제시 id와 패스워드 비번확인 필요함.
-	private JButton buttonClose = new JButton("닫기");
-
-
-
-
+	 
+	private JButton buttonClose = new JButton("홈으로");
 
 
 
@@ -65,13 +61,18 @@ public class Combo extends JFrame implements ActionListener{
 	private JLabel today3 = new JLabel("오늘의 목표를 3개 선택하세요");
 	private JLabel waterchecklabel = new JLabel("물마신 횟수를 체크해보세요");
 
-	private JButton cupb1 = new JButton(new ImageIcon("empty.JPG"));
-			
-	private JButton cupb2= new JButton("컵2");
-	private JButton cupb3 = new JButton("컵3");
+	private JButton fullcup = new JButton(new ImageIcon("full.JPG"));
 
-	private JButton cupb4 = new JButton("컵4");
-	private JButton cupb5 = new JButton("컵5");
+	private JButton cupb1 = new JButton(new ImageIcon("empty.JPG"));
+
+	private JButton cupb2= new JButton(new ImageIcon("empty.JPG"));
+	private JButton cupb3 = new JButton(new ImageIcon("empty.JPG"));
+
+	private JButton cupb4 = new JButton(new ImageIcon("empty.JPG"));
+	private JButton cupb5 = new JButton(new ImageIcon("empty.JPG"));
+
+
+
 
 
 	public void compInit(){
@@ -109,24 +110,48 @@ public class Combo extends JFrame implements ActionListener{
 
 		panelwater.add(waterchecklabel);
 		panelwater.add(cupb1);
+		
 		panelwater.add(cupb2);
 		panelwater.add(cupb3);
 		panelwater.add(cupb4);
 		panelwater.add(cupb5);
 
+//버튼크기에 맞춰 이미지삽입
+		cupb1.setBorderPainted(false);
+		cupb1.setFocusPainted(false); 
+		cupb1.setContentAreaFilled(false);
+		cupb1.addActionListener(this); 
 
+		setVisible(true);
 
+		cupb2.setBorderPainted(false);
+		cupb2.setFocusPainted(false); 
+		cupb2.setContentAreaFilled(false);
+		cupb2.addActionListener(this); 
 
+		setVisible(true);
 
+		cupb3.setBorderPainted(false);
+		cupb3.setFocusPainted(false); 
+		cupb3.setContentAreaFilled(false);
+		cupb3.addActionListener(this); 
 
+		setVisible(true);
 
+		cupb4.setBorderPainted(false);
+		cupb4.setFocusPainted(false); 
+		cupb4.setContentAreaFilled(false);
+		cupb4.addActionListener(this); 
 
-		//		String selected1 = combolist1.getSelectedItem().toString();
-		//		System.out.println(selected1);
-		//		String selected2 = combolist2.getSelectedItem().toString();
-		//		System.out.println(selected2);
-		//		String selected3 = combolist3.getSelectedItem().toString();
-		//		System.out.println(selected3);
+		setVisible(true);
+
+		cupb5.setBorderPainted(false);
+		cupb5.setFocusPainted(false); 
+		cupb5.setContentAreaFilled(false);
+		cupb5.addActionListener(this); 
+
+		setVisible(true);
+
 
 		this.panelNorth.add(labelPhotoTitle);
 
@@ -139,7 +164,7 @@ public class Combo extends JFrame implements ActionListener{
 		this.panelWest.add(buttonCommunity);
 
 		this.panelSouth.add(buttonUpload);
-		this.panelSouth.add(buttonRemove);
+		
 		this.panelSouth.add(buttonClose);
 
 		this.add(panelWest, BorderLayout.WEST);
@@ -149,42 +174,73 @@ public class Combo extends JFrame implements ActionListener{
 
 
 
-
-
 		setVisible(true);
+
+
 
 	}
 
+	void init(){
+		cupb1.setIconTextGap(1);
+		fullcup.setIconTextGap(1);
+		con=this.getContentPane();
+		con.add("Center",cupb1);
+	}
 
+	 void start(){
+		  cupb1.addActionListener(this);
+		  fullcup.addActionListener(this);
+		     
+		 }
 	public void eventInit(){
 
+
+		cupb1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if((e.getSource()).equals(cupb1)){
+					con.removeAll();
+					con.add(fullcup);
+					fullcup.updateUI();
+				}
+				else{
+					con.removeAll();
+					con.add(cupb1);
+					cupb1.updateUI();
+				}
+			}
+
+		});
+
+		//업로드버튼 누를시
 		//		buttonUpload.addActionListener(new ActionListener(){
 		//
 		//			@Override
 		//			public void actionPerformed(ActionEvent e) {
 		//				//			self.compInit().combolist1.getSelectedItem().toString();
 		//
-		//
 		//			}
 		//
 		//		});
-		//	}
-
-
-
-
 	}
+
+
+
 
 	public Combo(){
 
 
 
-		this.setLocationRelativeTo(null);
+
 		this.setSize(800,800);
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(Combo.EXIT_ON_CLOSE);
+		this.init();
+		this.start();
 		this.compInit();
 		this.eventInit();
+		
 		this.setVisible(true);
+		
 
 
 
