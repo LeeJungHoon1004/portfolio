@@ -3,12 +3,13 @@ package Client;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -66,14 +67,70 @@ public class BasicShape extends JFrame {
 	private JPanel mainPan = new JPanel(card);
 	private JScrollPane sc = new JScrollPane(mainPan);
 
+	
+	//COMPNENT - defaultPan
+	private JPanel defaultPan = new JPanel(new GridLayout(2,1));
+	private JPanel panelUpper = new JPanel();
+	private JPanel panellower = new JPanel();
+	private JLabel labelUpper = new JLabel("이미지슬라이드1");
+	private JLabel labellower = new JLabel("이미지BMI");
+
+	
+	
 	private JPanel goalPan = new JPanel();
+	
+	
+	
+	
 	private JPanel dailyPan = new JPanel();
+	
+	
+	
+	
+	
 	private JPanel videoPan = new JPanel();
-	private JPanel imgBoardPan = new JPanel();
+	
+	
+	
+	
+	
+	//COMPNENT - imgBoardPan
+	private JLabel labelPhoto1 = new JLabel("포토1");
+	private JLabel labelPhoto2 = new JLabel("포토2");
+	private JLabel labelPhoto3 = new JLabel("포토3");
+	private JButton buttonUpload = new JButton("업로드");
+	private JButton buttonRemove = new JButton("사진삭제"); //사진삭제시 id와 패스워드 비번확인 필요함.
+	private JButton buttonClose = new JButton("닫기");
+	private JPanel imgBoardPan = new JPanel(new GridLayout(3,1));
+	private JPanel panelnull = new JPanel();
+	private JPanel panelCenter = new JPanel(new GridLayout(1,3)); // 센터-포토3개
+	private JPanel panelSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+	
+
+ 	// =======COMPONENT========================
 
 	public void comp() {
 
 		setLayout(null);
+		
+		this.panelUpper.add(labelUpper);
+		this.panellower.add(labellower);
+		this.defaultPan.add(panelUpper);
+		this.defaultPan.add(panellower);
+		
+		//compInit() -defaultPan
+		
+		this.panelCenter.add(labelPhoto1);
+		this.panelCenter.add(labelPhoto2);
+		this.panelCenter.add(labelPhoto3);
+		this.panelSouth.add(buttonUpload);
+		this.panelSouth.add(buttonRemove);
+		this.panelSouth.add(buttonClose);
+		this.imgBoardPan.add(panelCenter);
+		this.imgBoardPan.add(panelnull);
+		this.imgBoardPan.add(panelSouth);
+		
+		//compInit()  - panelCard_StimulsPhoto
 		
 		category.add(goalBt);
 		category.add(dailyBt);
@@ -99,14 +156,22 @@ public class BasicShape extends JFrame {
 
 		titlePan.setBounds(0,0,1400,80);
 		add(titlePan);
-		sidepan.setBounds(0,81,200,630);
+		sidepan.setBounds(0,81,200,645);
 		add(sidepan);
-
+		
+		
+		
+		mainPan.add(defaultPan, "NamedefaultPane");
 		mainPan.add(goalPan);
 		mainPan.add(dailyPan);
 		mainPan.add(videoPan);
-		mainPan.add(imgBoardPan);
-		this.sc.setBounds(200, 79, 985, 635);
+		mainPan.add(imgBoardPan , "NameimgBoard"); //카드로 끼워넣는팬에
+											//이름을 부여함 .
+											//부여된 이름을 가지고 이벤트 처리부분에서
+											//카드의 이름으로 식별하여 visible함.
+		
+		this.setResizable(false);
+		this.sc.setBounds(200, 79, 1000, 650);
 		add(sc);
 
 	}
@@ -181,10 +246,64 @@ public class BasicShape extends JFrame {
 
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.next(imgBoardPan);
-
+			//	card.next(self.mainPan);
+				card.show(self.mainPan, "NameimgBoard");
+				
 			}
 		});
+		
+		title.addMouseListener(new MouseListener(){
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			//마우스버튼이 누른뒤 뗄때의 이벤트처리
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				card.show(self.mainPan, "NamedefaultPane");
+			}
+			
+		});
+		
+		//===============EVENTINIT()=========imgBoardPan
+		this.buttonUpload.addActionListener(new ActionListener(){
+			//사진 업로드시 xx회원님의 포토. 로 남겨둠 . 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		this.buttonClose.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		this.buttonRemove.addActionListener(new ActionListener(){
+			//사진 삭제시 회원의 아이디와 비밀번호를 한번입력받아서 확인후 해당회원의 사진일경우에 삭제 . 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		
+		
+		
 	}
 
 	public BasicShape() {
