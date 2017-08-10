@@ -3,11 +3,15 @@ package Client;
 
 //그냥 간단한 프레임위의 목표란( 콤보박스포함)
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,7 +20,10 @@ import javax.swing.JPanel;
 
 
 
-public class Combo extends JFrame{
+public class Combo extends JFrame implements ActionListener{
+
+
+
 
 	private Combo self = this;
 
@@ -40,16 +47,33 @@ public class Combo extends JFrame{
 	private JButton buttonClose = new JButton("닫기");
 
 
+
+
+
+
+
 	private JPanel panelWest = new JPanel(new GridLayout(7,1)); //사이드바 
 	private JPanel panelNorth = new JPanel(); //타이틀
-	private JPanel panelCenter = new JPanel(new GridLayout(1,2)); // 센터-포토6개
+	private JPanel panelCenter = new JPanel(new GridLayout(2,1)); // 센터-포토6개
 	private JPanel panelSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
 	private JPanel panelCombo = new JPanel((new FlowLayout()));
+	private JPanel panelwater = new JPanel((new FlowLayout()));
 
 
 
 	private JLabel today3 = new JLabel("오늘의 목표를 3개 선택하세요");
+	private JLabel waterchecklabel = new JLabel("물마신 횟수를 체크해보세요");
+
+	private JButton cupb1 = new JButton(new ImageIcon("empty.JPG"));
+			
+	private JButton cupb2= new JButton("컵2");
+	private JButton cupb3 = new JButton("컵3");
+
+	private JButton cupb4 = new JButton("컵4");
+	private JButton cupb5 = new JButton("컵5");
+
+
 	public void compInit(){
 
 
@@ -65,7 +89,7 @@ public class Combo extends JFrame{
 		combolist1.addItem(action);
 		combolist1.setEditable(false);
 
-	
+
 
 		JComboBox combolist2 = new JComboBox(action);
 		combolist2.addItem(action);
@@ -75,15 +99,27 @@ public class Combo extends JFrame{
 		combolist3.addItem(action);
 		combolist3.setEditable(false);
 
-
+		panelCenter.add(panelCombo,BorderLayout.NORTH);
+		panelCenter.add(panelwater,BorderLayout.SOUTH);
 
 		panelCombo.add(today3);
 		panelCombo.add(combolist1);
 		panelCombo.add(combolist2);
 		panelCombo.add(combolist3);
-		
-	
-		
+
+		panelwater.add(waterchecklabel);
+		panelwater.add(cupb1);
+		panelwater.add(cupb2);
+		panelwater.add(cupb3);
+		panelwater.add(cupb4);
+		panelwater.add(cupb5);
+
+
+
+
+
+
+
 
 		//		String selected1 = combolist1.getSelectedItem().toString();
 		//		System.out.println(selected1);
@@ -110,21 +146,35 @@ public class Combo extends JFrame{
 		this.add(panelCenter, BorderLayout.CENTER);
 		this.add(panelNorth , BorderLayout.NORTH);
 		this.add(panelSouth , BorderLayout.SOUTH);
+
+
+
+
+
+		setVisible(true);
+
 	}
-	
+
+
 	public void eventInit(){
 
-		buttonUpload.addActionListener(new ActionListener(){
+		//		buttonUpload.addActionListener(new ActionListener(){
+		//
+		//			@Override
+		//			public void actionPerformed(ActionEvent e) {
+		//				//			self.compInit().combolist1.getSelectedItem().toString();
+		//
+		//
+		//			}
+		//
+		//		});
+		//	}
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-//			self.compInit().combolist1.getSelectedItem().toString();
 
 
-			}
 
-		});
 	}
+
 	public Combo(){
 
 
@@ -135,10 +185,22 @@ public class Combo extends JFrame{
 		this.compInit();
 		this.eventInit();
 		this.setVisible(true);
+
+
+
 	}
 
 	public static void main(String[] args) {
 		new Combo();
 	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+
 
 }
