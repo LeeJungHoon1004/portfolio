@@ -1,16 +1,18 @@
 package Client;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,7 +23,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.TitledBorder;
 
 
 public class BasicShape extends JFrame {
@@ -53,29 +54,27 @@ public class BasicShape extends JFrame {
 	private JPanel picture = new JPanel();
 	private JPanel bmi = new JPanel();
 
+	private JPanel titlePan = new JPanel();
 	private JPanel panbox1 = new JPanel(new GridLayout(1, 2));
 	private JPanel panbox2 = new JPanel(new GridLayout(1, 2));
 	private JPanel panbox3 = new JPanel(new GridLayout(1, 2));
 	private JPanel panbox = new JPanel(new GridLayout(3, 1));
-
-	private TitledBorder tborder;
-
-	private JPanel pan = new JPanel();
-	private JScrollPane sc = new JScrollPane(pan);
+	private JPanel sidepan = new JPanel(new GridLayout(5,1));
 	
 	private CardLayout card = new CardLayout();
 	private BasicShape self = this;
+	private JPanel mainPan = new JPanel(card);
+	private JScrollPane sc = new JScrollPane(mainPan);
+
+	private JPanel goalPan = new JPanel();
+	private JPanel dailyPan = new JPanel();
+	private JPanel videoPan = new JPanel();
+	private JPanel imgBoardPan = new JPanel();
 
 	public void comp() {
-		setLayout(new BorderLayout());
-		// tborder = new TitledBorder("");
-		// tborder.setTitlePosition(TitledBorder.ABOVE_TOP);// 지정한 위치에 타이틀을
-		// 나타내주는 보더
-		// tborder.setTitleJustification(TitledBorder.CENTER);// 자리맞춤을 가운데로 지정
-		//
-		// title.setBorder(tborder);
-		// title.setFont(font);
 
+		setLayout(null);
+		
 		category.add(goalBt);
 		category.add(dailyBt);
 		category.add(videoBt);
@@ -91,19 +90,25 @@ public class BasicShape extends JFrame {
 		panbox.add(panbox2);
 		panbox.add(panbox3);
 
-		pan.add(panbox);
-		pan.add(category);
+		title.setFont(font);
+		titlePan.add(title);
+		
 
-		add(pan);
-		// //this.sc.setBounds(0, 0, 1185, 715);
-		// this.sc.setBounds(0, 0, 1185, 700);
-		//this.sc.setBounds(0, 0, 700, 500);
-		//add(sc, BorderLayout.CENTER);
+		sidepan.add(panbox);
+		sidepan.add(category);
 
-	}
+		titlePan.setBounds(0,0,1400,80);
+		add(titlePan);
+		sidepan.setBounds(0,81,200,630);
+		add(sidepan);
 
-	public void changePanel() {
-		card.next(this.getContentPane());
+		mainPan.add(goalPan);
+		mainPan.add(dailyPan);
+		mainPan.add(videoPan);
+		mainPan.add(imgBoardPan);
+		this.sc.setBounds(200, 79, 985, 635);
+		add(sc);
+
 	}
 
 	public void eventInit() {
@@ -156,29 +161,27 @@ public class BasicShape extends JFrame {
 
 		goalBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// card.show(card,"goalPage");
-				// card.changePanel();
-				// 대충 이런식으로 쓴다.
+				card.next(goalPan);
 			}
 		});
 
 		dailyBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				card.next(dailyPan);
 
 			}
 		});
 
 		videoBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				card.next(videoPan);
 
 			}
 		});
 
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				card.next(imgBoardPan);
 
 			}
 		});
@@ -186,8 +189,8 @@ public class BasicShape extends JFrame {
 
 	public BasicShape() {
 		setTitle("기본shape테스트");
-		setSize(700, 500);
-		// setSize(1200, 750);
+		//setSize(700, 500);
+		setSize(1200, 750);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		cp.setBackground(Color.WHITE);
@@ -214,3 +217,5 @@ public class BasicShape extends JFrame {
 
 // http://msource.tistory.com/5
 // 카드레이아웃 쉬운 설명
+//http://www.w3ii.com/ko/swing/swing_cardlayout.html
+//카드레이아웃 클래스
