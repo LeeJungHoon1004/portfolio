@@ -393,13 +393,6 @@ public class BasicShape extends JFrame {
 	public String userData() {
 
 		try {
-			client = new Socket("", 4000);
-			dis = new DataInputStream(client.getInputStream());
-		} catch (Exception e) {
-			System.out.println("초기연결실패");
-		}
-		
-		try {
 			name = dis.readUTF();
 			System.out.println("이름데이터받기 성공");
 		} catch (Exception e) {
