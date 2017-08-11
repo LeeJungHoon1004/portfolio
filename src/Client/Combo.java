@@ -7,47 +7,56 @@ package Client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
 
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 
 
 
 public class Combo extends JFrame implements ActionListener{
 
+	
+	
+	private Socket client;
+	private DataOutputStream dos;
+	private DataInputStream dis;
+
+	
+	
+	//------------소켓
+	
 	Container con;
 
 
 	private Combo self = this;
 
-	private JLabel labelPhoto1 = new JLabel("포토1");
-	private JLabel labelPhoto2 = new JLabel("포토2");
-	private JLabel labelPhoto3 = new JLabel("포토3");
+	private TitledBorder tborder;
 
-	private JLabel labelPhotoTitle = new JLabel("타이틀");
 
-	private JLabel labelPhotoFace = new JLabel("포토7");
 
-	private JButton buttonInfo = new JButton("info");
-	private JButton buttonDailyGoal = new JButton("하루목표");
-	private JButton buttonGoal = new JButton("목표");
-	private JButton buttonphoto = new JButton("사진"); 
-	private JButton buttonvideo = new JButton("비디오");
-	private JButton buttonCommunity = new JButton("커뮤니티");
-
+	private LineBorder bb = new LineBorder(Color.black,  2	, true);
+	
 	private JButton buttonUpload = new JButton("업로드");
-	 
+
 	private JButton buttonClose = new JButton("홈으로");
 	private JButton buttonclear = new JButton("선택완료");
 
@@ -57,9 +66,17 @@ public class Combo extends JFrame implements ActionListener{
 	private JPanel panelCenter = new JPanel(new GridLayout(2,1)); // 센터-포토6개
 	private JPanel panelSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-	private JPanel panelCombo = new JPanel((new FlowLayout()));
-	private JPanel panelwater = new JPanel((new FlowLayout()));
+	private JPanel panelCombo = new JPanel(new GridLayout(2,1));
 
+	private JPanel Combo3 = new JPanel(new GridBagLayout());
+	GridBagConstraints c = new GridBagConstraints(); //콤보리스트 넣는 레이아웃
+
+
+
+	private JPanel panelwater = new JPanel(new GridLayout(2,1));
+
+	private JPanel waterlinePan = new JPanel(new GridBagLayout());
+	GridBagConstraints c2 = new GridBagConstraints();
 
 
 	private JLabel today3 = new JLabel("오늘의 목표를 3개 선택하세요");
@@ -67,19 +84,84 @@ public class Combo extends JFrame implements ActionListener{
 
 	private JButton fullcup = new JButton(new ImageIcon("full2.PNG"));
 
-	private JButton cupb1 = new JButton(new ImageIcon("empty2.PNG"));
+	
 
-	private JButton cupb2= new JButton(new ImageIcon("empty2.PNG"));
-	private JButton cupb3 = new JButton(new ImageIcon("empty2.PNG"));
+	//컵에 이미지넣기 
+	private Image cupimage = new ImageIcon("empty.jpg").getImage()
+			.getScaledInstance(31, 47, java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon icon1 = new ImageIcon(cupimage);
+	private JButton cupb1 = new JButton();
+	private JButton cupb2= new JButton();
+	private JButton cupb3 = new JButton();
 
-	private JButton cupb4 = new JButton(new ImageIcon("empty2.PNG"));
-	private JButton cupb5 = new JButton(new ImageIcon("empty2.PNG"));
-
+	private JButton cupb4 = new JButton();
+	private JButton cupb5 = new JButton();
+	private JButton cupb6 = new JButton();
+	private JButton cupb7 = new JButton();
+	private JButton cupb8 = new JButton();
+	private JButton cupb9 = new JButton();
+	private JButton cupb10 = new JButton();
 
 
 
 
 	public void compInit(){
+
+	
+		this.cupb1.setIcon(icon1);
+		this.cupb1.setPreferredSize(new Dimension(31, 47));
+		this.add(cupb1);
+		
+		this.cupb2.setIcon(icon1);
+		this.cupb2.setPreferredSize(new Dimension(31, 47));
+		this.add(cupb2);
+		
+		this.cupb3.setIcon(icon1);
+		this.cupb3.setPreferredSize(new Dimension(31, 47));
+		this.add(cupb3);
+		
+		
+		this.cupb4.setIcon(icon1);
+		this.cupb4.setPreferredSize(new Dimension(31, 47));
+		this.add(cupb4);
+		
+		
+		this.cupb5.setIcon(icon1);
+		this.cupb5.setPreferredSize(new Dimension(31, 47));
+		this.add(cupb5);
+		
+		
+		this.cupb6.setIcon(icon1);
+		this.cupb6.setPreferredSize(new Dimension(31, 47));
+		this.add(cupb6);
+		
+		
+		this.cupb7.setIcon(icon1);
+		this.cupb7.setPreferredSize(new Dimension(31, 47));
+		this.add(cupb7);
+		
+		
+		this.cupb8.setIcon(icon1);
+		this.cupb8.setPreferredSize(new Dimension(31, 47));
+		this.add(cupb8);
+		
+		
+		this.cupb9.setIcon(icon1);
+		this.cupb9.setPreferredSize(new Dimension(31, 47));
+		this.add(cupb9);
+		
+		
+		this.cupb10.setIcon(icon1);
+		this.cupb10.setPreferredSize(new Dimension(31, 47));
+		this.add(cupb10);
+		
+		
+		
+		
+
+
+
+		today3.setBorder(tborder);
 
 
 
@@ -108,70 +190,79 @@ public class Combo extends JFrame implements ActionListener{
 		panelCenter.add(panelwater,BorderLayout.SOUTH);
 
 		panelCombo.add(today3);
-		panelCombo.add(combolist1);
-		panelCombo.add(combolist2);
-		panelCombo.add(combolist3);
+		panelCombo.add(Combo3);//위 그리드레이아웃(2,1)에 그리드백레이아웃 넣음
+
+
+
+		c.insets = new Insets(10,20,0,0); //공간, 시계방향 
+
+		c.gridy = 1; c.gridx = 1;
+		Combo3.add(combolist1,c);
+		c.gridy = 2; c.gridx = 1;
+		Combo3.add(combolist2,c);
+		c.gridy = 3; c.gridx =1;
+		Combo3.add(combolist3,c);
+		c.gridy = 4; c.gridx =1;
+		Combo3.add(buttonclear,c);
+
+		//		panelCombo.add(combolist1);
+		//		panelCombo.add(combolist2);
+		//		panelCombo.add(combolist3);
 
 		panelwater.add(waterchecklabel);
-		panelwater.add(cupb1);
+		panelwater.add(waterlinePan);
+		//		waterlinePan.add(cupb1);
+		//		waterlinePan.add(cupb2);
+		//		waterlinePan.add(cupb3);
+		//		waterlinePan.add(cupb4);
+		//		waterlinePan.add(cupb5);
+
+
+
+		//		panelwater.add(cupb1);
+		//		
+		//		panelwater.add(cupb2);
+		//		panelwater.add(cupb3);
+		//		panelwater.add(cupb4);
+		//		panelwater.add(cupb5);
+
+
+		c2.insets = new Insets(10,10,0,0); //공간, 시계방향 
+
+		c2.gridy = 1; c2.gridx = 1;
+		waterlinePan.add(cupb1,c2);
+		c2.gridy = 1; c2.gridx = 2;
+		waterlinePan.add(cupb2,c2);
+		c2.gridy = 1; c2.gridx =3;
+		waterlinePan.add(cupb3,c2);
+		c2.gridy = 1; c2.gridx =4;
+		waterlinePan.add(cupb4,c2);
+		c2.gridy = 1; c2.gridx =5;
+		waterlinePan.add(cupb5,c2); //물컵 5개
 		
-		panelwater.add(cupb2);
-		panelwater.add(cupb3);
-		panelwater.add(cupb4);
-		panelwater.add(cupb5);
-
-//버튼크기에 맞춰 이미지삽입
-		cupb1.setBorderPainted(false);
-		cupb1.setFocusPainted(false); 
-		cupb1.setContentAreaFilled(false);
-		cupb1.addActionListener(this); 
-
-		setVisible(true);
-
-		cupb2.setBorderPainted(false);
-		cupb2.setFocusPainted(false); 
-		cupb2.setContentAreaFilled(false);
-		cupb2.addActionListener(this); 
-
-		setVisible(true);
-
-		cupb3.setBorderPainted(false);
-		cupb3.setFocusPainted(false); 
-		cupb3.setContentAreaFilled(false);
-		cupb3.addActionListener(this); 
-
-		setVisible(true);
-
-		cupb4.setBorderPainted(false);
-		cupb4.setFocusPainted(false); 
-		cupb4.setContentAreaFilled(false);
-		cupb4.addActionListener(this); 
-
-		setVisible(true);
-
-		cupb5.setBorderPainted(false);
-		cupb5.setFocusPainted(false); 
-		cupb5.setContentAreaFilled(false);
-		cupb5.addActionListener(this); 
-
-		setVisible(true);
+		c2.gridy = 2; c2.gridx =1;
+		waterlinePan.add(cupb6,c2);
+		c2.gridy = 2; c2.gridx =2;
+		waterlinePan.add(cupb7,c2);
+		c2.gridy = 2; c2.gridx =3;
+		waterlinePan.add(cupb8,c2);
+		c2.gridy = 2; c2.gridx =4;
+		waterlinePan.add(cupb9,c2);
+		c2.gridy = 2; c2.gridx =5;
+		waterlinePan.add(cupb10,c2);
+		
+		
 
 
-		this.panelNorth.add(labelPhotoTitle);
 
-		this.panelWest.add(labelPhotoFace);
-		this.panelWest.add(buttonInfo);
-		this.panelWest.add(buttonDailyGoal);
-		this.panelWest.add(buttonGoal);
-		this.panelWest.add(buttonphoto);
-		this.panelWest.add(buttonvideo);
-		this.panelWest.add(buttonCommunity);
+		
 
 		this.panelSouth.add(buttonUpload);
-		
+
 		this.panelSouth.add(buttonClose);
-		this.panelCombo.add(buttonclear);
-		
+
+
+
 
 		this.add(panelWest, BorderLayout.WEST);
 		this.add(panelCenter, BorderLayout.CENTER);
@@ -193,16 +284,16 @@ public class Combo extends JFrame implements ActionListener{
 		con.add("Center",cupb1);
 	}
 
-	 void start(){
-		  cupb1.addActionListener(this);
-		  fullcup.addActionListener(this);
-		     
-		 }
+	void start(){
+		cupb1.addActionListener(this);
+		fullcup.addActionListener(this);
+
+	}
 	public void eventInit(){
 
 
-		
-		
+
+
 		cupb1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if((e.getSource()).equals(cupb1)){
@@ -218,35 +309,32 @@ public class Combo extends JFrame implements ActionListener{
 			}
 
 		});
-		
-		buttonclear.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				 String msg = buttonclear.getText();
-	               if(JOptionPane.showConfirmDialog(null, msg, "선택완료!",  JOptionPane.OK_CANCEL_OPTION)==0) {
-	                  //System.out.println("확인");
-				
-			}
-			
-		}
-			
-		});
-		
+		//		buttonclear.addActionListener(new ActionListener() {
+		//
+		//			@Override
+		//			public void actionPerformed(ActionEvent e) {
+		//				 String msg = buttonclear.getText();
+		//	               if(JOptionPane.showConfirmDialog(null, msg, "선택완료!",  JOptionPane.OK_CANCEL_OPTION)==0) {
+		//	                  //System.out.println("확인");
+		//				
+		//			}
+		//			
+		//		}
+		//			
+		//		});
+
 		this.buttonClose.addActionListener(new ActionListener(){
 
 			//버튼No가 눌렸을때의 이벤트처리
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//다이얼로그창 닫기 . - 클래스.this 는 인스턴스 스스로를 가키림
-				// JDialog를 상속받아 만든 클래스로 인스턴화되어있기떄문에
-				//이 인스턴스는 여러가지 메소드를 쓸수있다.
-				//클래스에 . 찍으면 JDialog를 상속받은 클래스를 가리키기 때문에 클래스에 . 찍어서 쓸수있는 Static Field만 보인다.
+
 				Combo.this.dispose();
-				
+
 			}
 		});
-	
+
 
 		//업로드버튼 누를시
 		//		buttonUpload.addActionListener(new ActionListener(){
@@ -275,9 +363,9 @@ public class Combo extends JFrame implements ActionListener{
 		this.start();
 		this.compInit();
 		this.eventInit();
-		
+
 		this.setVisible(true);
-		
+
 
 
 
