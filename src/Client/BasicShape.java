@@ -95,8 +95,9 @@ public class BasicShape extends JFrame {
 	private JPanel goalPan = new JPanel();
 
 	// COMPNENT - dailyPan
-	private JPanel dailyPan = new JPanel();
+	private JPanel Dailypan = new JPanel();
 
+	
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
 
@@ -134,7 +135,7 @@ public class BasicShape extends JFrame {
 		this.imgBoardPan.add(panelCenter);
 		this.imgBoardPan.add(panelnull);
 		this.imgBoardPan.add(panelSouth);
-
+		
 		// compInit() - panelCard_StimulsPhoto
 
 		category.add(goalBt);
@@ -180,7 +181,7 @@ public class BasicShape extends JFrame {
 		// CardLayout들어있는 mainPan에 패널들 넣음
 		mainPan.add(defaultPan, "NamedefaultPane");
 		mainPan.add(goalPan);
-		mainPan.add(dailyPan);
+		mainPan.add(Dailypan, "NamedailyBoard");
 		mainPan.add(videoPan);
 		mainPan.add(imgBoardPan, "NameimgBoard"); // 카드로 끼워넣는팬에
 		// 이름을 부여함 .
@@ -293,13 +294,16 @@ public class BasicShape extends JFrame {
 		//오늘의목표 버튼
 		dailyBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(result.equals("로그인성공")){
-					card.show(self.profilePan, "loginAfter");
-					}
-					else if (result.equals("로그인실패")) {
-					card.show(self.profilePan, "loginBefore");
-					}
+				
+				
+//				if(result.equals("로그인성공")){
+//					card.show(self.profilePan, "loginAfter");
+//					}
+//					else if (result.equals("로그인실패")) {
+//					card.show(self.profilePan, "loginBefore");
+//					}
 				//프로필창 로그인여부에 따라 다름.△△△△△△△
+				card.show(self.Dailypan, "NamedailyBoard" );
 			}
 		});
 
@@ -320,13 +324,13 @@ public class BasicShape extends JFrame {
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(result.equals("로그인성공")){
-					card.show(self.profilePan, "loginAfter");
-					}
-					else if (result.equals("로그인실패")) {
-					card.show(self.profilePan, "loginBefore");
-					}
-				//프로필창 로그인여부에 따라 다름.△△△△△△△
+//				if(result.equals("로그인성공")){
+//					card.show(self.profilePan, "loginAfter");
+//					}
+//					else if (result.equals("로그인실패")) {
+//					card.show(self.profilePan, "loginBefore");
+//					}
+//				//프로필창 로그인여부에 따라 다름.△△△△△△△
 				card.show(self.mainPan, "NameimgBoard");
 				
 			}
