@@ -15,30 +15,29 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+class ConnectionThread extends Thread {
 
-
-class ConnectionThread extends Thread{
-	
 	private Socket socket = null;
 	private DataInputStream dis;
 	private DataOutputStream dos;
-	
-	
-	public ConnectionThread(Socket socket){
-	try{
-		this.socket = socket;
-		dis = new DataInputStream(socket.getInputStream());
-		dos = new DataOutputStream(socket.getOutputStream());
-	} catch(Exception e){
-		System.out.println("서버:소켓초기화 실패했다.");
+
+	public ConnectionThread(Socket socket) {
+		try {
+			this.socket = socket;
+			dis = new DataInputStream(socket.getInputStream());
+			dos = new DataOutputStream(socket.getOutputStream());
+		} catch (Exception e) {
+			System.out.println("서버:소켓초기화 실패했다.");
+		}
+
 	}
-		
-	}
-	
+
 	public void run() {
-		while(true) {
+		
 		try {
 			System.out.println(socket.getInetAddress()+ " 님이 접속했습니다");
+			
+			while(true) {
 			String cmd = dis.readUTF();
 			
 			if(cmd.equals("회원가입")) {
@@ -47,9 +46,10 @@ class ConnectionThread extends Thread{
 			 * 
 			 */
 				String name = dis.readUTF();
+				String gender = dis.readUTF();
 				String id = dis.readUTF();
 				String pw = dis.readUTF();
-				boolean gender = dis.readBoolean();
+				
 				
 				Member m = new Member(name , id , pw , gender );
 				//클라이언트로 받은 아이디와  DB에 저장되어있는 내용인지 검사합니다.
@@ -57,9 +57,9 @@ class ConnectionThread extends Thread{
 				boolean result  = Server.manager.isExist(m); 
 				//값이 존재한다.(존재하는아이디) //값이 없다 회원가입 시켜줌.
 				if(result) {
-					dos.writeUTF("중복");
+					dos.writeUTF("회원가입실패");
 				}else { 
-					dos.writeUTF("가입");
+					dos.writeUTF("회원가입성공");
 				//생성자에서 받은 정보중에서 id,pw만 저장합니다.
 					Server.manager.insertData(m);
 			
@@ -77,13 +77,11 @@ class ConnectionThread extends Thread{
 				//성별 ,신장, 체중 를 가져옵니다.
 				
 				
-				
-			
 				Member m2 = new Member(id , pw);
 				boolean result = Server.manager.isLoginOk(m2);
 				if (result) {// 값이존재한다(회원가입 되어있는 아이디와비번이다) - 로그인허가
 					dos.writeUTF("로그인성공");
-					boolean gender =false;
+					String gender =null;
 					double stature =0;
 					double weight =0;
 					String name = null;
@@ -101,7 +99,7 @@ class ConnectionThread extends Thread{
 					dos.writeUTF(name);
 					dos.writeDouble(stature);
 					dos.writeDouble(weight);
-					dos.writeBoolean(gender);			
+					dos.writeUTF(gender);			
 					
 				} else {
 					dos.writeUTF("로그인실패");
@@ -115,8 +113,6 @@ class ConnectionThread extends Thread{
 //			}
 			
 			
-		}catch(Exception e) {
-			
 		}
 			
 			
@@ -125,34 +121,42 @@ class ConnectionThread extends Thread{
 			
 			
 			
-			
-			
 		}
-	}
+		catch(Exception e) {
+			System.out.println("비정상종료.");
+			try{
+			dos.close();
+			}catch(Exception e1){
+				e1.printStackTrace();
+			}
+		}
 }
 
-public class Server extends JFrame{
-	//매니저
+}
+
+public class Server extends JFrame {
+	// 매니저
 	public static Manager manager = new Manager();
-	//컴포넌트변수
+	// 컴포넌트변수
 	private JButton buttonClose = new JButton("닫기");
 	private JTextArea textareaShow = new JTextArea();
 	private JScrollPane scrollpaneshow = new JScrollPane(textareaShow);
 	private JPanel panelsouth = new JPanel();
 	private Server self = this;
-	
-	public void compInit(){
-		
-		this.buttonClose.setPreferredSize(new Dimension(100,50));
+
+	public void compInit() {
+
+		this.buttonClose.setPreferredSize(new Dimension(100, 50));
 		this.textareaShow.setEditable(false);
 		this.textareaShow.setLineWrap(true);
-		this.panelsouth.add(buttonClose );
-		
+		this.panelsouth.add(buttonClose);
+
 		this.add(panelsouth, BorderLayout.SOUTH);
 		this.add(scrollpaneshow, BorderLayout.CENTER);
-		
+
 	}
-	public void eventInit(){
+
+	public void eventInit() {
 		this.buttonClose.addActionListener(new ActionListener() {
 
 			@Override
@@ -160,33 +164,32 @@ public class Server extends JFrame{
 				// TODO Auto-generated method stub
 				self.dispose();
 			}
-			
+
 		});
-		
-		
+
 	}
-	
-	//생성자
-	public Server(){
+
+	// 생성자
+	public Server() {
 		this.setSize(1000, 800);
 		this.setTitle("다이어트프로그램서버");
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(Server.EXIT_ON_CLOSE);
-		
+
 		this.compInit();
 		this.eventInit();
 		this.setVisible(true);
 	}
-	public static void main(String[] args) throws Exception{
-		
-		
+
+	public static void main(String[] args) throws Exception {
+
 		ServerSocket server = new ServerSocket(40000);
 		new Server();
 		while (true) {
 			new ConnectionThread(server.accept()).start();
-			
-			}
-		
+
+		}
+
 	}
 
 }

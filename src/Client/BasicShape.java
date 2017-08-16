@@ -197,7 +197,7 @@ public class BasicShape extends JFrame {
 		// 로그인 버튼
 		try {
 		//	client = new Socket("", 4000);
-			client = new Socket("169.254.12.6", 4000);
+			client = new Socket("127.0.0.1", 40000);
 			
 			dos = new DataOutputStream(client.getOutputStream());
 			dis = new DataInputStream(client.getInputStream());
@@ -227,7 +227,7 @@ public class BasicShape extends JFrame {
 			} else if (result.equals("로그인실패")) {
 				JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.");
 			}
-			System.out.println("로그인 성공");
+		
 		} catch (Exception e2) {
 
 		}
@@ -239,7 +239,7 @@ public class BasicShape extends JFrame {
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				clientConnect();
+				 clientConnect();
 				//서버에 계정 보냄.△△△△△△△
 				
 				if(result.equals("로그인성공")){
@@ -271,7 +271,7 @@ public class BasicShape extends JFrame {
 		membership.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 회원가입창 띄우기
-				new SingUp(self).setVisible(true);
+				new SignUp(self).setVisible(true);
 			}
 		});
 
@@ -282,7 +282,10 @@ public class BasicShape extends JFrame {
 				if(result.equals("로그인성공")){
 					card.show(self.profilePan, "loginAfter");
 					}
-					else if (result.equals("로그인실패")) {
+//					else if (result.equals("로그인실패")) {
+//					card.show(self.profilePan, "loginBefore");
+//					}
+				else {
 					card.show(self.profilePan, "loginBefore");
 					}
 				//프로필창 로그인여부에 따라 다름.△△△△△△△
@@ -296,12 +299,15 @@ public class BasicShape extends JFrame {
 				
 				
 				
-//				if(result.equals("로그인성공")){
-//					card.show(self.profilePan, "loginAfter");
-//					}
+				if(result.equals("로그인성공")){
+					card.show(self.profilePan, "loginAfter");
+					}
 //					else if (result.equals("로그인실패")) {
 //					card.show(self.profilePan, "loginBefore");
 //					}
+				else {
+					card.show(self.profilePan, "loginBefore");
+					}
 				//프로필창 로그인여부에 따라 다름.△△△△△△△
 				card.show(self.mainPan, "NamedailyBoard" );
 			}
@@ -313,7 +319,10 @@ public class BasicShape extends JFrame {
 				if(result.equals("로그인성공")){
 					card.show(self.profilePan, "loginAfter");
 					}
-					else if (result.equals("로그인실패")) {
+//					else if (result.equals("로그인실패")) {
+//					card.show(self.profilePan, "loginBefore");
+//					}
+				else {
 					card.show(self.profilePan, "loginBefore");
 					}
 				//프로필창 로그인여부에 따라 다름.△△△△△△△
@@ -324,12 +333,15 @@ public class BasicShape extends JFrame {
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-//				if(result.equals("로그인성공")){
-//					card.show(self.profilePan, "loginAfter");
-//					}
+				if(result.equals("로그인성공")){
+					card.show(self.profilePan, "loginAfter");
+					}
 //					else if (result.equals("로그인실패")) {
 //					card.show(self.profilePan, "loginBefore");
 //					}
+				else {
+					card.show(self.profilePan, "loginBefore");
+					}
 //				//프로필창 로그인여부에 따라 다름.△△△△△△△
 				card.show(self.mainPan, "NameimgBoard");
 				
@@ -357,7 +369,17 @@ public class BasicShape extends JFrame {
 			// 마우스버튼이 누른뒤 뗄때의 이벤트처리
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
+
+				if(result.equals("로그인성공")){
+					card.show(self.profilePan, "loginAfter");
+					}
+//					else if (result.equals("로그인실패")) {
+//					card.show(self.profilePan, "loginBefore");
+//					}
+				else {
+					card.show(self.profilePan, "loginBefore");
+					}
+//				//프로필창 로그인여부에 따라 다름.△△△△△△△
 				card.show(self.mainPan, "NamedefaultPane");
 			}
 

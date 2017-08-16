@@ -5,7 +5,7 @@ public class Member {
 	private String name ;
 	private String id ;
 	private String pw ;
-	private boolean gender ; //己喊
+	private String gender ; //己喊
 	private double stature; //虐
 	private double weight; //个公霸
 	public String getName() {
@@ -39,21 +39,21 @@ public class Member {
 		this.pw = pw;
 	}
 	
-	public boolean isGender() {
+	public String isGender() {
 		return gender;
 	}
-	public void setGender(boolean gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	//积己磊
-	public Member(String name ,String id ,String pw , boolean gender) {
+	public Member(String name ,String id ,String pw , String gender) {
 		this.name = name;
 		this.id = id;
 		this.pw = pw;
 		this.gender = gender;
 	}
 	
-	public Member(String name, String id, String pw, boolean gender, double stature, double weight) {
+	public Member(String name, String id, String pw, String gender, double stature, double weight) {
 		
 		this.name = name;
 		this.id = id;
@@ -63,7 +63,7 @@ public class Member {
 		this.weight = weight;
 	}
 	//stature , weight, gender
-	public Member(String name, double stature , double weight , boolean gender) {
+	public Member(String name, double stature , double weight , String gender) {
 		this.name = name;
 		this.stature = stature;
 		this.weight = weight;
