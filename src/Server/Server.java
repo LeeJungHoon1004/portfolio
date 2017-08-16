@@ -181,7 +181,7 @@ public class Server extends JFrame{
 	public static void main(String[] args) throws Exception{
 		
 		
-		ServerSocket server = new ServerSocket(20000);
+		ServerSocket server = new ServerSocket(40000);
 		new Server();
 		while (true) {
 			new ConnectionThread(server.accept()).start();

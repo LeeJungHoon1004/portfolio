@@ -26,13 +26,16 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-public class SingUp extends  JDialog {
+public class SingUp extends JDialog {
+	
+	private SingUp self = this;
+	
 	private JLabel name = new JLabel("이름 : ");
 	private JTextField inputName = new JTextField();
 	private JLabel gender = new JLabel("성별 : ");
 	private JRadioButton male = new JRadioButton("남자");
 	private JRadioButton female = new JRadioButton("여자");
-	
+
 	private JLabel id = new JLabel("ID : ");
 	private JTextField inputId = new JTextField();
 	private JLabel pw = new JLabel("PW : ");
@@ -115,9 +118,11 @@ public class SingUp extends  JDialog {
 		sing.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					// client = new Socket("", 40000);
 					client = new Socket("", 40000);
 					dos = new DataOutputStream(client.getOutputStream());
 					dis = new DataInputStream(client.getInputStream());
+					System.out.println("회원가입시도");
 				} catch (Exception e1) {
 					System.out.println("초기연결실패");
 				}
@@ -125,6 +130,25 @@ public class SingUp extends  JDialog {
 				String userID = inputId.getText();
 				String userPW = inputPw.getText();
 				String userCheck = inputCheck.getText();
+				
+				//선택된 남자,여자의 성별을 if문으로 분기하여 유효성검사 필요함. **미구현**
+				String malegender = male.getLabel();
+				String femalegender = female.getLabel();
+				
+				// 유효성 검사 1. 빈칸체크
+				System.out.println(userName.isEmpty());
+				System.out.println(malegender);
+				if (userName.isEmpty() || userID.isEmpty() || userPW.isEmpty() || userCheck.isEmpty()) {
+					{
+						
+						if (male.getSelectedIcon() == null && female.getSelectedIcon() == null)
+							// 공란일때		
+							JOptionPane.showMessageDialog(null, "빈칸이 없게 해주세요");
+							return;
+					}
+				}
+
+				// 유효성 검사2. 비번과 비번확인번호가 일치하는지 확인
 				if (userCheck.equals(userPW)) {
 					try {
 						dos.writeUTF("성공");
@@ -146,22 +170,22 @@ public class SingUp extends  JDialog {
 						System.out.println("데이터 보내기 실패");
 					}
 				} else if (!userCheck.equals("실패")) {
-					JOptionPane.showMessageDialog(null, "회원가입이 비정상 처리 되었습니다.");
+				//	JOptionPane.showMessageDialog(null, "회원가입이 비정상 처리 되었습니다.");
+					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지않습니다.");
+					return;
 				}
-				if (userName.isEmpty() || userID.isEmpty() || userPW.isEmpty() || userCheck.isEmpty()) {
-					// 공란일때
-					JOptionPane.showMessageDialog(null, "빈칸이 없게 해주세요");
-				}
+
 				try {
 					String response = dis.readUTF();
+					System.out.println(response);
 					if (response.equals("성공")) {
-						JOptionPane.showMessageDialog(null, "회원가입 되셨습니다.");
+						JOptionPane.showMessageDialog(self, "회원가입 되셨습니다.");
 					} else {
-						JOptionPane.showMessageDialog(null, "회원가입 실패");
+						JOptionPane.showMessageDialog(null, "이미 존재하는 ID입니다.");
 					}
-					System.out.println("데이터 받기 성공!");
+				//	System.out.println("데이터 받기 성공!");
 				} catch (Exception e2) {
-					System.out.println("데이터 받기 실패");
+				//	System.out.println("데이터 받기 실패");
 				}
 			}
 		});
@@ -173,8 +197,9 @@ public class SingUp extends  JDialog {
 		setLocationRelativeTo(parent);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		compInit();
+		this.eventInit();
 		setModal(true);
-		
+
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
