@@ -9,6 +9,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -18,7 +20,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Dailypan extends JPanel{
@@ -44,7 +45,8 @@ public class Dailypan extends JPanel{
 
 	private Dailypan self = this;
 	
-	private boolean changecup =false;
+	private boolean changecup1 =false;
+	private boolean changecup2 =false;
 	//------------------------
 
 	private String result;
@@ -65,6 +67,7 @@ public class Dailypan extends JPanel{
 	private JLabel water_inform = new JLabel();
 
 	private ImageIcon icon1 = new ImageIcon(cupimage);
+	private ImageIcon icon2 = new ImageIcon(cupimage);
 	private JButton cupb1 = new JButton();
 	private JButton cupb2= new JButton();
 	private JButton cupb3 = new JButton();
@@ -111,7 +114,7 @@ public class Dailypan extends JPanel{
 		//컵 1-10까지 아이콘 에 사진넣기 
 		this.cupb1.setIcon(icon1);
 		this.cupb1.setPreferredSize(new Dimension(31, 47));
-		this.cupb2.setIcon(icon1);
+		this.cupb2.setIcon(icon2);
 		this.cupb2.setPreferredSize(new Dimension(31, 47));
 		this.cupb3.setIcon(icon1);
 		this.cupb3.setPreferredSize(new Dimension(31, 47));
@@ -265,48 +268,14 @@ public class Dailypan extends JPanel{
 	public void client(){
 		
 		try {
-			client = new Socket("127.0.0.1", 20000);
+			client = new Socket("127.0.0.1", 40000);
 			dos = new DataOutputStream(client.getOutputStream());
 			dis = new DataInputStream(client.getInputStream());
 			System.out.println("초기연결성공");
 		} catch (Exception e1) {
 			System.out.println("초기연결실패");
 		}
-		
-		String selected1 = combolist1.getSelectedItem().toString();
-		System.out.println(selected1);
-		String selected2 = combolist1.getSelectedItem().toString();
-		String selected3 = combolist1.getSelectedItem().toString();
-	
-	
-	
-	try{
-		dos.writeUTF("선택완료"); //리스트 선택완료
-		dos.writeUTF(selected1);
-		dos.writeUTF(selected2);
-		dos.writeUTF(selected3);
-		System.out.println("데이터보내기 성공! ");
-	} catch (Exception e1) {
-		System.out.println("데이터 보내기 실패");
 
-	}
-	
-	try {
-		
-		 result = dis.readUTF();
-		if (result.equals("전송성공")) {
-				JOptionPane.showMessageDialog(null, "전송 성공");
-
-			} else if (result.equals("전송실패")) {
-				JOptionPane.showMessageDialog(null, "전송에 실패하였습니다.");
-			}
-			System.out.println("전송 성공");
-	}catch (Exception e2) {
-
-	}
-	
-	
-	//return result;
 	}
 	
 	
@@ -320,10 +289,42 @@ public class Dailypan extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				client();
 				
-				//서버에 보내기
-				
+//				String selected1 = combolist1.getSelectedItem().toString();
+//				System.out.println(selected1);
+//				String selected2 = combolist1.getSelectedItem().toString();
+//				String selected3 = combolist1.getSelectedItem().toString();
+			
+			
+			
+//			try{
+//				dos.writeUTF("선택완료"); //리스트 선택완료
+//				dos.writeUTF(selected1);
+//				dos.writeUTF(selected2);
+//				dos.writeUTF(selected3);
+//				System.out.println("데이터보내기 성공! ");
+//			} catch (Exception e1) {
+//				System.out.println("데이터 보내기 실패");
+		//
+//			}
+			
+//			try {
+//				
+//				 result = dis.readUTF();
+//				if (result.equals("전송성공")) {
+//						JOptionPane.showMessageDialog(null, "전송 성공");
+		//
+//					} else if (result.equals("전송실패")) {
+//						JOptionPane.showMessageDialog(null, "전송에 실패하였습니다.");
+//					}
+//					System.out.println("전송 성공");
+//			}catch (Exception e2) {
+		//
+//			}
+			
+			
+			//return result;
+			
 				
 					
 				
@@ -332,18 +333,20 @@ public class Dailypan extends JPanel{
 			
 		});
 		
-		
-		
-
-		cupb1.addActionListener(new ActionListener() {
-
+		cupb1.addMouseListener(new MouseListener (){
 			@Override
-			public void actionPerformed(ActionEvent e) {
-
-	
-
-				changecup =! changecup;
-				if(changecup == true) {
+			public void mouseClicked(MouseEvent arg0) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			//마우스를 뗏을때의 이벤트 처리입니다.
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				changecup1 =! changecup1;
+				if(changecup1 == true) {
 					self.icon1.setImage(fullcupimage);
 				}else {
 					self.icon1.setImage(cupimage);
@@ -351,184 +354,230 @@ public class Dailypan extends JPanel{
 				}
 				self.cupb1.setIcon(icon1);
 				}
-
 			
-		});
-
-		cupb2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-	
-
-				changecup =! changecup;
-				if(changecup == true) {
-					self.icon1.setImage(fullcupimage);
-				}else {
-					self.icon1.setImage(cupimage);
-					
-				}
-				self.cupb2.setIcon(icon1);
-				}
-
 			
 		});
 		
-		cupb3.addActionListener(new ActionListener() {
-
+		cupb2.addMouseListener(new MouseListener (){
 			@Override
-			public void actionPerformed(ActionEvent e) {
-
-	
-
-				changecup =! changecup;
-				if(changecup == true) {
-					self.icon1.setImage(fullcupimage);
+			public void mouseClicked(MouseEvent arg0) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			//마우스를 뗏을때의 이벤트 처리입니다.
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				changecup2 =! changecup2;
+				if(changecup2 == true) {
+					self.icon2.setImage(fullcupimage);
 				}else {
-					self.icon1.setImage(cupimage);
+					self.icon2.setImage(cupimage);
 					
 				}
-				self.cupb3.setIcon(icon1);
+				self.cupb2.setIcon(icon2);
 				}
-
+			
 			
 		});
 		
-		cupb4.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-	
-
-				changecup =! changecup;
-				if(changecup == true) {
-					self.icon1.setImage(fullcupimage);
-				}else {
-					self.icon1.setImage(cupimage);
-					
-				}
-				self.cupb4.setIcon(icon1);
-				}
-
-			
-		});
-
-		cupb5.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-	
-
-				changecup =! changecup;
-				if(changecup == true) {
-					self.icon1.setImage(fullcupimage);
-				}else {
-					self.icon1.setImage(cupimage);
-					
-				}
-				self.cupb5.setIcon(icon1);
-				}
-
-			
-		});
-		cupb6.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-	
-
-				changecup =! changecup;
-				if(changecup == true) {
-					self.icon1.setImage(fullcupimage);
-				}else {
-					self.icon1.setImage(cupimage);
-					
-				}
-				self.cupb6.setIcon(icon1);
-				}
-
-			
-		});
-		cupb7.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-	
-
-				changecup =! changecup;
-				if(changecup == true) {
-					self.icon1.setImage(fullcupimage);
-				}else {
-					self.icon1.setImage(cupimage);
-					
-				}
-				self.cupb7.setIcon(icon1);
-				}
-
-			
-		});
-		cupb8.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-	
-
-				changecup =! changecup;
-				if(changecup == true) {
-					self.icon1.setImage(fullcupimage);
-				}else {
-					self.icon1.setImage(cupimage);
-					
-				}
-				self.cupb8.setIcon(icon1);
-				}
-
-			
-		});
-		cupb9.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-	
-
-				changecup =! changecup;
-				if(changecup == true) {
-					self.icon1.setImage(fullcupimage);
-				}else {
-					self.icon1.setImage(cupimage);
-					
-				}
-				self.cupb9.setIcon(icon1);
-				}
-
-			
-		});
-		cupb10.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-	
-
-				changecup =! changecup;
-				if(changecup == true) {
-					self.icon1.setImage(fullcupimage);
-				}else {
-					self.icon1.setImage(cupimage);
-					
-				}
-				self.cupb10.setIcon(icon1);
-				}
-
-			
-		});
+//		cupb1.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//	
+//
+//				changecup1 =! changecup1;
+//				if(changecup1 == true) {
+//					self.icon1.setImage(fullcupimage);
+//				}else {
+//					self.icon1.setImage(cupimage);
+//					
+//				}
+//				self.cupb1.setIcon(icon1);
+//				}
+//
+//			
+//		});
+//
+//		cupb2.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//	
+//
+//				changecup2 =! changecup2;
+//				if(changecup2 == true) {
+//					self.icon1.setImage(fullcupimage);
+//				}else {
+//					self.icon1.setImage(cupimage);
+//					
+//				}
+//				self.cupb2.setIcon(icon1);
+//				}
+//
+//			
+//		});
+		
+//		cupb3.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//	
+//
+//				changecup =! changecup;
+//				if(changecup == true) {
+//					self.icon1.setImage(fullcupimage);
+//				}else {
+//					self.icon1.setImage(cupimage);
+//					
+//				}
+//				self.cupb3.setIcon(icon1);
+//				}
+//
+//			
+//		});
+//		
+//		cupb4.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//	
+//
+//				changecup =! changecup;
+//				if(changecup == true) {
+//					self.icon1.setImage(fullcupimage);
+//				}else {
+//					self.icon1.setImage(cupimage);
+//					
+//				}
+//				self.cupb4.setIcon(icon1);
+//				}
+//
+//			
+//		});
+//
+//		cupb5.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//	
+//
+//				changecup =! changecup;
+//				if(changecup == true) {
+//					self.icon1.setImage(fullcupimage);
+//				}else {
+//					self.icon1.setImage(cupimage);
+//					
+//				}
+//				self.cupb5.setIcon(icon1);
+//				}
+//
+//			
+//		});
+//		cupb6.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//	
+//
+//				changecup =! changecup;
+//				if(changecup == true) {
+//					self.icon1.setImage(fullcupimage);
+//				}else {
+//					self.icon1.setImage(cupimage);
+//					
+//				}
+//				self.cupb6.setIcon(icon1);
+//				}
+//
+//			
+//		});
+//		cupb7.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//	
+//
+//				changecup =! changecup;
+//				if(changecup == true) {
+//					self.icon1.setImage(fullcupimage);
+//				}else {
+//					self.icon1.setImage(cupimage);
+//					
+//				}
+//				self.cupb7.setIcon(icon1);
+//				}
+//
+//			
+//		});
+//		cupb8.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//	
+//
+//				changecup =! changecup;
+//				if(changecup == true) {
+//					self.icon1.setImage(fullcupimage);
+//				}else {
+//					self.icon1.setImage(cupimage);
+//					
+//				}
+//				self.cupb8.setIcon(icon1);
+//				}
+//
+//			
+//		});
+//		cupb9.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//	
+//
+//				changecup =! changecup;
+//				if(changecup == true) {
+//					self.icon1.setImage(fullcupimage);
+//				}else {
+//					self.icon1.setImage(cupimage);
+//					
+//				}
+//				self.cupb9.setIcon(icon1);
+//				}
+//
+//			
+//		});
+//		cupb10.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//	
+//
+//				changecup =! changecup;
+//				if(changecup == true) {
+//					self.icon1.setImage(fullcupimage);
+//				}else {
+//					self.icon1.setImage(cupimage);
+//					
+//				}
+//				self.cupb10.setIcon(icon1);
+//				}
+//
+//			
+//		});
 
 	}
 	
@@ -539,11 +588,11 @@ public class Dailypan extends JPanel{
 
 
 		this.setSize(900,900);
-
+		this.client();
 		this.comp();
 		this.event();
 
-		this.client();
+		
 		this.setVisible(true);
 
 	}
@@ -551,13 +600,18 @@ public class Dailypan extends JPanel{
 
 
 //	public static void main(String[] args) {
-
+//
+//		
 //		JFrame f = new JFrame();
 //		f.add(new Dailypan());
+//		f.setSize(500,500);
+//		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
+//		f.setLocationRelativeTo(null);
 //		f.setVisible(true);
-		
-		
-
-
+//		
+//		
+//
+//
+//}
 }
 

@@ -62,7 +62,7 @@ class ConnectionThread extends Thread{
 					dos.writeUTF("가입");
 				//생성자에서 받은 정보중에서 id,pw만 저장합니다.
 					Server.manager.insertData(m);
-					
+			
 				}
 				dos.flush();
 				dos.close();
@@ -101,8 +101,7 @@ class ConnectionThread extends Thread{
 					dos.writeUTF(name);
 					dos.writeDouble(stature);
 					dos.writeDouble(weight);
-					dos.writeBoolean(gender);
-					
+					dos.writeBoolean(gender);			
 					
 				} else {
 					dos.writeUTF("로그인실패");

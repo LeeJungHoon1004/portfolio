@@ -15,9 +15,9 @@ public class ImageSliderAndTimerManual extends JFrame{
     //Images Path In Array
     
     String[] list = {
-                      "D:/6월자바_이정훈_2차/실습img/a.jpg",//0
-                      "D:/6월자바_이정훈_2차/실습img/b.jpg",//1
-                      "D:/6월자바_이정훈_2차/실습img/c.jpg",//2
+                      "empty.jpg",//0
+                      "empty2.png",//1
+                     // "D:/6월자바_이정훈_2차/실습img/c.jpg",//2
                     };
     //생성자
     public ImageSliderAndTimerManual(){
@@ -39,7 +39,7 @@ public class ImageSliderAndTimerManual extends JFrame{
     	this.getContentPane().setBackground(Color.decode("#bdb67b"));
     	labelpicture.setBounds(40, 30, 700, 300);
         //Call The Function SetImageSize
-        SetImageSize(2);
+        SetImageSize(0);
        
        //set a timer
         //Timer 클래스 이용-  쓰레드 입니다. 

@@ -8,16 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.net.Socket;
-import java.util.Enumeration;
 
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -117,15 +112,7 @@ public class SingUp extends JDialog {
 		});
 		sing.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					// client = new Socket("", 40000);
-					client = new Socket("", 40000);
-					dos = new DataOutputStream(client.getOutputStream());
-					dis = new DataInputStream(client.getInputStream());
-					System.out.println("회원가입시도");
-				} catch (Exception e1) {
-					System.out.println("초기연결실패");
-				}
+				
 				String userName = inputName.getText();
 				String userID = inputId.getText();
 				String userPW = inputPw.getText();
@@ -173,6 +160,21 @@ public class SingUp extends JDialog {
 				//	JOptionPane.showMessageDialog(null, "회원가입이 비정상 처리 되었습니다.");
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지않습니다.");
 					return;
+				}
+				
+				try {
+					// client = new Socket("", 40000);
+					client = new Socket("127.0.0.1", 40000);
+					dos = new DataOutputStream(client.getOutputStream());
+					dis = new DataInputStream(client.getInputStream());
+					
+					dos.writeUTF("회원가입");
+					//if( 남자 성별 선택) //서버 보낼것 String 이름 , String id ,String pw , String gender 
+					
+					
+					System.out.println("회원가입시도");
+				} catch (Exception e1) {
+					System.out.println("초기연결실패");
 				}
 
 				try {
