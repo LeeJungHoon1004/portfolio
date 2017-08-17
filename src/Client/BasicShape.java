@@ -205,6 +205,8 @@ public class BasicShape extends JFrame {
 		return result;
 	}// end
 
+	
+	
 	public void eventInit() {
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -240,44 +242,28 @@ public class BasicShape extends JFrame {
 		// 내목표 버튼
 		goalBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (result.equals("로그인성공")) {
-					card.show(self.profilePan, "loginAfter");
-				} else if (result.equals("로그인실패")) {
-					card.show(self.profilePan, "loginBefore");
-				}
+				
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 			}
 		});
 		// 오늘의목표 버튼
 		dailyBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (result.equals("로그인성공")) {
-					card.show(self.profilePan, "loginAfter");
-				} else if (result.equals("로그인실패")) {
-					card.show(self.profilePan, "loginBefore");
-				}
+				
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 			}
 		});
 		// 영상게시판 버튼
 		videoBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (result.equals("로그인성공")) {
-					card.show(self.profilePan, "loginAfter");
-				} else if (result.equals("로그인실패")) {
-					card.show(self.profilePan, "loginBefore");
-				}
+				
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 			}
 		});
 		// 사진게시판 버튼
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (result.equals("로그인성공")) {
-					card.show(self.profilePan, "loginAfter");
-				} else if (result.equals("로그인실패")) {
-					card.show(self.profilePan, "loginBefore");
-				}
+				
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 				card.show(self.mainPan, "NameimgBoard");
 			}
