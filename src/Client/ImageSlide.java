@@ -12,9 +12,9 @@ public class ImageSlide extends JPanel {
 	Timer tm;
 	int x = 0;
 	// Images Path In Array
-	String[] list = { "C://Users//Administrator//Desktop//찌르레기//KakaoTalk_20170808_111848677.jpg", // 0
-			"C://Users//Administrator//Desktop//찌르레기//KakaoTalk_20170808_111851622.jpg", // 1
-			"C://Users//Administrator//Desktop//찌르레기//KakaoTalk_20170808_111848043.jpg",// 2
+	String[] list = { "KakaoTalk_20170808_111848677.jpg", // 0
+			"KakaoTalk_20170808_111851622.jpg", // 1
+			"KakaoTalk_20170808_111848043.jpg",// 2
 	};
 
 	// 생성자

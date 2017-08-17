@@ -35,7 +35,7 @@ public class BMI extends JPanel {
 	private String name;
 	private double result;
 	private String grade;
-	private ImageIcon img = new ImageIcon("C://Users//Administrator//Desktop//찌르레기//bmi비만도.jpg");
+	private ImageIcon img = new ImageIcon("bmi비만도.jpg");
 	private JLabel imgResult = new JLabel(img);
 	private JLabel result1 = new JLabel();
 	private JLabel result2 = new JLabel();
