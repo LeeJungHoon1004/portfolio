@@ -234,7 +234,7 @@ public class BasicShape extends JFrame {
 		membership.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 회원가입창 띄우기
-				new SingUp(self).setVisible(true);
+				new SignUp(self).setVisible(true);
 			}
 		});
 		// 내목표 버튼
