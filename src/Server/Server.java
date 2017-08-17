@@ -60,7 +60,7 @@ class ConnectionThread extends Thread {
 					dos.writeUTF("회원가입실패");
 				}else { 
 					dos.writeUTF("회원가입성공");
-				//생성자에서 받은 정보중에서 id,pw만 저장합니다.
+				//생성자에서 받은 정보중에서 name, id , pw , gender를 저장합니다.
 					Server.manager.insertData(m);
 			
 				}
@@ -81,16 +81,14 @@ class ConnectionThread extends Thread {
 				boolean result = Server.manager.isLoginOk(m2);
 				if (result) {// 값이존재한다(회원가입 되어있는 아이디와비번이다) - 로그인허가
 					dos.writeUTF("로그인성공");
-					String gender =null;
+					String name = null;
 					double stature =0;
 					double weight =0;
-					String name = null;
+					String gender =null;
 					Member m1 = new Member(name , stature , weight, gender);
-					m1 =Server.manager.getBMIData();
-					//멤버 m1의 정보를 불러와서 4개를 채우고(성별, 키 , 몸무게 , 이름)
-					//클라이언트의 정보 2개를 입력받아서 2개를 채웁니다.
-					
-					gender =m1.isGender();
+					//멤버의 정보 (id,pw를 준뒤 해당 사용자의 이름 , 키 ,몸무게 ,성별을 가져옴)
+					m1 =Server.manager.getBMIData(m2);
+					gender =m1.getGender();
 					stature= m1.getStature();
 					weight = m1.getWeight();
 					name = m1.getName();
@@ -108,9 +106,9 @@ class ConnectionThread extends Thread {
 				// dos.close();
 				
 			}
-//			else if("커맨드") {
-//			
-//			}
+			else if(cmd.equals("로그아웃")) {
+			
+			}
 			
 			
 		}
@@ -175,7 +173,6 @@ public class Server extends JFrame {
 		this.setTitle("다이어트프로그램서버");
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(Server.EXIT_ON_CLOSE);
-
 		this.compInit();
 		this.eventInit();
 		this.setVisible(true);
