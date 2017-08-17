@@ -39,7 +39,7 @@ public class Member {
 		this.pw = pw;
 	}
 	
-	public String isGender() {
+	public String getGender() {
 		return gender;
 	}
 	public void setGender(String gender) {

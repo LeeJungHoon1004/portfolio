@@ -288,7 +288,7 @@ public class Dailypan extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				
 //				String selected1 = combolist1.getSelectedItem().toString();
 //				System.out.println(selected1);
