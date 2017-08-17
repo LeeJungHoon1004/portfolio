@@ -1,0 +1,125 @@
+package Client;
+
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+
+public class BMI extends JPanel {
+
+	private  TitledBorder tborder = new TitledBorder("");
+	
+	private JLabel stature = new JLabel("키 : ");
+	private JLabel weight = new JLabel("체중 : ");
+	private JLabel gender = new JLabel("성별 : ");
+	private JTextField inputStature = new JTextField();
+	private JTextField inputWeight = new JTextField();
+	private JRadioButton male = new JRadioButton("남자");
+	private JRadioButton female = new JRadioButton("여자");
+	private ButtonGroup group = new ButtonGroup();
+	private JButton resultButton = new JButton("결과");
+	private JPanel genderPan = new JPanel();
+	private JPanel radioPan = new JPanel(new GridLayout(1, 2));
+	// ==============△△△BMI측정 데이터입력UI△△△=========================
+	private String name;
+	private double result;
+	private String grade;
+	private ImageIcon img = new ImageIcon("C://Users//Administrator//Desktop//찌르레기//bmi비만도.jpg");
+	private JLabel imgResult = new JLabel(img);
+	private JLabel result1 = new JLabel();
+	private JLabel result2 = new JLabel();
+	private JLabel result3 = new JLabel();
+	private JPanel resultPan = new JPanel(new GridLayout(1, 2));
+	private Font f = new Font("바탕", Font.ITALIC, 21);
+
+	public void compInit() {
+		setLayout(null);
+		
+		imgResult.setBounds(65, 76, 800, 400);	
+		stature.setBounds(112, 500, 44, 40);
+		inputStature.setBounds(171,500, 255, 40);
+		weight.setBounds(492,500, 56, 40);
+		inputWeight.setBounds(562,500,255, 40);
+		gender.setBounds(112,550, 60, 50);
+		radioPan.setBounds(178,550, 252, 50);
+		resultButton.setBounds(670, 560, 84, 40);
+		
+		add(imgResult);
+		add(stature);
+		add(inputStature);
+		add(weight);
+		add(inputWeight);
+		add(gender);
+		group.add(male);
+		group.add(female);
+		radioPan.add(male);
+		radioPan.add(female);
+		add(radioPan);
+
+		add(resultButton);
+		
+		
+		
+	}// end
+
+	public void eventInit() {
+		
+		resultButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				resultBMI();
+				gradeBMI();
+				
+				resultPan.setBounds(120, 620, 720, 150);
+				
+				result1.setFont(f);
+				result2.setFont(f);
+				result1.setHorizontalTextPosition(SwingConstants.CENTER);
+				result1.setText(name + " 님의 BMI 결과는"+result + " % 이므로 "+grade + " 입니다.");
+				
+				resultPan.setBorder(tborder);
+				resultPan.add(result1);
+				
+				add(resultPan);
+			}
+		});
+	}
+	
+	public double resultBMI() {
+		double stature = Integer.parseInt(inputStature.getText())*0.1;
+		double weight = Double.parseDouble(inputWeight.getText());
+		double resultdouble = (weight) / (stature * stature);
+		return result = resultdouble*100;
+	}// end
+
+	public String gradeBMI() {
+		
+		if (result < 18.5) {
+			grade = "저체중";
+		} else if (result >= 18.5 && result <= 24.9) {
+			grade = "정상";
+		} else if (result >= 25 && result <= 29.9) {
+			grade = "과체중";
+		} else if (result <= 30 && result <= 34.9) {
+			grade = "비만";
+		} else if (result > 35) {
+			grade = "고도비만";
+		}
+		return grade;
+	}// end
+
+	public BMI() {
+		compInit();
+		eventInit();
+	}// conductor end
+}
