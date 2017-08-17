@@ -28,7 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-
+// 나 주석 달았다.
 public class BasicShape extends JFrame {
 	private Socket client;
 	private DataOutputStream dos;
