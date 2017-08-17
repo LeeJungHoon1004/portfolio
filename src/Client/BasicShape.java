@@ -88,7 +88,7 @@ public class BasicShape extends JFrame {
 	// COMPNENT - goalPan
 	private JPanel goalPan = new JPanel();
 	// COMPNENT - dailyPan
-	private JPanel dailyPan = new JPanel();
+	private Dailypan dailyPan =new Dailypan();
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
 	// COMPNENT - imgBoardPan
@@ -161,7 +161,7 @@ public class BasicShape extends JFrame {
 
 		mainPan.add(homePan, "NamedefaultPane");
 		mainPan.add(goalPan);
-		mainPan.add(dailyPan);
+		mainPan.add(dailyPan , "NamedailyPane");
 		mainPan.add(videoPan);
 		mainPan.add(imgBoardPan, "NameimgBoard"); // 카드로 끼워넣는팬에
 		// 이름을 부여함 .
@@ -251,6 +251,7 @@ public class BasicShape extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
+				card.show(self.mainPan, "NamedailyPane");
 			}
 		});
 		// 영상게시판 버튼
@@ -263,7 +264,8 @@ public class BasicShape extends JFrame {
 		// 사진게시판 버튼
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
+
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 				card.show(self.mainPan, "NameimgBoard");
 			}
