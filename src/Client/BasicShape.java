@@ -199,7 +199,7 @@ public class BasicShape extends JFrame {
 	}
 
 	public void clientConnect() {
-		while (true) {
+		
 			try {
 				client = new Socket("192.168.53.4", 40000);
 				dos = new DataOutputStream(client.getOutputStream());
@@ -208,7 +208,7 @@ public class BasicShape extends JFrame {
 			} catch (Exception e1) {
 				System.out.println("초기연결실패");
 			}
-		}
+		
 	}// end
 
 
@@ -265,7 +265,7 @@ public class BasicShape extends JFrame {
 					card.show(self.profilePan, "loginAfter");
 				} else if (result.equals("로그인실패")) {
 					card.show(self.profilePan, "loginBefore");
-
+\
 				}
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 			}
