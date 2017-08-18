@@ -37,7 +37,8 @@ public class BasicShape extends JFrame {
 	private DataInputStream dis;
 	// =======SOCKET========================
 	private Container cp = this.getContentPane();
-	private JLabel title = new JLabel("title", JLabel.CENTER);
+	private JLabel title = new JLabel();
+	
 	private Font font = new Font("바탕", Font.ITALIC, 30);
 	private JButton goalBt = new JButton("나의 목표");
 	private JButton dailyBt = new JButton("하루 목표");
@@ -76,6 +77,11 @@ public class BasicShape extends JFrame {
 	private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
 
 	// COMPNENT - homePan
+	
+	private Image titleimage = new ImageIcon("1.jpg").getImage()
+			.getScaledInstance(1500, 80, java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon titleicon= new ImageIcon(titleimage);
+	
 	private TitledBorder tborder = new TitledBorder("");
 	private JPanel homePan = new JPanel(new GridLayout(2, 1));
 	private String name;
@@ -95,6 +101,8 @@ public class BasicShape extends JFrame {
 	
 	private JLabel labelPhoto4 = new JLabel();
 
+	
+	
 	private Image image1 = new ImageIcon("설현1.jpg").getImage()
 			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon iconimage1= new ImageIcon(image1);
@@ -131,7 +139,7 @@ public class BasicShape extends JFrame {
 		bmi.setBorder(tborder);
 		this.homePan.add(imgSlide);
 		this.homePan.add(bmi);
-
+		
 		// compInit() -defaultPan
 		this.panelCenter.add(labelPhoto1);
 		this.panelCenter.add(labelPhoto2);
@@ -175,7 +183,8 @@ public class BasicShape extends JFrame {
 		profilePan.add(panbox, "loginBefore");
 		profilePan.add(panboxx, "loginAfter");
 		// =======================================================
-		title.setFont(font);
+//		title.setFont(font);
+		title.setIcon(titleicon);
 		titlePan.add(title);
 		sidepan.add(profilePan);
 		sidepan.add(category);
