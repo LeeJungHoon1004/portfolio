@@ -47,7 +47,7 @@ public class Dailypan extends JPanel{
 
    private JButton buttonselect = new JButton("선택완료"); //선택완료 버튼 (콤보쪽)
    private JButton buttonConfirm = new JButton("오늘의 목표를 평가해보세요");
-  // private JLabel ConfirmQ = new JLabel("오늘의 목표 잘 하셨나요?? ----------------->");
+  
    
    private Dailypan self = this;
    
@@ -78,8 +78,16 @@ public class Dailypan extends JPanel{
    
    private Image water_effect = new ImageIcon("waterInform.jpg").getImage()
          .getScaledInstance(500, 500, java.awt.Image.SCALE_SMOOTH);
-
    
+   private Image water_Sign = new ImageIcon("waterSign.jpg").getImage()
+	         .getScaledInstance(500, 500, java.awt.Image.SCALE_SMOOTH);
+
+   private Image dreamImage = new ImageIcon("규정.jpg").getImage()
+	         .getScaledInstance(600, 200, java.awt.Image.SCALE_SMOOTH);
+
+   private ImageIcon icondream = new ImageIcon(dreamImage);
+   
+   private ImageIcon iconwaterSign = new ImageIcon(water_Sign);
    private ImageIcon iconwater = new ImageIcon(water_effect);
    
    private ImageIcon icon1 = new ImageIcon(cupimage);
@@ -94,8 +102,9 @@ public class Dailypan extends JPanel{
    private ImageIcon icon10 = new ImageIcon(cupimage);
   
 
-   
+   private JLabel water_SignLabel = new JLabel();
    private JLabel water_inform = new JLabel();
+   private JLabel dream = new JLabel();
    
    private JButton cupb1 = new JButton();
    private JButton cupb2= new JButton();
@@ -164,9 +173,27 @@ public class Dailypan extends JPanel{
       this.cupb10.setIcon(icon10);
       this.cupb10.setPreferredSize(new Dimension(43, 72));
 
+//
+//      private Image water_effect = new ImageIcon("waterInform.jpg").getImage()
+//            .getScaledInstance(500, 500, java.awt.Image.SCALE_SMOOTH);
+//      
+//      
+//      
+//      private ImageIcon iconwater = new ImageIcon(water_effect);
+//      image1 = new ImageIcon("img/img.jpg");  //이미지 경로
+//      
+//      lb = new JLabel("이미지를 넣자",image1,JLabel.CENTER);
+//      lb.setVerticalTextPosition(JLabel.CENTER);
+//      lb.setHorizontalTextPosition(JLabel.RIGHT);
+    
+      this.dream.setIcon(icondream);
+      this.water_inform.setPreferredSize(new Dimension(500, 500));
+      
       this.water_inform.setIcon(iconwater);
       this.water_inform.setPreferredSize(new Dimension(500, 500));
       
+      this.water_SignLabel.setIcon(iconwaterSign);
+      this.water_inform.setPreferredSize(new Dimension(500, 500));
       //그리드백을 이용하여 컴포넌트 배치함..
       this.setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
@@ -200,6 +227,10 @@ public class Dailypan extends JPanel{
 
 
       c.insets = new Insets(0,10,30,0); //공간, 시계방향 
+
+      
+      c.gridy = 0; c.gridx = 1;
+      this.add(dream,c);
 
       c.gridy = 1; c.gridx = 1;
       this.add(today3,c);
@@ -251,9 +282,11 @@ public class Dailypan extends JPanel{
       this.add(cupPan2,c4);
 
 
-      c3.gridy = 11; c3.gridx =1;
-      this.add(buttonUpload,c3);
+      c4.gridy = 11; c4.gridx =1;
+      this.add(buttonUpload,c4);
 
+      c4.gridy = 12; c4.gridx =1;
+      this.add(water_SignLabel,c4);
 
 
       //      this.add(buttonClose);
