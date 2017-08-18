@@ -200,25 +200,28 @@ public class Dailypan extends JPanel{
 
       
       //콤보박스 배열이용하여 목록 넣고, 배치 
-      String[] action = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기", 
+      String [] action = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기", 
             "4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트" , "6.플랭크 1분 3세트" ,"7.저녁안먹기","8.샤워하며 마사지하기"
             ,"9.자기전 하늘자전거 5분","10.일어나서 물한잔 원샷"};
 
       JComboBox combolist1 = new JComboBox(action);
       combolist1.setPreferredSize(new Dimension(500, 50));
-      combolist1.addItem(action);
+   //   combolist1.addItem(action);
+    
       combolist1.setEditable(false);
+      
+      
 
 //asdf
       
       JComboBox combolist2 = new JComboBox(action);
       combolist2.setPreferredSize(new Dimension(500, 50));
-      combolist2.addItem(action);
+     
       combolist2.setEditable(false);
 
       JComboBox combolist3 = new JComboBox(action);
       combolist3.setPreferredSize(new Dimension(500, 50));
-      combolist3.addItem(action);
+     
       combolist3.setEditable(false);
 
 

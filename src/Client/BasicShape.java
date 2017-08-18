@@ -9,6 +9,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -88,9 +89,31 @@ public class BasicShape extends JFrame {
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
 	// COMPNENT - imgBoardPan
-	private JLabel labelPhoto1 = new JLabel("포토1");
-	private JLabel labelPhoto2 = new JLabel("포토2");
-	private JLabel labelPhoto3 = new JLabel("포토3");
+	private JLabel labelPhoto1 = new JLabel();
+	private JLabel labelPhoto2 = new JLabel();
+	private JLabel labelPhoto3 = new JLabel();
+	
+	private JLabel labelPhoto4 = new JLabel();
+
+	private Image image1 = new ImageIcon("설현1.jpg").getImage()
+			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon iconimage1= new ImageIcon(image1);
+	
+	private Image image2 = new ImageIcon("송혜교.jpg").getImage()
+			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon iconimage2= new ImageIcon(image2);
+	
+	private Image image3 = new ImageIcon("수지에프터.jpg").getImage()
+			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon iconimage3= new ImageIcon(image3);
+	
+	private Image image4 = new ImageIcon("연예인.jpg").getImage()
+			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon iconimage4= new ImageIcon(image4);
+	
+	
+	
+
 	private JButton buttonUpload = new JButton("업로드");
 	private JButton buttonRemove = new JButton("사진삭제"); // 사진삭제시 id와 패스워드 비번확인
 	// 필요함.
@@ -113,6 +136,14 @@ public class BasicShape extends JFrame {
 		this.panelCenter.add(labelPhoto1);
 		this.panelCenter.add(labelPhoto2);
 		this.panelCenter.add(labelPhoto3);
+		
+		//---------사진
+		this.labelPhoto1.setIcon(iconimage1);
+		this.labelPhoto2.setIcon(iconimage2);
+		this.labelPhoto3.setIcon(iconimage3);
+		this.labelPhoto4.setIcon(iconimage4);
+		
+		
 		this.panelSouth.add(buttonUpload);
 		this.panelSouth.add(buttonRemove);
 		this.panelSouth.add(buttonClose);
@@ -180,9 +211,9 @@ public class BasicShape extends JFrame {
 		}
 	}// end
 
-	
-	
-	
+
+
+
 	public String getResult() {
 		// 로그인 버튼
 		clientConnect();
@@ -221,10 +252,10 @@ public class BasicShape extends JFrame {
 		return name;
 	}
 
-	
-	
-	
-	
+
+
+
+
 	public void eventInit() {
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -3,9 +3,11 @@ package Client;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,8 +15,15 @@ import javax.swing.JPanel;
 
 public class StimulsPhoto extends JFrame{
 	
+	
+	
 	private StimulsPhoto self = this;
 	//===========================
+	
+	
+	
+	
+	
 	private JLabel labelPhoto1 = new JLabel("포토1");
 	private JLabel labelPhoto2 = new JLabel("포토2");
 	private JLabel labelPhoto3 = new JLabel("포토3");
@@ -49,6 +58,8 @@ public class StimulsPhoto extends JFrame{
 	
 	
 	public void compInit(){
+		
+		
 	//====================================
 	this.panelCenter.add(labelPhoto1);
 	this.panelCenter.add(labelPhoto2);
