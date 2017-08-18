@@ -65,8 +65,13 @@ class ConnectionThread extends Thread {
 					System.out.println("test2");
 					dos.writeUTF("회원가입성공");
 				//생성자에서 받은 정보중에서 name, id , pw , gender를 저장합니다.
-					Server.manager.insertData(m);
+				int result2=	Server.manager.insertData(m);
 			
+				if(result2 > 0 ){
+										System.out.println("회원정보입력에 성공했습니다");
+									}else{
+										System.out.println("회원정보입력에 실패했습니다.");
+									}
 				}
 				dos.flush();
 				
@@ -128,6 +133,7 @@ class ConnectionThread extends Thread {
 		}
 		catch(Exception e) {
 			System.out.println("비정상종료.");
+			e.printStackTrace();
 			try{
 			dos.close();
 			}catch(Exception e1){

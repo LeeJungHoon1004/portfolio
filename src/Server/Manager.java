@@ -21,13 +21,13 @@ import java.sql.ResultSet;
 public class Manager implements ManagerInterface{
 
 	private Connection getConnection() throws Exception{
-		System.out.println("java07의 데이터베이스 커넥션생성 시도");
+		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		String url = "jdbc:oracle:thin:@localhost:1521:XE";
 		String id = "java07";
 		String pw = "java07";
 		Connection con = DriverManager.getConnection(url,id, pw );
-		System.out.println("java07의 데이터베이스 커넥션 생성 성공");
+		
 		return con;
 	}
 	
@@ -52,7 +52,7 @@ public class Manager implements ManagerInterface{
 	}
 
 	@Override
-	public void insertData(Member m) throws Exception {
+	public int insertData(Member m) throws Exception {
 		// TODO Auto-generated method stub
 		Connection con =this.getConnection();
 		String sql = "insert into member values(member_seq.nextval , ? , ? ,? ,? , sysdate)";
@@ -63,7 +63,8 @@ public class Manager implements ManagerInterface{
 		pstat.setString(4, m.getGender());
 		int result = pstat.executeUpdate();
 		con.commit();
-		
+		con.close();
+		return result;
 	}
 	
 
