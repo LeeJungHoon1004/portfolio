@@ -21,13 +21,13 @@ import java.sql.ResultSet;
 public class Manager implements ManagerInterface{
 
 	private Connection getConnection() throws Exception{
-	
+		System.out.println("java07狼 单捞磐海捞胶 目池记积己 矫档");
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		String url = "jdbc:oracle:thin:@localhost:1521:XE";
 		String id = "java07";
 		String pw = "java07";
 		Connection con = DriverManager.getConnection(url,id, pw );
-		System.out.println("java07狼 单捞磐海捞胶 目池记 积己");
+		System.out.println("java07狼 单捞磐海捞胶 目池记 积己 己傍");
 		return con;
 	}
 	

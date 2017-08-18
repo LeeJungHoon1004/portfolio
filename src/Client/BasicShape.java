@@ -265,7 +265,7 @@ public class BasicShape extends JFrame {
 					card.show(self.profilePan, "loginAfter");
 				} else if (result.equals("로그인실패")) {
 					card.show(self.profilePan, "loginBefore");
-\
+
 				}
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 			}
