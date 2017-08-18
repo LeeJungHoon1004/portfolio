@@ -8,6 +8,7 @@ public class Member {
 	private String gender ; //성별
 	private double stature; //키
 	private double weight; //몸무게
+	
 	public String getName() {
 		return name;
 	}

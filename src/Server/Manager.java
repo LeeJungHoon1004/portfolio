@@ -21,25 +21,34 @@ import java.sql.ResultSet;
 public class Manager implements ManagerInterface{
 
 	private Connection getConnection() throws Exception{
+	
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		String url = "jdbc:oracle:thin:@localhost:1521:XE";
 		String id = "java07";
 		String pw = "java07";
 		Connection con = DriverManager.getConnection(url,id, pw );
-	
+		System.out.println("java07의 데이터베이스 커넥션 생성");
 		return con;
 	}
 	
 	@Override
 	public boolean isExist(Member m) throws Exception{
+		System.out.println("java07의 isExist메소드실행");
 		Connection con =this.getConnection();
+		
+		System.out.println(m.getId());
+		
 		String sql = "select * from member where id = ?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, m.getId());
+		
 		ResultSet rs = pstat.executeQuery();
+		
 		boolean result = rs.next();
+		//id가 존재하면 true
+		//id가 없으면 false
 		con.close();
-		return false;
+		return result;
 	}
 
 	@Override
@@ -54,7 +63,7 @@ public class Manager implements ManagerInterface{
 		pstat.setString(4, m.getGender());
 		int result = pstat.executeUpdate();
 		con.commit();
-	
+		
 	}
 	
 

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.ButtonGroup;
@@ -122,16 +123,16 @@ public class SignUp extends JDialog {
 				String malegender ;
 				String femalegender;
 				if(male.isSelected()){
-					 malegender = male.getLabel();
+					 malegender = male.getLabel(); //남자
 					System.out.println(malegender);
 				}
 				else if(female.isSelected()){
-					 femalegender = female.getLabel();
+					 femalegender = female.getLabel(); //여자
 					System.out.println(femalegender);
 				}
 					
 				// 유효성 검사 1. 빈칸체크
-				System.out.println(userName.isEmpty());
+			//	System.out.println(userName.isEmpty());
 				
 				
 				if ( userName.isEmpty() || userID.isEmpty() || userPW.isEmpty() || userCheck.isEmpty() ) {
@@ -176,10 +177,13 @@ public class SignUp extends JDialog {
 						}
 						dos.writeUTF(userID);
 						dos.writeUTF(userPW);
-						JOptionPane.showMessageDialog(null, "회원가입이 정상 처리 되었습니다.");
-						self.dispose();
+						
+				//		self.dispose();
 						System.out.println("회원가입 데이터 보내기 성공");
-					} catch (Exception e1) {
+						
+					
+					} 
+					catch (Exception e1) {
 						System.out.println("회원가입 데이터 보내기 실패");
 					}
 				} else if (!userCheck.equals(userPW)) {
@@ -202,7 +206,17 @@ public class SignUp extends JDialog {
 				} catch (Exception e2) {
 				//	System.out.println("데이터 받기 실패");
 				}
+			
+				//회원가입 시도후 소켓닫기.
+				try {
+					client.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} //
+			
 			}
+			
 		});
 	}// end
 

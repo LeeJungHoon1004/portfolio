@@ -35,7 +35,7 @@ class ConnectionThread extends Thread {
 	public void run() {
 		
 		try {
-			System.out.println(socket.getInetAddress()+ " 님이 접속했습니다");
+			System.out.println(socket.getInetAddress()+ "님이접속했습니다");
 			
 			while(true) {
 			String cmd = dis.readUTF();
@@ -54,18 +54,23 @@ class ConnectionThread extends Thread {
 				Member m = new Member(name , id , pw , gender );
 				//클라이언트로 받은 아이디와  DB에 저장되어있는 내용인지 검사합니다.
 				//생성자에서 받은 정보중에서 id만 검사합니다
+				System.out.println(name);
 				boolean result  = Server.manager.isExist(m); 
+				System.out.println(result);
 				//값이 존재한다.(존재하는아이디) //값이 없다 회원가입 시켜줌.
 				if(result) {
+					System.out.println("test1");
 					dos.writeUTF("회원가입실패");
 				}else { 
+					System.out.println("test2");
 					dos.writeUTF("회원가입성공");
 				//생성자에서 받은 정보중에서 name, id , pw , gender를 저장합니다.
 					Server.manager.insertData(m);
 			
 				}
 				dos.flush();
-				dos.close();
+				
+				
 			}
 			
 			else if(cmd.equals("로그인")) {
@@ -104,6 +109,7 @@ class ConnectionThread extends Thread {
 				}
 				dos.flush();
 				// dos.close();
+				
 				
 			}
 			else if(cmd.equals("로그아웃")) {

@@ -296,18 +296,7 @@ public class Dailypan extends JPanel{
 
    }
    
-   public void client(){
-      
-      try {
-         client = new Socket("127.0.0.1", 40000);
-         dos = new DataOutputStream(client.getOutputStream());
-         dis = new DataInputStream(client.getInputStream());
-         System.out.println("초기연결성공");
-      } catch (Exception e1) {
-         System.out.println("초기연결실패");
-      }
-
-   }
+   
    
    
    
@@ -598,7 +587,7 @@ public class Dailypan extends JPanel{
 
 
       this.setSize(900,900);
-      this.client();
+     
       this.comp();
       this.event();
 
