@@ -1,10 +1,14 @@
 package Client;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -43,6 +47,13 @@ public class BMI extends JPanel {
 	private JPanel resultPan = new JPanel(new GridLayout(1, 2));
 	private Font f = new Font("바탕", Font.ITALIC, 21);
 
+	
+	//================서버로부터 이름받기=======================
+	
+	private Socket client;
+	private DataInputStream dis;
+	private DataOutputStream dos;
+	
 	public void compInit() {
 		setLayout(null);
 		
@@ -117,6 +128,24 @@ public class BMI extends JPanel {
 		}
 		return grade;
 	}// end
+
+	public String ConnectClient() {
+		try {
+			client = new Socket("192.168.53.4",40000);
+			dis = new DataInputStream(client.getInputStream());
+		} catch (Exception e) {
+			System.out.println("bmi 초기연결 실패");
+		}
+		
+		try {
+			name = dis.readUTF();
+		}catch(Exception e1) {
+			System.out.println("bmi 이름데이터받기 실패");
+		}
+		
+		return name;
+	}
+	
 
 	public BMI() {
 		compInit();

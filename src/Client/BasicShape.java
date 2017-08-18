@@ -73,22 +73,18 @@ public class BasicShape extends JFrame {
 	private JPanel mainPan = new JPanel(card);
 	private JScrollPane sc = new JScrollPane(mainPan);
 	private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
-	
-	
-	
+
 	// COMPNENT - homePan
-	private  TitledBorder tborder = new TitledBorder("");
-	private JPanel homePan = new JPanel(new GridLayout(2,1));
+	private TitledBorder tborder = new TitledBorder("");
+	private JPanel homePan = new JPanel(new GridLayout(2, 1));
 	private String name;
 	private ImageSlide imgSlide = new ImageSlide();
 	private BMI bmi = new BMI();
-	
-	
-	
+
 	// COMPNENT - goalPan
 	private JPanel goalPan = new JPanel();
 	// COMPNENT - dailyPan
-	private Dailypan dailyPan =new Dailypan();
+	private Dailypan dailyPan = new Dailypan();
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
 	// COMPNENT - imgBoardPan
@@ -105,7 +101,6 @@ public class BasicShape extends JFrame {
 	private JPanel panelSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 	// =======COMPONENT========================
 
-	
 	public void comp() {
 		setLayout(null);
 		imgSlide.setPreferredSize(new Dimension(872, 461));
@@ -161,7 +156,7 @@ public class BasicShape extends JFrame {
 
 		mainPan.add(homePan, "NamedefaultPane");
 		mainPan.add(goalPan);
-		mainPan.add(dailyPan , "NamedailyPane");
+		mainPan.add(dailyPan, "NamedailyPane");
 		mainPan.add(videoPan);
 		mainPan.add(imgBoardPan, "NameimgBoard"); // 카드로 끼워넣는팬에
 		// 이름을 부여함 .
@@ -172,16 +167,26 @@ public class BasicShape extends JFrame {
 		add(sc);
 	}
 
-	public String clientConnect() {
-		// 로그인 버튼
-		try {
-			client = new Socket("", 4000);
-			dos = new DataOutputStream(client.getOutputStream());
-			dis = new DataInputStream(client.getInputStream());
-			System.out.println("초기연결성공");
-		} catch (Exception e1) {
-			System.out.println("초기연결실패");
+	public void clientConnect() {
+		while (true) {
+			try {
+				client = new Socket("192.168.53.4", 4000);
+				dos = new DataOutputStream(client.getOutputStream());
+				dis = new DataInputStream(client.getInputStream());
+				System.out.println("초기연결성공");
+			} catch (Exception e1) {
+				System.out.println("초기연결실패");
+			}
 		}
+	}// end
+
+	
+	
+	
+	public String getResult() {
+		// 로그인 버튼
+		clientConnect();
+
 		String userID = inputID.getText();
 		String userPW = inputPW.getText();
 		try {
@@ -205,6 +210,19 @@ public class BasicShape extends JFrame {
 		return result;
 	}// end
 
+	public String getName() {
+		clientConnect();
+
+		try {
+			name = dis.readUTF();
+		} catch (Exception e1) {
+			System.out.println("홈-프로필 이름데이터받기 실패");
+		}
+		return name;
+	}
+
+	
+	
 	
 	
 	public void eventInit() {
@@ -216,6 +234,7 @@ public class BasicShape extends JFrame {
 					card.show(self.profilePan, "loginAfter");
 				} else if (result.equals("로그인실패")) {
 					card.show(self.profilePan, "loginBefore");
+
 				}
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 			}
@@ -242,14 +261,14 @@ public class BasicShape extends JFrame {
 		// 내목표 버튼
 		goalBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 			}
 		});
 		// 오늘의목표 버튼
 		dailyBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 				card.show(self.mainPan, "NamedailyPane");
 			}
@@ -257,14 +276,13 @@ public class BasicShape extends JFrame {
 		// 영상게시판 버튼
 		videoBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 			}
 		});
 		// 사진게시판 버튼
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 				card.show(self.mainPan, "NameimgBoard");
@@ -316,22 +334,6 @@ public class BasicShape extends JFrame {
 				// TODO Auto-generated method stub
 			}
 		});
-	}
-
-	public String userData() {
-		try {
-			client = new Socket("", 4000);
-			dis = new DataInputStream(client.getInputStream());
-		} catch (Exception e) {
-			System.out.println("초기연결실패");
-		}
-		try {
-			name = dis.readUTF();
-			System.out.println("이름데이터받기 성공");
-		} catch (Exception e) {
-			System.out.println("데이터받기 실패");
-		}
-		return name;
 	}
 
 	public BasicShape() {
