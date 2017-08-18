@@ -86,6 +86,8 @@ public class Dailypan extends JPanel{
    private ImageIcon icon8 = new ImageIcon(cupimage);
    private ImageIcon icon9 = new ImageIcon(cupimage);
    private ImageIcon icon10 = new ImageIcon(cupimage);
+  
+		   private ImageIcon icon11 = new ImageIcon(cupimage);
    
    
    private JLabel water_inform = new JLabel(iconwater);
@@ -133,9 +135,6 @@ public class Dailypan extends JPanel{
       cupPan2.add(cupb10);
       
       
-      
-
-
       //컵 1-10까지 아이콘 에 사진넣기 
       this.cupb1.setIcon(icon1);
       this.cupb1.setPreferredSize(new Dimension(43, 72));
@@ -176,8 +175,8 @@ public class Dailypan extends JPanel{
       combolist1.addItem(action);
       combolist1.setEditable(false);
 
-
-
+//asdf
+      
       JComboBox combolist2 = new JComboBox(action);
       combolist2.setPreferredSize(new Dimension(500, 50));
       combolist2.addItem(action);
