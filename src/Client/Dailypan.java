@@ -13,12 +13,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.net.Socket;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Dailypan extends JPanel{
@@ -34,7 +38,7 @@ public class Dailypan extends JPanel{
    
    private JLabel today3 = new JLabel("오늘의 목표를 3개 선택하세요");
    private Font font = new Font("나무", Font.ITALIC, 20);
-   
+   private Font font2 = new Font("나무", Font.BOLD, 20);
    private JLabel waterchecklabel = new JLabel("물마신 횟수를 체크해보세요! ");
    
    
@@ -42,7 +46,9 @@ public class Dailypan extends JPanel{
 
 
    private JButton buttonselect = new JButton("선택완료"); //선택완료 버튼 (콤보쪽)
-
+   private JButton buttonConfirm = new JButton("오늘의 목표를 평가해보세요");
+  // private JLabel ConfirmQ = new JLabel("오늘의 목표 잘 하셨나요?? ----------------->");
+   
    private Dailypan self = this;
    
    private boolean changecup1 =false;
@@ -87,10 +93,9 @@ public class Dailypan extends JPanel{
    private ImageIcon icon9 = new ImageIcon(cupimage);
    private ImageIcon icon10 = new ImageIcon(cupimage);
   
-		   private ImageIcon icon12 = new ImageIcon(cupimage);
+
    
-   
-   private JLabel water_inform = new JLabel(iconwater);
+   private JLabel water_inform = new JLabel();
    
    private JButton cupb1 = new JButton();
    private JButton cupb2= new JButton();
@@ -111,6 +116,8 @@ public class Dailypan extends JPanel{
 
 
    public void comp() {
+	   
+	  
 
       this.setSize(800, 800);
       
@@ -212,6 +219,12 @@ public class Dailypan extends JPanel{
       this.add(combolist3,c2);
       c2.gridy = 5; c2.gridx =2;
       this.add(buttonselect,c2);
+      c2.gridy = 6; c2.gridx =1;
+      this.add(buttonConfirm,c2);
+      
+//      c2.gridy = 6; c2.gridx =3;
+//      this.add(ConfirmQ,c2);
+     
       
       //3번 컨테이너, 물 체크해보세요 레이블
 
@@ -219,7 +232,7 @@ public class Dailypan extends JPanel{
       c3.insets = new Insets(10,10,30,0);
 
 
-      c3.gridy = 6; c3.gridx = 1;
+      c3.gridy = 7; c3.gridx = 1;
       this.add(waterchecklabel,c3);
       
       
@@ -229,16 +242,16 @@ public class Dailypan extends JPanel{
       //컵 패널 
       GridBagConstraints c4 = new GridBagConstraints();
       c4.insets = new Insets(10,20,30,0);
-      c4.gridy = 7; c4.gridx = 1;
-      this.add(water_inform,c4);
       c4.gridy = 8; c4.gridx = 1;
+      this.add(water_inform,c4);
+      c4.gridy = 9; c4.gridx = 1;
       this.add(cupPan,c4);
 
-      c4.gridy = 9; c4.gridx = 1;
+      c4.gridy = 10; c4.gridx = 1;
       this.add(cupPan2,c4);
 
 
-      c3.gridy = 10; c3.gridx =2;
+      c3.gridy = 11; c3.gridx =1;
       this.add(buttonUpload,c3);
 
 
@@ -313,6 +326,29 @@ public class Dailypan extends JPanel{
             
          }
          
+      });
+      
+      buttonConfirm.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			int a = JOptionPane.showConfirmDialog(buttonConfirm, "오늘의 목표 3가지 모두 다 하셨나요?");
+			//int i = JOptionPane.showConfirmDialog(null, "확실한가요", "진짜?", JOptionPane.OK_CANCEL_OPTION);
+			
+			if (a ==0 ) {
+				JOptionPane.showConfirmDialog(null, "정말 수고하셨어요! 새로운 목표도 화이팅! ", "진짜?", JOptionPane.OK_CANCEL_OPTION);
+			}
+			else if ( a == 1) {
+				JOptionPane.showConfirmDialog(null, "이럴수가..내일은 힘내보아요! ", "진짜?", JOptionPane.OK_CANCEL_OPTION);
+			}
+//			
+			
+			
+				
+			
+		}
+    	  
       });
       
       cupb1.addMouseListener(new MouseListener (){
