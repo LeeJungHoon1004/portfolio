@@ -114,6 +114,7 @@ public class BasicShape extends JFrame {
 	private JLabel labelPhoto3 = new JLabel();
 	
 	private JLabel labelPhoto4 = new JLabel();
+	private JLabel labelPhoto5 = new JLabel();
 
 	
 	
