@@ -87,7 +87,7 @@ public class Dailypan extends JPanel{
    private ImageIcon icon9 = new ImageIcon(cupimage);
    private ImageIcon icon10 = new ImageIcon(cupimage);
   
-		   private ImageIcon icon11 = new ImageIcon(cupimage);
+		   private ImageIcon icon12 = new ImageIcon(cupimage);
    
    
    private JLabel water_inform = new JLabel(iconwater);
