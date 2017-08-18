@@ -49,9 +49,19 @@ public class BasicShape extends JFrame {
 	private JPanel sidepan = new JPanel(new GridLayout(5, 1));
 	// ▽▽▽▽▽▽▽▽▽▽프로필 바뀜▽▽▽▽▽▽▽▽▽▽▽▽
 	// 로그아웃 중일때
-	private JLabel lbID = new JLabel("아이디 :");
+	private JLabel lbID = new JLabel();
+	private JLabel lbPW = new JLabel();
+	
+	private Image idimage = new ImageIcon("id.jpg").getImage()
+			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon iconid= new ImageIcon(idimage);
+	
+	private Image pwimage = new ImageIcon("pw.jpg").getImage()
+			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon iconpw= new ImageIcon(pwimage);
+	
 	private JTextField inputID = new JTextField();
-	private JLabel lbPW = new JLabel("비밀번호 :");
+	
 	private JPasswordField inputPW = new JPasswordField();
 	private JButton membership = new JButton("회원가입");
 	private JButton login = new JButton("로그인");
@@ -82,8 +92,12 @@ public class BasicShape extends JFrame {
 			.getScaledInstance(1500, 80, java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon titleicon= new ImageIcon(titleimage);
 	
+	
+	
+
 	private TitledBorder tborder = new TitledBorder("");
 	private JPanel homePan = new JPanel(new GridLayout(2, 1));
+	
 	private String name;
 	private ImageSlide imgSlide = new ImageSlide();
 	private BMI bmi = new BMI();
@@ -140,6 +154,7 @@ public class BasicShape extends JFrame {
 		this.homePan.add(imgSlide);
 		this.homePan.add(bmi);
 		
+		
 		// compInit() -defaultPan
 		this.panelCenter.add(labelPhoto1);
 		this.panelCenter.add(labelPhoto2);
@@ -151,7 +166,8 @@ public class BasicShape extends JFrame {
 		this.labelPhoto3.setIcon(iconimage3);
 		this.labelPhoto4.setIcon(iconimage4);
 		
-		
+		this.lbID.setIcon(iconid);
+		this.lbPW.setIcon(iconpw);
 		this.panelSouth.add(buttonUpload);
 		this.panelSouth.add(buttonRemove);
 		this.panelSouth.add(buttonClose);
