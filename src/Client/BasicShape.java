@@ -225,16 +225,16 @@ public class BasicShape extends JFrame {
 	}
 
 	public void clientConnect() {
-		while (true) {
+		
 			try {
-				client = new Socket("192.168.53.4", 4000);
+				client = new Socket("192.168.53.4", 40000);
 				dos = new DataOutputStream(client.getOutputStream());
 				dis = new DataInputStream(client.getInputStream());
 				System.out.println("초기연결성공");
 			} catch (Exception e1) {
 				System.out.println("초기연결실패");
 			}
-		}
+		
 	}// end
 
 

@@ -17,7 +17,7 @@ public interface ManagerInterface {
 	 * @param m
 	 * @throws Exception 
 	 */
-	public void insertData(Member m) throws Exception ;
+	public int insertData(Member m) throws Exception ;
 	
 	/**멤버(String name, String id , String pw, String gender) 일치하는 값이 있는지 검사한뒤
 	 * 값이 존재하면 true 없으면 false를 반환합니다
