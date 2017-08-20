@@ -176,7 +176,7 @@ public class BasicShape extends JFrame {
 //		this.panelCenter.add(labelPhoto3);
 		
 		//---------운동영상
-		this.video.setPreferredSize(new Dimension(990,1000));
+		this.video.setPreferredSize(new Dimension(965, 1500));
 		this.videoPan.add(video);
 		//---------사진
 		
