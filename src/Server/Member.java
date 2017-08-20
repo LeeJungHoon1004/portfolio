@@ -64,11 +64,9 @@ public class Member {
 		this.weight = weight;
 	}
 	//stature , weight, gender
-	public Member(String name, double stature , double weight , String gender) {
+	public Member(String name) {
 		this.name = name;
-		this.stature = stature;
-		this.weight = weight;
-		this.gender= gender;
+		
 	}
 	public Member(String id , String pw) {
 		this.id= id;

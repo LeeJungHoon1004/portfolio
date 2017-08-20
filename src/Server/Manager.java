@@ -55,7 +55,7 @@ public class Manager implements ManagerInterface{
 	public int insertData(Member m) throws Exception {
 		// TODO Auto-generated method stub
 		Connection con =this.getConnection();
-		String sql = "insert into member values(member_seq.nextval , ? , ? ,? ,? , sysdate)";
+		String sql = "insert into member(seq,name,id,pw,gender,regdate) values(member_seq.nextval , ? , ? ,? ,? , sysdate)";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, m.getName());
 		pstat.setString(2, m.getId());
@@ -82,19 +82,17 @@ public class Manager implements ManagerInterface{
 	}
 
 	@Override
-	public Member getBMIData(Member m)throws Exception {
-		//name , stature , weight, gender
+	public Member getNameData(Member m)throws Exception {
+		//name
 		Connection con = this.getConnection();
-		String sql = "select name, stature , weight, gender where id =? ";
+		String sql = "select name where id =? ";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, m.getId());
 		ResultSet rs = pstat.executeQuery();
 		//쿼리문 실행후 해당하는 id값주인의 이름 키 몸무게 성별을 가져옴
 		String name = rs.getString(0);
-		String stature = rs.getString(1);
-		String weight = rs.getString(2);
-		String gender = rs.getString(3);
-		Member m1 = new Member(name ,stature ,weight , gender);
+		
+		Member m1 = new Member(name );
 		//해당하는 회원의 정보를 멤버m1으로 만들어서 리턴한다. 
 		return m1;
 	}
