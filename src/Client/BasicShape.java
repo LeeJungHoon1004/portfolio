@@ -38,6 +38,7 @@ public class BasicShape extends JFrame {
 	// =======SOCKET========================
 	private Container cp = this.getContentPane();
 	private JLabel title = new JLabel();
+	private JLabel title2 = new JLabel();
 	
 	private Font font = new Font("바탕", Font.ITALIC, 30);
 	private JButton goalBt = new JButton("나의 목표");
