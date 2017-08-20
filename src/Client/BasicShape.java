@@ -112,6 +112,7 @@ public class BasicShape extends JFrame {
 	private Dailypan dailyPan = new Dailypan();
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
+	private VideoPan video = new VideoPan();
 	// COMPNENT - imgBoardPan
 	private JLabel labelPhoto1 = new JLabel();
 	private JLabel labelPhoto2 = new JLabel();
@@ -166,6 +167,9 @@ public class BasicShape extends JFrame {
 		this.panelCenter.add(labelPhoto2);
 		this.panelCenter.add(labelPhoto3);
 		
+		//---------운동영상
+		this.video.setPreferredSize(new Dimension(990,1000));
+		videoPan.add(video);
 		//---------사진
 		this.labelPhoto1.setIcon(iconimage1);
 		this.labelPhoto2.setIcon(iconimage2);
