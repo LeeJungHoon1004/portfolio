@@ -112,6 +112,7 @@ public class BasicShape extends JFrame {
 	private Dailypan dailyPan = new Dailypan();
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
+	private VideoPan video = new VideoPan();
 	// COMPNENT - imgBoardPan
 	private JLabel labelPhoto1 = new JLabel();
 	private JLabel labelPhoto2 = new JLabel();
@@ -166,6 +167,9 @@ public class BasicShape extends JFrame {
 		this.panelCenter.add(labelPhoto2);
 		this.panelCenter.add(labelPhoto3);
 		
+		//---------운동영상
+		this.video.setPreferredSize(new Dimension(990,1000));
+		this.videoPan.add(video);
 		//---------사진
 		this.labelPhoto1.setIcon(iconimage1);
 		this.labelPhoto2.setIcon(iconimage2);
@@ -219,7 +223,7 @@ public class BasicShape extends JFrame {
 		mainPan.add(homePan, "NamedefaultPane");
 		mainPan.add(goalPan);
 		mainPan.add(dailyPan, "NamedailyPane");
-		mainPan.add(videoPan);
+		mainPan.add(videoPan,"NamevideoPane");
 		mainPan.add(imgBoardPan, "NameimgBoard"); // 카드로 끼워넣는팬에
 		// 이름을 부여함 .
 		// 부여된 이름을 가지고 이벤트 처리부분에서
@@ -344,8 +348,8 @@ public class BasicShape extends JFrame {
 		// 영상게시판 버튼
 		videoBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				// 프로필창 로그인여부에 따라 다름.△△△△△△△
+				card.show(self.mainPan, "NamevideoPane");
+				
 			}
 		});
 		// 사진게시판 버튼
