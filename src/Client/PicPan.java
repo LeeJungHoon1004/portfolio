@@ -15,6 +15,7 @@ public class PicPan extends JPanel {
 	private TitledBorder b_f = new TitledBorder("BEFORE & AFTER");
 	private TitledBorder tip = new TitledBorder("꿀팁 나누기");
 	private TitledBorder moti = new TitledBorder("자극사진");
+	private TitledBorder pharse = new TitledBorder("자극사진");
 	
 //===========================================================
 	private ImageIcon imgb_f1 = new ImageIcon("송혜교.JPG");
@@ -41,31 +42,45 @@ public class PicPan extends JPanel {
 	private ImageIcon imageprettypic2= new ImageIcon("크리스탈3.JPG");
 	private ImageIcon imageprettypic3= new ImageIcon("손나은.JPG");
 	private ImageIcon imageprettypic4= new ImageIcon("설현1.JPG");
+	private ImageIcon imageprettypic5= new ImageIcon("하니.JPG");
 	
 	private JLabel pretty1 = new JLabel(imageprettypic1);
 	private JLabel pretty2 = new JLabel(imageprettypic2);
 	private JLabel pretty3 = new JLabel(imageprettypic3);
 	private JLabel pretty4 = new JLabel(imageprettypic4);
+	private JLabel pretty5 = new JLabel(imageprettypic5);
 	
+	//===========================================================
+	private ImageIcon imgPhrase1 = new ImageIcon("야식.JPG");
+	private ImageIcon imgPhrase2= new ImageIcon("인생은.JPG");
+	private ImageIcon imgPhrase3= new ImageIcon("흔들리면지방.JPG");
+	private ImageIcon imgPhrase4= new ImageIcon("음식아까워마라.JPG");
+	private ImageIcon imgPhrase5= new ImageIcon("그맛이다.JPG");
+	
+	private JLabel phrase1 = new JLabel(imgPhrase1);
+	private JLabel phrase2 = new JLabel(imgPhrase2);
+	private JLabel phrase3 = new JLabel(imgPhrase3);
+	private JLabel phrase4 = new JLabel(imgPhrase4);
+	private JLabel phrase5 = new JLabel(imgPhrase5);
 	
 	//===========================================================
 	
 	private JPanel b_fpicPan = new JPanel();
 	private JPanel tipPan = new JPanel();
 	private JPanel motivePan = new JPanel();
-	
+	private JPanel phrasePan = new JPanel();
 	
 	private JScrollPane bfSc = new JScrollPane(b_fpicPan);
 	private JScrollPane tipSc = new JScrollPane(tipPan);
 	private JScrollPane motiveSC = new JScrollPane(motivePan);
-	
+	private JScrollPane pharseSC = new JScrollPane(phrasePan);
 	
 	public void compInit() {
 
 		
 		
 		
-		setLayout(new GridLayout(3, 1));
+		setLayout(new GridLayout(4, 1));
 
 		
 		pretty1.setPreferredSize(new Dimension(300, 400));
@@ -82,11 +97,19 @@ public class PicPan extends JPanel {
 		tip2.setPreferredSize(new Dimension(310, 350));
 		tip3.setPreferredSize(new Dimension(310, 350));
 		
+		
+		phrase1.setPreferredSize(new Dimension(320, 330));
+		phrase2.setPreferredSize(new Dimension(320, 330));
+		phrase3.setPreferredSize(new Dimension(320, 330));
+		phrase4.setPreferredSize(new Dimension(320, 330));
+		phrase5.setPreferredSize(new Dimension(320, 330));
+		
 		motivePan.setBorder(moti);
 		motivePan.add(pretty1);
 		motivePan.add(pretty2);
 		motivePan.add(pretty3);
 		motivePan.add(pretty4);
+		motivePan.add(pretty5);
 		add(motiveSC);
 		
 		b_fpicPan.setBorder(b_f);
@@ -105,6 +128,15 @@ public class PicPan extends JPanel {
 		
 		add(tipSc);
 		
+		phrasePan.setBorder(pharse);
+		phrasePan.add(phrase1);
+		phrasePan.add(phrase2);
+		phrasePan.add(phrase3);
+		phrasePan.add(phrase4);
+		phrasePan.add(phrase5);
+		
+		add(pharseSC);
+	
 		
 
 		
