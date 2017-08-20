@@ -93,7 +93,6 @@ class ConnectionThread extends Thread {
 				if (result) {// 값이존재한다(회원가입 되어있는 아이디와비번이다) - 로그인허가
 					dos.writeUTF("로그인성공");
 					String name = null;
-					
 					Member m1 = new Member(name);
 					//멤버의 정보 (id,pw를 준뒤 해당 사용자의 이름을 가져옴)
 					m1 =Server.manager.getNameData(m2);
@@ -101,8 +100,7 @@ class ConnectionThread extends Thread {
 					System.out.println(name);
 					//이름 , 신장, 체중 ,성별 순서대로 보냅니다
 					dos.writeUTF(name);
-							
-					
+
 				} else {
 					dos.writeUTF("로그인실패");
 				}
@@ -111,9 +109,9 @@ class ConnectionThread extends Thread {
 				
 				
 			}
-			else if(cmd.equals("로그아웃")) {
-			
-			}
+//			else if(cmd.equals("로그아웃")) {
+//			
+//			}
 			
 			
 		}
