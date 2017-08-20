@@ -329,6 +329,8 @@ public class BasicShape extends JFrame {
 				try {
 					client.close();
 					System.out.println("성공적으로 소켓종료");
+					inputID.setText("");
+					inputPW.setText("");
 				} catch (IOException e1) {
 					System.out.println("소켓종료 실패");
 				}
