@@ -41,11 +41,12 @@ public class BasicShape extends JFrame {
 	private JLabel title2 = new JLabel();
 	
 	private Font font = new Font("바탕", Font.ITALIC, 30);
+	private JButton homeBt = new JButton("홈");
 	private JButton goalBt = new JButton("나의 목표");
 	private JButton dailyBt = new JButton("하루 목표");
 	private JButton videoBt = new JButton("운동영상");
 	private JButton imgBoardBt = new JButton("사진게시판");
-	private JPanel category = new JPanel(new GridLayout(4, 1));
+	private JPanel category = new JPanel(new GridLayout(5, 1));
 	private JPanel titlePan = new JPanel();
 	private JPanel sidepan = new JPanel(new GridLayout(5, 1));
 	// ▽▽▽▽▽▽▽▽▽▽프로필 바뀜▽▽▽▽▽▽▽▽▽▽▽▽
@@ -197,6 +198,7 @@ public class BasicShape extends JFrame {
 		this.imgBoardPan.add(panelnull);
 		this.imgBoardPan.add(panelSouth);
 		// compInit() - panelCard_StimulsPhoto
+		category.add(homeBt);
 		category.add(goalBt);
 		category.add(dailyBt);
 		category.add(videoBt);
@@ -248,7 +250,7 @@ public class BasicShape extends JFrame {
 	public void clientConnect() {
 		
 			try {
-				client = new Socket("127.0.0.1", 40000);
+				client = new Socket("192.168.53.4", 40000);
 				dos = new DataOutputStream(client.getOutputStream());
 				dis = new DataInputStream(client.getInputStream());
 				System.out.println("초기연결성공");
@@ -348,6 +350,12 @@ public class BasicShape extends JFrame {
 				new SignUp(self).setVisible(true);
 			}
 		});
+		
+		homeBt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(self.mainPan, "NamedefaultPane");
+			}
+		});	
 		// 내목표 버튼
 		goalBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
