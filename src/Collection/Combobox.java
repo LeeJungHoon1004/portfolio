@@ -1,4 +1,4 @@
-package Client;
+package Collection;
 
 //콤보박스 저번 메인 포함한 목표란
 import java.awt.Color;
