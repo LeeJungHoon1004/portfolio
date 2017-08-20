@@ -38,6 +38,7 @@ public class BasicShape extends JFrame {
 	// =======SOCKET========================
 	private Container cp = this.getContentPane();
 	private JLabel title = new JLabel();
+	private JLabel title2 = new JLabel();
 	
 	private Font font = new Font("바탕", Font.ITALIC, 30);
 	private JButton goalBt = new JButton("나의 목표");
@@ -111,35 +112,42 @@ public class BasicShape extends JFrame {
 	// COMPNENT - dailyPan
 	private Dailypan dailyPan = new Dailypan();
 	// COMPNENT - videoPan
+	
+	private JPanel imgPanel = new JPanel();
+	private PicPan picpan = new PicPan();
+	
+	
 	private JPanel videoPan = new JPanel();
+	
 	private VideoPan video = new VideoPan();
+	
 	// COMPNENT - imgBoardPan
-	private JLabel labelPhoto1 = new JLabel();
-	private JLabel labelPhoto2 = new JLabel();
-	private JLabel labelPhoto3 = new JLabel();
-	
-	private JLabel labelPhoto4 = new JLabel();
+//	private JLabel labelPhoto1 = new JLabel();
+//	private JLabel labelPhoto2 = new JLabel();
+//	private JLabel labelPhoto3 = new JLabel();
+//	
+//	private JLabel labelPhoto4 = new JLabel();
 
-	private JLabel labelPhoto5 = new JLabel();
 
-	
-	
-	private Image image1 = new ImageIcon("설현1.jpg").getImage()
-			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
-	private ImageIcon iconimage1= new ImageIcon(image1);
-	
-	private Image image2 = new ImageIcon("송혜교.jpg").getImage()
-			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
-	private ImageIcon iconimage2= new ImageIcon(image2);
-	
-	private Image image3 = new ImageIcon("수지에프터.jpg").getImage()
-			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
-	private ImageIcon iconimage3= new ImageIcon(image3);
-	
-	private Image image4 = new ImageIcon("연예인.jpg").getImage()
-			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
-	private ImageIcon iconimage4= new ImageIcon(image4);
-	
+
+//	
+//	
+//	private Image image1 = new ImageIcon("설현1.jpg").getImage()
+//			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
+//	private ImageIcon iconimage1= new ImageIcon(image1);
+//	
+//	private Image image2 = new ImageIcon("송혜교.jpg").getImage()
+//			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
+//	private ImageIcon iconimage2= new ImageIcon(image2);
+//	
+//	private Image image3 = new ImageIcon("수지에프터.jpg").getImage()
+//			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
+//	private ImageIcon iconimage3= new ImageIcon(image3);
+//	
+//	private Image image4 = new ImageIcon("연예인.jpg").getImage()
+//			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
+//	private ImageIcon iconimage4= new ImageIcon(image4);
+//	
 	
 	
 
@@ -147,6 +155,7 @@ public class BasicShape extends JFrame {
 	private JButton buttonRemove = new JButton("사진삭제"); // 사진삭제시 id와 패스워드 비번확인
 	// 필요함.
 	private JButton buttonClose = new JButton("닫기");
+	
 	private JPanel imgBoardPan = new JPanel(new GridLayout(3, 1));
 	private JPanel panelnull = new JPanel();
 	private JPanel panelCenter = new JPanel(new GridLayout(1, 3)); // 센터-포토3개
@@ -163,18 +172,21 @@ public class BasicShape extends JFrame {
 		
 		
 		// compInit() -defaultPan
-		this.panelCenter.add(labelPhoto1);
-		this.panelCenter.add(labelPhoto2);
-		this.panelCenter.add(labelPhoto3);
+//		this.panelCenter.add(labelPhoto1);
+//		this.panelCenter.add(labelPhoto2);
+//		this.panelCenter.add(labelPhoto3);
 		
 		//---------운동영상
 		this.video.setPreferredSize(new Dimension(965, 1500));
 		this.videoPan.add(video);
 		//---------사진
-		this.labelPhoto1.setIcon(iconimage1);
-		this.labelPhoto2.setIcon(iconimage2);
-		this.labelPhoto3.setIcon(iconimage3);
-		this.labelPhoto4.setIcon(iconimage4);
+		
+		this.picpan.setPreferredSize(new Dimension(990,1000));
+		this.imgPanel.add(picpan);
+//		this.labelPhoto1.setIcon(iconimage1);
+//		this.labelPhoto2.setIcon(iconimage2);
+//		this.labelPhoto3.setIcon(iconimage3);
+//		this.labelPhoto4.setIcon(iconimage4);
 		
 		this.lbID.setIcon(iconid);
 		this.lbPW.setIcon(iconpw);
@@ -224,7 +236,7 @@ public class BasicShape extends JFrame {
 		mainPan.add(goalPan);
 		mainPan.add(dailyPan, "NamedailyPane");
 		mainPan.add(videoPan,"NamevideoPane");
-		mainPan.add(imgBoardPan, "NameimgBoard"); // 카드로 끼워넣는팬에
+		mainPan.add(imgPanel, "NameimgBoard"); // 카드로 끼워넣는팬에
 		// 이름을 부여함 .
 		// 부여된 이름을 가지고 이벤트 처리부분에서
 		// 카드의 이름으로 식별하여 visible함.
@@ -321,6 +333,8 @@ public class BasicShape extends JFrame {
 				try {
 					client.close();
 					System.out.println("성공적으로 소켓종료");
+					inputID.setText("");
+					inputPW.setText("");
 				} catch (IOException e1) {
 					System.out.println("소켓종료 실패");
 				}
