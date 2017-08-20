@@ -78,7 +78,7 @@ public class BasicShape extends JFrame {
 	// COMPNENT - homePan
 	private TitledBorder tborder = new TitledBorder("");
 	private JPanel homePan = new JPanel(new GridLayout(2, 1));
-	private String name;
+	private String name = getName();
 	private ImageSlide imgSlide = new ImageSlide();
 	private BMI bmi = new BMI();
 
@@ -201,7 +201,7 @@ public class BasicShape extends JFrame {
 	public void clientConnect() {
 		
 			try {
-				client = new Socket("192.168.53.4", 40000);
+				client = new Socket("127.0.0.1", 40000);
 				dos = new DataOutputStream(client.getOutputStream());
 				dis = new DataInputStream(client.getInputStream());
 				System.out.println("초기연결성공");
@@ -216,7 +216,8 @@ public class BasicShape extends JFrame {
 
 	public String getResult() {
 		// 로그인 버튼
-		clientConnect();
+		
+
 
 		String userID = inputID.getText();
 		String userPW = inputPW.getText();
@@ -232,17 +233,19 @@ public class BasicShape extends JFrame {
 			result = dis.readUTF();
 			if (result.equals("로그인성공")) {
 				JOptionPane.showMessageDialog(null, "로그인 성공");
+				System.out.println("로그인 성공");
 			} else if (result.equals("로그인실패")) {
 				JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.");
-			}
-			System.out.println("로그인 성공");
+				System.out.println("로그인 실패");
+			}	
+		
 		} catch (Exception e2) {
 		}
 		return result;
 	}// end
 
 	public String getName() {
-		clientConnect();
+
 
 		try {
 			name = dis.readUTF();
@@ -260,8 +263,11 @@ public class BasicShape extends JFrame {
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clientConnect();
+				getResult();
+				 
 				// 서버에 계정 보냄.△△△△△△△
 				if (result.equals("로그인성공")) {
+					getName();
 					card.show(self.profilePan, "loginAfter");
 				} else if (result.equals("로그인실패")) {
 					card.show(self.profilePan, "loginBefore");

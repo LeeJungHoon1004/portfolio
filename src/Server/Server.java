@@ -74,7 +74,7 @@ class ConnectionThread extends Thread {
 									}
 				}
 				dos.flush();
-				
+			//	dos.close();
 				
 			}
 			
@@ -89,25 +89,19 @@ class ConnectionThread extends Thread {
 				
 				Member m2 = new Member(id , pw);
 				boolean result = Server.manager.isLoginOk(m2);
+				System.out.println(result);
 				if (result) {// 값이존재한다(회원가입 되어있는 아이디와비번이다) - 로그인허가
 					dos.writeUTF("로그인성공");
 					String name = null;
-					double stature =0;
-					double weight =0;
-					String gender =null;
-					Member m1 = new Member(name , stature , weight, gender);
+					
+					Member m1 = new Member(name);
 					//멤버의 정보 (id,pw를 준뒤 해당 사용자의 이름 , 키 ,몸무게 ,성별을 가져옴)
-					m1 =Server.manager.getBMIData(m2);
-					gender =m1.getGender();
-					stature= m1.getStature();
-					weight = m1.getWeight();
+					m1 =Server.manager.getNameData(m2);
 					name = m1.getName();
 					
 					//이름 , 신장, 체중 ,성별 순서대로 보냅니다
 					dos.writeUTF(name);
-					dos.writeDouble(stature);
-					dos.writeDouble(weight);
-					dos.writeUTF(gender);			
+							
 					
 				} else {
 					dos.writeUTF("로그인실패");
@@ -132,12 +126,12 @@ class ConnectionThread extends Thread {
 			
 		}
 		catch(Exception e) {
-			System.out.println("비정상종료.");
-			e.printStackTrace();
+			System.out.println("소켓연결해제.");
+	//		e.printStackTrace();
 			try{
 			dos.close();
 			}catch(Exception e1){
-				e1.printStackTrace();
+		//		e1.printStackTrace();
 			}
 		}
 }

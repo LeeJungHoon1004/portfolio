@@ -28,7 +28,7 @@ public interface ManagerInterface {
 	 * BMI데이터인 stature,wieght,gender를 가져옵니다.
 	 * @return
 	 */
-	public Member getBMIData(Member m) throws Exception;
+	public Member getNameData(Member m) throws Exception;
 	
 	/**로그인했을때 해당하는 회원의 bmidata를 보냅니다. 
 	 * 
