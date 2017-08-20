@@ -108,6 +108,23 @@ public class Manager implements ManagerInterface{
 		return false;
 	}
 
+	@Override
+	public String InsertDailyList(int c1, int c2, int c3) throws Exception {
+		// TODO Auto-generated method stub
+		Connection con =this.getConnection();
+		String sql = "insert into member(seq,name,id,pw,gender,regdate) values(member_seq.nextval , ? , ? ,? ,? , sysdate)";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		//멤버자료형 따로만들것.
+//		pstat.setString(1, m.getName());
+//		pstat.setString(2, m.getId());
+//		pstat.setString(3, m.getPw());
+//		pstat.setString(4, m.getGender());
+//		int result = pstat.executeUpdate();
+		con.commit();
+		con.close();
+		return null;
+	}
+
 	
 
 	

@@ -38,7 +38,14 @@ public interface ManagerInterface {
 	 */
 	public boolean isLogoutOk(Member m)throws Exception;
 	
-	
+	/**Combolist에서 받은 int값 3개를 배열에 저장합니다.
+	 * 
+	 * @param c1
+	 * @param c2
+	 * @param c3
+	 * @throws Exception
+	 */
+	public String InsertDailyList(int c1 , int c2, int c3) throws Exception;
 	
 	
 	

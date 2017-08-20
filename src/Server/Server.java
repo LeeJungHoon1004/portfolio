@@ -17,6 +17,7 @@ import javax.swing.JTextArea;
 
 class ConnectionThread extends Thread {
 
+	private int DailyList [] = new int[] {};
 	private Socket socket = null;
 	private DataInputStream dis;
 	private DataOutputStream dos;
@@ -109,9 +110,20 @@ class ConnectionThread extends Thread {
 				
 				
 			}
-//			else if(cmd.equals("로그아웃")) {
-//			
-//			}
+			//dailyPan combolist 데이터 수신
+			else if(cmd.equals("하루목표전송")) {
+				int c1 =dis.readInt();
+				int c2 =dis.readInt();
+				int c3 =dis.readInt();
+			
+				DailyList[0] =c1;
+				DailyList[1] =c2;
+				DailyList[2] =c3;
+			
+				
+			String msg =Server.manager.InsertDailyList(c1,c2,c3);
+			
+			}
 			
 			
 		}

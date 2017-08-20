@@ -31,16 +31,18 @@ public class Dailypan extends JPanel{
    private DataInputStream dis;
    
    //----------------소켓 
+   // 선택버튼buttonselect
+  
    
    private JComboBox combolist1 = new JComboBox();
    private JComboBox combolist2 = new JComboBox();
    private JComboBox combolist3 = new JComboBox();
    
+   
    private JLabel today3 = new JLabel("오늘의 목표를 3개 선택하세요");
    private Font font = new Font("나무", Font.ITALIC, 20);
    private Font font2 = new Font("나무", Font.BOLD, 20);
    private JLabel waterchecklabel = new JLabel("물마신 횟수를 체크해보세요! ");
-   
    
    private JButton buttonUpload = new JButton("체크완료"); //체크완료 버튼
 
@@ -309,7 +311,23 @@ public class Dailypan extends JPanel{
          @Override
          public void actionPerformed(ActionEvent e) {
             
-            
+//        	 
+//        		 questList [0]= combolist1.getSelectedIndex(); 
+//        		 questList [1] =combolist2.getSelectedIndex();
+//        		 questList [2] =combolist3.getSelectedIndex();
+        		 
+        	 try {
+        		 dos.writeUTF("하루목표전송");
+        		 dos.writeInt(combolist1.getSelectedIndex());
+        		 dos.writeInt(combolist2.getSelectedIndex());
+        		 dos.writeInt(combolist3.getSelectedIndex());
+        		 System.out.println("combolist데이터 발신 성공");
+        		 }catch(Exception e1) {
+        			 System.out.println("combolist데이터 발신 실패.");
+        			 e1.printStackTrace();
+        		 }
+        		 
+        		 
 //            String selected1 = combolist1.getSelectedItem().toString();
 //            System.out.println(selected1);
 //            String selected2 = combolist1.getSelectedItem().toString();
@@ -583,8 +601,11 @@ public class Dailypan extends JPanel{
    }
    
 
-   public Dailypan() {
-
+   public Dailypan(Socket client , DataInputStream dis , DataOutputStream dos) {
+	   
+	   this.client = client;
+	   this.dis = dis;
+	   this.dos = dos;
 
       this.setSize(900,900);
      

@@ -111,7 +111,7 @@ public class BasicShape extends JFrame {
 	// COMPNENT - goalPan
 	private JPanel goalPan = new JPanel();
 	// COMPNENT - dailyPan
-	private Dailypan dailyPan = new Dailypan();
+	private Dailypan dailyPan = new Dailypan(client , dis ,dos );
 	// COMPNENT - videoPan
 	
 	private JPanel imgPanel = new JPanel();
