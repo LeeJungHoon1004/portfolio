@@ -29,7 +29,6 @@ class ConnectionThread extends Thread {
 		} catch (Exception e) {
 			System.out.println("서버:소켓초기화 실패했다.");
 		}
-
 	}
 
 	public void run() {

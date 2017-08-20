@@ -32,13 +32,14 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
 public class BasicShape extends JFrame {
+	
 	private Socket client;
 	private DataOutputStream dos;
 	private DataInputStream dis;
 	// =======SOCKET========================
 	private Container cp = this.getContentPane();
 	private JLabel title = new JLabel();
-	private JLabel title2 = new JLabel();
+
 	
 	private Font font = new Font("바탕", Font.ITALIC, 30);
 	private JButton goalBt = new JButton("나의 목표");
@@ -248,7 +249,7 @@ public class BasicShape extends JFrame {
 	public void clientConnect() {
 		
 			try {
-				client = new Socket("127.0.0.1", 40000);
+				client = new Socket("192.168.53.4", 40000);
 				dos = new DataOutputStream(client.getOutputStream());
 				dis = new DataInputStream(client.getInputStream());
 				System.out.println("초기연결성공");

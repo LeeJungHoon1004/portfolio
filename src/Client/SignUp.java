@@ -153,7 +153,7 @@ public class SignUp extends JDialog {
 					//비번과 비번확인번호가 일치할때 -> 소켓생성후 서버쪽에 데이터 송신
 					try {
 						// client = new Socket("", 40000);
-						client = new Socket("127.0.0.1", 40000);
+						client = new Socket("192.168.53.4", 40000);
 						dos = new DataOutputStream(client.getOutputStream());
 						dis = new DataInputStream(client.getInputStream());
 						

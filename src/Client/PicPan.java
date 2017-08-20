@@ -14,6 +14,7 @@ public class PicPan extends JPanel {
 
 	private TitledBorder b_f = new TitledBorder("BEFORE & AFTER");
 	private TitledBorder tip = new TitledBorder("꿀팁 나누기");
+	private TitledBorder moti = new TitledBorder("자극사진");
 	
 //===========================================================
 	private ImageIcon imgb_f1 = new ImageIcon("송혜교.JPG");
@@ -35,6 +36,18 @@ public class PicPan extends JPanel {
 	
 
 //===========================================================
+	
+	private ImageIcon imageprettypic1 = new ImageIcon("여자체지방.JPG");
+	private ImageIcon imageprettypic2= new ImageIcon("남자체지방.JPG");
+	private ImageIcon imageprettypic3= new ImageIcon("옷발체중.JPG");
+	
+	private JLabel pretty1 = new JLabel(imageprettypic1);
+	private JLabel pretty2 = new JLabel(imageprettypic2);
+	private JLabel pretty3 = new JLabel(imageprettypic3);
+	
+	
+	//===========================================================
+	
 	private JPanel b_fpicPan = new JPanel();
 	private JPanel tipPan = new JPanel();
 	private JPanel motivePan = new JPanel();
@@ -47,11 +60,25 @@ public class PicPan extends JPanel {
 	
 	public void compInit() {
 
+		
+		
+		
 		setLayout(new GridLayout(3, 1));
 
+		
+		pretty1.setPreferredSize(new Dimension(300, 340));
+		pretty2.setPreferredSize(new Dimension(300, 340));
+		pretty3.setPreferredSize(new Dimension(300, 340));
+		
+		
 		bfpic1.setPreferredSize(new Dimension(300, 340));
 		bfpic2.setPreferredSize(new Dimension(300, 340));
 		bfpic3.setPreferredSize(new Dimension(300, 340));
+		
+		
+		tip1.setPreferredSize(new Dimension(300, 340));
+		tip2.setPreferredSize(new Dimension(300, 340));
+		tip3.setPreferredSize(new Dimension(300, 340));
 		
 		
 		tip1.setPreferredSize(new Dimension(300, 340));
@@ -71,6 +98,12 @@ public class PicPan extends JPanel {
 		tipPan.add(tip3);
 		
 		add(tipSc);
+		
+		motivePan.setBorder(moti);
+		motivePan.add(tip1);
+		motivePan.add(tip2);
+		motivePan.add(tip3);
+		add(motiveSC);
 
 		
 	}
