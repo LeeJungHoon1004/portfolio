@@ -30,7 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
-
+//sfasdf
 public class BasicShape extends JFrame {
 	private Socket client;
 	private DataOutputStream dos;
