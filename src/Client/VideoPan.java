@@ -27,7 +27,7 @@ public class VideoPan extends JPanel {
 	private TitledBorder smi = new TitledBorder("½º¹ÌÈ¨Æ®");
 	
 //===========================================================	
-	private ImageIcon imgE1 = new ImageIcon("ÀÚ±Ø±Û±Í.JPG");
+	private ImageIcon imgE1 = new ImageIcon("KakaoTalk_20170820_180152201.jpg");
 	private JLabel encourage = new JLabel(imgE1);
 //===========================================================
 	private ImageIcon imgY1 = new ImageIcon("y1.JPG");
