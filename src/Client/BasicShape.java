@@ -298,11 +298,14 @@ public class BasicShape extends JFrame {
 		try {
 			name = dis.readUTF();
 		} catch (Exception e1) {
-			System.out.println("홈-프로필 이름데이터받기 실패");
+		//	System.out.println("홈-프로필 이름데이터받기 실패");
 		}
 		return name;
 	}
-
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 
 
 
@@ -315,7 +318,8 @@ public class BasicShape extends JFrame {
 				 
 				// 서버에 계정 보냄.△△△△△△△
 				if (result.equals("로그인성공")) {
-					getName();
+					
+					profilename.setText(getName() + " 님 환영합니다!");
 					card.show(self.profilePan, "loginAfter");
 				} else if (result.equals("로그인실패")) {
 					card.show(self.profilePan, "loginBefore");
@@ -330,6 +334,8 @@ public class BasicShape extends JFrame {
 				try {
 					client.close();
 					System.out.println("성공적으로 소켓종료");
+					inputID.setText("");
+					inputPW.setText("");
 				} catch (IOException e1) {
 					System.out.println("소켓종료 실패");
 				}

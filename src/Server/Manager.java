@@ -85,16 +85,21 @@ public class Manager implements ManagerInterface{
 	public Member getNameData(Member m)throws Exception {
 		//name
 		Connection con = this.getConnection();
-		String sql = "select name where id =? ";
+		String sql = "select name from member where id =? ";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, m.getId());
 		ResultSet rs = pstat.executeQuery();
 		//쿼리문 실행후 해당하는 id값주인의 이름 키 몸무게 성별을 가져옴
-		String name = rs.getString(0);
+		String name=null;
+		if(rs.next()) {
+		name = rs.getString(1);
+		}
+		Member m1 = new Member(name);
 		
-		Member m1 = new Member(name );
 		//해당하는 회원의 정보를 멤버m1으로 만들어서 리턴한다. 
+		
 		return m1;
+		
 	}
 
 	@Override
