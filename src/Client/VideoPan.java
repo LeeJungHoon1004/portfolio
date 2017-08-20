@@ -3,6 +3,7 @@ package Client;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.net.URISyntaxException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
@@ -23,6 +25,10 @@ public class VideoPan extends JPanel {
 	private TitledBorder miley = new TitledBorder("마일리사이러스");
 	private TitledBorder dance = new TitledBorder("춤 다이어트");
 	private TitledBorder smi = new TitledBorder("스미홈트");
+	
+//===========================================================	
+	private ImageIcon imgE1 = new ImageIcon("자극글귀.JPG");
+	private JLabel encourage = new JLabel(imgE1);
 //===========================================================
 	private ImageIcon imgY1 = new ImageIcon("y1.JPG");
 	private ImageIcon imgY2 = new ImageIcon("y2.JPG");
@@ -35,20 +41,29 @@ public class VideoPan extends JPanel {
 	private JButton videoY4 = new JButton(imgY4);
 	private JButton videoY5 = new JButton(imgY5);
 //===========================================================
-	private JButton videoS1 = new JButton();
-	private JButton videoS2 = new JButton();
-	private JButton videoS3 = new JButton();
-	private JButton videoS4 = new JButton();
-	private JButton videoS5 = new JButton();
+	private ImageIcon imgs1 = new ImageIcon("s1.JPG");
+	private ImageIcon imgs11 = new ImageIcon("s1.JPG");
+	private ImageIcon imgs2 = new ImageIcon("s2.JPG");
+	private ImageIcon imgs3 = new ImageIcon("s3.JPG");
+	private ImageIcon imgs4 = new ImageIcon("s4.JPG");
+	private ImageIcon imgs5 = new ImageIcon("s5.JPG");
+	private JButton videoS1 = new JButton(imgs1);
+	private JButton videoS11 = new JButton(imgs1);
+	private JButton videoS2 = new JButton(imgs2);
+	private JButton videoS3 = new JButton(imgs3);
+	private JButton videoS4 = new JButton(imgs4);
+	private JButton videoS5 = new JButton(imgs5);
 //===========================================================
 	private ImageIcon imgM1 = new ImageIcon("m1.JPG");
 	private ImageIcon imgM2 = new ImageIcon("m2.JPG");
 	private ImageIcon imgM3 = new ImageIcon("m3.JPG");
 	private ImageIcon imgM4 = new ImageIcon("m4.JPG");
+	private ImageIcon imgM5 = new ImageIcon("m5.JPG");
 	private JButton miley1 = new JButton(imgM1);
 	private JButton miley2 = new JButton(imgM2);
 	private JButton miley3 = new JButton(imgM3);
 	private JButton miley4 = new JButton(imgM4);
+	private JButton miley5 = new JButton(imgM5);
 //===========================================================
 	private ImageIcon imgD1 = new ImageIcon("d1.jpg");
 	private ImageIcon imgD2 = new ImageIcon("d2.JPG");
@@ -61,16 +76,16 @@ public class VideoPan extends JPanel {
 	private JButton dance4 = new JButton(imgD4);
 	private JButton dance5 = new JButton(imgD5);
 //===========================================================
-	private ImageIcon imgSmi1 = new ImageIcon();
-	private ImageIcon imgSmi2 = new ImageIcon();
-	private ImageIcon imgSmi3 = new ImageIcon();
-	private ImageIcon imgSmi4 = new ImageIcon();
-	private ImageIcon imgSmi5 = new ImageIcon();
-	private JButton smi1 = new JButton();
-	private JButton smi2 = new JButton();
-	private JButton smi3 = new JButton();
-	private JButton smi4 = new JButton();
-	private JButton smi5 = new JButton();
+	private ImageIcon imgSmi1 = new ImageIcon("smi1.JPG");
+	private ImageIcon imgSmi2 = new ImageIcon("smi2.JPG");
+	private ImageIcon imgSmi3 = new ImageIcon("smi3.JPG");
+	private ImageIcon imgSmi4 = new ImageIcon("smi4.JPG");
+	private ImageIcon imgSmi5 = new ImageIcon("smi5.JPG");
+	private JButton smi1 = new JButton(imgSmi1);
+	private JButton smi2 = new JButton(imgSmi2);
+	private JButton smi3 = new JButton(imgSmi3);
+	private JButton smi4 = new JButton(imgSmi4);
+	private JButton smi5 = new JButton(imgSmi5);
 	private JButton moreSmi = new JButton("스미트홈 더보기..");
 //===========================================================
 	private JPanel healthPan = new JPanel();
@@ -89,36 +104,44 @@ public class VideoPan extends JPanel {
 	
 	public void compInit() {
 
-		setLayout(new GridLayout(5, 1));
-
-		videoY1.setPreferredSize(new Dimension(200, 140));
-		videoY2.setPreferredSize(new Dimension(200, 140));
-		videoY3.setPreferredSize(new Dimension(200, 140));
-		videoY4.setPreferredSize(new Dimension(200, 140));
-		videoY5.setPreferredSize(new Dimension(200, 140));
-
-		videoS1.setPreferredSize(new Dimension(200, 140));
-		videoS2.setPreferredSize(new Dimension(200, 140));
-		videoS3.setPreferredSize(new Dimension(200, 140));
-		videoS4.setPreferredSize(new Dimension(200, 140));
-		videoS5.setPreferredSize(new Dimension(200, 140));
-
-		miley1.setPreferredSize(new Dimension(200, 140));
-		miley2.setPreferredSize(new Dimension(200, 140));
-		miley3.setPreferredSize(new Dimension(200, 140));
-		miley4.setPreferredSize(new Dimension(200, 140));
-
-		dance1.setPreferredSize(new Dimension(200, 140));
-		dance2.setPreferredSize(new Dimension(200, 140));
-		dance3.setPreferredSize(new Dimension(200, 140));
-		dance4.setPreferredSize(new Dimension(200, 140));
-		dance5.setPreferredSize(new Dimension(200, 140));
+		setLayout(new GridLayout(6, 1));
 		
-		smi1.setPreferredSize(new Dimension(200, 140));
-		smi2.setPreferredSize(new Dimension(200, 140));
-		smi3.setPreferredSize(new Dimension(200, 140));
-		smi4.setPreferredSize(new Dimension(200, 140));
-		smi5.setPreferredSize(new Dimension(200, 140));
+		
+		
+		videoY1.setPreferredSize(new Dimension(200, 150));
+		videoY2.setPreferredSize(new Dimension(200, 150));
+		videoY3.setPreferredSize(new Dimension(200, 150));
+		videoY4.setPreferredSize(new Dimension(200, 150));
+		videoY5.setPreferredSize(new Dimension(200, 150));
+
+		videoS1.setPreferredSize(new Dimension(200, 150));
+		videoS11.setPreferredSize(new Dimension(200, 150));
+		videoS2.setPreferredSize(new Dimension(200, 150));
+		videoS3.setPreferredSize(new Dimension(200, 150));
+		videoS4.setPreferredSize(new Dimension(200, 150));
+		videoS5.setPreferredSize(new Dimension(200, 150));
+
+		miley1.setPreferredSize(new Dimension(200, 150));
+		miley2.setPreferredSize(new Dimension(200, 150));
+		miley3.setPreferredSize(new Dimension(200, 150));
+		miley4.setPreferredSize(new Dimension(200, 150));
+		miley5.setPreferredSize(new Dimension(200, 150));
+
+		dance1.setPreferredSize(new Dimension(200, 150));
+		dance2.setPreferredSize(new Dimension(200, 150));
+		dance3.setPreferredSize(new Dimension(200, 150));
+		dance4.setPreferredSize(new Dimension(200, 150));
+		dance5.setPreferredSize(new Dimension(200, 150));
+		
+		smi1.setPreferredSize(new Dimension(200, 150));
+		smi2.setPreferredSize(new Dimension(200, 150));
+		smi3.setPreferredSize(new Dimension(200, 150));
+		smi4.setPreferredSize(new Dimension(200, 150));
+		smi5.setPreferredSize(new Dimension(200, 150));
+		
+		
+
+		add(encourage);
 		
 		yogaPan.setBorder(yoga);
 		yogaPan.add(videoY1);
@@ -130,6 +153,7 @@ public class VideoPan extends JPanel {
 
 		stretchPan.setBorder(stretching);
 		stretchPan.add(videoS1);
+		stretchPan.add(videoS11);
 		stretchPan.add(videoS2);
 		stretchPan.add(videoS3);
 		stretchPan.add(videoS4);
@@ -141,6 +165,7 @@ public class VideoPan extends JPanel {
 		mileyPan.add(miley2);
 		mileyPan.add(miley3);
 		mileyPan.add(miley4);
+		mileyPan.add(miley5);
 		add(mileySc);
 
 		dancePan.setBorder(dance);
@@ -213,6 +238,69 @@ public class VideoPan extends JPanel {
 		});
 	}//end
 	
+	public void eventInitStretching() {
+		videoS1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI("https://youtu.be/1m6SZ4ksbBY"));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		videoS11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI("https://youtu.be/w1VCSOAEZJ4"));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		videoS2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI("https://youtu.be/FB2OF9Y32zA"));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		videoS3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI("https://youtu.be/SAsE6JUbSWQ"));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		videoS4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI("https://youtu.be/ZcsUQD5sloc"));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		videoS5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI("https://youtu.be/2u97jwzp0Jw"));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	public void eventInitMiley() {
 		miley1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -258,6 +346,18 @@ public class VideoPan extends JPanel {
 				
 			}
 		});
+		miley5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI("https://youtu.be/HrpW5PliIdU"));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		
 	}//end
 
 	public void eventInitDance() {
