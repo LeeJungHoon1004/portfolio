@@ -19,7 +19,7 @@ public class PicPan extends JPanel {
 //===========================================================
 	private ImageIcon imgb_f1 = new ImageIcon("송혜교.JPG");
 	private ImageIcon imgb_f2 = new ImageIcon("수지에프터.JPG");
-	private ImageIcon imgb_f3 = new ImageIcon("설현1.JPG");
+	private ImageIcon imgb_f3 = new ImageIcon("유빈.JPG");
 	
 	private JLabel bfpic1 = new JLabel(imgb_f1);
 	private JLabel bfpic2 = new JLabel(imgb_f2);
@@ -28,7 +28,7 @@ public class PicPan extends JPanel {
 //===========================================================
 	private ImageIcon imgTip1 = new ImageIcon("여자체지방.JPG");
 	private ImageIcon imgTip2= new ImageIcon("남자체지방.JPG");
-	private ImageIcon imgTip3= new ImageIcon("옷발체중.JPG");
+	private ImageIcon imgTip3= new ImageIcon("옷발체중2.JPG");
 	
 	private JLabel tip1 = new JLabel(imgTip1);
 	private JLabel tip2 = new JLabel(imgTip2);
@@ -37,13 +37,15 @@ public class PicPan extends JPanel {
 
 //===========================================================
 	
-	private ImageIcon imageprettypic1 = new ImageIcon("여자체지방.JPG");
-	private ImageIcon imageprettypic2= new ImageIcon("남자체지방.JPG");
-	private ImageIcon imageprettypic3= new ImageIcon("옷발체중.JPG");
+	private ImageIcon imageprettypic1 = new ImageIcon("김사랑.JPG");
+	private ImageIcon imageprettypic2= new ImageIcon("크리스탈3.JPG");
+	private ImageIcon imageprettypic3= new ImageIcon("손나은.JPG");
+	private ImageIcon imageprettypic4= new ImageIcon("설현1.JPG");
 	
 	private JLabel pretty1 = new JLabel(imageprettypic1);
 	private JLabel pretty2 = new JLabel(imageprettypic2);
 	private JLabel pretty3 = new JLabel(imageprettypic3);
+	private JLabel pretty4 = new JLabel(imageprettypic4);
 	
 	
 	//===========================================================
@@ -66,24 +68,26 @@ public class PicPan extends JPanel {
 		setLayout(new GridLayout(3, 1));
 
 		
-		pretty1.setPreferredSize(new Dimension(300, 340));
-		pretty2.setPreferredSize(new Dimension(300, 340));
-		pretty3.setPreferredSize(new Dimension(300, 340));
+		pretty1.setPreferredSize(new Dimension(300, 400));
+		pretty2.setPreferredSize(new Dimension(300, 400));
+		pretty3.setPreferredSize(new Dimension(300, 400));
+		pretty4.setPreferredSize(new Dimension(300, 400));
+		
+		bfpic1.setPreferredSize(new Dimension(310, 320));
+		bfpic2.setPreferredSize(new Dimension(310, 320));
+		bfpic3.setPreferredSize(new Dimension(310, 320));
 		
 		
-		bfpic1.setPreferredSize(new Dimension(300, 340));
-		bfpic2.setPreferredSize(new Dimension(300, 340));
-		bfpic3.setPreferredSize(new Dimension(300, 340));
+		tip1.setPreferredSize(new Dimension(310, 350));
+		tip2.setPreferredSize(new Dimension(310, 350));
+		tip3.setPreferredSize(new Dimension(310, 350));
 		
-		
-		tip1.setPreferredSize(new Dimension(300, 340));
-		tip2.setPreferredSize(new Dimension(300, 340));
-		tip3.setPreferredSize(new Dimension(300, 340));
-		
-		
-		tip1.setPreferredSize(new Dimension(300, 340));
-		tip2.setPreferredSize(new Dimension(300, 340));
-		tip3.setPreferredSize(new Dimension(300, 340));
+		motivePan.setBorder(moti);
+		motivePan.add(pretty1);
+		motivePan.add(pretty2);
+		motivePan.add(pretty3);
+		motivePan.add(pretty4);
+		add(motiveSC);
 		
 		b_fpicPan.setBorder(b_f);
 		b_fpicPan.add(bfpic1);
@@ -92,6 +96,8 @@ public class PicPan extends JPanel {
 		
 		add(bfSc);
 
+		
+		
 		tipPan.setBorder(tip);
 		tipPan.add(tip1);
 		tipPan.add(tip2);
@@ -99,11 +105,7 @@ public class PicPan extends JPanel {
 		
 		add(tipSc);
 		
-		motivePan.setBorder(moti);
-		motivePan.add(tip1);
-		motivePan.add(tip2);
-		motivePan.add(tip3);
-		add(motiveSC);
+		
 
 		
 	}
