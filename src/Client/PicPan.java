@@ -1,5 +1,6 @@
 package Client;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -84,8 +85,10 @@ public class PicPan extends JPanel {
 	
 	public void compInit() {
 
-		
-		
+		b_fpicPan.setBackground(Color.white);
+		tipPan.setBackground(Color.white);
+		motivePan.setBackground(Color.white);
+		phrasePan.setBackground(Color.white);
 		
 		setLayout(new GridLayout(4, 1));
 
@@ -158,7 +161,7 @@ public class PicPan extends JPanel {
 	
 	public PicPan() {
 		compInit();
-		
+		this.setBackground(Color.white);
 		
 
 	}

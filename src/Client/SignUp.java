@@ -1,5 +1,6 @@
 package Client;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -21,11 +22,12 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.border.TitledBorder;
 
 public class SignUp extends JDialog {
 	
 	private SignUp self = this;
-	
+	private  TitledBorder tborder = new TitledBorder("");
 	private JLabel name = new JLabel("이름 : ");
 	private JTextField inputName = new JTextField();
 	private JLabel gender = new JLabel("성별 : ");
@@ -55,6 +57,13 @@ public class SignUp extends JDialog {
 
 	public void compInit() {
 		setLayout(new GridBagLayout());
+		
+		panName.setBorder(tborder);
+		panGender.setBorder(tborder);
+		panID.setBorder(tborder);
+		panPW.setBorder(tborder);
+		panCheck.setBorder(tborder);
+		
 		GridBagConstraints c = new GridBagConstraints();
 		name.setPreferredSize(new Dimension(100, 40));
 		inputName.setPreferredSize(new Dimension(200, 40));

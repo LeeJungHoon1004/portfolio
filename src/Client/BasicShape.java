@@ -30,16 +30,19 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
-//sfasdf
+
+
+//github.com/LeeJungHoon1004/portfolio.git	
+
+
 public class BasicShape extends JFrame {
-	
 	private Socket client;
 	private DataOutputStream dos;
 	private DataInputStream dis;
 	// =======SOCKET========================
 	private Container cp = this.getContentPane();
 	private JLabel title = new JLabel();
-
+	private JLabel title2 = new JLabel();
 	
 	private Font font = new Font("바탕", Font.ITALIC, 30);
 	private JButton homeBt = new JButton("홈");
@@ -55,11 +58,11 @@ public class BasicShape extends JFrame {
 	private JLabel lbID = new JLabel();
 	private JLabel lbPW = new JLabel();
 	
-	private Image idimage = new ImageIcon("id.jpg").getImage()
+	private Image idimage = new ImageIcon("ID.jpg").getImage()
 			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon iconid= new ImageIcon(idimage);
 	
-	private Image pwimage = new ImageIcon("pw.jpg").getImage()
+	private Image pwimage = new ImageIcon("PW.jpg").getImage()
 			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon iconpw= new ImageIcon(pwimage);
 	
@@ -75,9 +78,7 @@ public class BasicShape extends JFrame {
 	// 로그인 중일때
 	private JPanel panboxx = new JPanel(new GridLayout(3, 1));
 	private JPanel namePan = new JPanel();
-	private JPanel photoPan = new JPanel();
 	private JPanel logoutPan = new JPanel();
-	private ImageIcon photo = new ImageIcon("");
 	private JLabel profilename = new JLabel();
 	private JLabel profilePhoto = new JLabel();
 	private JButton logout = new JButton("로그아웃");
@@ -87,26 +88,16 @@ public class BasicShape extends JFrame {
 	private BasicShape self = this;
 	private JPanel mainPan = new JPanel(card);
 	private JScrollPane sc = new JScrollPane(mainPan);
-	
 	private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
 
 	// COMPNENT - homePan
-	
-	private Image titleimage = new ImageIcon("1.jpg").getImage()
-			.getScaledInstance(1500, 80, java.awt.Image.SCALE_SMOOTH);
+	private Image titleimage = new ImageIcon("타이틀06.jpg").getImage()
+			.getScaledInstance(1194, 100, java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon titleicon= new ImageIcon(titleimage);
-	
-	
-	
 
 	private TitledBorder tborder = new TitledBorder("");
 	private JPanel homePan = new JPanel(new GridLayout(2, 1));
-
-	
-
-
 	private String name = getName();
-//github.com/LeeJungHoon1004/portfolio.git
 	private ImageSlide imgSlide = new ImageSlide();
 	private BMI bmi = new BMI();
 
@@ -115,48 +106,14 @@ public class BasicShape extends JFrame {
 	// COMPNENT - dailyPan
 	private Dailypan dailyPan = new Dailypan();
 	// COMPNENT - videoPan
-	
-	private JPanel imgPanel = new JPanel();
-	private PicPan picpan = new PicPan();
-	
-	
 	private JPanel videoPan = new JPanel();
-	
 	private VideoPan video = new VideoPan();
 	
 	// COMPNENT - imgBoardPan
-//	private JLabel labelPhoto1 = new JLabel();
-//	private JLabel labelPhoto2 = new JLabel();
-//	private JLabel labelPhoto3 = new JLabel();
-//	
-//	private JLabel labelPhoto4 = new JLabel();
-
-
-
-//	
-//	
-//	private Image image1 = new ImageIcon("설현1.jpg").getImage()
-//			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
-//	private ImageIcon iconimage1= new ImageIcon(image1);
-//	
-//	private Image image2 = new ImageIcon("송혜교.jpg").getImage()
-//			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
-//	private ImageIcon iconimage2= new ImageIcon(image2);
-//	
-//	private Image image3 = new ImageIcon("수지에프터.jpg").getImage()
-//			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
-//	private ImageIcon iconimage3= new ImageIcon(image3);
-//	
-//	private Image image4 = new ImageIcon("연예인.jpg").getImage()
-//			.getScaledInstance(300, 350, java.awt.Image.SCALE_SMOOTH);
-//	private ImageIcon iconimage4= new ImageIcon(image4);
-//	
-	
-	
-
+	private JPanel imgPanel = new JPanel();
+	private PicPan picpan = new PicPan();
 	private JButton buttonUpload = new JButton("업로드");
-	private JButton buttonRemove = new JButton("사진삭제"); // 사진삭제시 id와 패스워드 비번확인
-	// 필요함.
+	private JButton buttonRemove = new JButton("사진삭제"); // 사진삭제시 id와 패스워드 비번확인 필요함.
 	private JButton buttonClose = new JButton("닫기");
 	
 	private JPanel imgBoardPan = new JPanel(new GridLayout(3, 1));
@@ -165,31 +122,28 @@ public class BasicShape extends JFrame {
 	private JPanel panelSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 	// =======COMPONENT========================
 
+	
+	
+	
 	public void comp() {
 		setLayout(null);
-		imgSlide.setPreferredSize(new Dimension(872, 461));
+		    //투명
+		
+		imgSlide.setPreferredSize(new Dimension(400, 700));
 		bmi.setPreferredSize(new Dimension(872, 800));
 		bmi.setBorder(tborder);
 		this.homePan.add(imgSlide);
 		this.homePan.add(bmi);
 		
-		
-		// compInit() -defaultPan
-//		this.panelCenter.add(labelPhoto1);
-//		this.panelCenter.add(labelPhoto2);
-//		this.panelCenter.add(labelPhoto3);
-		
 		//---------운동영상
+		videoPan.setBackground(Color.white);
 		this.video.setPreferredSize(new Dimension(965, 1500));
 		this.videoPan.add(video);
 		//---------사진
-		
+		picpan.setBackground(Color.white);
+		imgPanel.setBackground(Color.white);
 		this.picpan.setPreferredSize(new Dimension(990,1000));
 		this.imgPanel.add(picpan);
-//		this.labelPhoto1.setIcon(iconimage1);
-//		this.labelPhoto2.setIcon(iconimage2);
-//		this.labelPhoto3.setIcon(iconimage3);
-//		this.labelPhoto4.setIcon(iconimage4);
 		
 		this.lbID.setIcon(iconid);
 		this.lbPW.setIcon(iconpw);
@@ -200,6 +154,12 @@ public class BasicShape extends JFrame {
 		this.imgBoardPan.add(panelnull);
 		this.imgBoardPan.add(panelSouth);
 		// compInit() - panelCard_StimulsPhoto
+		category.setBackground(Color.WHITE);
+		sidepan.setBackground(Color.WHITE);
+		panbox1.setBackground(Color.WHITE);
+		panbox2.setBackground(Color.WHITE);
+		panbox3.setBackground(Color.WHITE);
+		
 		category.add(homeBt);
 		category.add(goalBt);
 		category.add(dailyBt);
@@ -215,27 +175,32 @@ public class BasicShape extends JFrame {
 		panbox.add(panbox2);
 		panbox.add(panbox3);
 		// CardLayout이 들어있는 profilePan에 넣음.
-		photoPan.add(profilePhoto);
+		
+		panboxx.setBackground(Color.white);
+		namePan.setBackground(Color.white);
+		logoutPan.setBackground(Color.white);
 		profilename.setText(name + " 님 환영합니다!");
 		namePan.add(profilename);
 		logoutPan.add(logout);
-		panboxx.add(photoPan, BorderLayout.CENTER);
+		
 		panboxx.add(profilename, BorderLayout.CENTER);
 		panboxx.add(logoutPan, BorderLayout.CENTER);
 		profilePan.add(panbox, "loginBefore");
 		profilePan.add(panboxx, "loginAfter");
+		
 		// =======================================================
 //		title.setFont(font);
 		title.setIcon(titleicon);
 		titlePan.add(title);
 		sidepan.add(profilePan);
 		sidepan.add(category);
-		titlePan.setBounds(0, 0, 1400, 80);
+		titlePan.setBounds(0, 0, 1194, 100);
 		add(titlePan);
-		sidepan.setBounds(0, 81, 200, 640);
+		sidepan.setBounds(0, 101, 200, 640);
 		add(sidepan);
 		// CardLayout들어있는 mainPan에 패널들 넣음
 
+		mainPan.setBackground(Color.WHITE);
 		mainPan.add(homePan, "NamedefaultPane");
 		mainPan.add(goalPan);
 		mainPan.add(dailyPan, "NamedailyPane");
@@ -245,7 +210,7 @@ public class BasicShape extends JFrame {
 		// 부여된 이름을 가지고 이벤트 처리부분에서
 		// 카드의 이름으로 식별하여 visible함.
 		this.setResizable(false);
-		this.sc.setBounds(200, 79, 1000, 650);
+		this.sc.setBounds(200, 99, 1000, 650);
 		add(sc);
 	}
 
@@ -267,9 +232,6 @@ public class BasicShape extends JFrame {
 
 	public String getResult() {
 		// 로그인 버튼
-		
-
-
 		String userID = inputID.getText();
 		String userPW = inputPW.getText();
 		try {
@@ -350,6 +312,7 @@ public class BasicShape extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// 회원가입창 띄우기
 				new SignUp(self).setVisible(true);
+				
 			}
 		});
 		
@@ -384,7 +347,6 @@ public class BasicShape extends JFrame {
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 				card.show(self.mainPan, "NameimgBoard");
 			}
 		});

@@ -1,4 +1,5 @@
 package Client;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -24,7 +25,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 public class Dailypan extends JPanel{
    private Socket client;
@@ -586,7 +586,7 @@ public class Dailypan extends JPanel{
 
    public Dailypan() {
 
-
+	   this.setBackground(Color.white);
       this.setSize(900,900);
      
       this.comp();
