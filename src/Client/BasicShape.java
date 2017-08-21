@@ -87,6 +87,7 @@ public class BasicShape extends JFrame {
 	private BasicShape self = this;
 	private JPanel mainPan = new JPanel(card);
 	private JScrollPane sc = new JScrollPane(mainPan);
+	
 	private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
 
 	// COMPNENT - homePan

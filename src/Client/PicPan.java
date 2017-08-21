@@ -1,5 +1,6 @@
 package Client;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -12,19 +13,24 @@ import javax.swing.border.TitledBorder;
 
 public class PicPan extends JPanel {
 
+	private static final Component PicPan = null;
 	private TitledBorder b_f = new TitledBorder("BEFORE & AFTER");
 	private TitledBorder tip = new TitledBorder("꿀팁 나누기");
 	private TitledBorder moti = new TitledBorder("자극사진");
-	private TitledBorder pharse = new TitledBorder("자극사진");
-	
+	private TitledBorder pharse = new TitledBorder("자극문구");
+	private JScrollPane sc1 = new JScrollPane(PicPan);
 //===========================================================
-	private ImageIcon imgb_f1 = new ImageIcon("송혜교.JPG");
+	private ImageIcon imgb_f1 = new ImageIcon("몸매.JPG");
 	private ImageIcon imgb_f2 = new ImageIcon("수지에프터.JPG");
 	private ImageIcon imgb_f3 = new ImageIcon("유빈.JPG");
+	private ImageIcon imgb_f4 = new ImageIcon("에일리.JPG");
+	private ImageIcon imgb_f5 = new ImageIcon("송혜교.JPG");
 	
 	private JLabel bfpic1 = new JLabel(imgb_f1);
 	private JLabel bfpic2 = new JLabel(imgb_f2);
 	private JLabel bfpic3 = new JLabel(imgb_f3);
+	private JLabel bfpic4 = new JLabel(imgb_f4);
+	private JLabel bfpic5 = new JLabel(imgb_f5);
 	
 //===========================================================
 	private ImageIcon imgTip1 = new ImageIcon("여자체지방.JPG");
@@ -44,6 +50,7 @@ public class PicPan extends JPanel {
 	private ImageIcon imageprettypic4= new ImageIcon("설현1.JPG");
 	private ImageIcon imageprettypic5= new ImageIcon("하니.JPG");
 	
+	
 	private JLabel pretty1 = new JLabel(imageprettypic1);
 	private JLabel pretty2 = new JLabel(imageprettypic2);
 	private JLabel pretty3 = new JLabel(imageprettypic3);
@@ -53,9 +60,9 @@ public class PicPan extends JPanel {
 	//===========================================================
 	private ImageIcon imgPhrase1 = new ImageIcon("야식.JPG");
 	private ImageIcon imgPhrase2= new ImageIcon("인생은.JPG");
-	private ImageIcon imgPhrase3= new ImageIcon("흔들리면지방.JPG");
+	private ImageIcon imgPhrase3= new ImageIcon("그맛이다.JPG");
 	private ImageIcon imgPhrase4= new ImageIcon("음식아까워마라.JPG");
-	private ImageIcon imgPhrase5= new ImageIcon("그맛이다.JPG");
+	private ImageIcon imgPhrase5= new ImageIcon("흔들리면지방.JPG");
 	
 	private JLabel phrase1 = new JLabel(imgPhrase1);
 	private JLabel phrase2 = new JLabel(imgPhrase2);
@@ -88,9 +95,9 @@ public class PicPan extends JPanel {
 		pretty3.setPreferredSize(new Dimension(300, 400));
 		pretty4.setPreferredSize(new Dimension(300, 400));
 		
-		bfpic1.setPreferredSize(new Dimension(310, 320));
-		bfpic2.setPreferredSize(new Dimension(310, 320));
-		bfpic3.setPreferredSize(new Dimension(310, 320));
+		bfpic1.setPreferredSize(new Dimension(330, 320));
+		bfpic2.setPreferredSize(new Dimension(330, 320));
+		bfpic3.setPreferredSize(new Dimension(330, 320));
 		
 		
 		tip1.setPreferredSize(new Dimension(310, 350));
@@ -116,6 +123,8 @@ public class PicPan extends JPanel {
 		b_fpicPan.add(bfpic1);
 		b_fpicPan.add(bfpic2);
 		b_fpicPan.add(bfpic3);
+		b_fpicPan.add(bfpic4);
+		b_fpicPan.add(bfpic5);
 		
 		add(bfSc);
 
