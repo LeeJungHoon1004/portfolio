@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 
 public class Manager implements ManagerInterface{
 
+	
 	private Connection getConnection() throws Exception{
 		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -30,7 +31,6 @@ public class Manager implements ManagerInterface{
 		
 		return con;
 	}
-	
 	@Override
 	public boolean isExist(Member m) throws Exception{
 		System.out.println("java07의 isExist메소드실행");
@@ -50,6 +50,7 @@ public class Manager implements ManagerInterface{
 		con.close();
 		return result;
 	}
+	
 
 	@Override
 	public int insertData(Member m) throws Exception {
@@ -82,7 +83,7 @@ public class Manager implements ManagerInterface{
 	}
 
 	@Override
-	public Member getNameData(Member m)throws Exception {
+	public String getNameData(Member m)throws Exception {
 		//name
 		Connection con = this.getConnection();
 		String sql = "select name from member where id =? ";
@@ -91,14 +92,16 @@ public class Manager implements ManagerInterface{
 		ResultSet rs = pstat.executeQuery();
 		//쿼리문 실행후 해당하는 id값주인의 이름 키 몸무게 성별을 가져옴
 		String name=null;
+		String id = null;
+		String pw = null;
+		
 		if(rs.next()) {
 		name = rs.getString(1);
 		}
-		Member m1 = new Member(name);
 		
 		//해당하는 회원의 정보를 멤버m1으로 만들어서 리턴한다. 
 		
-		return m1;
+		return name;
 		
 	}
 
@@ -109,12 +112,18 @@ public class Manager implements ManagerInterface{
 	}
 
 	@Override
-	public String InsertDailyList(int c1, int c2, int c3) throws Exception {
+	public String InsertDailyList(Member m) throws Exception {
 		// TODO Auto-generated method stub
+		
 		Connection con =this.getConnection();
-		String sql = "insert into member(seq,name,id,pw,gender,regdate) values(member_seq.nextval , ? , ? ,? ,? , sysdate)";
+		String sql = "insert into member(combolist) values(?) where id =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		//멤버자료형 따로만들것.
+		//String list, String id
+		pstat.setString(1, m.getDailylist());
+		pstat.setString(2 ,m.getId() );
+		
+		
 //		pstat.setString(1, m.getName());
 //		pstat.setString(2, m.getId());
 //		pstat.setString(3, m.getPw());
@@ -124,6 +133,11 @@ public class Manager implements ManagerInterface{
 		con.close();
 		return null;
 	}
+
+
+
+	
+	
 
 	
 

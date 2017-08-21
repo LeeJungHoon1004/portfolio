@@ -8,6 +8,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,8 +17,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 class ConnectionThread extends Thread {
-
-	private int DailyList [] = new int[] {};
+	
+	String name ;
+	String gender ;
+	String id ;
+	String pw ;
+	
+	private String dailyList ;
+//	private int dailyList [] = new int[3] ;
 	private Socket socket = null;
 	private DataInputStream dis;
 	private DataOutputStream dos;
@@ -94,10 +101,10 @@ class ConnectionThread extends Thread {
 				if (result) {// 값이존재한다(회원가입 되어있는 아이디와비번이다) - 로그인허가
 					dos.writeUTF("로그인성공");
 					String name = null;
-					Member m1 = new Member(name);
+					Member m1 = new Member(name , id ,pw);
 					//멤버의 정보 (id,pw를 준뒤 해당 사용자의 이름을 가져옴)
-					m1 =Server.manager.getNameData(m2);
-					name = m1.getName();
+					name =Server.manager.getNameData(m2);
+					
 					System.out.println(name);
 					//이름 , 신장, 체중 ,성별 순서대로 보냅니다
 					dos.writeUTF(name);
@@ -112,16 +119,15 @@ class ConnectionThread extends Thread {
 			}
 			//dailyPan combolist 데이터 수신
 			else if(cmd.equals("하루목표전송")) {
-				int c1 =dis.readInt();
-				int c2 =dis.readInt();
-				int c3 =dis.readInt();
-			
-				DailyList[0] =c1;
-				DailyList[1] =c2;
-				DailyList[2] =c3;
-			
 				
-			String msg =Server.manager.InsertDailyList(c1,c2,c3);
+				String list = dis.readUTF();
+				System.out.println(list);
+				
+			
+				//String list, String id
+				Member m = new Member(list , name );
+			String msg =Server.manager.InsertDailyList(m);
+			System.out.println("하루목표전송받았다.");
 			
 			}
 			
@@ -138,6 +144,7 @@ class ConnectionThread extends Thread {
 		catch(Exception e) {
 			System.out.println("소켓연결해제.");
 			System.out.println("사용자가 로그아웃하였습니다.");
+			e.printStackTrace();
 			try{
 			dos.close();
 			}catch(Exception e1){

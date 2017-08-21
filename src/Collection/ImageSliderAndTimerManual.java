@@ -44,7 +44,7 @@ public class ImageSliderAndTimerManual extends JFrame{
        //set a timer
         //Timer 클래스 이용-  쓰레드 입니다. 
         //
-     tm =  new Timer(1000,new ActionListener() { //delay값
+     tm =  new Timer(1000,new ActionListener() { //delay값 1000이면 1초 .
             @Override
             public void actionPerformed(ActionEvent e) {
                 SetImageSize(x);

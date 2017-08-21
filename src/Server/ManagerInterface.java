@@ -28,7 +28,7 @@ public interface ManagerInterface {
 	 * BMI데이터인 stature,wieght,gender를 가져옵니다.
 	 * @return
 	 */
-	public Member getNameData(Member m) throws Exception;
+	public String getNameData(Member m) throws Exception;
 	
 	/**로그인했을때 해당하는 회원의 bmidata를 보냅니다. 
 	 * 
@@ -38,15 +38,14 @@ public interface ManagerInterface {
 	 */
 	public boolean isLogoutOk(Member m)throws Exception;
 	
-	/**Combolist에서 받은 int값 3개를 배열에 저장합니다.
-	 * 
+	/**Combolist에서 받은 int값 3개 Integer클래스로 wrapping해서
+	 * ArrayList<Integer>저장합니다. 
 	 * @param c1
 	 * @param c2
 	 * @param c3
 	 * @throws Exception
 	 */
-	public String InsertDailyList(int c1 , int c2, int c3) throws Exception;
-	
+	public String InsertDailyList(Member m ) throws Exception ;
 	
 	
 	
