@@ -636,23 +636,15 @@ public class Dailypan extends JPanel{
    }
    
 
-<<<<<<< HEAD
-   public Dailypan() {
 
-	   this.setBackground(Color.white);
-=======
+  
    public Dailypan(BasicShape parent) {
 	  this.parent =parent;
 	  this.setBackground(Color.white);
->>>>>>> branch 'master' of https://github.com/LeeJungHoon1004/portfolio.git
       this.setSize(900,900);
-     
       this.comp();
       this.event();
-
-      
       this.setVisible(true);
-
    }
 
 

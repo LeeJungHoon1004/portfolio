@@ -18,8 +18,8 @@ import javax.swing.JTextArea;
 
 class ConnectionThread extends Thread {
 	
-	String name ;
-	String gender ;
+	String name;
+	String gender;
 	String id ;
 	String pw ;
 	
