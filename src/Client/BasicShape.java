@@ -61,11 +61,9 @@ public class BasicShape extends JFrame {
 	private Image idimage = new ImageIcon("ID (3).jpg").getImage()
 			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon iconid= new ImageIcon(idimage);
-	
 	private Image pwimage = new ImageIcon("PW (2).jpg").getImage()
 			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon iconpw= new ImageIcon(pwimage);
-	
 	private JTextField inputID = new JTextField();
 	
 	private JPasswordField inputPW = new JPasswordField();
@@ -87,9 +85,7 @@ public class BasicShape extends JFrame {
 	private CardLayout card = new CardLayout();
 	private BasicShape self = this;
 	private JPanel mainPan = new JPanel(card);
-	private JScrollPane sc = new JScrollPane(mainPan);
 	private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
-
 	// COMPNENT - homePan
 	private Image titleimage = new ImageIcon("타이틀06.jpg").getImage()
 			.getScaledInstance(1194, 100, java.awt.Image.SCALE_SMOOTH);
@@ -97,21 +93,27 @@ public class BasicShape extends JFrame {
 
 	private TitledBorder tborder = new TitledBorder("");
 	private JPanel homePan = new JPanel(new GridLayout(2, 1));
+	private JScrollPane homeSc = new JScrollPane(homePan);
 	private String name = getName();
 	private ImageSlide imgSlide = new ImageSlide();
 	private BMI bmi = new BMI();
 
 	// COMPNENT - goalPan
 	private JPanel goalPan = new JPanel();
+	private JScrollPane goalSc = new JScrollPane(goalPan);//스크롤
 	// COMPNENT - dailyPan
 	private Dailypan dailyPan = new Dailypan();
+	private JScrollPane dailySc = new JScrollPane(dailyPan);//스크롤
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
 	private VideoPan video = new VideoPan();
+	private JScrollPane videoSc = new JScrollPane(videoPan);//스크롤
 	
 	// COMPNENT - imgBoardPan
 	private JPanel imgPanel = new JPanel();
 	private PicPan picpan = new PicPan();
+	private JScrollPane picSc = new JScrollPane(imgPanel);//스크롤
+	
 	private JButton buttonUpload = new JButton("업로드");
 	private JButton buttonRemove = new JButton("사진삭제"); // 사진삭제시 id와 패스워드 비번확인 필요함.
 	private JButton buttonClose = new JButton("닫기");
@@ -137,12 +139,12 @@ public class BasicShape extends JFrame {
 		
 		//---------운동영상
 		videoPan.setBackground(Color.white);
-		this.video.setPreferredSize(new Dimension(965, 1500));
+		this.video.setPreferredSize(new Dimension(965, 1600));
 		this.videoPan.add(video);
 		//---------사진
 		picpan.setBackground(Color.white);
 		imgPanel.setBackground(Color.white);
-		this.picpan.setPreferredSize(new Dimension(990,1000));
+		this.picpan.setPreferredSize(new Dimension(975,1600));
 		this.imgPanel.add(picpan);
 		
 		this.lbID.setIcon(iconid);
@@ -202,18 +204,20 @@ public class BasicShape extends JFrame {
 		add(sidepan);
 		// CardLayout들어있는 mainPan에 패널들 넣음
 
-		mainPan.setBackground(Color.WHITE);
-		mainPan.add(homePan, "NamedefaultPane");
-		mainPan.add(goalPan);
-		mainPan.add(dailyPan, "NamedailyPane");
-		mainPan.add(videoPan,"NamevideoPane");
-		mainPan.add(imgPanel, "NameimgBoard"); // 카드로 끼워넣는팬에
+		
+		mainPan.add(homeSc, "NamedefaultPane");
+		mainPan.add(goalSc);
+		mainPan.add(dailySc, "NamedailyPane");
+		mainPan.add(videoSc,"NamevideoPane");
+		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
 		// 이름을 부여함 .
 		// 부여된 이름을 가지고 이벤트 처리부분에서
 		// 카드의 이름으로 식별하여 visible함.
 		this.setResizable(false);
-		this.sc.setBounds(200, 99, 1000, 650);
-		add(sc);
+		this.mainPan.setBounds(200, 99, 1000, 650);
+		add(mainPan);
+		
+		
 	}
 
 	public void clientConnect() {
