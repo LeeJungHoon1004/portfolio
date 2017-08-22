@@ -94,15 +94,12 @@ public class PicPan extends JPanel {
 
 		
 
-		pretty1.setPreferredSize(new Dimension(300, 350));
-		pretty2.setPreferredSize(new Dimension(300, 350));
-		pretty3.setPreferredSize(new Dimension(300, 350));
-		pretty4.setPreferredSize(new Dimension(300, 350));
+		pretty1.setPreferredSize(new Dimension(300, 390));
+		pretty2.setPreferredSize(new Dimension(300, 390));
+		pretty3.setPreferredSize(new Dimension(300, 390));
+		pretty4.setPreferredSize(new Dimension(300, 390));
 
-		pretty1.setPreferredSize(new Dimension(300, 400));
-		pretty2.setPreferredSize(new Dimension(300, 400));
-		pretty3.setPreferredSize(new Dimension(300, 400));
-		pretty4.setPreferredSize(new Dimension(300, 400));
+
 
 		
 		bfpic1.setPreferredSize(new Dimension(330, 320));

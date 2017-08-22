@@ -187,6 +187,8 @@ public class BasicShape extends JFrame {
 		panbox2.setBackground(Color.WHITE);
 		panbox3.setBackground(Color.WHITE);
 		
+		
+		
 		category.add(homeBt);
 		category.add(goalBt);
 		category.add(dailyBt);
