@@ -303,7 +303,7 @@ public class BasicShape extends JFrame {
 		this.name = name;
 	}
 
-
+	
 
 
 	public void eventInit() {
@@ -328,7 +328,14 @@ public class BasicShape extends JFrame {
 		logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+
+					dos.close();
+					dis.close();
 					client.close();
+					dos=null;
+					dis=null;
+					client=null;
+
 					System.out.println("성공적으로 소켓종료");
 					inputID.setText("");
 					inputPW.setText("");
