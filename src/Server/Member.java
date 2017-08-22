@@ -1,7 +1,10 @@
 package Server;
 
+import java.util.ArrayList;
+
 public class Member {
 
+	private String dailylist;
 	private String name ;
 	private String id ;
 	private String pw ;
@@ -9,6 +12,16 @@ public class Member {
 	private double stature; //虐
 	private double weight; //个公霸
 	
+	
+	
+	
+
+	public String getDailylist() {
+		return dailylist;
+	}
+	public void setDailylist(String dailylist) {
+		this.dailylist = dailylist;
+	}
 	public String getName() {
 		return name;
 	}
@@ -47,6 +60,8 @@ public class Member {
 		this.gender = gender;
 	}
 	//积己磊
+	
+	
 	public Member(String name ,String id ,String pw , String gender) {
 		this.name = name;
 		this.id = id;
@@ -64,8 +79,10 @@ public class Member {
 		this.weight = weight;
 	}
 	//stature , weight, gender
-	public Member(String name) {
+	public Member(String name , String id , String pw) {
 		this.name = name;
+		this.id = id ;
+		this.pw = pw;
 		
 	}
 	public Member(String id , String pw) {
@@ -73,6 +90,8 @@ public class Member {
 		this.pw= pw;
 		
 	}
+	
+
 	
 	
 	

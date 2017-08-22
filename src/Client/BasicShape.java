@@ -61,6 +61,7 @@ public class BasicShape extends JFrame {
 	private Image idimage = new ImageIcon("ID (3).jpg").getImage()
 			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon iconid= new ImageIcon(idimage);
+
 	private Image pwimage = new ImageIcon("PW (2).jpg").getImage()
 			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon iconpw= new ImageIcon(pwimage);
@@ -102,7 +103,9 @@ public class BasicShape extends JFrame {
 	private JPanel goalPan = new JPanel();
 	private JScrollPane goalSc = new JScrollPane(goalPan);//스크롤
 	// COMPNENT - dailyPan
-	private Dailypan dailyPan = new Dailypan();
+
+	private Dailypan dailyPan = new Dailypan(self);
+
 	private JScrollPane dailySc = new JScrollPane(dailyPan);//스크롤
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
@@ -122,10 +125,30 @@ public class BasicShape extends JFrame {
 	private JPanel panelnull = new JPanel();
 	private JPanel panelCenter = new JPanel(new GridLayout(1, 3)); // 센터-포토3개
 	private JPanel panelSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-	// =======COMPONENT========================
+	
+	public Socket getClient() {
+		return client;
+	}
 
-	
-	
+	public void setClient(Socket client) {
+		this.client = client;
+	}
+
+	public DataOutputStream getDos() {
+		return dos;
+	}
+
+	public void setDos(DataOutputStream dos) {
+		this.dos = dos;
+	}
+
+	public DataInputStream getDis() {
+		return dis;
+	}
+
+	public void setDis(DataInputStream dis) {
+		this.dis = dis;
+	}	
 	
 	public void comp() {
 		setLayout(null);
@@ -140,6 +163,8 @@ public class BasicShape extends JFrame {
 		//---------운동영상
 		videoPan.setBackground(Color.white);
 		this.video.setPreferredSize(new Dimension(965, 1600));
+		this.video.setPreferredSize(new Dimension(965, 1500));
+
 		this.videoPan.add(video);
 		//---------사진
 		picpan.setBackground(Color.white);
