@@ -48,7 +48,7 @@ public class Dailypan extends JPanel{
 
    private JButton buttonselect = new JButton("선택완료"); //선택완료 버튼 (콤보쪽)
    private JButton buttonConfirm = new JButton("오늘의 목표를 평가해보세요");
-  
+   private JLabel confirm = new JLabel();
    
    private Dailypan self = this;
    
@@ -70,11 +70,14 @@ public class Dailypan extends JPanel{
    private String result;
    
    
+   private Image confirmimg = new ImageIcon("goal.jpg").getImage()
+	         .getScaledInstance(300, 150, java.awt.Image.SCALE_SMOOTH); //빈컵이미지
+   
 
    private Image cupimage = new ImageIcon("empty2.png").getImage()
-         .getScaledInstance(43, 72, java.awt.Image.SCALE_SMOOTH); //빈컵이미지
+         .getScaledInstance(50, 80, java.awt.Image.SCALE_SMOOTH); //빈컵이미지
    private Image fullcupimage = new ImageIcon("full2.png").getImage()
-         .getScaledInstance(43, 72, java.awt.Image.SCALE_SMOOTH); //물들어있는컵
+         .getScaledInstance(50, 80, java.awt.Image.SCALE_SMOOTH); //물들어있는컵
    
    
    private Image water_effect = new ImageIcon("waterInform.jpg").getImage()
@@ -86,6 +89,7 @@ public class Dailypan extends JPanel{
    private Image dreamImage = new ImageIcon("규정.jpg").getImage()
 	         .getScaledInstance(600, 200, java.awt.Image.SCALE_SMOOTH);
 
+   private ImageIcon iconconfirm = new ImageIcon(confirmimg);
    private ImageIcon icondream = new ImageIcon(dreamImage);
    
    private ImageIcon iconwaterSign = new ImageIcon(water_Sign);
@@ -133,7 +137,7 @@ public class Dailypan extends JPanel{
       
       today3.setFont(font); //오늘의 목표 고르라는 레이블 
       waterchecklabel.setFont(font);
-      cupPan.setPreferredSize(new Dimension(300, 100));
+      cupPan.setPreferredSize(new Dimension(250, 80));
    //   cupPan.add(water_inform);
       cupPan.add(cupb1);
       
@@ -144,7 +148,7 @@ public class Dailypan extends JPanel{
       cupPan.add(cupb5);
 
 
-      cupPan2.setPreferredSize(new Dimension(300, 100));
+      cupPan2.setPreferredSize(new Dimension(250, 80));
       cupPan2.add(cupb6);
       cupPan2.add(cupb7);
       cupPan2.add(cupb8);
@@ -154,15 +158,15 @@ public class Dailypan extends JPanel{
       
       //컵 1-10까지 아이콘 에 사진넣기 
       this.cupb1.setIcon(icon1);
-      this.cupb1.setPreferredSize(new Dimension(43, 72));
+     // this.cupb1.setPreferredSize(new Dimension(43, 72));
       this.cupb2.setIcon(icon2);
-      this.cupb2.setPreferredSize(new Dimension(43, 72));
+     // this.cupb2.setPreferredSize(new Dimension(43, 72));
       this.cupb3.setIcon(icon3);
-      this.cupb3.setPreferredSize(new Dimension(43, 72));
+     // this.cupb3.setPreferredSize(new Dimension(43, 72));
       this.cupb4.setIcon(icon4);
-      this.cupb4.setPreferredSize(new Dimension(43, 72));
+     // this.cupb4.setPreferredSize(new Dimension(43, 72));
       this.cupb5.setIcon(icon5);
-      this.cupb5.setPreferredSize(new Dimension(43, 72));
+     // this.cupb5.setPreferredSize(new Dimension(43, 72));
       this.cupb6.setIcon(icon6);
       this.cupb6.setPreferredSize(new Dimension(43, 72));
       this.cupb7.setIcon(icon7);
@@ -187,9 +191,11 @@ public class Dailypan extends JPanel{
 //      lb.setVerticalTextPosition(JLabel.CENTER);
 //      lb.setHorizontalTextPosition(JLabel.RIGHT);
     
-      this.dream.setIcon(icondream);
-      this.water_inform.setPreferredSize(new Dimension(500, 500));
+      this.confirm.setIcon(iconconfirm);
+      this.confirm.setPreferredSize(new Dimension(300, 230));
       
+      this.dream.setIcon(icondream);
+     
       this.water_inform.setIcon(iconwater);
       this.water_inform.setPreferredSize(new Dimension(500, 500));
       
@@ -244,7 +250,7 @@ public class Dailypan extends JPanel{
 
       //2번 컨테이너. 콤보들 넣음 
       GridBagConstraints c2 = new GridBagConstraints();
-      c2.insets = new Insets(10,10,30,0);
+      c2.insets = new Insets(10,10,10,0);
 
       c2.gridy = 2; c2.gridx = 1;
       this.add(combolist1,c2);
@@ -254,42 +260,48 @@ public class Dailypan extends JPanel{
       this.add(combolist3,c2);
       c2.gridy = 5; c2.gridx =2;
       this.add(buttonselect,c2);
-      c2.gridy = 6; c2.gridx =1;
-      this.add(buttonConfirm,c2);
+      
+   
       
 //      c2.gridy = 6; c2.gridx =3;
 //      this.add(ConfirmQ,c2);
-     
+  
+      c2.gridy = 6; c2.gridx = 1;
+      this.add(confirm,c2);
       
+      c2.gridy = 7; c2.gridx =1;
+      this.add(buttonConfirm,c2);
+     
       //3번 컨테이너, 물 체크해보세요 레이블
 
       GridBagConstraints c3 = new GridBagConstraints();
       c3.insets = new Insets(10,10,30,0);
 
-
-      c3.gridy = 7; c3.gridx = 1;
+      
+ 
+      
+      c3.gridy = 8; c3.gridx = 1;
       this.add(waterchecklabel,c3);
-      
-      
+    
    
 
       
       //컵 패널 
       GridBagConstraints c4 = new GridBagConstraints();
       c4.insets = new Insets(10,20,30,0);
-      c4.gridy = 8; c4.gridx = 1;
-      this.add(water_inform,c4);
       c4.gridy = 9; c4.gridx = 1;
+      this.add(water_inform,c4);
+      c4.gridy = 10; c4.gridx = 1;
       this.add(cupPan,c4);
 
-      c4.gridy = 10; c4.gridx = 1;
+      c4.gridy = 11; c4.gridx = 1;
       this.add(cupPan2,c4);
 
 
-      c4.gridy = 11; c4.gridx =1;
+      c4.gridy = 12; c4.gridx =1;
       this.add(buttonUpload,c4);
 
-      c4.gridy = 12; c4.gridx =1;
+      c4.gridy = 13; c4.gridx =1;
       this.add(water_SignLabel,c4);
 
 
