@@ -76,7 +76,7 @@ public class Dailypan extends JPanel{
 
 	private JButton buttonselect = new JButton("선택완료"); //선택완료 버튼 (콤보쪽)
 	private JButton buttonConfirm = new JButton("오늘의 목표를 평가해보세요");
-
+	private JLabel confirm = new JLabel();
 
 	private Dailypan self = this;
 
@@ -97,12 +97,13 @@ public class Dailypan extends JPanel{
 
 	private String result;
 
-
+	 private Image confirmimg = new ImageIcon("goal.jpg").getImage()
+	         .getScaledInstance(300, 150, java.awt.Image.SCALE_SMOOTH); //빈컵이미지
 
 	private Image cupimage = new ImageIcon("empty2.png").getImage()
-			.getScaledInstance(43, 72, java.awt.Image.SCALE_SMOOTH); //빈컵이미지
+			.getScaledInstance(50, 80, java.awt.Image.SCALE_SMOOTH); //빈컵이미지
 	private Image fullcupimage = new ImageIcon("full2.png").getImage()
-			.getScaledInstance(43, 72, java.awt.Image.SCALE_SMOOTH); //물들어있는컵
+			.getScaledInstance(50, 80, java.awt.Image.SCALE_SMOOTH); //물들어있는컵
 
 
 	private Image water_effect = new ImageIcon("waterInform.jpg").getImage()
@@ -114,6 +115,8 @@ public class Dailypan extends JPanel{
 	private Image dreamImage = new ImageIcon("규정.jpg").getImage()
 			.getScaledInstance(600, 200, java.awt.Image.SCALE_SMOOTH);
 
+	
+	 private ImageIcon iconconfirm = new ImageIcon(confirmimg);
 	private ImageIcon icondream = new ImageIcon(dreamImage);
 
 	private ImageIcon iconwaterSign = new ImageIcon(water_Sign);
@@ -161,7 +164,7 @@ public class Dailypan extends JPanel{
 
 		today3.setFont(font); //오늘의 목표 고르라는 레이블 
 		waterchecklabel.setFont(font);
-		cupPan.setPreferredSize(new Dimension(300, 100));
+		cupPan.setPreferredSize(new Dimension(250, 80));
 		//   cupPan.add(water_inform);
 		cupPan.add(cupb1);
 
@@ -172,7 +175,7 @@ public class Dailypan extends JPanel{
 		cupPan.add(cupb5);
 
 
-		cupPan2.setPreferredSize(new Dimension(300, 100));
+		cupPan2.setPreferredSize(new Dimension(250, 80));
 		cupPan2.add(cupb6);
 		cupPan2.add(cupb7);
 		cupPan2.add(cupb8);
@@ -182,9 +185,9 @@ public class Dailypan extends JPanel{
 
 		//컵 1-10까지 아이콘 에 사진넣기 
 		this.cupb1.setIcon(icon1);
-		this.cupb1.setPreferredSize(new Dimension(43, 72));
+		//this.cupb1.setPreferredSize(new Dimension(43, 72));
 		this.cupb2.setIcon(icon2);
-		this.cupb2.setPreferredSize(new Dimension(43, 72));
+		//this.cupb2.setPreferredSize(new Dimension(43, 72));
 		this.cupb3.setIcon(icon3);
 		this.cupb3.setPreferredSize(new Dimension(43, 72));
 		this.cupb4.setIcon(icon4);
@@ -214,9 +217,11 @@ public class Dailypan extends JPanel{
 		//      lb = new JLabel("이미지를 넣자",image1,JLabel.CENTER);
 		//      lb.setVerticalTextPosition(JLabel.CENTER);
 		//      lb.setHorizontalTextPosition(JLabel.RIGHT);
-
+		buttonConfirm.setPreferredSize(new Dimension(200,50));
+	      this.confirm.setIcon(iconconfirm);
+	      this.confirm.setPreferredSize(new Dimension(300, 230));
+	      
 		this.dream.setIcon(icondream);
-		this.water_inform.setPreferredSize(new Dimension(500, 500));
 
 		this.water_inform.setIcon(iconwater);
 		this.water_inform.setPreferredSize(new Dimension(500, 500));
