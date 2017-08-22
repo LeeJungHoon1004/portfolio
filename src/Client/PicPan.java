@@ -3,6 +3,7 @@ package Client;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -36,7 +37,7 @@ public class PicPan extends JPanel {
 //===========================================================
 	private ImageIcon imgTip1 = new ImageIcon("여자체지방.JPG");
 	private ImageIcon imgTip2= new ImageIcon("남자체지방.JPG");
-	private ImageIcon imgTip3= new ImageIcon("옷발체중2.JPG");
+	private ImageIcon imgTip3= new ImageIcon("옷발체중.JPG");
 	
 	private JLabel tip1 = new JLabel(imgTip1);
 	private JLabel tip2 = new JLabel(imgTip2);
@@ -72,6 +73,12 @@ public class PicPan extends JPanel {
 	private JLabel phrase5 = new JLabel(imgPhrase5);
 	
 	//===========================================================
+	private JButton upload_bt = new JButton("업로드");
+	private JButton delete_bt = new JButton("삭제");
+	private JPanel uploadPan = new JPanel(new FlowLayout());
+	
+	
+	//---------------------------
 	
 	private JPanel b_fpicPan = new JPanel();
 	private JPanel tipPan = new JPanel();
@@ -90,33 +97,35 @@ public class PicPan extends JPanel {
 		motivePan.setBackground(Color.white);
 		phrasePan.setBackground(Color.white);
 		
-		setLayout(new GridLayout(4, 1));
+		setLayout(new GridLayout(5, 1));
 
 		
 
-		pretty1.setPreferredSize(new Dimension(300, 350));
-		pretty2.setPreferredSize(new Dimension(300, 350));
-		pretty3.setPreferredSize(new Dimension(300, 350));
-		pretty4.setPreferredSize(new Dimension(300, 350));
+		pretty1.setPreferredSize(new Dimension(240, 330));
+		pretty2.setPreferredSize(new Dimension(240, 330));
+		pretty3.setPreferredSize(new Dimension(240, 330));
+		pretty4.setPreferredSize(new Dimension(240, 330));
 
 
 
 		
-		bfpic1.setPreferredSize(new Dimension(330, 350));
-		bfpic2.setPreferredSize(new Dimension(330, 350));
-		bfpic3.setPreferredSize(new Dimension(330, 350));
+		bfpic1.setPreferredSize(new Dimension(300, 300));
+		bfpic2.setPreferredSize(new Dimension(300, 300));
+		bfpic3.setPreferredSize(new Dimension(300, 300));
 		
 		
-		tip1.setPreferredSize(new Dimension(310, 350));
-		tip2.setPreferredSize(new Dimension(310, 350));
-		tip3.setPreferredSize(new Dimension(310, 350));
+		tip1.setPreferredSize(new Dimension(300, 300));
+		tip2.setPreferredSize(new Dimension(300, 300));
+		tip3.setPreferredSize(new Dimension(300, 300));
 		
 		
-		phrase1.setPreferredSize(new Dimension(320, 330));
-		phrase2.setPreferredSize(new Dimension(320, 330));
-		phrase3.setPreferredSize(new Dimension(320, 330));
-		phrase4.setPreferredSize(new Dimension(320, 330));
-		phrase5.setPreferredSize(new Dimension(320, 330));
+		phrase1.setPreferredSize(new Dimension(300, 300));
+		phrase2.setPreferredSize(new Dimension(300, 300));
+		phrase3.setPreferredSize(new Dimension(300, 300));
+		phrase4.setPreferredSize(new Dimension(300, 300));
+		phrase5.setPreferredSize(new Dimension(300, 300));
+		
+		upload_bt.setPreferredSize(new Dimension(100, 30));
 		
 		motivePan.setBorder(moti);
 		motivePan.add(pretty1);
@@ -155,6 +164,9 @@ public class PicPan extends JPanel {
 	
 		
 
+		add(uploadPan);
+		uploadPan.add(upload_bt);
+		uploadPan.add(delete_bt);
 		
 	}
 	
