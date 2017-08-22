@@ -34,6 +34,11 @@ import javax.swing.border.TitledBorder;
 
 
 
+
+
+//github.com/LeeJungHoon1004/portfolio.git	
+
+
 public class BasicShape extends JFrame {
 	
 	
@@ -86,14 +91,18 @@ public class BasicShape extends JFrame {
 	private JLabel lbID = new JLabel();
 	private JLabel lbPW = new JLabel();
 
-	private Image idimage = new ImageIcon("id.jpg").getImage().getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
-	private ImageIcon iconid = new ImageIcon(idimage);
-
-	private Image pwimage = new ImageIcon("pw.jpg").getImage().getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
-	private ImageIcon iconpw = new ImageIcon(pwimage);
-
+	
+	
+	private Image idimage = new ImageIcon("ID.jpg").getImage()
+			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon iconid= new ImageIcon(idimage);
+	
+	private Image pwimage = new ImageIcon("PW.jpg").getImage()
+			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon iconpw= new ImageIcon(pwimage);
+	
 	private JTextField inputID = new JTextField();
-
+	
 	private JPasswordField inputPW = new JPasswordField();
 	private JButton membership = new JButton("회원가입");
 	private JButton login = new JButton("로그인");
@@ -172,8 +181,7 @@ public class BasicShape extends JFrame {
 	//
 
 	private JButton buttonUpload = new JButton("업로드");
-	private JButton buttonRemove = new JButton("사진삭제"); // 사진삭제시 id와 패스워드 비번확인
-	// 필요함.
+	private JButton buttonRemove = new JButton("사진삭제"); // 사진삭제시 id와 패스워드 비번확인 필요함.
 	private JButton buttonClose = new JButton("닫기");
 
 	private JPanel imgBoardPan = new JPanel(new GridLayout(3, 1));
