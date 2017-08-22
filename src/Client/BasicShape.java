@@ -58,11 +58,11 @@ public class BasicShape extends JFrame {
 	private JLabel lbID = new JLabel();
 	private JLabel lbPW = new JLabel();
 	
-	private Image idimage = new ImageIcon("ID.jpg").getImage()
+	private Image idimage = new ImageIcon("ID (3).jpg").getImage()
 			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon iconid= new ImageIcon(idimage);
 	
-	private Image pwimage = new ImageIcon("PW.jpg").getImage()
+	private Image pwimage = new ImageIcon("PW (2).jpg").getImage()
 			.getScaledInstance(98, 30, java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon iconpw= new ImageIcon(pwimage);
 	
