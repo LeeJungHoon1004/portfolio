@@ -112,18 +112,24 @@ public class Manager implements ManagerInterface{
 	}
 
 	@Override
-	public String InsertDailyList(Member m) throws Exception {
+	public int InsertDailyList(String id ,String combolist) throws Exception {
 		// TODO Auto-generated method stub
 		
 		Connection con =this.getConnection();
-		String sql = "insert into member(combolist) values(?) where id =?";
+		System.out.println(id);
+		System.out.println(combolist);
+		String sql = "update member set combolist =? where id =?";
+		
 		PreparedStatement pstat = con.prepareStatement(sql);
 		//멤버자료형 따로만들것.
 		//String list, String id
-		pstat.setString(1, m.getDailylist());
-		pstat.setString(2 ,m.getId() );
 		
-		
+		pstat.setString(1, combolist );
+		pstat.setString(2 ,id  );
+
+				
+		int result = pstat.executeUpdate();
+
 //		pstat.setString(1, m.getName());
 //		pstat.setString(2, m.getId());
 //		pstat.setString(3, m.getPw());
@@ -131,6 +137,12 @@ public class Manager implements ManagerInterface{
 //		int result = pstat.executeUpdate();
 		con.commit();
 		con.close();
+		return result ;
+	}
+
+	@Override
+	public String InsertWaterCuplist(String id, String waterCupList) throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -45,8 +45,9 @@ public interface ManagerInterface {
 	 * @param c3
 	 * @throws Exception
 	 */
-	public String InsertDailyList(Member m ) throws Exception ;
+	public int InsertDailyList(String id, String combolist) throws Exception ;
 	
 	
+	public String InsertWaterCuplist(String id,String waterCupList) throws Exception;
 	
 }

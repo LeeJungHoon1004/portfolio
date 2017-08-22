@@ -15,11 +15,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -95,29 +93,24 @@ public class Dailypan extends JPanel {
 
 	private String result;
 
-
-	 private Image confirmimg = new ImageIcon("goal.jpg").getImage()
-	         .getScaledInstance(300, 150, java.awt.Image.SCALE_SMOOTH); //빈컵이미지
-
-	
+	private Image confirmimg = new ImageIcon("goal.jpg").getImage().getScaledInstance(300, 150,
+			java.awt.Image.SCALE_SMOOTH); // 빈컵이미지
 
 	private Image water_effect = new ImageIcon("waterInform.jpg").getImage().getScaledInstance(500, 500,
 			java.awt.Image.SCALE_SMOOTH);
 
-	private Image cupimage = new ImageIcon("empty2.png").getImage()
-			.getScaledInstance(50, 80, java.awt.Image.SCALE_SMOOTH); //빈컵이미지
-	private Image fullcupimage = new ImageIcon("full2.png").getImage()
-			.getScaledInstance(50, 80, java.awt.Image.SCALE_SMOOTH); //물들어있는컵
+	private Image cupimage = new ImageIcon("empty2.png").getImage().getScaledInstance(50, 80,
+			java.awt.Image.SCALE_SMOOTH); // 빈컵이미지
+	private Image fullcupimage = new ImageIcon("full2.png").getImage().getScaledInstance(50, 80,
+			java.awt.Image.SCALE_SMOOTH); // 물들어있는컵
 
 	private Image water_Sign = new ImageIcon("waterSign.jpg").getImage().getScaledInstance(500, 500,
 			java.awt.Image.SCALE_SMOOTH);
 
-
 	private Image dreamImage = new ImageIcon("규정.jpg").getImage().getScaledInstance(600, 200,
 			java.awt.Image.SCALE_SMOOTH);
 
-	
-	 private ImageIcon iconconfirm = new ImageIcon(confirmimg);
+	private ImageIcon iconconfirm = new ImageIcon(confirmimg);
 	private ImageIcon icondream = new ImageIcon(dreamImage);
 
 	private ImageIcon iconwaterSign = new ImageIcon(water_Sign);
@@ -161,16 +154,14 @@ public class Dailypan extends JPanel {
 		today3.setFont(font); // 오늘의 목표 고르라는 레이블
 		waterchecklabel.setFont(font);
 		cupPan.setPreferredSize(new Dimension(250, 80));
-		//   cupPan.add(water_inform);
-		
-	
+		// cupPan.add(water_inform);
+
 		cupPan.add(cupb1);
 
 		cupPan.add(cupb2);
 		cupPan.add(cupb3);
 		cupPan.add(cupb4);
 		cupPan.add(cupb5);
-
 
 		cupPan2.setPreferredSize(new Dimension(250, 80));
 
@@ -182,9 +173,9 @@ public class Dailypan extends JPanel {
 
 		// 컵 1-10까지 아이콘 에 사진넣기
 		this.cupb1.setIcon(icon1);
-		//this.cupb1.setPreferredSize(new Dimension(43, 72));
+		// this.cupb1.setPreferredSize(new Dimension(43, 72));
 		this.cupb2.setIcon(icon2);
-		//this.cupb2.setPreferredSize(new Dimension(43, 72));
+		// this.cupb2.setPreferredSize(new Dimension(43, 72));
 		this.cupb3.setIcon(icon3);
 		this.cupb3.setPreferredSize(new Dimension(43, 72));
 		this.cupb4.setIcon(icon4);
@@ -204,21 +195,20 @@ public class Dailypan extends JPanel {
 
 		//
 
-		//      private Image water_effect = new ImageIcon("waterInform.jpg").getImage()
-		//            .getScaledInstance(500, 500, java.awt.Image.SCALE_SMOOTH);
-		//      
-		//      
-		//      
-		//      private ImageIcon iconwater = new ImageIcon(water_effect);
-		//      image1 = new ImageIcon("img/img.jpg");  //이미지 경로
-		//      
-		//      lb = new JLabel("이미지를 넣자",image1,JLabel.CENTER);
-		//      lb.setVerticalTextPosition(JLabel.CENTER);
-		//      lb.setHorizontalTextPosition(JLabel.RIGHT);
-		buttonConfirm.setPreferredSize(new Dimension(200,50));
-	      this.confirm.setIcon(iconconfirm);
-	      this.confirm.setPreferredSize(new Dimension(300, 230));
-	      
+		// private Image water_effect = new ImageIcon("waterInform.jpg").getImage()
+		// .getScaledInstance(500, 500, java.awt.Image.SCALE_SMOOTH);
+		//
+		//
+		//
+		// private ImageIcon iconwater = new ImageIcon(water_effect);
+		// image1 = new ImageIcon("img/img.jpg"); //이미지 경로
+		//
+		// lb = new JLabel("이미지를 넣자",image1,JLabel.CENTER);
+		// lb.setVerticalTextPosition(JLabel.CENTER);
+		// lb.setHorizontalTextPosition(JLabel.RIGHT);
+		buttonConfirm.setPreferredSize(new Dimension(200, 50));
+		this.confirm.setIcon(iconconfirm);
+		this.confirm.setPreferredSize(new Dimension(300, 230));
 
 		// private Image water_effect = new ImageIcon("waterInform.jpg").getImage()
 		// .getScaledInstance(500, 500, java.awt.Image.SCALE_SMOOTH);
@@ -256,9 +246,9 @@ public class Dailypan extends JPanel {
 		// addItem 넣은것은 Object타입 으로 넣었다.
 		combolist1 = new JComboBox();
 		for (int i = 0; i < action.length; i++) {
-			
+
 			combolist1.addItem(action[i]);
-			
+
 		}
 		combolist1.setPreferredSize(new Dimension(500, 50));
 		combolist1.setEditable(false);
@@ -311,7 +301,7 @@ public class Dailypan extends JPanel {
 		this.add(buttonselect, c2);
 		c2.gridy = 5;
 		c2.gridx = 1;
-		this.add(confirm,c2);
+		this.add(confirm, c2);
 		c2.gridy = 6;
 		c2.gridx = 1;
 		this.add(buttonConfirm, c2);
@@ -369,21 +359,19 @@ public class Dailypan extends JPanel {
 
 				// new TimeThread(time).start();
 
-				
 				// 2가지 케이스로 나눈다 . 선택완료 버튼을 누를떄
-				
+
 				// 1.로그인이 된 상태에서 버튼을 누르는경우.
 				if (parent.getClient() != null) {
-					
-					//1-1 유효성검사 combolist 에 등록된 컴포넌트3가지에 대한 유효성 검사
-					// a != b , a !=c , b !=c  3가지값이 모두 같지않은경우에 대해서만 값을 통과시킨다.
-					if(combolist1.getSelectedIndex() != combolist2.getSelectedIndex() &&
-							combolist1.getSelectedIndex() !=combolist3.getSelectedIndex() &&
-							combolist2.getSelectedIndex() != combolist3.getSelectedIndex()) {
-						
+
+					// 1-1 유효성검사 combolist 에 등록된 컴포넌트3가지에 대한 유효성 검사
+					// a != b , a !=c , b !=c 3가지값이 모두 같지않은경우에 대해서만 값을 통과시킨다.
+					if (combolist1.getSelectedIndex() != combolist2.getSelectedIndex()
+							&& combolist1.getSelectedIndex() != combolist3.getSelectedIndex()
+							&& combolist2.getSelectedIndex() != combolist3.getSelectedIndex()) {
+
 						try {
-							
-							
+
 							dis = parent.getDis();
 							dos = parent.getDos();
 							dos.writeUTF("하루목표전송");
@@ -410,64 +398,99 @@ public class Dailypan extends JPanel {
 							System.out.println("combolist데이터 발신 실패.");
 							e1.printStackTrace();
 						}
-					}
-					else {
+					} else {
 						JOptionPane.showMessageDialog(null, "목표가 중복됩니다. 다시 선택해주세요.");
 						return;
 					}
-				
+
+				}
+
+				// 2.로그인을 하지않은 경우에서 버튼을 누르는경우
+				else if (parent.getClient() == null) {
+					JOptionPane.showMessageDialog(null, "로그인먼저해주세요");
+					return;
+				}
+
+				// String selected1 = combolist1.getSelectedItem().toString();
+				// System.out.println(selected1);
+				// String selected2 = combolist1.getSelectedItem().toString();
+				// String selected3 = combolist1.getSelectedItem().toString();
+
+				// try{
+				// dos.writeUTF("선택완료"); //리스트 선택완료
+				// dos.writeUTF(selected1);
+				// dos.writeUTF(selected2);
+				// dos.writeUTF(selected3);
+				// System.out.println("데이터보내기 성공! ");
+				// } catch (Exception e1) {
+				// System.out.println("데이터 보내기 실패");
+				//
+				// }
+
+				// try {
+				//
+				// result = dis.readUTF();
+				// if (result.equals("전송성공")) {
+				// JOptionPane.showMessageDialog(null, "전송 성공");
+				//
+				// } else if (result.equals("전송실패")) {
+				// JOptionPane.showMessageDialog(null, "전송에 실패하였습니다.");
+				// }
+				// System.out.println("전송 성공");
+				// }catch (Exception e2) {
+				//
+				// }
+
+				// return result;
+
+			}
+
+		});
+
+		buttonUpload.addActionListener(new ActionListener() {
+			// 체크완료 버튼에 대한 이벤트처리입니다.
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			//	System.out.println(Boolean.valueOf(changecup1).toString());
+				dis = parent.getDis();
+				dos = parent.getDos();
+				try {
+					dos.writeUTF("물컵체크");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 				
+			String changeCup1 =Boolean.valueOf(changecup1).toString();
+			String changeCup2 =Boolean.valueOf(changecup2).toString();
+			String changeCup3 =Boolean.valueOf(changecup3).toString();
+			String changeCup4 =Boolean.valueOf(changecup4).toString();
+			String changeCup5 =Boolean.valueOf(changecup5).toString();
+			String changeCup6 =Boolean.valueOf(changecup6).toString();
+			String changeCup7 =Boolean.valueOf(changecup7).toString();
+			String changeCup8 =Boolean.valueOf(changecup8).toString();
+			String changeCup9 =Boolean.valueOf(changecup9).toString();
+			String changeCup10 =Boolean.valueOf(changecup10).toString();
+
+			
+			String changeCupList = changeCup1 + "," +changeCup2+ ","+changeCup3+ ","
+			+changeCup4+ ","+ changeCup5+ ","+ changeCup6+ 
+			","+changeCup7+ ","+changeCup8+ ","+ changeCup9+ ","+changeCup10 ;
+			System.out.println(changeCupList);
+			
+			try {
+				dos.writeUTF(changeCupList);
+			} catch (IOException e) {
 				
-					// 2.로그인을 하지않은 경우에서 버튼을 누르는경우
-					else if (parent.getClient() == null) {
-						JOptionPane.showMessageDialog(null, "로그인먼저해주세요");
-						return;
-					}
-
-					// String selected1 = combolist1.getSelectedItem().toString();
-					// System.out.println(selected1);
-					// String selected2 = combolist1.getSelectedItem().toString();
-					// String selected3 = combolist1.getSelectedItem().toString();
-
-					// try{
-					// dos.writeUTF("선택완료"); //리스트 선택완료
-					// dos.writeUTF(selected1);
-					// dos.writeUTF(selected2);
-					// dos.writeUTF(selected3);
-					// System.out.println("데이터보내기 성공! ");
-					// } catch (Exception e1) {
-					// System.out.println("데이터 보내기 실패");
-					//
-					// }
-
-					// try {
-					//
-					// result = dis.readUTF();
-					// if (result.equals("전송성공")) {
-					// JOptionPane.showMessageDialog(null, "전송 성공");
-					//
-					// } else if (result.equals("전송실패")) {
-					// JOptionPane.showMessageDialog(null, "전송에 실패하였습니다.");
-					// }
-					// System.out.println("전송 성공");
-					// }catch (Exception e2) {
-					//
-					// }
-
-					// return result;
-					
-					
-					
-					
-
+				e.printStackTrace();
+			}
 			}
 
 		});
 
 		buttonConfirm.addActionListener(new ActionListener() {
 
-	@Override
+			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				int a = JOptionPane.showConfirmDialog(buttonConfirm, "오늘의 목표 3가지 모두 다 하셨나요?");

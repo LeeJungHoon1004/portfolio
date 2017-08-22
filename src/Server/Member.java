@@ -11,11 +11,25 @@ public class Member {
 	private String gender ; //성별
 	private double stature; //키
 	private double weight; //몸무게
+	private String watercuplist;
+	private String combolist;
 	
 	
 	
 	
 
+	public String getWatercuplist() {
+		return watercuplist;
+	}
+	public void setWatercuplist(String watercuplist) {
+		this.watercuplist = watercuplist;
+	}
+	public String getCombolist() {
+		return combolist;
+	}
+	public void setCombolist(String combolist) {
+		this.combolist = combolist;
+	}
 	public String getDailylist() {
 		return dailylist;
 	}
@@ -90,8 +104,11 @@ public class Member {
 		this.pw= pw;
 		
 	}
-	
 
+	public Member(String id ) {
+		this.id = id;
+	}
+	
 	
 	
 	

@@ -87,8 +87,8 @@ class ConnectionThread extends Thread {
 			
 			else if(cmd.equals("로그인")) {
 				
-				String id = dis.readUTF();
-				String pw = dis.readUTF();
+				 id = dis.readUTF();
+				pw = dis.readUTF();
 				//로그인후에 로그인창에는 이름을 출력
 				//로그인후에 BMI란에는 저장되있는 신체지수데이터를 불러오고
 				//성별 ,신장, 체중 를 가져옵니다.
@@ -114,22 +114,35 @@ class ConnectionThread extends Thread {
 				dos.flush();
 				// dos.close();
 				
+				//client 에 로그인이후부터 콤보리스트 저장한거 보내기
+//				dos.writeUTF("콤보리스트3개");
+//				dos.writeUTF(dailyList);
+				
+				
+				
 				
 			}
 			//dailyPan combolist 데이터 수신
 			else if(cmd.equals("하루목표전송")) {
 				
-				String list = dis.readUTF();
-				System.out.println(list);
+				String combolist = dis.readUTF();
+				System.out.println(combolist);
 				
 			
 				//String list, String id
-				Member m = new Member(list , name );
-			String msg =Server.manager.InsertDailyList(m);
+			Member m = new Member( id, pw);
+			int result =Server.manager.InsertDailyList(id,combolist);
+			System.out.println(result);
 			System.out.println("하루목표전송받았다.");
 			}
 			
-			
+			else if(cmd.equals("물컵체크")) {
+				String waterCupList = dis.readUTF();
+				System.out.println(waterCupList);
+				
+			String msg =Server.manager.InsertWaterCuplist(id,waterCupList);
+			System.out.println(msg);
+			}
 		}
 			
 			

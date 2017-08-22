@@ -248,7 +248,7 @@ public class BasicShape extends JFrame {
 	public void clientConnect() {
 		
 			try {
-				client = new Socket("192.168.53.4", 40000);
+				client = new Socket("127.0.0.1", 40000);
 				dos = new DataOutputStream(client.getOutputStream());
 				dis = new DataInputStream(client.getInputStream());
 				System.out.println("초기연결성공");
@@ -284,7 +284,9 @@ public class BasicShape extends JFrame {
 			}	
 		
 		} catch (Exception e2) {
+			e2.printStackTrace();
 		}
+		
 		return result;
 	}// end
 
@@ -309,6 +311,8 @@ public class BasicShape extends JFrame {
 	public void eventInit() {
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//소켓생성후 커넥트 , 로그인성공실패 에따른 ui출력
 				clientConnect();
 				getResult();
 				 
@@ -322,7 +326,32 @@ public class BasicShape extends JFrame {
 
 				}
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
+			
+				
+				//로그인 이후시점부터 서버에서 받는 데이터처리 
+				//1.콤보리스트
+			
+//				try {
+//				String msg =dis.readUTF();
+//				System.out.println(msg);
+//				if(msg.equals("콤보리스트3개")){
+//					String dailyList = dis.readUTF();
+//					System.out.println(dailyList);
+//					
+//				}
+//				
+//				}catch(Exception e1) {
+//					e1.printStackTrace();
+//				}
+				
+				//2.물컵리스트
+				
+				//3.흥미유도글url + 이미지썸네일  
+				
+				//4.유튜브url + 이미지썸네일
+			
 			}
+			
 		});
 		// 로그아웃 버튼
 		logout.addActionListener(new ActionListener() {
