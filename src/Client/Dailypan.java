@@ -190,7 +190,7 @@ public class Dailypan extends JPanel{
 //      lb = new JLabel("이미지를 넣자",image1,JLabel.CENTER);
 //      lb.setVerticalTextPosition(JLabel.CENTER);
 //      lb.setHorizontalTextPosition(JLabel.RIGHT);
-    
+      buttonConfirm.setPreferredSize(new Dimension(200,50));
       this.confirm.setIcon(iconconfirm);
       this.confirm.setPreferredSize(new Dimension(300, 230));
       
