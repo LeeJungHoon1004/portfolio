@@ -104,7 +104,7 @@ public class BasicShape extends JFrame {
 	// COMPNENT - goalPan
 	private JPanel goalPan = new JPanel();
 	// COMPNENT - dailyPan
-	private Dailypan dailyPan = new Dailypan();
+	private Dailypan dailyPan = new Dailypan(self);
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
 	private VideoPan video = new VideoPan();
@@ -122,7 +122,29 @@ public class BasicShape extends JFrame {
 	private JPanel panelSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 	// =======COMPONENT========================
 
-	
+	public Socket getClient() {
+		return client;
+	}
+
+	public void setClient(Socket client) {
+		this.client = client;
+	}
+
+	public DataOutputStream getDos() {
+		return dos;
+	}
+
+	public void setDos(DataOutputStream dos) {
+		this.dos = dos;
+	}
+
+	public DataInputStream getDis() {
+		return dis;
+	}
+
+	public void setDis(DataInputStream dis) {
+		this.dis = dis;
+	}
 	
 	
 	public void comp() {
@@ -213,6 +235,8 @@ public class BasicShape extends JFrame {
 		this.sc.setBounds(200, 99, 1000, 650);
 		add(sc);
 	}
+
+	
 
 	public void clientConnect() {
 		

@@ -646,17 +646,15 @@ public class Dailypan extends JPanel{
 					self.icon10.setImage(fullcupimage);
 				}else {
 					self.icon10.setImage(cupimage);
-	   this.setBackground(Color.white);
+	   
 				}
 				self.cupb10.setIcon(icon10);
 			}
-	   this.setBackground(Color.white);
-	   this.setBackground(Color.white);
+	   
+	   
 		});
-	   this.setBackground(Color.white);
-	   this.setBackground(Color.white);
-	   this.setBackground(Color.white);
-	   this.setBackground(Color.white);
+	   
+	   
 		//      cupb1.addActionListener(new ActionListener() {
 			//
 		//         @Override
