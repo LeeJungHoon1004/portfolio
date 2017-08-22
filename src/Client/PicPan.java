@@ -48,7 +48,7 @@ public class PicPan extends JPanel {
 	private ImageIcon imageprettypic1 = new ImageIcon("±è»ç¶û.JPG");
 	private ImageIcon imageprettypic2= new ImageIcon("Å©¸®½ºÅ»3.JPG");
 	private ImageIcon imageprettypic3= new ImageIcon("¼Õ³ªÀº.JPG");
-	private ImageIcon imageprettypic4= new ImageIcon("¼³Çö1.JPG");
+	private ImageIcon imageprettypic4= new ImageIcon("¼³Çö.JPG");
 	private ImageIcon imageprettypic5= new ImageIcon("ÇÏ´Ï.JPG");
 	
 	
@@ -94,17 +94,17 @@ public class PicPan extends JPanel {
 
 		
 
-		pretty1.setPreferredSize(new Dimension(300, 390));
-		pretty2.setPreferredSize(new Dimension(300, 390));
-		pretty3.setPreferredSize(new Dimension(300, 390));
-		pretty4.setPreferredSize(new Dimension(300, 390));
+		pretty1.setPreferredSize(new Dimension(300, 350));
+		pretty2.setPreferredSize(new Dimension(300, 350));
+		pretty3.setPreferredSize(new Dimension(300, 350));
+		pretty4.setPreferredSize(new Dimension(300, 350));
 
 
 
 		
-		bfpic1.setPreferredSize(new Dimension(330, 320));
-		bfpic2.setPreferredSize(new Dimension(330, 320));
-		bfpic3.setPreferredSize(new Dimension(330, 320));
+		bfpic1.setPreferredSize(new Dimension(330, 350));
+		bfpic2.setPreferredSize(new Dimension(330, 350));
+		bfpic3.setPreferredSize(new Dimension(330, 350));
 		
 		
 		tip1.setPreferredSize(new Dimension(310, 350));
