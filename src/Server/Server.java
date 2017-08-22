@@ -128,7 +128,6 @@ class ConnectionThread extends Thread {
 				Member m = new Member(list , name );
 			String msg =Server.manager.InsertDailyList(m);
 			System.out.println("하루목표전송받았다.");
-			
 			}
 			
 			
