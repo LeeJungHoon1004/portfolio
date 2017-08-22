@@ -41,7 +41,7 @@ public class ImageSlide extends JPanel {
 		// Timer 클래스 이용- 쓰레드 입니다.
 		//
 		
-		tm = new Timer(1000, new ActionListener() { // delay값
+		tm = new Timer(1500, new ActionListener() { // delay값
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SetImageSize(x);
