@@ -295,7 +295,7 @@ public class Dailypan extends JPanel {
 
 		// 2번 컨테이너. 콤보들 넣음
 		GridBagConstraints c2 = new GridBagConstraints();
-		c2.insets = new Insets(10, 10, 30, 0);
+		c2.insets = new Insets(10, 10, 10, 0);
 
 		c2.gridy = 2;
 		c2.gridx = 1;
@@ -309,6 +309,9 @@ public class Dailypan extends JPanel {
 		c2.gridy = 5;
 		c2.gridx = 2;
 		this.add(buttonselect, c2);
+		c2.gridy = 5;
+		c2.gridx = 1;
+		this.add(confirm,c2);
 		c2.gridy = 6;
 		c2.gridx = 1;
 		this.add(buttonConfirm, c2);
