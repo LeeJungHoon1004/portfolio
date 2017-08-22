@@ -93,10 +93,10 @@ public class PicPan extends JPanel {
 		setLayout(new GridLayout(4, 1));
 
 		
-		pretty1.setPreferredSize(new Dimension(300, 350));
-		pretty2.setPreferredSize(new Dimension(300, 350));
-		pretty3.setPreferredSize(new Dimension(300, 350));
-		pretty4.setPreferredSize(new Dimension(300, 350));
+		pretty1.setPreferredSize(new Dimension(300, 390));
+		pretty2.setPreferredSize(new Dimension(300, 390));
+		pretty3.setPreferredSize(new Dimension(300, 390));
+		pretty4.setPreferredSize(new Dimension(300, 390));
 		
 		bfpic1.setPreferredSize(new Dimension(330, 320));
 		bfpic2.setPreferredSize(new Dimension(330, 320));
