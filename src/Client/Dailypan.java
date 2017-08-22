@@ -27,6 +27,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Dailypan extends JPanel{
+	public static int time;
+
+	BasicShape parent;
    private Socket client;
    private DataOutputStream dos;
    private DataInputStream dis;
@@ -322,46 +325,95 @@ public class Dailypan extends JPanel{
          @Override
          public void actionPerformed(ActionEvent e) {
             
-            
-//            String selected1 = combolist1.getSelectedItem().toString();
-//            System.out.println(selected1);
-//            String selected2 = combolist1.getSelectedItem().toString();
-//            String selected3 = combolist1.getSelectedItem().toString();
-         
-         
-         
-//         try{
-//            dos.writeUTF("선택완료"); //리스트 선택완료
-//            dos.writeUTF(selected1);
-//            dos.writeUTF(selected2);
-//            dos.writeUTF(selected3);
-//            System.out.println("데이터보내기 성공! ");
-//         } catch (Exception e1) {
-//            System.out.println("데이터 보내기 실패");
-      //
-//         }
-         
-//         try {
-//            
-//             result = dis.readUTF();
-//            if (result.equals("전송성공")) {
-//                  JOptionPane.showMessageDialog(null, "전송 성공");
-      //
-//               } else if (result.equals("전송실패")) {
-//                  JOptionPane.showMessageDialog(null, "전송에 실패하였습니다.");
-//               }
-//               System.out.println("전송 성공");
-//         }catch (Exception e2) {
-      //
-//         }
-         
-         
-         //return result;
-         
-            
-               
-            
-            
+
+				//        	 
+				//        		 questList [0]= combolist1.getSelectedIndex(); 
+				//        		 questList [1] =combolist2.getSelectedIndex();
+				//        		 questList [2] =combolist3.getSelectedIndex();
+
+				//  	 new TimeThread(time).start();
+
+				//2가지 케이스로 나눈다 . 선택완료 버튼을 누를떄
+				//1.로그인이 된 상태에서 버튼을 누르는경우.
+				
+				if(parent.getClient() !=null)
+				
+				try {
+					dis= parent.getDis();
+					dos= parent.getDos();
+					dos.writeUTF("하루목표전송");
+					
+					System.out.println(combolist1.getSelectedIndex());
+					System.out.println(combolist2.getSelectedIndex());
+					System.out.println(combolist3.getSelectedIndex());
+					String list= combolist1.getSelectedIndex() +"," + combolist2.getSelectedIndex() +
+								"," +combolist3.getSelectedIndex() ;
+					System.out.println(list);
+					dos.writeUTF(list);
+					
+					System.out.println("하루목표전송 성공");
+					
+			//		System.out.println(combolist1.getSelectedIndex());
+			//		System.out.println(combolist2.getSelectedIndex());
+			//		System.out.println(combolist3.getSelectedIndex());
+//					dos.writeInt(combolist1.getSelectedIndex());
+//					dos.writeInt(combolist2.getSelectedIndex());
+//					dos.writeInt(combolist3.getSelectedIndex());
+					System.out.println("combolist데이터 발신 성공");
+					
+					
+				}catch(Exception e1) {
+					System.out.println("combolist데이터 발신 실패.");
+					e1.printStackTrace();
+				}
+				
+				//2.로그인을 하지않은 경우에서 버튼을 누르는경우
+				else if(parent.getClient() ==null)
+				{
+					JOptionPane.showMessageDialog(null, "로그인먼저해주세요");
+					return;
+				}
+				
+				//            String selected1 = combolist1.getSelectedItem().toString();
+				//            System.out.println(selected1);
+				//            String selected2 = combolist1.getSelectedItem().toString();
+				//            String selected3 = combolist1.getSelectedItem().toString();
+
+
+
+				//         try{
+				//            dos.writeUTF("선택완료"); //리스트 선택완료
+				//            dos.writeUTF(selected1);
+				//            dos.writeUTF(selected2);
+				//            dos.writeUTF(selected3);
+				//            System.out.println("데이터보내기 성공! ");
+				//         } catch (Exception e1) {
+				//            System.out.println("데이터 보내기 실패");
+				//
+				//         }
+
+				//         try {
+				//            
+				//             result = dis.readUTF();
+				//            if (result.equals("전송성공")) {
+				//                  JOptionPane.showMessageDialog(null, "전송 성공");
+				//
+				//               } else if (result.equals("전송실패")) {
+				//                  JOptionPane.showMessageDialog(null, "전송에 실패하였습니다.");
+				//               }
+				//               System.out.println("전송 성공");
+				//         }catch (Exception e2) {
+				//
+				//         }
+
+
+				//return result;
+
+
+
+
+
+
          }
          
       });
@@ -596,17 +648,15 @@ public class Dailypan extends JPanel{
    }
    
 
-   public Dailypan() {
 
-	   this.setBackground(Color.white);
+  
+   public Dailypan(BasicShape parent) {
+	  this.parent =parent;
+	  this.setBackground(Color.white);
       this.setSize(900,900);
-     
       this.comp();
       this.event();
-
-      
       this.setVisible(true);
-
    }
 
 
