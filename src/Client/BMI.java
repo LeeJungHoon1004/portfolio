@@ -1,5 +1,6 @@
 package Client;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -74,6 +75,7 @@ public class BMI extends JPanel {
 		add(gender);
 		group.add(male);
 		group.add(female);
+		radioPan.setBackground(Color.white);
 		radioPan.add(male);
 		radioPan.add(female);
 		add(radioPan);
@@ -101,6 +103,7 @@ public class BMI extends JPanel {
 				resultPan.setBorder(tborder);
 				resultPan.add(result1);
 				
+				resultPan.setBackground(new Color(255, 209, 43));
 				add(resultPan);
 			}
 		});
@@ -148,6 +151,7 @@ public class BMI extends JPanel {
 	
 
 	public BMI() {
+		this.setBackground(Color.WHITE);
 		compInit();
 		eventInit();
 	}// conductor end

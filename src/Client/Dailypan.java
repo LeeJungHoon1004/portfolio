@@ -1,4 +1,5 @@
 package Client;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -645,17 +646,17 @@ public class Dailypan extends JPanel{
 					self.icon10.setImage(fullcupimage);
 				}else {
 					self.icon10.setImage(cupimage);
-
+	   this.setBackground(Color.white);
 				}
 				self.cupb10.setIcon(icon10);
 			}
-
-
+	   this.setBackground(Color.white);
+	   this.setBackground(Color.white);
 		});
-
-
-
-
+	   this.setBackground(Color.white);
+	   this.setBackground(Color.white);
+	   this.setBackground(Color.white);
+	   this.setBackground(Color.white);
 		//      cupb1.addActionListener(new ActionListener() {
 			//
 		//         @Override
@@ -677,12 +678,11 @@ public class Dailypan extends JPanel{
 		//      });
 		//
 	}
-
-
+	 
 	public Dailypan(BasicShape parent ) {
-
+	   
 		this.parent =parent;
-
+	   
 		//	   if(client != null) {
 		//	   this.client = client;
 		//	   this.dos= dos;
@@ -697,12 +697,12 @@ public class Dailypan extends JPanel{
 		//			   e.printStackTrace();
 		//		   }
 		//	   }
-
+	   this.setBackground(Color.white);
 		this.setSize(900,900);
-
+	   
 		this.comp();
 		this.event();
-
+	   
 
 		this.setVisible(true);
 
