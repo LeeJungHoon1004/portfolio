@@ -105,14 +105,8 @@ public class VideoPan extends JPanel {
 	
 	public void compInit() {
 
-		setLayout(new GridLayout(6, 1));
-		
-//		healthPan.setBackground(new Color(255, 242, 150));
-//		yogaPan.setBackground(new Color(255, 242, 150));
-//		stretchPan.setBackground(new Color(255, 242, 150));
-//		mileyPan.setBackground(new Color(255, 242, 150));
-//		dancePan.setBackground(new Color(255, 242, 150));
-//		smiPan.setBackground(new Color(255, 242, 150));
+		setLayout(new GridLayout(7, 1));
+
 		
 		healthPan.setBackground(Color.white);
 		yogaPan.setBackground(Color.white);
