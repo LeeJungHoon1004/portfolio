@@ -17,14 +17,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 class ConnectionThread extends Thread {
-	
+
 	String name;
 	String gender;
 	String id ;
 	String pw ;
-	
+
 	private String dailyList ;
-//	private int dailyList [] = new int[3] ;
+	//	private int dailyList [] = new int[3] ;
 	private Socket socket = null;
 	private DataInputStream dis;
 	private DataOutputStream dos;
@@ -40,129 +40,134 @@ class ConnectionThread extends Thread {
 	}
 
 	public void run() {
-		
+
 		try {
 			System.out.println(socket.getInetAddress()+ "님이접속했습니다");
-			
-			while(true) {
-			String cmd = dis.readUTF();
-			
-			if(cmd.equals("회원가입")) {
-			/* 회원가입 name ,id , pw ,gender
-			 *  
-			 * 
-			 */
-				String name = dis.readUTF();
-				String gender = dis.readUTF();
-				String id = dis.readUTF();
-				String pw = dis.readUTF();
-				
-				
-				Member m = new Member(name , id , pw , gender );
-				//클라이언트로 받은 아이디와  DB에 저장되어있는 내용인지 검사합니다.
-				//생성자에서 받은 정보중에서 id만 검사합니다
-				System.out.println(name);
-				boolean result  = Server.manager.isExist(m); 
-				System.out.println(result);
-				//값이 존재한다.(존재하는아이디) //값이 없다 회원가입 시켜줌.
-				if(result) {
-					System.out.println("test1");
-					dos.writeUTF("회원가입실패");
-				}else { 
-					System.out.println("test2");
-					dos.writeUTF("회원가입성공");
-				//생성자에서 받은 정보중에서 name, id , pw , gender를 저장합니다.
-				int result2=	Server.manager.insertData(m);
-			
-				if(result2 > 0 ){
-										System.out.println("회원정보입력에 성공했습니다");
-									}else{
-										System.out.println("회원정보입력에 실패했습니다.");
-									}
-				}
-				dos.flush();
-			//	dos.close();
-				
-			}
-			
-			else if(cmd.equals("로그인")) {
-				
-				 id = dis.readUTF();
-				pw = dis.readUTF();
-				//로그인후에 로그인창에는 이름을 출력
-				//로그인후에 BMI란에는 저장되있는 신체지수데이터를 불러오고
-				//성별 ,신장, 체중 를 가져옵니다.
-				
-				
-				Member m2 = new Member(id , pw);
-				boolean result = Server.manager.isLoginOk(m2);
-				System.out.println(result);
-				if (result) {// 값이존재한다(회원가입 되어있는 아이디와비번이다) - 로그인허가
-					dos.writeUTF("로그인성공");
-					String name = null;
-					Member m1 = new Member(name , id ,pw);
-					//멤버의 정보 (id,pw를 준뒤 해당 사용자의 이름을 가져옴)
-					name =Server.manager.getNameData(m2);
-					
-					System.out.println(name);
-					//이름 , 신장, 체중 ,성별 순서대로 보냅니다
-					dos.writeUTF(name);
 
-				} else {
-					dos.writeUTF("로그인실패");
+			while(true) {
+				String cmd = dis.readUTF();
+
+				if(cmd.equals("회원가입")) {
+					/* 회원가입 name ,id , pw ,gender
+					 *  
+					 * 
+					 */
+					String name = dis.readUTF();
+					String gender = dis.readUTF();
+					String id = dis.readUTF();
+					String pw = dis.readUTF();
+
+
+					Member m = new Member(name , id , pw , gender );
+					//클라이언트로 받은 아이디와  DB에 저장되어있는 내용인지 검사합니다.
+					//생성자에서 받은 정보중에서 id만 검사합니다
+					System.out.println(name);
+					boolean result  = Server.manager.isExist(m); 
+					System.out.println(result);
+					//값이 존재한다.(존재하는아이디) //값이 없다 회원가입 시켜줌.
+					if(result) {
+						System.out.println("test1");
+						dos.writeUTF("회원가입실패");
+					}else { 
+						System.out.println("test2");
+						dos.writeUTF("회원가입성공");
+						//생성자에서 받은 정보중에서 name, id , pw , gender를 저장합니다.
+						int result2=	Server.manager.insertData(m);
+
+						if(result2 > 0 ){
+							System.out.println("회원정보입력에 성공했습니다");
+						}else{
+							System.out.println("회원정보입력에 실패했습니다.");
+						}
+					}
+					dos.flush();
+					//	dos.close();
+
 				}
-				dos.flush();
-				// dos.close();
+
+				else if(cmd.equals("로그인")) {
+
+					id = dis.readUTF();
+					pw = dis.readUTF();
+					//로그인후에 로그인창에는 이름을 출력
+					//로그인후에 BMI란에는 저장되있는 신체지수데이터를 불러오고
+					//성별 ,신장, 체중 를 가져옵니다.
+
+
+					Member m2 = new Member(id , pw);
+					boolean result = Server.manager.isLoginOk(m2);
+					System.out.println(result);
+					if (result) {// 값이존재한다(회원가입 되어있는 아이디와비번이다) - 로그인허가
+						dos.writeUTF("로그인성공");
+						String name = null;
+						Member m1 = new Member(name , id ,pw);
+						//멤버의 정보 (id,pw를 준뒤 해당 사용자의 이름을 가져옴)
+						name =Server.manager.getNameData(m2);
+
+						System.out.println(name);
+						//이름 , 신장, 체중 ,성별 순서대로 보냅니다
+						dos.writeUTF(name);
+
+					} else {
+						dos.writeUTF("로그인실패");
+					}
+					dos.flush();
+					// dos.close();
+
+					//client 에 로그인이후부터 콤보리스트 저장한거 보내기
+					//				dos.writeUTF("콤보리스트3개");
+					//				dos.writeUTF(dailyList);
+
+
+
+
+				}
+				//dailyPan combolist 데이터 수신
+				else if(cmd.equals("하루목표전송")) {
+
+					String combolist = dis.readUTF();
+					System.out.println(combolist);
+
+
+					//String list, String id
+					Member m = new Member( id, pw);
+					int result =Server.manager.InsertDailyList(id,combolist);
+					System.out.println(result);
+					System.out.println("하루목표전송받았다.");
+				}
+
+				else if(cmd.equals("물컵체크")) {
+					String waterCupList = dis.readUTF();
+					System.out.println(waterCupList);
+
+					String msg =Server.manager.InsertWaterCuplist(id,waterCupList);
+					System.out.println(msg);
+				}
 				
-				//client 에 로그인이후부터 콤보리스트 저장한거 보내기
-//				dos.writeUTF("콤보리스트3개");
-//				dos.writeUTF(dailyList);
 				
-				
-				
-				
+			
+	
 			}
-			//dailyPan combolist 데이터 수신
-			else if(cmd.equals("하루목표전송")) {
-				
-				String combolist = dis.readUTF();
-				System.out.println(combolist);
-				
-			
-				//String list, String id
-			Member m = new Member( id, pw);
-			int result =Server.manager.InsertDailyList(id,combolist);
-			System.out.println(result);
-			System.out.println("하루목표전송받았다.");
-			}
-			
-			else if(cmd.equals("물컵체크")) {
-				String waterCupList = dis.readUTF();
-				System.out.println(waterCupList);
-				
-			String msg =Server.manager.InsertWaterCuplist(id,waterCupList);
-			System.out.println(msg);
-			}
-		}
-			
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
+
+
 		}
 		catch(Exception e) {
 			System.out.println("소켓연결해제.");
 			System.out.println("사용자가 로그아웃하였습니다.");
 			e.printStackTrace();
 			try{
-			dos.close();
+				dos.close();
 			}catch(Exception e1){
-		//		e1.printStackTrace();
+				//		e1.printStackTrace();
 			}
 		}
-}
+	}
 
 }
 

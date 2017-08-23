@@ -1,7 +1,6 @@
 package Server;
 
 public interface ManagerInterface {
-	
 	/**
 	 * 멤버(name , id , pw , gender)
 	 * 를 인자로 받아서 DB에서 일치하는 id값이 있는지 검사한뒤
@@ -10,7 +9,6 @@ public interface ManagerInterface {
 	 * @throws Exception 
 	 */
 	public boolean isExist(Member m) throws Exception;
-	
 	/**멤버(String name, String id , String pw , String gender) 
 	 * 를 인자로 받아서 DB에 저장합니다.
 	 * 

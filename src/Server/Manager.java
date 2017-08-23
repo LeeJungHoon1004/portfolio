@@ -42,7 +42,7 @@ public class Manager implements ManagerInterface{
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, m.getId());
 		
-		ResultSet rs = pstat.executeQuery();
+		ResultSet rs = pstat.executeQuery(); //디비에서 가져올때 꼭 써야하는 거
 		
 		boolean result = rs.next();
 		//id가 존재하면 true
@@ -142,8 +142,25 @@ public class Manager implements ManagerInterface{
 
 	@Override
 	public String InsertWaterCuplist(String id, String waterCupList) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection con =this.getConnection();
+		System.out.println(id);
+		System.out.println(waterCupList);
+		String sql = "update member set waterCupList =? where id =?";
+		
+		PreparedStatement pstat = con.prepareStatement(sql);
+		
+		pstat.setString(1,waterCupList);
+		pstat.setString(2,id);
+		
+		int result = pstat.executeUpdate();
+		
+		
+		con.commit();
+		con.close();
+		return null ;
+		
+		
 	}
 
 

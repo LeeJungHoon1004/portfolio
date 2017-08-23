@@ -177,21 +177,21 @@ public class Dailypan extends JPanel {
 		this.cupb2.setIcon(icon2);
 		// this.cupb2.setPreferredSize(new Dimension(43, 72));
 		this.cupb3.setIcon(icon3);
-		this.cupb3.setPreferredSize(new Dimension(43, 72));
+		//this.cupb3.setPreferredSize(new Dimension(43, 72));
 		this.cupb4.setIcon(icon4);
-		this.cupb4.setPreferredSize(new Dimension(43, 72));
+		//this.cupb4.setPreferredSize(new Dimension(43, 72));
 		this.cupb5.setIcon(icon5);
-		this.cupb5.setPreferredSize(new Dimension(43, 72));
+		//this.cupb5.setPreferredSize(new Dimension(43, 72));
 		this.cupb6.setIcon(icon6);
-		this.cupb6.setPreferredSize(new Dimension(43, 72));
+		//this.cupb6.setPreferredSize(new Dimension(43, 72));
 		this.cupb7.setIcon(icon7);
-		this.cupb7.setPreferredSize(new Dimension(43, 72));
+		//this.cupb7.setPreferredSize(new Dimension(43, 72));
 		this.cupb8.setIcon(icon8);
-		this.cupb8.setPreferredSize(new Dimension(43, 72));
+		//this.cupb8.setPreferredSize(new Dimension(43, 72));
 		this.cupb9.setIcon(icon9);
-		this.cupb9.setPreferredSize(new Dimension(43, 72));
+		//this.cupb9.setPreferredSize(new Dimension(43, 72));
 		this.cupb10.setIcon(icon10);
-		this.cupb10.setPreferredSize(new Dimension(43, 72));
+		//this.cupb10.setPreferredSize(new Dimension(43, 72));
 
 		//
 
@@ -235,8 +235,10 @@ public class Dailypan extends JPanel {
 
 		// 콤보박스 배열이용하여 목록 넣고, 배치
 
-		Object[] action = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기", "4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트",
-				"6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기", "9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
+		Object[] action = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기", 
+				"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트",
+				"6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기", 
+				"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
 
 		// String [] action = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
 		// "4.집에갈때 계단이용하기 ", "5.스쿼트 30개씩 3세트" , "6.플랭크 1분 3세트" ,"7.저녁안먹기","8.샤워하며 마사지하기"
@@ -253,8 +255,10 @@ public class Dailypan extends JPanel {
 		combolist1.setPreferredSize(new Dimension(500, 50));
 		combolist1.setEditable(false);
 
-		Object[] action2 = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기", "4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트",
-				"6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기", "9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
+		Object[] action2 = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
+				"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트",
+				"6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기",
+				"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
 		// JComboBox combolist2 = new JComboBox(action);
 		combolist2 = new JComboBox();
 		for (int i = 0; i < action.length; i++) {
@@ -263,8 +267,10 @@ public class Dailypan extends JPanel {
 		combolist2.setPreferredSize(new Dimension(500, 50));
 		combolist2.setEditable(false);
 
-		Object[] action3 = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기", "4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트",
-				"6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기", "9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
+		Object[] action3 = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기", 
+				"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트",
+				"6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기", 
+				"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
 		// JComboBox combolist3 = new JComboBox(action);
 		combolist3 = new JComboBox();
 		for (int i = 0; i < action.length; i++) {
@@ -344,15 +350,15 @@ public class Dailypan extends JPanel {
 
 	}
 
-	// 컵 1을 누르면 물컵 아이콘이 바뀜
-	public void event() {
 
+	public void event() {
+		//콤보선택시 서버에 내용보내기
 		buttonselect.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				//
+
 				// questList [0]= combolist1.getSelectedIndex();
 				// questList [1] =combolist2.getSelectedIndex();
 				// questList [2] =combolist3.getSelectedIndex();
@@ -447,53 +453,67 @@ public class Dailypan extends JPanel {
 
 		});
 
+
+		// 컵 1을 누르면 물컵 아이콘이 바뀜
 		buttonUpload.addActionListener(new ActionListener() {
 			// 체크완료 버튼에 대한 이벤트처리입니다.
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-			//	System.out.println(Boolean.valueOf(changecup1).toString());
-				dis = parent.getDis();
-				dos = parent.getDos();
-				try {
-					dos.writeUTF("물컵체크");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				//	System.out.println(Boolean.valueOf(changecup1).toString());
+				if (parent.getClient() != null) {
+
+
+					dis = parent.getDis();
+					dos = parent.getDos();
+					try {
+						dos.writeUTF("물컵체크");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+					String changeCup1 =Boolean.valueOf(changecup1).toString();
+					String changeCup2 =Boolean.valueOf(changecup2).toString();
+					String changeCup3 =Boolean.valueOf(changecup3).toString();
+					String changeCup4 =Boolean.valueOf(changecup4).toString();
+					String changeCup5 =Boolean.valueOf(changecup5).toString();
+					String changeCup6 =Boolean.valueOf(changecup6).toString();
+					String changeCup7 =Boolean.valueOf(changecup7).toString();
+					String changeCup8 =Boolean.valueOf(changecup8).toString();
+					String changeCup9 =Boolean.valueOf(changecup9).toString();
+					String changeCup10 =Boolean.valueOf(changecup10).toString();
+
+
+					String changeCupList = changeCup1 + "," +changeCup2+ ","+changeCup3+ ","
+							+changeCup4+ ","+ changeCup5+ ","+ changeCup6+ 
+							","+changeCup7+ ","+changeCup8+ ","+ changeCup9+ ","+changeCup10 ;
+					System.out.println(changeCupList);
+
+					try {
+						dos.writeUTF(changeCupList);
+					} catch (IOException e) {
+
+						e.printStackTrace();
+					}
 				}
 				
-			String changeCup1 =Boolean.valueOf(changecup1).toString();
-			String changeCup2 =Boolean.valueOf(changecup2).toString();
-			String changeCup3 =Boolean.valueOf(changecup3).toString();
-			String changeCup4 =Boolean.valueOf(changecup4).toString();
-			String changeCup5 =Boolean.valueOf(changecup5).toString();
-			String changeCup6 =Boolean.valueOf(changecup6).toString();
-			String changeCup7 =Boolean.valueOf(changecup7).toString();
-			String changeCup8 =Boolean.valueOf(changecup8).toString();
-			String changeCup9 =Boolean.valueOf(changecup9).toString();
-			String changeCup10 =Boolean.valueOf(changecup10).toString();
+				else if (parent.getClient() == null) {
+					JOptionPane.showMessageDialog(null, "로그인먼저해주세요");
+					return;
+				}
 
-			
-			String changeCupList = changeCup1 + "," +changeCup2+ ","+changeCup3+ ","
-			+changeCup4+ ","+ changeCup5+ ","+ changeCup6+ 
-			","+changeCup7+ ","+changeCup8+ ","+ changeCup9+ ","+changeCup10 ;
-			System.out.println(changeCupList);
-			
-			try {
-				dos.writeUTF(changeCupList);
-			} catch (IOException e) {
-				
-				e.printStackTrace();
 			}
-			}
-
 		});
+
+
+
 
 		buttonConfirm.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				int a = JOptionPane.showConfirmDialog(buttonConfirm, "오늘의 목표 3가지 모두 다 하셨나요?");
+				int a = JOptionPane.showConfirmDialog(null, "오늘의 목표 3가지 모두 다 하셨나요?");
 				// int i = JOptionPane.showConfirmDialog(null, "확실한가요", "진짜?",
 				// JOptionPane.OK_CANCEL_OPTION);
 
