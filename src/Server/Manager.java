@@ -186,7 +186,7 @@ public class Manager implements ManagerInterface{
 		
 	}
 	@Override
-	public void waterCupListData() throws Exception {
+	public void getwaterCupListData() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}

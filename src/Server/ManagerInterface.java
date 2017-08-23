@@ -62,7 +62,7 @@ public interface ManagerInterface {
 	public void isExistWaterCupListData()throws Exception;
 	
 	public String getComboListData(Member m)throws Exception;
-	public void waterCupListData()throws Exception;
+	public void getwaterCupListData()throws Exception;
 	
 	
 }

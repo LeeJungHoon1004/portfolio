@@ -278,21 +278,6 @@ public class BasicShape extends JFrame {
 			if (result.equals("로그인성공")) {
 				JOptionPane.showMessageDialog(null, "로그인 성공");
 				System.out.println("로그인 성공");
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 			} else if (result.equals("로그인실패")) {
 				JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.");
 				System.out.println("로그인 실패");
