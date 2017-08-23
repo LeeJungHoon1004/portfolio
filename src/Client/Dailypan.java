@@ -370,13 +370,26 @@ public class Dailypan extends JPanel {
 				// 1.로그인이 된 상태에서 버튼을 누르는경우.
 				if (parent.getClient() != null) {
 
-				
-					
+					int Question = JOptionPane.showConfirmDialog(null, "저장하시겠습니까 ? ",
+							"저장",JOptionPane.OK_OPTION);
+					if (Question == 0) {
+						JOptionPane.showMessageDialog(null, "저장되었습니다");
+					} 
+
+
+					else if(Question == 1) {
+						JOptionPane.showMessageDialog(null, "취소되었습니다.다시선택해주세요");
+						return ;
+					}
+
+
 					// 1-1 유효성검사 combolist 에 등록된 컴포넌트3가지에 대한 유효성 검사
 					// a != b , a !=c , b !=c 3가지값이 모두 같지않은경우에 대해서만 값을 통과시킨다.
 					if (combolist1.getSelectedIndex() != combolist2.getSelectedIndex()
 							&& combolist1.getSelectedIndex() != combolist3.getSelectedIndex()
 							&& combolist2.getSelectedIndex() != combolist3.getSelectedIndex()) {
+
+
 
 						try {
 
@@ -401,13 +414,10 @@ public class Dailypan extends JPanel {
 							// dos.writeInt(combolist2.getSelectedIndex());
 							// dos.writeInt(combolist3.getSelectedIndex());
 							System.out.println("combolist데이터 발신 성공");
-							
-							int Question = JOptionPane.showConfirmDialog(null, "저장하시겠습니까 ? ",
-									"저장",JOptionPane.OK_OPTION);
-							
-							if (Question == 0) {
-								JOptionPane.showMessageDialog(null, "저장되었습니다");
-							} 
+
+
+
+
 						} catch (Exception e1) {
 							System.out.println("combolist데이터 발신 실패.");
 							e1.printStackTrace();
@@ -467,14 +477,24 @@ public class Dailypan extends JPanel {
 			// 체크완료 버튼에 대한 이벤트처리입니다.
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-			
-				
+
+
+
 				//	System.out.println(Boolean.valueOf(changecup1).toString());
 				if (parent.getClient() != null) {
 
-					
-					
+					int Question = JOptionPane.showConfirmDialog(null, "저장하시겠습니까 ? ",
+							"저장",JOptionPane.OK_OPTION);
+					if (Question == 0) {
+						JOptionPane.showMessageDialog(null, "저장되었습니다");
+					} 
+
+
+					else if(Question == 1) {
+						JOptionPane.showMessageDialog(null, "취소되었습니다.다시선택해주세요");
+						return ;
+					}
+
 					dis = parent.getDis();
 					dos = parent.getDos();
 					try {
@@ -507,18 +527,9 @@ public class Dailypan extends JPanel {
 
 						e.printStackTrace();
 					}
+
 					
-					int Question = JOptionPane.showConfirmDialog(null, "저장하시겠습니까 ? ",
-							"저장",JOptionPane.OK_OPTION);
 					
-					if (Question == 0) {
-						JOptionPane.showMessageDialog(null, "저장되었습니다");
-					} 
-				}
-				
-				else if (parent.getClient() == null) {
-					JOptionPane.showMessageDialog(null, "로그인먼저해주세요");
-					return;
 				}
 
 			}
