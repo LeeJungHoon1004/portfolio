@@ -278,6 +278,21 @@ public class BasicShape extends JFrame {
 			if (result.equals("로그인성공")) {
 				JOptionPane.showMessageDialog(null, "로그인 성공");
 				System.out.println("로그인 성공");
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			} else if (result.equals("로그인실패")) {
 				JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.");
 				System.out.println("로그인 실패");
@@ -321,6 +336,22 @@ public class BasicShape extends JFrame {
 					
 					profilename.setText(getName() + " 님 환영합니다!");
 					card.show(self.profilePan, "loginAfter");
+					
+					// 로그인이후시점에서 서버로부터 받는 데이터를 처리합니다.
+					//1.콤보리스트 2.물컵리스트 3.동영상url리스트+메타데이터(String) 
+					//4.(로그인이후시점에서 서버컴퓨터에서 보내는데이터)업로드한사진 + 코멘트데이터 ( String)
+					try {
+					String receivedComboListData =dis.readUTF();
+					System.out.println(receivedComboListData);
+					}catch(Exception e1) {
+						System.out.println("콤보리스트에서 받는곳에서 에러발생지점.");
+						e1.printStackTrace();
+					}
+					
+					
+					
+					
+					
 				} else if (result.equals("로그인실패")) {
 					card.show(self.profilePan, "loginBefore");
 

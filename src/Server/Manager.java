@@ -139,29 +139,61 @@ public class Manager implements ManagerInterface{
 		con.close();
 		return result ;
 	}
+	
 
 	@Override
-	public int InsertWaterCuplist(String id, String ChangeCupList) throws Exception {
+	public void isExistWaterCupListData() throws Exception {
 		
+		
+	}
+	
+	@Override
+	public int InsertWaterCuplist(String id, String ChangeCupList) throws Exception {
 		Connection con =this.getConnection();
 		System.out.println(id);
 		System.out.println(ChangeCupList);
 		String sql = "update member set watercuplist =? where id =?";
-		
 		PreparedStatement pstat = con.prepareStatement(sql);
-		
 		pstat.setString(1,ChangeCupList);
 		pstat.setString(2,id);
-		
 		int result = pstat.executeUpdate();
-		
-		
 		con.commit();
 		con.close();
-		return result ;
+		return result ;	
+	}
+	
+	
+	
+	@Override
+	public String getComboListData(Member m) throws Exception {
+
 		
+		
+		Connection con =this.getConnection();
+		String sql = "select combolist from member where id = ?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		
+		pstat.setString(1, m.getId());
+		ResultSet rs = pstat.executeQuery();
+		boolean b = rs.next();
+		System.out.println("ResultSet 검사후 존재여부 :" +b);
+		String result =null;
+		if(b) {
+			result = rs.getString("combolist");
+		}
+		System.out.println("getComboListData메소드의 result :" +result);
+		return result;
 		
 	}
+	@Override
+	public void waterCupListData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
+	
 
 
 

@@ -1,6 +1,5 @@
 package Client;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,6 +17,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -37,9 +37,9 @@ public class SignUp extends JDialog {
 	private JLabel id = new JLabel("ID : ");
 	private JTextField inputId = new JTextField();
 	private JLabel pw = new JLabel("PW : ");
-	private JTextField inputPw = new JTextField();
+	private JPasswordField inputPw = new JPasswordField();
 	private JLabel pwcheck = new JLabel("PW확인 : ");
-	private JTextField inputCheck = new JTextField();
+	private JPasswordField inputCheck = new JPasswordField();
 	private JButton cancel = new JButton("닫기");
 	private JButton sign = new JButton("가입하기");
 	private JPanel radioPan = new JPanel();

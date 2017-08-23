@@ -36,16 +36,33 @@ public interface ManagerInterface {
 	 */
 	public boolean isLogoutOk(Member m)throws Exception;
 	
-	/**Combolist에서 받은 int값 3개 Integer클래스로 wrapping해서
-	 * ArrayList<Integer>저장합니다. 
+	/**Combolist에서 받은 String타입의 combolist를 받고
+	 * Member(String id, String pw)생성자에서 
+	 * id값을 가져온뒤에 id값에 해당하는 사람의 combolist를 업데이트 합니다.
 	 * @param c1
 	 * @param c2
 	 * @param c3
 	 * @throws Exception
 	 */
 	public int InsertDailyList(String id, String combolist) throws Exception ;
+	/**ChangeCupList에서 받은 String타입의 changeCupList를 받고
+	 * Member(String id, String pw)생성자에서
+	 * id값을 가져온뒤에 id값에 해당하는 사람의 changeCupList를 업데이트합니다.
+	 * 오라클 db에서의 changeCupList이름은 watercuplist임.
+	 * @param id
+	 * @param ChangeCupList
+	 * @return
+	 * @throws Exception
+	 */
 	
 	
-	public int InsertWaterCuplist(String id,String ChangeCupList) throws Exception;
+	public int InsertWaterCuplist(String id,String changeCupList) throws Exception;
+	
+
+	public void isExistWaterCupListData()throws Exception;
+	
+	public String getComboListData(Member m)throws Exception;
+	public void waterCupListData()throws Exception;
+	
 	
 }

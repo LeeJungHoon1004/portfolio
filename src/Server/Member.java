@@ -1,7 +1,5 @@
 package Server;
 
-import java.util.ArrayList;
-
 public class Member {
 
 	private String dailylist;
