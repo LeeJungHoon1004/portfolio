@@ -146,7 +146,7 @@ public class Manager implements ManagerInterface{
 		Connection con =this.getConnection();
 		System.out.println(id);
 		System.out.println(ChangeCupList);
-		String sql = "update member set ChangeCupList =? where id =?";
+		String sql = "update member set watercuplist =? where id =?";
 		
 		PreparedStatement pstat = con.prepareStatement(sql);
 		
