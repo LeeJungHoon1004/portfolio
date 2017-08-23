@@ -46,6 +46,6 @@ public interface ManagerInterface {
 	public int InsertDailyList(String id, String combolist) throws Exception ;
 	
 	
-	public String InsertWaterCuplist(String id,String waterCupList) throws Exception;
+	public int InsertWaterCuplist(String id,String ChangeCupList) throws Exception;
 	
 }

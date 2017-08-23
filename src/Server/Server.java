@@ -137,10 +137,10 @@ class ConnectionThread extends Thread {
 				}
 
 				else if(cmd.equals("¹°ÄÅÃ¼Å©")) {
-					String waterCupList = dis.readUTF();
-					System.out.println(waterCupList);
+					String ChangeCupListAA = dis.readUTF();
+					System.out.println(ChangeCupListAA);
 
-					String msg =Server.manager.InsertWaterCuplist(id,waterCupList);
+					int msg =Server.manager.InsertWaterCuplist(id,ChangeCupListAA);
 					System.out.println(msg);
 				}
 				

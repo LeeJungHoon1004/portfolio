@@ -141,16 +141,16 @@ public class Manager implements ManagerInterface{
 	}
 
 	@Override
-	public String InsertWaterCuplist(String id, String waterCupList) throws Exception {
+	public int InsertWaterCuplist(String id, String ChangeCupList) throws Exception {
 		
 		Connection con =this.getConnection();
 		System.out.println(id);
-		System.out.println(waterCupList);
-		String sql = "update member set waterCupList =? where id =?";
+		System.out.println(ChangeCupList);
+		String sql = "update member set ChangeCupList =? where id =?";
 		
 		PreparedStatement pstat = con.prepareStatement(sql);
 		
-		pstat.setString(1,waterCupList);
+		pstat.setString(1,ChangeCupList);
 		pstat.setString(2,id);
 		
 		int result = pstat.executeUpdate();
@@ -158,7 +158,7 @@ public class Manager implements ManagerInterface{
 		
 		con.commit();
 		con.close();
-		return null ;
+		return result ;
 		
 		
 	}

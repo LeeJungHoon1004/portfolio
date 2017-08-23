@@ -11,18 +11,18 @@ public class Member {
 	private String gender ; //성별
 	private double stature; //키
 	private double weight; //몸무게
-	private String watercuplist;
-	private String combolist;
 	
+	private String combolist;
+	private String ChangeCupList;
 	
 	
 	
 
-	public String getWatercuplist() {
-		return watercuplist;
+	public String ChangeCupList() {
+		return ChangeCupList;
 	}
-	public void setWatercuplist(String watercuplist) {
-		this.watercuplist = watercuplist;
+	public void setWatercuplist(String ChangeCupList) {
+		this.ChangeCupList = ChangeCupList;
 	}
 	public String getCombolist() {
 		return combolist;

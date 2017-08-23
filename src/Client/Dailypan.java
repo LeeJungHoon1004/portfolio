@@ -459,6 +459,14 @@ public class Dailypan extends JPanel {
 			// 체크완료 버튼에 대한 이벤트처리입니다.
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				
+				int Question = JOptionPane.showConfirmDialog(null, "저장하시겠습니까 ? ",
+						"저장",JOptionPane.OK_CANCEL_OPTION);
+				
+				if (Question == 0) {
+					JOptionPane.showConfirmDialog(null, "저장되었습니다");
+				} 
+				
 				//	System.out.println(Boolean.valueOf(changecup1).toString());
 				if (parent.getClient() != null) {
 
@@ -513,14 +521,14 @@ public class Dailypan extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				int a = JOptionPane.showConfirmDialog(null, "오늘의 목표 3가지 모두 다 하셨나요?");
+				int Question = JOptionPane.showConfirmDialog(null, "오늘의 목표 3가지 모두 다 하셨나요?");
 				// int i = JOptionPane.showConfirmDialog(null, "확실한가요", "진짜?",
 				// JOptionPane.OK_CANCEL_OPTION);
 
-				if (a == 0) {
+				if (Question == 0) {
 					JOptionPane.showConfirmDialog(null, "정말 수고하셨어요! 새로운 목표도 화이팅! ", "진짜?",
 							JOptionPane.OK_CANCEL_OPTION);
-				} else if (a == 1) {
+				} else if (Question == 1) {
 					JOptionPane.showConfirmDialog(null, "이럴수가..내일은 힘내보아요! ", "진짜?", JOptionPane.OK_CANCEL_OPTION);
 				}
 				//
