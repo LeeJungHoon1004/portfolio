@@ -72,7 +72,7 @@ public class Dailypan extends JPanel {
 	private JButton buttonUpload = new JButton("체크완료"); // 체크완료 버튼
 
 	private JButton buttonselect = new JButton("선택완료"); // 선택완료 버튼 (콤보쪽)
-	private JButton buttonConfirm = new JButton("오늘의 목표를 평가해보세요");
+	private JButton buttonConfirm = new JButton("");
 
 	private JLabel confirm = new JLabel();
 
@@ -206,8 +206,9 @@ public class Dailypan extends JPanel {
 		// lb = new JLabel("이미지를 넣자",image1,JLabel.CENTER);
 		// lb.setVerticalTextPosition(JLabel.CENTER);
 		// lb.setHorizontalTextPosition(JLabel.RIGHT);
-		buttonConfirm.setPreferredSize(new Dimension(200, 50));
-		this.confirm.setIcon(iconconfirm);
+		buttonConfirm.setPreferredSize(new Dimension(300, 150));
+		this.buttonConfirm.setIcon(iconconfirm);
+		
 		this.confirm.setPreferredSize(new Dimension(300, 230));
 
 		// private Image water_effect = new ImageIcon("waterInform.jpg").getImage()
@@ -302,13 +303,13 @@ public class Dailypan extends JPanel {
 		c2.gridy = 4;
 		c2.gridx = 1;
 		this.add(combolist3, c2);
-		c2.gridy = 5;
+		c2.gridy = 4;
 		c2.gridx = 2;
 		this.add(buttonselect, c2);
+//		c2.gridy = 5;
+//		c2.gridx = 1;
+//		this.add(confirm, c2);
 		c2.gridy = 5;
-		c2.gridx = 1;
-		this.add(confirm, c2);
-		c2.gridy = 6;
 		c2.gridx = 1;
 		this.add(buttonConfirm, c2);
 
