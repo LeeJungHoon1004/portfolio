@@ -258,9 +258,6 @@ public class BasicShape extends JFrame {
 		
 	}// end
 
-
-
-
 	public String getResult() {
 		// 로그인 버튼
 		String userID = inputID.getText();
@@ -327,10 +324,19 @@ public class BasicShape extends JFrame {
 					//4.(로그인이후시점에서 서버컴퓨터에서 보내는데이터)업로드한사진 + 코멘트데이터 ( String)
 					try {
 					String receivedComboListData =dis.readUTF();
-					System.out.println(receivedComboListData);
+					System.out.println("콤보데이터받기 : " + receivedComboListData);
 					}catch(Exception e1) {
 						System.out.println("콤보리스트에서 받는곳에서 에러발생지점.");
 						e1.printStackTrace();
+					}
+				
+					try{
+					String receicedWaterCupData = dis.readUTF();
+					System.out.println("물컵데이터받기 :" + receicedWaterCupData);
+				}
+					catch(Exception e2) {
+						System.out.println("물컵리스트 받는곳에서 에러발생");
+						e2.printStackTrace();
 					}
 					
 					
