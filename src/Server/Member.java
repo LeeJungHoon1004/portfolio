@@ -9,6 +9,7 @@ public class Member {
 	private String gender ; //성별
 	private double stature; //키
 	private double weight; //몸무게
+
 	
 	private String combolist;
 	private String ChangeCupList;
@@ -19,8 +20,8 @@ public class Member {
 	public String ChangeCupList() {
 		return ChangeCupList;
 	}
-	public void setWatercuplist(String ChangeCupList) {
-		this.ChangeCupList = ChangeCupList;
+	public void setChangecuplist(String changeCupList) {
+		this.ChangeCupList = changeCupList;
 	}
 	public String getCombolist() {
 		return combolist;

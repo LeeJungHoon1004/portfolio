@@ -228,7 +228,7 @@ public class Server extends JFrame {
 	// 생성자
 	public Server() {
 		this.setSize(1000, 800);
-		this.setTitle("다이어트프로그램서버");
+		this.setTitle("4주다이어트서버");
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(Server.EXIT_ON_CLOSE);
 		this.compInit();

@@ -168,7 +168,6 @@ public class Manager implements ManagerInterface{
 	public String getComboListData(Member m) throws Exception {
 
 		
-		
 		Connection con =this.getConnection();
 		String sql = "select combolist from member where id = ?";
 		PreparedStatement pstat = con.prepareStatement(sql);
@@ -186,27 +185,25 @@ public class Manager implements ManagerInterface{
 		
 	}
 	@Override
-	public void getwaterCupListData() throws Exception {
-		// TODO Auto-generated method stub
+	public String getwaterCupListData(Member m) throws Exception {
 		
+		Connection con =this.getConnection();
+		String sql = "select watercupList from member where id = ?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		
+		pstat.setString(1, m.getId());
+		ResultSet rs = pstat.executeQuery();
+		boolean isexistID = rs.next();
+		System.out.println("resultset 검사후 id존재여부 : "+ isexistID);
+		String result = null;
+		if(isexistID) {
+		result = rs.getString("watercuplist");
+		}
+		System.out.println("getwarterCupListData 메소드의 result : " + result);
+		return result;
+	
 	}
 
-
-	
-	
-
-
-
-	
-	
-
-	
-
-	
-
-	
-
-	
 	
 
 }

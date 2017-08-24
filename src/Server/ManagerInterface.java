@@ -55,14 +55,15 @@ public interface ManagerInterface {
 	 * @throws Exception
 	 */
 	
-	
+
 	public int InsertWaterCuplist(String id,String changeCupList) throws Exception;
 	
 
 	public void isExistWaterCupListData()throws Exception;
 	
 	public String getComboListData(Member m)throws Exception;
-	public void getwaterCupListData()throws Exception;
+	public String getwaterCupListData(Member m)throws Exception;
+
 	
 	
 }
