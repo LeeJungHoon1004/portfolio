@@ -116,6 +116,7 @@ public class Dailypan extends JPanel {
 	private ImageIcon iconwaterSign = new ImageIcon(water_Sign);
 	private ImageIcon iconwater = new ImageIcon(water_effect);
 
+	//아이콘에다가 이미지를 등록함... 
 	private ImageIcon icon1 = new ImageIcon(cupimage);
 	private ImageIcon icon2 = new ImageIcon(cupimage);
 	private ImageIcon icon3 = new ImageIcon(cupimage);
@@ -480,7 +481,7 @@ public class Dailypan extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 
 
-
+				//예 /아니오 처리.
 				//	System.out.println(Boolean.valueOf(changecup1).toString());
 				if (parent.getClient() != null) {
 
@@ -496,8 +497,11 @@ public class Dailypan extends JPanel {
 						return ;
 					}
 
+					//parent의 주소를 받아서 input,output 스트림 개방
 					dis = parent.getDis();
 					dos = parent.getDos();
+					
+					//물컵체크에 대한 커맨드 발신.
 					try {
 						dos.writeUTF("물컵체크");
 					} catch (IOException e1) {
@@ -520,7 +524,7 @@ public class Dailypan extends JPanel {
 					String changeCupList = changeCup1 + "," +changeCup2+ ","+changeCup3+ ","
 							+changeCup4+ ","+ changeCup5+ ","+ changeCup6+ 
 							","+changeCup7+ ","+changeCup8+ ","+ changeCup9+ ","+changeCup10 ;
-					System.out.println(changeCupList);
+					System.out.println("클라이언트에서 서버로 버튼클릭시 보내는changeCupList " + changeCupList);
 
 					try {
 						dos.writeUTF(changeCupList);

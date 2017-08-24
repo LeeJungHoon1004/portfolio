@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.Socket;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -36,6 +37,22 @@ import javax.swing.border.TitledBorder;
 
 
 public class BasicShape extends JFrame {
+	String receivedComboListData ;
+	
+	String tmpComboListData [] ;
+	
+	String receiveaction [] = null;	
+	int tmpcombo1 ;
+	String tmpComboString1  ;
+	int tmpcombo2 ;
+	String tmpComboString2  ;		
+	int tmpcombo3 ;
+	String tmpComboString3  ;	
+	String tmpComboStringList ;	
+
+	
+	
+	
 	private Socket client;
 	private DataOutputStream dos;
 	private DataInputStream dis;
@@ -326,12 +343,32 @@ public class BasicShape extends JFrame {
 					//1.콤보리스트 2.물컵리스트 3.동영상url리스트+메타데이터(String) 
 					//4.(로그인이후시점에서 서버컴퓨터에서 보내는데이터)업로드한사진 + 코멘트데이터 ( String)
 					try {
-					String receivedComboListData =dis.readUTF();
-					System.out.println(receivedComboListData);
-					}catch(Exception e1) {
-						System.out.println("콤보리스트에서 받는곳에서 에러발생지점.");
-						e1.printStackTrace();
-					}
+						 receivedComboListData =dis.readUTF();
+						System.out.println(receivedComboListData);
+						tmpComboListData =receivedComboListData.split(",");
+			
+						 receiveaction =new String[] { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기", 
+								"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트",
+								"6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기", 
+								"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
+
+						tmpcombo1 = Integer.parseInt(tmpComboListData[0]);
+						tmpComboString1 =receiveaction[tmpcombo1] ;
+						
+						tmpcombo2 = Integer.parseInt(tmpComboListData[1]);
+						tmpComboString2 =receiveaction[tmpcombo2] ;
+						
+						tmpcombo3 = Integer.parseInt(tmpComboListData[2]);
+						tmpComboString3 =receiveaction[tmpcombo3] ;
+						
+						tmpComboStringList =tmpComboString1 + tmpComboString2 + tmpComboString3;
+						
+					
+						
+						}catch(Exception e1) {
+							System.out.println("콤보리스트에서 받는곳에서 에러발생지점.");
+							e1.printStackTrace();
+						}
 					
 					
 					
@@ -411,10 +448,15 @@ public class BasicShape extends JFrame {
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 			}
 		});
-		// 오늘의목표 버튼
+		//하루목표 버튼
 		dailyBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				//if() 하루시간이 지난이후시점. 
+				JOptionPane.showMessageDialog(null,"저번의 목표3가지 " + tmpComboStringList + "3가지 모두 다 하셨나요 ");
+				
+				//else 하루시간이 지나지않은시점. 안나옴. 
+				//JOptionPane.showMessageDialog( , );
+				
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 				card.show(self.mainPan, "NamedailyPane");
 			}

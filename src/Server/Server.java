@@ -115,6 +115,7 @@ class ConnectionThread extends Thread {
 						
 						dos.writeUTF(sentComboListData);
 
+						//3.로그인성공후 등록된 회원의 waterlist전송.
 
 					} else {
 						dos.writeUTF("로그인실패");
@@ -155,12 +156,15 @@ class ConnectionThread extends Thread {
 					
 				}
 
+				//물컵체크에 대한 커맨드 수신.
 				else if(cmd.equals("물컵체크")) {
 					String ChangeCupListAA = dis.readUTF();
-					System.out.println(ChangeCupListAA);
+					System.out.println("물컵체크리스트를 클라이언트에서 받음 :" +ChangeCupListAA);
 
 					int msg =Server.manager.InsertWaterCuplist(id,ChangeCupListAA);
-					System.out.println(msg);
+					System.out.println("물컵체크리스트를 서버에서 DB로 저장함 : (존재하면1 없으면 0) " +msg);
+					
+					
 				}
 
 
