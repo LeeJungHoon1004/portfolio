@@ -101,6 +101,8 @@ class ConnectionThread extends Thread {
 						dos.writeUTF("로그인성공");
 
 						//1.로그인성공후 등록한 회원의 이름 전송.
+						
+						
 						String name = null;
 						Member m1 = new Member(name , id ,pw);
 						//멤버의 정보 (id,pw를 준뒤 해당 사용자의 이름을 가져옴)
@@ -110,6 +112,8 @@ class ConnectionThread extends Thread {
 						dos.writeUTF(name);
 
 						//2.로그인성공후 등록한 회원의 combolist전송.
+						
+						
 						String sentComboListData = Server.manager.getComboListData(m2);
 					//	System.out.println(sentComboListData);
 						
@@ -150,9 +154,6 @@ class ConnectionThread extends Thread {
 
 					System.out.println("하루목표전송받았다.");
 					
-					
-					
-					
 				}
 
 				else if(cmd.equals("물컵체크")) {
@@ -163,17 +164,7 @@ class ConnectionThread extends Thread {
 					System.out.println(msg);
 				}
 
-
-
-
 			}
-
-
-
-
-
-
-
 
 		}
 		catch(Exception e) {
