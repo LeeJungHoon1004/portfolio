@@ -164,6 +164,7 @@ public class Manager implements ManagerInterface{
 	
 	
 	
+	
 	@Override
 	public String getComboListData(Member m) throws Exception {
 

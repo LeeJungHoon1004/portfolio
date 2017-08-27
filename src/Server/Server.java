@@ -1,7 +1,13 @@
 package Server;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
@@ -10,11 +16,25 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.border.TitledBorder;
+
+import Client.BMI;
+import Client.BasicShape;
+import Client.Dailypan;
+import Client.ImageSlide;
+import Client.PicPan;
+import Client.VideoPan;
 
 class ConnectionThread extends Thread {
 
@@ -96,29 +116,30 @@ class ConnectionThread extends Thread {
 
 					Member m2 = new Member(id , pw);
 					boolean result = Server.manager.isLoginOk(m2);
-					System.out.println(result);
+					System.out.println("회원목록의 존재유무 :  " +result);
 					if (result) {// 값이존재한다(회원가입 되어있는 아이디와비번이다) - 로그인허가
 						dos.writeUTF("로그인성공");
 
 						//1.로그인성공후 등록한 회원의 이름 전송.
-						
-						
 						String name = null;
 						Member m1 = new Member(name , id ,pw);
 						//멤버의 정보 (id,pw를 준뒤 해당 사용자의 이름을 가져옴)
 						name =Server.manager.getNameData(m2);
-						System.out.println(name);
+						System.out.println("로그인한 회원님 : " +name);
 						//이름 , 신장, 체중 ,성별 순서대로 보냅니다
 						dos.writeUTF(name);
-
 						//2.로그인성공후 등록한 회원의 combolist전송.
-						
-						
+						//2.1 DB에 해당 회원의 ComboListData있는지 조사
+						//2.2 DB에 해당 회원의 ComboListData유무에 따라 
+						//2.2.1명령커맨드보내거나 2.2.2리스트 보내거나
 						String sentComboListData = Server.manager.getComboListData(m2);
-					//	System.out.println(sentComboListData);
-						
+						System.out.println("DB에 저장되어있는 ComboListData :" +sentComboListData);
+						if(sentComboListData !=null) {
 						dos.writeUTF(sentComboListData);
-
+						}
+						else{
+							dos.writeUTF("비어있는ComboList데이터");
+						}
 						//3.로그인성공후 등록된 회원의 waterlist전송.
 
 					} else {
@@ -189,42 +210,182 @@ public class Server extends JFrame {
 	// 매니저
 	public static Manager manager = new Manager();
 	// 컴포넌트변수
-	private JButton buttonClose = new JButton("닫기");
-	private JTextArea textareaShow = new JTextArea();
-	private JScrollPane scrollpaneshow = new JScrollPane(textareaShow);
-	private JPanel panelsouth = new JPanel();
-	private Server self = this;
+		private Server self = this;
+
+	//Component Variable
+		private Container cp = this.getContentPane();
+		private JLabel title = new JLabel();
+
+
+		private Font font = new Font("바탕", Font.ITALIC, 30);
+		private JButton homeBt = new JButton("홈");
+		private JButton goalBt = new JButton("나의 목표");
+		private JButton dailyBt = new JButton("하루 목표");
+		private JButton videoBt = new JButton("운동영상");
+		private JButton imgBoardBt = new JButton("사진게시판");
+		private JPanel category = new JPanel(new GridLayout(5, 1));
+		private JPanel titlePan = new JPanel();
+		private JPanel sidepan = new JPanel(new GridLayout(5, 1));
+		// ▽▽▽▽▽▽▽▽▽▽프로필 바뀜▽▽▽▽▽▽▽▽▽▽▽▽
+		// 로그아웃 중일때
+		private JLabel lbID = new JLabel();
+		private JLabel lbPW = new JLabel();
+
+		private Image idimage = new ImageIcon("ID (3).jpg").getImage().getScaledInstance(98, 30,
+				java.awt.Image.SCALE_SMOOTH);
+		private ImageIcon iconid = new ImageIcon(idimage);
+
+		private Image pwimage = new ImageIcon("PW (2).jpg").getImage().getScaledInstance(98, 30,
+				java.awt.Image.SCALE_SMOOTH);
+		private ImageIcon iconpw = new ImageIcon(pwimage);
+		private JTextField inputID = new JTextField();
+
+		private JPasswordField inputPW = new JPasswordField();
+		private JButton membership = new JButton("회원가입");
+		private JButton login = new JButton("로그인");
+		private JPanel panbox1 = new JPanel(new GridLayout(1, 2));
+		private JPanel panbox2 = new JPanel(new GridLayout(1, 2));
+		private JPanel panbox3 = new JPanel(new GridLayout(1, 2));
+		private JPanel panbox = new JPanel(new GridLayout(3, 1));
+		// 로그인 중일때
+		private JPanel panboxx = new JPanel(new GridLayout(3, 1));
+		private JPanel namePan = new JPanel();
+		private JPanel logoutPan = new JPanel();
+		private JLabel profilename = new JLabel();
+		private JLabel profilePhoto = new JLabel();
+		private JButton logout = new JButton("로그아웃");
+		private String result;
+		// 카드레이아웃 여기있음
+		private CardLayout card = new CardLayout();
+		
+		private JPanel mainPan = new JPanel(card);
+		private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
+		// COMPNENT - homePan
+		private Image titleimage = new ImageIcon("타이틀06.jpg").getImage().getScaledInstance(1194, 100,
+				java.awt.Image.SCALE_SMOOTH);
+		private ImageIcon titleicon = new ImageIcon(titleimage);
+
+		private TitledBorder tborder = new TitledBorder("");
+		private JPanel homePan = new JPanel(new GridLayout(2, 1));
+		private JScrollPane homeSc = new JScrollPane(homePan);
+		private String name = getName();
+		private ImageSlide imgSlide = new ImageSlide();
+		private BMI bmi = new BMI();
+
+		// COMPNENT - goalPan
+		private JPanel goalPan = new JPanel();
+		private JScrollPane goalSc = new JScrollPane(goalPan);// 스크롤
+		// COMPNENT - dailyPan
+
+		private Dailypan dailyPan = new Dailypan();
+		private JScrollPane dailySc = new JScrollPane(dailyPan);// 스크롤
+		// COMPNENT - videoPan
+		private JPanel videoPan = new JPanel();
+		private VideoPan video = new VideoPan();
+		private JScrollPane videoSc = new JScrollPane(videoPan);// 스크롤
+
+		// COMPNENT - imgBoardPan
+		private JPanel imgPanel = new JPanel();
+		private PicPan picpan = new PicPan();
+		private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
 
 	public void compInit() {
 
-		this.buttonClose.setPreferredSize(new Dimension(100, 50));
-		this.textareaShow.setEditable(false);
-		this.textareaShow.setLineWrap(true);
-		this.panelsouth.add(buttonClose);
+		setLayout(null);
+		// 투명
 
-		this.add(panelsouth, BorderLayout.SOUTH);
-		this.add(scrollpaneshow, BorderLayout.CENTER);
+		imgSlide.setPreferredSize(new Dimension(400, 700));
+		bmi.setPreferredSize(new Dimension(872, 800));
+		bmi.setBorder(tborder);
+		this.homePan.add(imgSlide);
+		this.homePan.add(bmi);
 
-	}
+		// ---------운동영상
+		videoPan.setBackground(Color.white);
+		this.video.setPreferredSize(new Dimension(965, 1600));
+		this.video.setPreferredSize(new Dimension(965, 1500));
+
+		this.videoPan.add(video);
+		// ---------사진
+		picpan.setBackground(Color.white);
+		imgPanel.setBackground(Color.white);
+		this.picpan.setPreferredSize(new Dimension(975, 1600));
+		this.imgPanel.add(picpan);
+
+		this.lbID.setIcon(iconid);
+		this.lbPW.setIcon(iconpw);
+
+		// compInit() - panelCard_StimulsPhoto
+		category.setBackground(Color.WHITE);
+		sidepan.setBackground(Color.WHITE);
+		panbox1.setBackground(Color.WHITE);
+		panbox2.setBackground(Color.WHITE);
+		panbox3.setBackground(Color.WHITE);
+
+		category.add(homeBt);
+		category.add(goalBt);
+		category.add(dailyBt);
+		category.add(videoBt);
+		category.add(imgBoardBt);
+		panbox1.add(lbID);
+		panbox1.add(inputID);
+		panbox2.add(lbPW);
+		panbox2.add(inputPW);
+		panbox3.add(login);
+		panbox3.add(membership);
+		panbox.add(panbox1);
+		panbox.add(panbox2);
+		panbox.add(panbox3);
+		// CardLayout이 들어있는 profilePan에 넣음.
+
+		panboxx.setBackground(Color.white);
+		namePan.setBackground(Color.white);
+		logoutPan.setBackground(Color.white);
+		profilename.setText(name + " 님 환영합니다!");
+		namePan.add(profilename);
+		logoutPan.add(logout);
+
+		panboxx.add(profilename, BorderLayout.CENTER);
+		panboxx.add(logoutPan, BorderLayout.CENTER);
+		profilePan.add(panbox, "loginBefore");
+		profilePan.add(panboxx, "loginAfter");
+
+		// =======================================================
+		// title.setFont(font);
+		title.setIcon(titleicon);
+		titlePan.add(title);
+		sidepan.add(profilePan);
+		sidepan.add(category);
+		titlePan.setBounds(0, 0, 1194, 100);
+		add(titlePan);
+		sidepan.setBounds(0, 101, 200, 640);
+		add(sidepan);
+		// CardLayout들어있는 mainPan에 패널들 넣음
+
+		mainPan.add(homeSc, "NamedefaultPane");
+		mainPan.add(goalSc);
+		mainPan.add(dailySc, "NamedailyPane");
+		mainPan.add(videoSc, "NamevideoPane");
+		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
+		// 이름을 부여함 .
+		// 부여된 이름을 가지고 이벤트 처리부분에서
+		// 카드의 이름으로 식별하여 visible함.
+		this.setResizable(false);
+		this.mainPan.setBounds(200, 99, 1000, 650);
+		add(mainPan);
+		}
 
 	public void eventInit() {
-		this.buttonClose.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				self.dispose();
-			}
-
-		});
+		
 
 	}
 
 	// 생성자
 	public Server() {
-		this.setSize(1000, 800);
+		this.setSize(1200, 750);
 		this.setTitle("4주다이어트서버");
 		this.setLocationRelativeTo(null);
+		this.setBackground(Color.WHITE);
 		this.setDefaultCloseOperation(Server.EXIT_ON_CLOSE);
 		this.compInit();
 		this.eventInit();
@@ -232,7 +393,17 @@ public class Server extends JFrame {
 	}
 
 	public static void main(String[] args) throws Exception {
-
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// If Nimbus is not available, you can set the GUI to another look
+			// and feel.
+		}
 		ServerSocket server = new ServerSocket(40000);
 		new Server();
 		while (true) {

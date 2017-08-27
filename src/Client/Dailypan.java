@@ -771,32 +771,21 @@ public class Dailypan extends JPanel {
 		//
 	}
 
-	public Dailypan(BasicShape parent) {
-
+	public Dailypan(BasicShape parent) { //클라이언트에서 BasicShape와 연결되있는 생성자.
 		this.parent = parent;
-
-		// if(client != null) {
-		// this.client = client;
-		// this.dos= dos;
-		// this.dis = dis;
-		// }
-		// else if(client ==null) {
-		// try {
-		// this.client = new Socket("192.168.53.4",40000);
-		// this.dos
-		//
-		// }catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		// }
 		this.setBackground(Color.white);
 		this.setSize(900, 900);
-
 		this.comp();
 		this.event();
-
 		this.setVisible(true);
-
+	}
+	public Dailypan( ) { // 서버에서 참조하는 생성자.
+		
+		this.setBackground(Color.white);
+		this.setSize(900, 900);
+		this.comp();
+		this.event();
+		this.setVisible(true);
 	}
 
 	// public static void main(String[] args) {

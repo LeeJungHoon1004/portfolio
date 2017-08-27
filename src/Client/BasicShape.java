@@ -5,9 +5,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -18,9 +16,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -35,10 +33,9 @@ import javax.swing.border.TitledBorder;
 //github.com/LeeJungHoon1004/portfolio.git	
 
 public class BasicShape extends JFrame {
+
 	String receivedComboListData;
-
 	String tmpComboListData[];
-
 	String receiveaction[] = null;
 	int tmpcombo1;
 	String tmpComboString1;
@@ -47,21 +44,20 @@ public class BasicShape extends JFrame {
 	int tmpcombo3;
 	String tmpComboString3;
 	String tmpComboStringList;
-
+	// ========ComboList Variable====================
 	private Socket client;
 	private DataOutputStream dos;
 	private DataInputStream dis;
 	// =======SOCKET========================
 	private Container cp = this.getContentPane();
 	private JLabel title = new JLabel();
-	private JLabel title2 = new JLabel();
+
 
 	private Font font = new Font("바탕", Font.ITALIC, 30);
 	private JButton homeBt = new JButton("홈");
-	private JButton goalBt = new JButton("나의 목표");
-	private JButton dailyBt = new JButton("하루 목표");
-	private JButton videoBt = new JButton("운동영상");
-	private JButton imgBoardBt = new JButton("사진게시판");
+	private JButton dailyBt = new JButton("목표");
+	private JButton videoBt = new JButton("운동");
+	private JButton imgBoardBt = new JButton("커뮤니티");
 	private JPanel category = new JPanel(new GridLayout(5, 1));
 	private JPanel titlePan = new JPanel();
 	private JPanel sidepan = new JPanel(new GridLayout(5, 1));
@@ -111,9 +107,7 @@ public class BasicShape extends JFrame {
 	private ImageSlide imgSlide = new ImageSlide();
 	private BMI bmi = new BMI();
 
-	// COMPNENT - goalPan
-	private JPanel goalPan = new JPanel();
-	private JScrollPane goalSc = new JScrollPane(goalPan);// 스크롤
+
 	// COMPNENT - dailyPan
 
 	private Dailypan dailyPan = new Dailypan(self);
@@ -128,15 +122,6 @@ public class BasicShape extends JFrame {
 	private JPanel imgPanel = new JPanel();
 	private PicPan picpan = new PicPan();
 	private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
-
-	private JButton buttonUpload = new JButton("업로드");
-	private JButton buttonRemove = new JButton("사진삭제"); // 사진삭제시 id와 패스워드 비번확인 필요함.
-	private JButton buttonClose = new JButton("닫기");
-
-	private JPanel imgBoardPan = new JPanel(new GridLayout(3, 1));
-	private JPanel panelnull = new JPanel();
-	private JPanel panelCenter = new JPanel(new GridLayout(1, 3)); // 센터-포토3개
-	private JPanel panelSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
 	public Socket getClient() {
 		return client;
@@ -172,13 +157,13 @@ public class BasicShape extends JFrame {
 		this.homePan.add(imgSlide);
 		this.homePan.add(bmi);
 
-		// ---------운동영상
+		// ---------운동
 		videoPan.setBackground(Color.white);
 		this.video.setPreferredSize(new Dimension(965, 1600));
 		this.video.setPreferredSize(new Dimension(965, 1500));
 
 		this.videoPan.add(video);
-		// ---------사진
+		// ---------커뮤니티
 		picpan.setBackground(Color.white);
 		imgPanel.setBackground(Color.white);
 		this.picpan.setPreferredSize(new Dimension(975, 1600));
@@ -186,12 +171,7 @@ public class BasicShape extends JFrame {
 
 		this.lbID.setIcon(iconid);
 		this.lbPW.setIcon(iconpw);
-		this.panelSouth.add(buttonUpload);
-		this.panelSouth.add(buttonRemove);
-		this.panelSouth.add(buttonClose);
-		this.imgBoardPan.add(panelCenter);
-		this.imgBoardPan.add(panelnull);
-		this.imgBoardPan.add(panelSouth);
+
 		// compInit() - panelCard_StimulsPhoto
 		category.setBackground(Color.WHITE);
 		sidepan.setBackground(Color.WHITE);
@@ -200,7 +180,7 @@ public class BasicShape extends JFrame {
 		panbox3.setBackground(Color.WHITE);
 
 		category.add(homeBt);
-		category.add(goalBt);
+		
 		category.add(dailyBt);
 		category.add(videoBt);
 		category.add(imgBoardBt);
@@ -240,7 +220,6 @@ public class BasicShape extends JFrame {
 		// CardLayout들어있는 mainPan에 패널들 넣음
 
 		mainPan.add(homeSc, "NamedefaultPane");
-		mainPan.add(goalSc);
 		mainPan.add(dailySc, "NamedailyPane");
 		mainPan.add(videoSc, "NamevideoPane");
 		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
@@ -314,7 +293,7 @@ public class BasicShape extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				// 소켓생성후 커넥트 , 로그인성공실패 에따른 ui출력
-				clientConnect();
+
 				getResult();
 
 				// 서버에 계정 보냄.△△△△△△△
@@ -331,8 +310,11 @@ public class BasicShape extends JFrame {
 
 						receivedComboListData = dis.readUTF();
 						System.out.println(receivedComboListData);
+						// 로그인후 받은 콤보리스트 데이터가 null값이아니면 쪼개서 리스트를 분리한다.
+						//수신한데이터가 null이아니면 쪼개서 분리한다.
+						//수신한데이터가 null이면 비어있는데이터라고 출력한다.
+						if(tmpComboListData !=null) {
 						tmpComboListData = receivedComboListData.split(",");
-
 						receiveaction = new String[] { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
 								"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트", "6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기",
 								"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
@@ -347,20 +329,24 @@ public class BasicShape extends JFrame {
 						tmpComboString3 = receiveaction[tmpcombo3];
 
 						tmpComboStringList = tmpComboString1 + tmpComboString2 + tmpComboString3;
-
+						}
+						else {
+							receivedComboListData ="비어있는ComboList데이터";
+							tmpComboStringList ="비어있는ComboList데이터";
+						}
 					} catch (Exception e1) {
 						System.out.println("콤보리스트에서 받는곳에서 에러발생지점.");
 						e1.printStackTrace();
 					}
 
 					// 2.물컵데이터받기.
-					try {
-						String receicedWaterCupData = dis.readUTF();
-						System.out.println("물컵데이터받기 :" + receicedWaterCupData);
-					} catch (Exception e2) {
-						System.out.println("물컵리스트 받는곳에서 에러발생");
-						e2.printStackTrace();
-					}
+					// try {
+					// String receicedWaterCupData = dis.readUTF();
+					// System.out.println("물컵데이터받기 :" + receicedWaterCupData);
+					// } catch (Exception e2) {
+					// System.out.println("물컵리스트 받는곳에서 에러발생");
+					// e2.printStackTrace();
+					// }
 
 				} else if (result.equals("로그인실패")) {
 
@@ -406,19 +392,13 @@ public class BasicShape extends JFrame {
 				card.show(self.mainPan, "NamedefaultPane");
 			}
 		});
-		// 내목표 버튼
-		goalBt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				// 프로필창 로그인여부에 따라 다름.△△△△△△△
-			}
-		});
-		// 하루목표 버튼
+		
+		
+		// 목표 버튼
 		dailyBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// if() 하루시간이 지난이후시점.
-				JOptionPane.showMessageDialog(null, "저번의 목표3가지 " + tmpComboStringList + "3가지 모두 다 하셨나요 ");
-
+				System.out.println("나의목표 :" + tmpComboStringList);
 				// else 하루시간이 지나지않은시점. 안나옴.
 				// JOptionPane.showMessageDialog( , );
 
@@ -426,14 +406,14 @@ public class BasicShape extends JFrame {
 				card.show(self.mainPan, "NamedailyPane");
 			}
 		});
-		// 영상게시판 버튼
+		// 운동 버튼
 		videoBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.show(self.mainPan, "NamevideoPane");
 
 			}
 		});
-		// 사진게시판 버튼
+		// 커뮤니티 버튼
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -465,27 +445,7 @@ public class BasicShape extends JFrame {
 				card.show(self.mainPan, "NamedefaultPane");
 			}
 		});
-		// ===============EVENTINIT()=========imgBoardPan
-		this.buttonUpload.addActionListener(new ActionListener() {
-			// 사진 업로드시 xx회원님의 포토. 로 남겨둠 .
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-			}
-		});
-		this.buttonClose.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-			}
-		});
-		this.buttonRemove.addActionListener(new ActionListener() {
-			// 사진 삭제시 회원의 아이디와 비밀번호를 한번입력받아서 확인후 해당회원의 사진일경우에 삭제 .
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-			}
-		});
+
 	}
 
 	public BasicShape() {
@@ -497,6 +457,7 @@ public class BasicShape extends JFrame {
 		cp.setBackground(Color.WHITE);
 		comp();
 		eventInit();
+		clientConnect();
 		setVisible(true);
 	}
 

@@ -27,6 +27,8 @@ import javax.swing.border.TitledBorder;
 public class SignUp extends JDialog {
 	
 	private SignUp self = this;
+	private BasicShape parent ;
+	
 	private  TitledBorder tborder = new TitledBorder("");
 	private JLabel name = new JLabel("이름 : ");
 	private JTextField inputName = new JTextField();
@@ -161,10 +163,17 @@ public class SignUp extends JDialog {
 				if (userCheck.equals(userPW)) {
 					//비번과 비번확인번호가 일치할때 -> 소켓생성후 서버쪽에 데이터 송신
 					try {
-						// client = new Socket("", 40000);
-						client = new Socket("127.0.0.1", 40000);
-						dos = new DataOutputStream(client.getOutputStream());
-						dis = new DataInputStream(client.getInputStream());
+						// client = new ("", 40000);
+//						client = new Socket("127.0.0.1", 40000);
+//						dos = new DataOutputStream(client.getOutputStream());
+//						dis = new DataInputStream(client.getInputStream());
+						
+						client = self.parent.getClient();
+						dos =self.parent.getDos(); 
+					//	dos = new DataOutputStream(client.getOutputStream());
+						dis =self.parent.getDis();
+					//	dis = new DataInputStream(client.getInputStream());
+						
 						
 						dos.writeUTF("회원가입");
 						//if( 남자 성별 선택) //서버 보낼것 String 이름 , String id ,String pw , String gender 
@@ -216,13 +225,6 @@ public class SignUp extends JDialog {
 				//	System.out.println("데이터 받기 실패");
 				}
 			
-				//회원가입 시도후 소켓닫기.
-				try {
-					client.close();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} //
 			
 			}
 			
@@ -230,6 +232,10 @@ public class SignUp extends JDialog {
 	}// end
 
 	public SignUp(BasicShape parent) {
+		//부모의 주소를 받아서 parent변수에 담아주고 
+		//필요한 상황이 생겼을떄 parent.getdis / parent.getdos 로 불러사용.
+		this.parent = parent;
+		
 		setTitle("회원가입");
 		setSize(500, 500);
 		setLocationRelativeTo(parent);
@@ -250,6 +256,8 @@ public class SignUp extends JDialog {
 			// and feel.
 		}
 	}// end
+
+	
 
 }// class end
 	// <a target="_blank"
