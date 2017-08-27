@@ -22,9 +22,8 @@ import javax.swing.border.TitledBorder;
 
 
 //오브젝트 스트림 = 객체직렬화 / 객체직렬화 소켓통신
-//http://nicebury.tistory.com/15
-//http://egloos.zum.com/dojeun/v/317825
-//
+//<a target="_blank" href="http://nicebury.tistory.com/15" class="tx-link">http://nicebury.tistory.com/15</a>;
+
 
 public class AddPictureBoard extends JDialog {
 
@@ -81,7 +80,8 @@ public class AddPictureBoard extends JDialog {
 		findPicture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 로컬파일찾은후 텍스트필드에 경로 붙이기.
-				img = fileChooser();// 이미지 file형으로 return.
+				fileChooser();
+				img = fc.getSelectedFile();// 이미지 file형으로 return.
 				picturePath.setText(img.getPath());
 				
 				imgIcon = new ImageIcon(img.getPath());
@@ -94,7 +94,9 @@ public class AddPictureBoard extends JDialog {
 
 		commit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sendData();
+				//sendData();
+				img = fc.getSelectedFile();
+				SetRenderer sr = new SetRenderer(img.getPath());
 				JOptionPane.showMessageDialog(null, "upload complete");
 				dispose();
 			}
@@ -102,7 +104,7 @@ public class AddPictureBoard extends JDialog {
 	}
 
 	
-	public File fileChooser() {
+	public void fileChooser() {
 		fc.setAccessory(new ImagePreview(fc));
 		fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		switch (fc.showOpenDialog(AddPictureBoard.this)) { // △파일열기.
@@ -112,22 +114,20 @@ public class AddPictureBoard extends JDialog {
 
 			break;
 
-		case JFileChooser.CANCEL_OPTION:
-			JOptionPane.showMessageDialog(AddPictureBoard.this, "Cancelled", "FCDemo", JOptionPane.OK_OPTION);
-			break;
+//		case JFileChooser.CANCEL_OPTION:
+//			JOptionPane.showMessageDialog(AddPictureBoard.this, "Cancelled", "FCDemo", JOptionPane.OK_OPTION);
+//			break;
 
 		case JFileChooser.ERROR_OPTION:
 			JOptionPane.showMessageDialog(AddPictureBoard.this, "error", "FCDemo", JOptionPane.OK_OPTION);
 		}
 
-		return img;
 	}// 선택한 img를 파일형으로 return.
-
 
 	
 	public void sendData() {
 		//connection();
-		img = fileChooser(); //꺼내올 파일 경로.
+		img = fc.getSelectedFile(); //꺼내올 파일 경로.
 		long fileSize = img.length();//파일사이즈를 long형으로 저장.
 
 		try{
