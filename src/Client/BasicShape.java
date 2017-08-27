@@ -56,15 +56,25 @@ public class BasicShape extends JFrame {
 	private Font font = new Font("바탕", Font.ITALIC, 30);
 	private JButton homeBt = new JButton("홈");
 	private JButton dailyBt = new JButton("목표");
+	private JButton planBt = new JButton("목표수정중");
 	private JButton videoBt = new JButton("운동");
 	private JButton imgBoardBt = new JButton("커뮤니티");
-	private JPanel category = new JPanel(new GridLayout(5, 1));
+	private JPanel category = new JPanel(new GridLayout(4, 1));
 	private JPanel titlePan = new JPanel();
 	private JPanel sidepan = new JPanel(new GridLayout(5, 1));
+
+	private JLabel passionlabel = new JLabel();
+
+	private Image passionimg = new ImageIcon("끼.jpg").getImage().getScaledInstance(187, 130,
+			java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon passionicon = new ImageIcon(passionimg);
+
 	// ▽▽▽▽▽▽▽▽▽▽프로필 바뀜▽▽▽▽▽▽▽▽▽▽▽▽
 	// 로그아웃 중일때
 	private JLabel lbID = new JLabel();
 	private JLabel lbPW = new JLabel();
+
+
 
 	private Image idimage = new ImageIcon("ID (3).jpg").getImage().getScaledInstance(98, 30,
 			java.awt.Image.SCALE_SMOOTH);
@@ -123,6 +133,12 @@ public class BasicShape extends JFrame {
 	private PicPan picpan = new PicPan();
 	private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
 
+	// COMPNENT - planPan
+	private JPanel planPan = new JPanel();
+	private PlanPan plan = new PlanPan();
+	private JScrollPane planSc = new JScrollPane(planPan);// 스크롤
+
+
 	public Socket getClient() {
 		return client;
 	}
@@ -157,10 +173,14 @@ public class BasicShape extends JFrame {
 		this.homePan.add(imgSlide);
 		this.homePan.add(bmi);
 
+		//목표(plan) 새로운 목표 패널임 (달력들어간거)
+		planPan.setBackground(Color.white);
+		this.plan.setPreferredSize(new Dimension(965, 1600));
+		this.planPan.add(plan);
+
 		// ---------운동
 		videoPan.setBackground(Color.white);
 		this.video.setPreferredSize(new Dimension(965, 1600));
-		this.video.setPreferredSize(new Dimension(965, 1500));
 
 		this.videoPan.add(video);
 		// ---------커뮤니티
@@ -180,10 +200,12 @@ public class BasicShape extends JFrame {
 		panbox3.setBackground(Color.WHITE);
 
 		category.add(homeBt);
-		
+
 		category.add(dailyBt);
 		category.add(videoBt);
 		category.add(imgBoardBt);
+		category.add(planBt);
+
 		panbox1.add(lbID);
 		panbox1.add(inputID);
 		panbox2.add(lbPW);
@@ -198,6 +220,8 @@ public class BasicShape extends JFrame {
 		panboxx.setBackground(Color.white);
 		namePan.setBackground(Color.white);
 		logoutPan.setBackground(Color.white);
+		planPan.setBackground(Color.WHITE);
+
 		profilename.setText(name + " 님 환영합니다!");
 		namePan.add(profilename);
 		logoutPan.add(logout);
@@ -213,16 +237,20 @@ public class BasicShape extends JFrame {
 		titlePan.add(title);
 		sidepan.add(profilePan);
 		sidepan.add(category);
+		sidepan.add(passionlabel);
 		titlePan.setBounds(0, 0, 1194, 100);
 		add(titlePan);
 		sidepan.setBounds(0, 101, 200, 640);
 		add(sidepan);
 		// CardLayout들어있는 mainPan에 패널들 넣음
-
+		this.passionlabel.setIcon(passionicon);
 		mainPan.add(homeSc, "NamedefaultPane");
 		mainPan.add(dailySc, "NamedailyPane");
+
+		mainPan.add(planSc, "NameplanPane");
 		mainPan.add(videoSc, "NamevideoPane");
 		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
+
 		// 이름을 부여함 .
 		// 부여된 이름을 가지고 이벤트 처리부분에서
 		// 카드의 이름으로 식별하여 visible함.
@@ -314,21 +342,21 @@ public class BasicShape extends JFrame {
 						//수신한데이터가 null이아니면 쪼개서 분리한다.
 						//수신한데이터가 null이면 비어있는데이터라고 출력한다.
 						if(tmpComboListData !=null) {
-						tmpComboListData = receivedComboListData.split(",");
-						receiveaction = new String[] { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
-								"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트", "6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기",
-								"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
+							tmpComboListData = receivedComboListData.split(",");
+							receiveaction = new String[] { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
+									"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트", "6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기",
+									"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
 
-						tmpcombo1 = Integer.parseInt(tmpComboListData[0]);
-						tmpComboString1 = receiveaction[tmpcombo1];
+							tmpcombo1 = Integer.parseInt(tmpComboListData[0]);
+							tmpComboString1 = receiveaction[tmpcombo1];
 
-						tmpcombo2 = Integer.parseInt(tmpComboListData[1]);
-						tmpComboString2 = receiveaction[tmpcombo2];
+							tmpcombo2 = Integer.parseInt(tmpComboListData[1]);
+							tmpComboString2 = receiveaction[tmpcombo2];
 
-						tmpcombo3 = Integer.parseInt(tmpComboListData[2]);
-						tmpComboString3 = receiveaction[tmpcombo3];
+							tmpcombo3 = Integer.parseInt(tmpComboListData[2]);
+							tmpComboString3 = receiveaction[tmpcombo3];
 
-						tmpComboStringList = tmpComboString1 + tmpComboString2 + tmpComboString3;
+							tmpComboStringList = tmpComboString1 + tmpComboString2 + tmpComboString3;
 						}
 						else {
 							receivedComboListData ="비어있는ComboList데이터";
@@ -392,8 +420,18 @@ public class BasicShape extends JFrame {
 				card.show(self.mainPan, "NamedefaultPane");
 			}
 		});
-		
-		
+		planBt.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				card.show(self.mainPan, "NameplanPane");
+
+			}
+
+		});
+
+
 		// 목표 버튼
 		dailyBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
