@@ -258,6 +258,59 @@ public class BasicShape extends JFrame {
 		add(mainPan);
 
 	}
+	
+	public void receiveData() {
+		
+		// 로그인이후시점에서 서버로부터 받는 데이터를 처리합니다.
+		// 1.목표 - 캘린더 달성한데이터 Num 값으로 받고 받은데이터는 합계sum 을 만들어서 누적시킨뒤
+		// 한달동안 모아진 sum 값을 가지고 보상함.
+		
+		// 4.동영상url리스트+메타데이터(String)
+		// 5.(로그인이후시점에서 서버컴퓨터에서 보내는데이터)업로드한사진 + 코멘트데이터 ( String)
+		// 1.콤보리스트데이터 받기.
+		try {
+			receivedComboListData = dis.readUTF();
+			System.out.println(receivedComboListData);
+			// 로그인후 받은 콤보리스트 데이터가 null값이아니면 쪼개서 리스트를 분리한다.
+			//수신한데이터가 null이아니면 쪼개서 분리한다.
+			//수신한데이터가 null이면 비어있는데이터라고 출력한다.
+			if(tmpComboListData !=null) {
+				tmpComboListData = receivedComboListData.split(",");
+				receiveaction = new String[] { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
+						"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트", "6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기",
+						"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
+
+				tmpcombo1 = Integer.parseInt(tmpComboListData[0]);
+				tmpComboString1 = receiveaction[tmpcombo1];
+
+				tmpcombo2 = Integer.parseInt(tmpComboListData[1]);
+				tmpComboString2 = receiveaction[tmpcombo2];
+
+				tmpcombo3 = Integer.parseInt(tmpComboListData[2]);
+				tmpComboString3 = receiveaction[tmpcombo3];
+
+				tmpComboStringList = tmpComboString1 + tmpComboString2 + tmpComboString3;
+			}
+			else {
+				receivedComboListData ="비어있는ComboList데이터";
+				tmpComboStringList ="비어있는ComboList데이터";
+			}
+		} catch (Exception e1) {
+			System.out.println("콤보리스트에서 받는곳에서 에러발생지점.");
+			e1.printStackTrace();
+		}
+
+		// 2.물컵데이터받기.
+		// try {
+		// String receicedWaterCupData = dis.readUTF();
+		// System.out.println("물컵데이터받기 :" + receicedWaterCupData);
+		// } catch (Exception e2) {
+		// System.out.println("물컵리스트 받는곳에서 에러발생");
+		// e2.printStackTrace();
+		// }
+		
+	}
+	
 
 	public void clientConnect() {
 
@@ -329,51 +382,7 @@ public class BasicShape extends JFrame {
 					profilename.setText(getName() + " 님 환영합니다!");
 					card.show(self.profilePan, "loginAfter");
 
-					// 로그인이후시점에서 서버로부터 받는 데이터를 처리합니다.
-					// 1.콤보리스트 2.물컵리스트 3.동영상url리스트+메타데이터(String)
-					// 4.(로그인이후시점에서 서버컴퓨터에서 보내는데이터)업로드한사진 + 코멘트데이터 ( String)
-					// 1.콤보리스트데이터 받기.
-					try {
-
-						receivedComboListData = dis.readUTF();
-						System.out.println(receivedComboListData);
-						// 로그인후 받은 콤보리스트 데이터가 null값이아니면 쪼개서 리스트를 분리한다.
-						//수신한데이터가 null이아니면 쪼개서 분리한다.
-						//수신한데이터가 null이면 비어있는데이터라고 출력한다.
-						if(tmpComboListData !=null) {
-							tmpComboListData = receivedComboListData.split(",");
-							receiveaction = new String[] { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
-									"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트", "6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기",
-									"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
-
-							tmpcombo1 = Integer.parseInt(tmpComboListData[0]);
-							tmpComboString1 = receiveaction[tmpcombo1];
-
-							tmpcombo2 = Integer.parseInt(tmpComboListData[1]);
-							tmpComboString2 = receiveaction[tmpcombo2];
-
-							tmpcombo3 = Integer.parseInt(tmpComboListData[2]);
-							tmpComboString3 = receiveaction[tmpcombo3];
-
-							tmpComboStringList = tmpComboString1 + tmpComboString2 + tmpComboString3;
-						}
-						else {
-							receivedComboListData ="비어있는ComboList데이터";
-							tmpComboStringList ="비어있는ComboList데이터";
-						}
-					} catch (Exception e1) {
-						System.out.println("콤보리스트에서 받는곳에서 에러발생지점.");
-						e1.printStackTrace();
-					}
-
-					// 2.물컵데이터받기.
-					// try {
-					// String receicedWaterCupData = dis.readUTF();
-					// System.out.println("물컵데이터받기 :" + receicedWaterCupData);
-					// } catch (Exception e2) {
-					// System.out.println("물컵리스트 받는곳에서 에러발생");
-					// e2.printStackTrace();
-					// }
+					
 
 				} else if (result.equals("로그인실패")) {
 
@@ -492,9 +501,12 @@ public class BasicShape extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		cp.setBackground(Color.WHITE);
+		
+		
 		comp();
 		eventInit();
 		clientConnect();
+//		receiveData();
 		setVisible(true);
 	}
 
