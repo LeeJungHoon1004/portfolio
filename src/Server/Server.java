@@ -29,9 +29,9 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
-import Client.BMI;
-import Client.ImageSlide;
-import Client.PicPan;
+
+import Server.ImageSlidePan;
+
 
 class ConnectionThread extends Thread {
 
@@ -264,11 +264,11 @@ public class Server extends JFrame {
 
 		private TitledBorder tborder = new TitledBorder("");
 		
-		private JPanel homePan = new JPanel(new GridLayout(2, 1));
+		private JPanel homePan = new JPanel(new GridLayout(1, 1));
 		private JScrollPane homeSc = new JScrollPane(homePan);
 		private String name = getName();
-		private ImageSlide imgSlide = new ImageSlide();
-		private BMI bmi = new BMI();
+		private ImageSlidePan imgSlide = new ImageSlidePan();
+	
 
 		// COMPNENT - goalPan 목표
 		private JPanel goalPan = new JPanel();
@@ -289,15 +289,10 @@ public class Server extends JFrame {
 
 		setLayout(null);
 		// 투명
-
 		imgSlide.setPreferredSize(new Dimension(400, 700));
-		bmi.setPreferredSize(new Dimension(872, 800));
-		bmi.setBorder(tborder);
-		
 		// ---------홈
 		homePan.setBackground(Color.white);
 		this.homePan.add(imgSlide);
-		this.homePan.add(bmi);
 
 		// ---------목표
 		goalPan.setBackground(Color.white);
