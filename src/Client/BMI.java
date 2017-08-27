@@ -58,7 +58,7 @@ public class BMI extends JPanel {
 	public void compInit() {
 		setLayout(null);
 		
-		imgResult.setBounds(65, 76, 800, 400);	
+		imgResult.setBounds(35, 76, 800, 400);	
 		stature.setBounds(112, 500, 44, 40);
 		inputStature.setBounds(171,500, 255, 40);
 		weight.setBounds(492,500, 56, 40);

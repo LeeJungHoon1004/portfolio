@@ -168,14 +168,13 @@ public class BasicShape extends JFrame {
 		// 투명
 
 		imgSlide.setPreferredSize(new Dimension(400, 700));
-		bmi.setPreferredSize(new Dimension(872, 800));
+		bmi.setPreferredSize(new Dimension(672, 800));
 		bmi.setBorder(tborder);
 		this.homePan.add(imgSlide);
 		this.homePan.add(bmi);
 
 		//목표(plan) 새로운 목표 패널임 (달력들어간거)
 		planPan.setBackground(Color.white);
-		this.plan.setPreferredSize(new Dimension(965, 1600));
 		this.planPan.add(plan);
 
 		// ---------운동
