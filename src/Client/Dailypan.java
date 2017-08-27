@@ -779,14 +779,7 @@ public class Dailypan extends JPanel {
 		this.event();
 		this.setVisible(true);
 	}
-	public Dailypan( ) { // 서버에서 참조하는 생성자.
-		
-		this.setBackground(Color.white);
-		this.setSize(900, 900);
-		this.comp();
-		this.event();
-		this.setVisible(true);
-	}
+	
 
 	// public static void main(String[] args) {
 	//

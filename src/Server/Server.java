@@ -10,11 +10,12 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,18 +24,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
 import Client.BMI;
-import Client.BasicShape;
-import Client.Dailypan;
 import Client.ImageSlide;
 import Client.PicPan;
-import Client.VideoPan;
 
 class ConnectionThread extends Thread {
 
@@ -219,10 +216,10 @@ public class Server extends JFrame {
 
 		private Font font = new Font("바탕", Font.ITALIC, 30);
 		private JButton homeBt = new JButton("홈");
-		private JButton goalBt = new JButton("나의 목표");
-		private JButton dailyBt = new JButton("하루 목표");
-		private JButton videoBt = new JButton("운동영상");
-		private JButton imgBoardBt = new JButton("사진게시판");
+		
+		private JButton goalBt = new JButton("목표");
+		private JButton exerciseBt = new JButton("운동");
+		private JButton communityBt = new JButton("커뮤니티");
 		private JPanel category = new JPanel(new GridLayout(5, 1));
 		private JPanel titlePan = new JPanel();
 		private JPanel sidepan = new JPanel(new GridLayout(5, 1));
@@ -266,28 +263,27 @@ public class Server extends JFrame {
 		private ImageIcon titleicon = new ImageIcon(titleimage);
 
 		private TitledBorder tborder = new TitledBorder("");
+		
 		private JPanel homePan = new JPanel(new GridLayout(2, 1));
 		private JScrollPane homeSc = new JScrollPane(homePan);
 		private String name = getName();
 		private ImageSlide imgSlide = new ImageSlide();
 		private BMI bmi = new BMI();
 
-		// COMPNENT - goalPan
+		// COMPNENT - goalPan 목표
 		private JPanel goalPan = new JPanel();
+		private goalPan goal = new goalPan(self);
 		private JScrollPane goalSc = new JScrollPane(goalPan);// 스크롤
-		// COMPNENT - dailyPan
+		
+		// COMPNENT - exercisePan 운동
+		private JPanel exercisePan = new JPanel();
+		private exercisePan exercise = new exercisePan(self);
+		private JScrollPane exerciseSc = new JScrollPane(exercisePan);// 스크롤
 
-		private Dailypan dailyPan = new Dailypan();
-		private JScrollPane dailySc = new JScrollPane(dailyPan);// 스크롤
-		// COMPNENT - videoPan
-		private JPanel videoPan = new JPanel();
-		private VideoPan video = new VideoPan();
-		private JScrollPane videoSc = new JScrollPane(videoPan);// 스크롤
-
-		// COMPNENT - imgBoardPan
-		private JPanel imgPanel = new JPanel();
-		private PicPan picpan = new PicPan();
-		private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
+		// COMPNENT - communityPan 커뮤니티
+		private JPanel communityPan = new JPanel();
+		private communityPan community = new communityPan(self);
+		private JScrollPane communitySc = new JScrollPane(communityPan);// 스크롤
 
 	public void compInit() {
 
@@ -297,20 +293,24 @@ public class Server extends JFrame {
 		imgSlide.setPreferredSize(new Dimension(400, 700));
 		bmi.setPreferredSize(new Dimension(872, 800));
 		bmi.setBorder(tborder);
+		
+		// ---------홈
+		homePan.setBackground(Color.white);
 		this.homePan.add(imgSlide);
 		this.homePan.add(bmi);
 
-		// ---------운동영상
-		videoPan.setBackground(Color.white);
-		this.video.setPreferredSize(new Dimension(965, 1600));
-		this.video.setPreferredSize(new Dimension(965, 1500));
-
-		this.videoPan.add(video);
-		// ---------사진
-		picpan.setBackground(Color.white);
-		imgPanel.setBackground(Color.white);
-		this.picpan.setPreferredSize(new Dimension(975, 1600));
-		this.imgPanel.add(picpan);
+		// ---------목표
+		goalPan.setBackground(Color.white);
+		this.goal.setPreferredSize(new Dimension(965, 1500));
+		this.goalPan.add(goal);
+		// ---------운동
+		exercisePan.setBackground(Color.white);
+		this.exercise.setPreferredSize(new Dimension(965, 1500));
+		this.exercisePan.add(exercise);
+		// ---------커뮤니티
+		communityPan.setBackground(Color.white);
+		this.community.setPreferredSize(new Dimension(965, 1500));
+		this.communityPan.add(community);
 
 		this.lbID.setIcon(iconid);
 		this.lbPW.setIcon(iconpw);
@@ -324,9 +324,8 @@ public class Server extends JFrame {
 
 		category.add(homeBt);
 		category.add(goalBt);
-		category.add(dailyBt);
-		category.add(videoBt);
-		category.add(imgBoardBt);
+		category.add(exerciseBt);
+		category.add(communityBt);
 		panbox1.add(lbID);
 		panbox1.add(inputID);
 		panbox2.add(lbPW);
@@ -362,11 +361,10 @@ public class Server extends JFrame {
 		add(sidepan);
 		// CardLayout들어있는 mainPan에 패널들 넣음
 
-		mainPan.add(homeSc, "NamedefaultPane");
-		mainPan.add(goalSc);
-		mainPan.add(dailySc, "NamedailyPane");
-		mainPan.add(videoSc, "NamevideoPane");
-		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
+		mainPan.add(homeSc, "NamedefaultPan");
+		mainPan.add(goalSc, "NamegoalPan");
+		mainPan.add(exerciseSc, "NameexercisePan");
+		mainPan.add(communitySc, "NamecommunityPan"); // 카드로 끼워넣는팬에
 		// 이름을 부여함 .
 		// 부여된 이름을 가지고 이벤트 처리부분에서
 		// 카드의 이름으로 식별하여 visible함.
@@ -377,13 +375,66 @@ public class Server extends JFrame {
 
 	public void eventInit() {
 		
+		homeBt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(self.mainPan, "NamedefaultPan");
+			}
+		});
+		
+		
+		// 목표 버튼
+		goalBt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				card.show(self.mainPan, "NamegoalPan");
+			}							
+		});
+		// 운동 버튼
+		exerciseBt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(self.mainPan, "NameexercisePan");
+
+			}
+		});
+		// 커뮤니티 버튼
+		communityBt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				card.show(self.mainPan, "NamecommunityPan");
+			}
+		});
+		// 제목 리스너
+		title.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+
+			// 마우스버튼이 누른뒤 뗄때의 이벤트처리
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				card.show(self.mainPan, "NamedefaultPane");
+			}
+		});
 
 	}
 
 	// 생성자
 	public Server() {
 		this.setSize(1200, 750);
-		this.setTitle("4주다이어트서버");
+		this.setTitle("서버");
 		this.setLocationRelativeTo(null);
 		this.setBackground(Color.WHITE);
 		this.setDefaultCloseOperation(Server.EXIT_ON_CLOSE);
@@ -412,5 +463,6 @@ public class Server extends JFrame {
 		}
 
 	}
+	
 
 }
