@@ -150,7 +150,7 @@ public class BasicShape extends JFrame {
 
 	// COMPNENT - imgBoardPan
 	private JPanel imgPanel = new JPanel();
-	private PictureBoardPan pbp = new PictureBoardPan();
+	//private PictureBoardPan pbp = new PictureBoardPan();
 	private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
 
 	// COMPNENT - planPan
@@ -203,10 +203,10 @@ public class BasicShape extends JFrame {
 
 		this.videoPan.add(video);
 		// ---------커뮤니티
-		pbp.setBackground(Color.white);
-		imgPanel.setBackground(Color.white);
-		this.pbp.setPreferredSize(new Dimension(975, 1600));
-		this.imgPanel.add(pbp);
+		//pbp.setBackground(Color.white);
+		//imgPanel.setBackground(Color.white);
+		//this.pbp.setPreferredSize(new Dimension(975, 1600));
+		//this.imgPanel.add(pbp);
 
 		this.lbID.setIcon(iconid);
 		this.lbPW.setIcon(iconpw);
