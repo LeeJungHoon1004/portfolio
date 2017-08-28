@@ -56,11 +56,12 @@ public class BasicShape extends JFrame {
 
 	private Font font = new Font("바탕", Font.ITALIC, 30);
 	private JButton homeBt = new JButton("홈");
-	private JButton dailyBt = new JButton("목표");
-	private JButton planBt = new JButton("목표수정중");
+	//private JButton dailyBt = new JButton("목표");
+	private JButton planBt = new JButton("목표");
 	private JButton videoBt = new JButton("운동");
 	private JButton imgBoardBt = new JButton("커뮤니티");
-	private JPanel category = new JPanel(new GridLayout(4, 1));
+	private JButton calandarBt = new JButton("캘린더");
+	private JPanel category = new JPanel(new GridLayout(5, 1));
 	private JPanel titlePan = new JPanel();
 	private JPanel sidepan = new JPanel(new GridLayout(5, 1));
 
@@ -112,7 +113,7 @@ public class BasicShape extends JFrame {
 	private ImageIcon titleicon = new ImageIcon(titleimage);
 
 	private TitledBorder tborder = new TitledBorder("");
-	private JPanel homePan = new JPanel(new GridLayout(2, 1));
+	private JPanel homePan = new JPanel(new GridLayout(1, 1));
 	private JScrollPane homeSc = new JScrollPane(homePan);
 	private String name = getName();
 	private String userID  =null;
@@ -135,7 +136,7 @@ public class BasicShape extends JFrame {
 
 	
 	private ImageSlide imgSlide = new ImageSlide();
-	private BMI bmi = new BMI();
+//	private BMI bmi = new BMI();
 
 
 	// COMPNENT - dailyPan
@@ -143,6 +144,10 @@ public class BasicShape extends JFrame {
 	private Dailypan dailyPan = new Dailypan(self);
 
 	private JScrollPane dailySc = new JScrollPane(dailyPan);// 스크롤
+	
+	private CalandarPan calandarpan = new CalandarPan();
+	
+	private JScrollPane calandarSc = new JScrollPane(calandarpan);
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
 	private VideoPan video = new VideoPan();
@@ -188,10 +193,10 @@ public class BasicShape extends JFrame {
 		// 투명
 
 		imgSlide.setPreferredSize(new Dimension(400, 700));
-		bmi.setPreferredSize(new Dimension(672, 800));
-		bmi.setBorder(tborder);
+//		bmi.setPreferredSize(new Dimension(672, 800));
+//		bmi.setBorder(tborder);
 		this.homePan.add(imgSlide);
-		this.homePan.add(bmi);
+//		this.homePan.add(bmi);
 
 		//목표(plan) 새로운 목표 패널임 (달력들어간거)
 		planPan.setBackground(Color.white);
@@ -219,11 +224,13 @@ public class BasicShape extends JFrame {
 		panbox3.setBackground(Color.WHITE);
 
 		category.add(homeBt);
-
-		category.add(dailyBt);
+		category.add(planBt);
+	//	category.add(dailyBt);
 		category.add(videoBt);
 		category.add(imgBoardBt);
-		category.add(planBt);
+		category.add(calandarBt);
+		
+		
 
 		panbox1.add(lbID);
 		panbox1.add(inputID);
@@ -265,7 +272,7 @@ public class BasicShape extends JFrame {
 		this.passionlabel.setIcon(passionicon);
 		mainPan.add(homeSc, "NamedefaultPane");
 		mainPan.add(dailySc, "NamedailyPane");
-
+		mainPan.add(calandarSc, "NamecalandarPane");
 		mainPan.add(planSc, "NameplanPane");
 		mainPan.add(videoSc, "NamevideoPane");
 		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
@@ -357,6 +364,7 @@ public class BasicShape extends JFrame {
 		} catch (Exception e1) {
 			System.out.println("데이터 보내기 실패");
 		}
+		
 		try {
 			result = dis.readUTF();
 			if (result.equals("로그인성공")) {
@@ -459,20 +467,31 @@ public class BasicShape extends JFrame {
 			}
 
 		});
+		
+		calandarBt.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				card.show(self.mainPan, "NamecalandarPane");
+
+			}
+
+		});
 
 
 		// 목표 버튼
-		dailyBt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// if() 하루시간이 지난이후시점.
-				System.out.println("나의목표 :" + tmpComboStringList);
-				// else 하루시간이 지나지않은시점. 안나옴.
-				// JOptionPane.showMessageDialog( , );
-
-				// 프로필창 로그인여부에 따라 다름.△△△△△△△
-				card.show(self.mainPan, "NamedailyPane");
-			}
-		});
+//		dailyBt.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				// if() 하루시간이 지난이후시점.
+//				System.out.println("나의목표 :" + tmpComboStringList);
+//				// else 하루시간이 지나지않은시점. 안나옴.
+//				// JOptionPane.showMessageDialog( , );
+//
+//				// 프로필창 로그인여부에 따라 다름.△△△△△△△
+//				card.show(self.mainPan, "NamedailyPane");
+//			}
+//		});
 		// 운동 버튼
 		videoBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
