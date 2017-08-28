@@ -338,6 +338,7 @@ public class BasicShape extends JFrame {
 		} catch (Exception e1) {
 			System.out.println("데이터 보내기 실패");
 		}
+		
 		try {
 			result = dis.readUTF();
 			if (result.equals("로그인성공")) {

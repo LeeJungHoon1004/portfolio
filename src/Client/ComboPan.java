@@ -128,13 +128,7 @@ public class ComboPan extends JPanel{
 				"6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기", 
 				"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
 
-		// String [] action = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
-		// "4.집에갈때 계단이용하기 ", "5.스쿼트 30개씩 3세트" , "6.플랭크 1분 3세트" ,"7.저녁안먹기","8.샤워하며 마사지하기"
-		// ,"9.자기전 하늘자전거 5분","10.일어나서 물한잔 원샷"};
-		// JComboBox combolist1 = new JComboBox(action);
-		// combolist1.addItem(action);
-		// addItem 넣은것은 Object타입 으로 넣었다.
-
+		
 		combolist1 = new JComboBox();
 		for (int i = 0; i < action.length; i++) {
 
@@ -426,16 +420,9 @@ public class ComboPan extends JPanel{
 		});
 
 		selectBt.addActionListener(new ActionListener() {
-
+			//선택완료 버튼 이벤트처리입니다.
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-
-				// questList [0]= combolist1.getSelectedIndex();
-				// questList [1] =combolist2.getSelectedIndex();
-				// questList [2] =combolist3.getSelectedIndex();
-
-				// new TimeThread(time).start();
 
 				// 2가지 케이스로 나눈다 . 선택완료 버튼을 누를떄
 
@@ -479,12 +466,6 @@ public class ComboPan extends JPanel{
 
 							System.out.println("하루목표전송 성공");
 
-							// System.out.println(combolist1.getSelectedIndex());
-							// System.out.println(combolist2.getSelectedIndex());
-							// System.out.println(combolist3.getSelectedIndex());
-							// dos.writeInt(combolist1.getSelectedIndex());
-							// dos.writeInt(combolist2.getSelectedIndex());
-							// dos.writeInt(combolist3.getSelectedIndex());
 							System.out.println("combolist데이터 발신 성공");
 
 
@@ -507,38 +488,7 @@ public class ComboPan extends JPanel{
 					return;
 				}
 
-				// String selected1 = combolist1.getSelectedItem().toString();
-				// System.out.println(selected1);
-				// String selected2 = combolist1.getSelectedItem().toString();
-				// String selected3 = combolist1.getSelectedItem().toString();
-
-				// try{
-				// dos.writeUTF("선택완료"); //리스트 선택완료
-				// dos.writeUTF(selected1);
-				// dos.writeUTF(selected2);
-				// dos.writeUTF(selected3);
-				// System.out.println("데이터보내기 성공! ");
-				// } catch (Exception e1) {
-				// System.out.println("데이터 보내기 실패");
-				//
-				// }
-
-				// try {
-				//
-				// result = dis.readUTF();
-				// if (result.equals("전송성공")) {
-				// JOptionPane.showMessageDialog(null, "전송 성공");
-				//
-				// } else if (result.equals("전송실패")) {
-				// JOptionPane.showMessageDialog(null, "전송에 실패하였습니다.");
-				// }
-				// System.out.println("전송 성공");
-				// }catch (Exception e2) {
-				//
-				// }
-
-				// return result;
-
+				
 			}
 
 		});
