@@ -30,7 +30,7 @@ public class PlanPan extends JPanel {
 	private Socket client;
 	private DataOutputStream dos;
 	private DataInputStream dis;
-	
+
 	private PlanPan self = this;
 
 	private TitledBorder tborder = new TitledBorder("");
@@ -54,13 +54,15 @@ public class PlanPan extends JPanel {
 
 
 	//멤버
-	private JLabel combolabel = new JLabel("1. 오늘의 목표를 선택하세요!");
+	private JLabel combolabel = new JLabel(" 1.  오늘의 목표를 선택하세요!");
 	private JButton selectBt = new JButton("선택완료 >_<");
-	private JLabel waterchecklabel = new JLabel("2. 물마신 횟수를 체크해보세요! ");
+	private JLabel waterchecklabel = new JLabel(" 2.  물마신 횟수를 체크해보세요! ");
 	private JButton buttonUpload = new JButton("체크완료 >_<"); // 체크완료 버튼
 
 	private JLabel goallabel = new JLabel("");
 	private JLabel emptylabel = new JLabel("                                           ");
+	private JLabel emptylabel2 = new JLabel("                                           ");
+
 	private JLabel waterinformlabel = new JLabel("");
 
 
@@ -80,7 +82,7 @@ public class PlanPan extends JPanel {
 
 
 	//컵 이미지와 아이콘 생성
-	private Image goalimg = new ImageIcon("목표.jpg").getImage().getScaledInstance(330, 150,
+	private Image goalimg = new ImageIcon("목표.jpg").getImage().getScaledInstance(330, 180,
 			java.awt.Image.SCALE_SMOOTH); // 
 	private Image waterinformimg = new ImageIcon("waterinform.jpg").getImage().getScaledInstance(300, 300,
 			java.awt.Image.SCALE_SMOOTH); 
@@ -93,7 +95,7 @@ public class PlanPan extends JPanel {
 			java.awt.Image.SCALE_SMOOTH); // 물들어있는컵
 
 
-	
+
 	private ImageIcon icongoal = new ImageIcon(goalimg);
 	private ImageIcon iconwaterinform = new ImageIcon(waterinformimg);
 	private ImageIcon icon1 = new ImageIcon(cupimage);
@@ -184,15 +186,15 @@ public class PlanPan extends JPanel {
 		comboPanel.add(combolistPanel, BorderLayout.CENTER);
 		comboPanel.add(selectBt,BorderLayout.SOUTH);
 
-		
+
 		combolistPanel.add(emptylabel);
 		combolistPanel.add(goallabel);
 		goallabel.setIcon(icongoal);
 		combolistPanel.add(combolist1);
 		combolistPanel.add(combolist2);
 		combolistPanel.add(combolist3);
-		
-		
+
+
 
 
 
@@ -222,12 +224,12 @@ public class PlanPan extends JPanel {
 		waterPanel.add(buttonUpload,BorderLayout.SOUTH);
 
 
-
+		waterlistPanel.add(emptylabel2);
 		waterinformlabel.setIcon(iconwaterinform);
 		waterlistPanel.add(waterinformlabel);
 		waterlistPanel.add(cupPan);
 		waterlistPanel.add(cupPan2);
-		
+
 		cupPan.setPreferredSize(new Dimension(250, 80));
 		// cupPan.add(water_inform);
 
@@ -518,7 +520,7 @@ public class PlanPan extends JPanel {
 					return;
 				}
 
-				
+
 			}
 
 		});
@@ -589,7 +591,7 @@ public class PlanPan extends JPanel {
 			}
 		});
 	}
-	
+
 
 	//생성자
 	public PlanPan() {
