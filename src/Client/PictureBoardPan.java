@@ -114,10 +114,10 @@ public class PictureBoardPan extends JFrame {
 	}
 
 	public SetRenderer[] addList() {
-
+		imgPath = getImgPathData();
 		for (int i = 0; i < getFileNum(); i++) {
 			renderer = new SetRenderer[i];
-			renderer[i] = new SetRenderer(new ImageIcon(getImgPathData()), getTitleData());
+			renderer[i] = new SetRenderer(new ImageIcon(imgPath[i]), getTitleData());
 		}
 
 		// renderer = new SetRenderer[10];

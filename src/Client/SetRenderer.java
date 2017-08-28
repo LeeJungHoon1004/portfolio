@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 public class SetRenderer {
 
 	private ImageIcon icon;
-	private String title;
+	private String[] title;
 	private String imagePath;
 	private int index;
 	
@@ -15,7 +15,7 @@ public class SetRenderer {
 	private Image changedImg;
 	private ImageIcon image;
 	
-	public SetRenderer(ImageIcon icon, String title) {
+	public SetRenderer(ImageIcon icon, String[] title) {
 		super();
 		this.title = title;
 		this.icon = icon;
