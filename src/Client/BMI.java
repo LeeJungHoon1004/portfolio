@@ -58,14 +58,14 @@ public class BMI extends JPanel {
 	public void compInit() {
 		setLayout(null);
 		
-		imgResult.setBounds(35, 76, 800, 400);	
-		stature.setBounds(112, 500, 44, 40);
-		inputStature.setBounds(171,500, 255, 40);
-		weight.setBounds(492,500, 56, 40);
-		inputWeight.setBounds(562,500,255, 40);
-		gender.setBounds(112,550, 60, 50);
-		radioPan.setBounds(178,550, 252, 50);
-		resultButton.setBounds(670, 560, 84, 40);
+		imgResult.setBounds(35, 16, 800, 400);	
+		stature.setBounds(112, 430, 44, 40);
+		inputStature.setBounds(171,430, 255, 40);
+		weight.setBounds(492,430, 56, 40);
+		inputWeight.setBounds(562,430,255, 40);
+		gender.setBounds(112,480, 60, 50);
+		radioPan.setBounds(178,480, 252, 50);
+		resultButton.setBounds(650, 480, 84, 40);
 		
 		add(imgResult);
 		add(stature);
@@ -93,7 +93,7 @@ public class BMI extends JPanel {
 				resultBMI();
 				gradeBMI();
 				
-				resultPan.setBounds(120, 620, 720, 150);
+				resultPan.setBounds(100, 530, 720, 100);
 				
 				result1.setFont(f);
 				result2.setFont(f);

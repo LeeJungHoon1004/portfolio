@@ -564,22 +564,8 @@ public class Dailypan extends JPanel {
 
 		});
 
-		cupb1.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
+		cupb1.addMouseListener(new MouseAdapter() {
+			
 
 			// 마우스를 뗏을때의 이벤트 처리입니다.
 			@Override
@@ -596,7 +582,7 @@ public class Dailypan extends JPanel {
 
 		});
 
-		cupb2.addMouseListener(new MouseListener() {
+		cupb2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 			}

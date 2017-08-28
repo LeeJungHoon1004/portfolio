@@ -9,21 +9,29 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 public class PlanPan extends JPanel {
+	
 	private TitledBorder tborder = new TitledBorder("");
 	//멤버
 	private JButton buttonNorth = new JButton("북쪽버튼");
-	private JButton buttoncenter = new JButton("센터버튼");
+
 	private BMI bmi = new BMI();
+	private ComboPan combo = new ComboPan();
 	private JPanel panelNorth = new JPanel();
 	private JPanel panelCenter = new JPanel();
 	private JPanel panelSouth = new JPanel();
 	
 	public void compInit() {
 		
+		this.setLayout(new GridLayout(3,1));
 		this.panelNorth.add(buttonNorth);
-		this.panelCenter.add(buttoncenter);
+		this.panelCenter.add(combo);
 		this.panelSouth.add(bmi);
-		bmi.setPreferredSize(new Dimension(872, 900));
+		
+		combo.setPreferredSize(new Dimension(872,600));
+		combo.setBorder(tborder);
+		
+		
+		bmi.setPreferredSize(new Dimension(872, 650));
 		bmi.setBorder(tborder);
 		this.add(panelNorth);
 		this.add(panelCenter);
@@ -40,9 +48,9 @@ public class PlanPan extends JPanel {
 	
 	//생성자
 	public PlanPan() {
+		this.setBackground(Color.WHITE);
 		
-		this.setLayout(new GridLayout(3,1));
-		this.setSize(900, 1800);
+		this.setSize(900, 900);
 		
 		this.compInit();
 		this.eventInit();
