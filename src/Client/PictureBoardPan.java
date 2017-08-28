@@ -281,7 +281,7 @@ public class PictureBoardPan extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		if (new BasicShape().getID != null && new BasicShape().getPW != null) {
+		if (new BasicShape().getUserID() != null && new BasicShape().getUserPW() != null) {
 			new PictureBoardPan();
 		} else {
 			JOptionPane.showMessageDialog(null, "로그인을 하고 이용해 주세요.");
