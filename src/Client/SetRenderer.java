@@ -7,14 +7,15 @@ import javax.swing.ImageIcon;
 public class SetRenderer {
 
 	private ImageIcon icon;
-	private String title;
+	private String[] title;
 	private String imagePath;
 	private int index;
+	
 	private Image originImg;
 	private Image changedImg;
 	private ImageIcon image;
 	
-	public SetRenderer(ImageIcon icon, String title) {
+	public SetRenderer(ImageIcon icon, String[] title) {
 		super();
 		this.title = title;
 		this.icon = icon;
@@ -27,6 +28,8 @@ public class SetRenderer {
 	public SetRenderer(String imagePath) {
 		this.imagePath = imagePath;
 	}
+	
+	//================¡â»ý¼ºÀÚ¡â===================
 	
 	public ImageIcon getIconPath() {
 		
