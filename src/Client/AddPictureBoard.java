@@ -42,7 +42,8 @@ public class AddPictureBoard extends JDialog {
 	private JButton findPicture = new JButton("사진");
 	private JTextField picturePath = new JTextField();
 	private JTextField comment = new JTextField();
-
+	private JTextField title = new JTextField();
+	
 	private JPanel picturePan = new JPanel();
 	private JPanel pathPan = new JPanel();
 	private JPanel buttonPan = new JPanel();
@@ -109,7 +110,7 @@ public class AddPictureBoard extends JDialog {
 		fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		switch (fc.showOpenDialog(AddPictureBoard.this)) { // △파일열기.
 		case JFileChooser.APPROVE_OPTION:// 열기버튼
-			img = fc.getSelectedFile();
+			img = fc.getSelectedFile(); //img에 선택한 파일 넣음.
 			System.out.println(img);// ←선택한 파일주소
 
 			break;
@@ -121,14 +122,15 @@ public class AddPictureBoard extends JDialog {
 		case JFileChooser.ERROR_OPTION:
 			JOptionPane.showMessageDialog(AddPictureBoard.this, "error", "FCDemo", JOptionPane.OK_OPTION);
 		}
-
-	}// 선택한 img를 파일형으로 return.
+		
+		//return img;
+	}
 
 	
-	public void sendData() {
-		//connection();
+	public void sendImage() {
+		//connection(); //사실 이거 이제 필요없음. basicshape에서 소켓주소 받아서 쓰기 때문
 		img = fc.getSelectedFile(); //꺼내올 파일 경로.
-		long fileSize = img.length();//파일사이즈를 long형으로 저장.
+		long fileSize = img.length();//파일사이즈를 long형으로 저장.img는 file형이다.
 
 		try{
 			FileInputStream fis = new FileInputStream(img);//파일인풋스트림 fis에 보낼파일경로저장.
@@ -137,17 +139,27 @@ public class AddPictureBoard extends JDialog {
 			byte[] fileContents = new byte[(int)fileSize];//byte형 배열에 파일 사이즈 저장.
 			dis.readFully(fileContents);//파일 끝까지 잘 읽어라.
 			
-			System.out.println(client.getInetAddress()+"에게 파일사이즈..");
-			
-			this.dos.writeInt((int)fileSize);
-			this.dos.write(fileContents);
-			this.dos.flush();
+			this.dos.writeUTF("사진게시판 이미지");
+			this.dos.writeUTF(img.getName());//파일이름 먼저 보냄.
+			this.dos.writeInt((int)fileSize);//파일사이즈를 보내서 공간확보(?)
+			this.dos.write(fileContents);//파일컨텐츠 = 바이트를 보냄.
+			this.dos.flush();//플러쉬 날림.
 			
 		}catch(Exception e){
-			System.out.println("파일을 찾을 수 없습니다.");
+			System.out.println("이미지파일 보내기 실패");
 		}
 	}
 	
+	public void sendData() {
+		try {
+			dos.writeUTF("사진게시판 데이터");
+			dos.writeUTF(title.getText());//글 제목 보내기.
+			dos.writeUTF(new BasicShape().getName());//올린사람 이름 보냄.
+			dos.writeUTF(comment.getText());//코멘트 보냄.
+		}catch(Exception e1) {
+			System.out.println("사진게시판 데이터 보내기 실패");
+		}
+	}
 	
 	
 	public AddPictureBoard(PictureBoardPan parent) {

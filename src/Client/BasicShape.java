@@ -150,7 +150,7 @@ public class BasicShape extends JFrame {
 
 	// COMPNENT - imgBoardPan
 	private JPanel imgPanel = new JPanel();
-	private PicPan picpan = new PicPan();
+	private PictureBoardPan pbp = new PictureBoardPan();
 	private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
 
 	// COMPNENT - planPan
@@ -203,10 +203,10 @@ public class BasicShape extends JFrame {
 
 		this.videoPan.add(video);
 		// ---------커뮤니티
-		picpan.setBackground(Color.white);
+		pbp.setBackground(Color.white);
 		imgPanel.setBackground(Color.white);
-		this.picpan.setPreferredSize(new Dimension(975, 1600));
-		this.imgPanel.add(picpan);
+		this.pbp.setPreferredSize(new Dimension(975, 1600));
+		this.imgPanel.add(pbp);
 
 		this.lbID.setIcon(iconid);
 		this.lbPW.setIcon(iconpw);
@@ -483,7 +483,8 @@ public class BasicShape extends JFrame {
 		// 커뮤니티 버튼
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				clientConnect();
+				new PictureBoardPan(client,dis,dos);
 				card.show(self.mainPan, "NameimgBoard");
 			}
 		});
