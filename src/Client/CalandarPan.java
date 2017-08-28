@@ -34,7 +34,7 @@ public class CalandarPan extends JPanel {
 
 	private JButton buttonUpload = new JButton("체크"); // 체크완료 버튼
 
-
+	private JButton buttonUpload2 = new JButton("체크"); 
 	
 	public void compInit() {
 
