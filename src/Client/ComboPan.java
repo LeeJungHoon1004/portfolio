@@ -27,7 +27,7 @@ import javax.swing.border.TitledBorder;
 public class ComboPan extends JPanel{
 
 
-	BasicShape parent;
+	private BasicShape parent;
 	private Socket client;
 	private DataOutputStream dos;
 	private DataInputStream dis;
@@ -440,7 +440,9 @@ public class ComboPan extends JPanel{
 				// 2가지 케이스로 나눈다 . 선택완료 버튼을 누를떄
 
 				// 1.로그인이 된 상태에서 버튼을 누르는경우.
-				if (parent.getClient() != null) {
+				System.out.println(parent.getUserID());
+				System.out.println(parent.getUserPW());
+				if (parent.getUserID() != null && parent.getUserPW() != null) {
 
 					int Question = JOptionPane.showConfirmDialog(null, "저장하시겠습니까 ? ",
 							"저장",JOptionPane.OK_OPTION);
@@ -502,9 +504,11 @@ public class ComboPan extends JPanel{
 				}
 
 				// 2.로그인을 하지않은 경우에서 버튼을 누르는경우
+				
 				else if (parent.getClient() == null) {
 					JOptionPane.showMessageDialog(null, "로그인먼저해주세요");
 					return;
+					
 				}
 
 				// String selected1 = combolist1.getSelectedItem().toString();
@@ -610,6 +614,12 @@ public class ComboPan extends JPanel{
 		});
 	}
 
+	public BasicShape getParent() {
+		return parent;
+	}
+	public void setParent(BasicShape parent) {
+		this.parent = parent;
+	}
 	public ComboPan() {
 
 		this.setBackground(Color.WHITE);

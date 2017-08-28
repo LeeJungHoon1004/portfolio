@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class exercisePan extends JPanel{
+public class ExercisePan extends JPanel{
 
 	JButton button = new JButton("獄動");
 
@@ -17,7 +17,7 @@ public void compInit() {
 	}
 	
 	//持失切
-	public exercisePan(Server parent) {
+	public ExercisePan(Server parent) {
 		this.setBackground(Color.WHITE);
 		this.compInit();
 	

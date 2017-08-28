@@ -50,6 +50,8 @@ class TimeThread extends Thread {
 }
 
 public class Dailypan extends JPanel {
+	private String userId =null;
+	private String userPw = null;
 	public static int time;
 
 	BasicShape parent;
@@ -370,7 +372,10 @@ public class Dailypan extends JPanel {
 				// 2가지 케이스로 나눈다 . 선택완료 버튼을 누를떄
 
 				// 1.로그인이 된 상태에서 버튼을 누르는경우.
-				if (parent.getClient() != null) {
+				userId =parent.getUserID(); 
+				userPw =parent.getUserPW();
+				
+				if (parent.getUserID() != null && parent.getUserPW() != null) {
 
 					int Question = JOptionPane.showConfirmDialog(null, "저장하시겠습니까 ? ",
 							"저장",JOptionPane.OK_OPTION);
@@ -394,7 +399,8 @@ public class Dailypan extends JPanel {
 
 
 						try {
-
+							
+							
 							dis = parent.getDis();
 							dos = parent.getDos();
 							dos.writeUTF("하루목표전송");
@@ -432,7 +438,7 @@ public class Dailypan extends JPanel {
 				}
 
 				// 2.로그인을 하지않은 경우에서 버튼을 누르는경우
-				else if (parent.getClient() == null) {
+				else if (parent.getUserID() == null && parent.getUserPW() ==null) {
 					JOptionPane.showMessageDialog(null, "로그인먼저해주세요");
 					return;
 				}

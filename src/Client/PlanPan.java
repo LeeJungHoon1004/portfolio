@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 public class PlanPan extends JPanel {
+	private BasicShape parent ;
+	private PlanPan self = this;
 	
 	private TitledBorder tborder = new TitledBorder("");
 	//¸â¹ö
@@ -47,7 +49,8 @@ public class PlanPan extends JPanel {
 	}
 	
 	//»ý¼ºÀÚ
-	public PlanPan() {
+	public PlanPan(BasicShape self) {
+		 
 		this.setBackground(Color.WHITE);
 		
 		this.setSize(900, 900);

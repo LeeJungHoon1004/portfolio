@@ -115,6 +115,25 @@ public class BasicShape extends JFrame {
 	private JPanel homePan = new JPanel(new GridLayout(2, 1));
 	private JScrollPane homeSc = new JScrollPane(homePan);
 	private String name = getName();
+	private String userID  =null;
+	private String userPW  =null;
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	public String getUserPW() {
+		return userPW;
+	}
+
+	public void setUserPW(String userPW) {
+		this.userPW = userPW;
+	}
+
+	
 	private ImageSlide imgSlide = new ImageSlide();
 	private BMI bmi = new BMI();
 
@@ -136,7 +155,7 @@ public class BasicShape extends JFrame {
 
 	// COMPNENT - planPan
 	private JPanel planPan = new JPanel();
-	private PlanPan plan = new PlanPan();
+	private PlanPan plan = new PlanPan(self);
 	private JScrollPane planSc = new JScrollPane(planPan);// 스크롤
 
 
@@ -271,11 +290,11 @@ public class BasicShape extends JFrame {
 		// 1.콤보리스트데이터 받기.
 		try {
 			receivedComboListData = dis.readUTF();
-			System.out.println(receivedComboListData);
+			System.out.println("수신한receivedComboListData 값 :" + receivedComboListData);
 			// 로그인후 받은 콤보리스트 데이터가 null값이아니면 쪼개서 리스트를 분리한다.
 			//수신한데이터가 null이아니면 쪼개서 분리한다.
 			//수신한데이터가 null이면 비어있는데이터라고 출력한다.
-			if(tmpComboListData !=null) {
+			if(receivedComboListData !=null) {
 				tmpComboListData = receivedComboListData.split(",");
 				receiveaction = new String[] { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
 						"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트", "6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기",
@@ -292,8 +311,8 @@ public class BasicShape extends JFrame {
 
 				tmpComboStringList = tmpComboString1 + tmpComboString2 + tmpComboString3;
 			}
-			else {
-				receivedComboListData ="비어있는ComboList데이터";
+			else if(receivedComboListData.equals("비어있는ComboList데이터")){
+				
 				tmpComboStringList ="비어있는ComboList데이터";
 			}
 		} catch (Exception e1) {
@@ -328,8 +347,8 @@ public class BasicShape extends JFrame {
 
 	public String getResult() {
 		// 로그인 버튼
-		String userID = inputID.getText();
-		String userPW = inputPW.getText();
+		userID = inputID.getText();
+		userPW = inputPW.getText();
 		try {
 			dos.writeUTF("로그인");
 			dos.writeUTF(userID);
@@ -343,6 +362,7 @@ public class BasicShape extends JFrame {
 			if (result.equals("로그인성공")) {
 				JOptionPane.showMessageDialog(null, "로그인 성공");
 				System.out.println("로그인 성공");
+				
 			} else if (result.equals("로그인실패")) {
 				JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.");
 				System.out.println("로그인 실패");
@@ -382,7 +402,7 @@ public class BasicShape extends JFrame {
 
 					profilename.setText(getName() + " 님 환영합니다!");
 					card.show(self.profilePan, "loginAfter");
-
+					receiveData();
 					
 
 				} else if (result.equals("로그인실패")) {
@@ -397,21 +417,21 @@ public class BasicShape extends JFrame {
 		// 로그아웃 버튼
 		logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-
-					dos.close();
-					dis.close();
-					client.close();
-					dos = null;
-					dis = null;
-					client = null;
-
+				
+					
+//					dos.close();
+//					dis.close();
+//					client.close();
+//					dos = null;
+//					dis = null;
+//					client = null;
+					self.userID = null;
+					self.userPW = null;
+					
 					System.out.println("성공적으로 소켓종료");
 					inputID.setText("");
 					inputPW.setText("");
-				} catch (IOException e1) {
-					System.out.println("소켓종료 실패");
-				}
+				
 				card.show(self.profilePan, "loginBefore");
 			}
 		});
@@ -488,12 +508,9 @@ public class BasicShape extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		cp.setBackground(Color.WHITE);
-		
-		
 		comp();
 		eventInit();
 		clientConnect();
-//		receiveData();
 		setVisible(true);
 	}
 

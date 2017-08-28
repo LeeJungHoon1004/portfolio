@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class goalPan extends JPanel {
+public class GoalPan extends JPanel {
 
 	//¸â¹ö
 
@@ -18,7 +18,7 @@ public class goalPan extends JPanel {
 	}
 	
 	//»ý¼ºÀÚ
-	public goalPan(Server parent) {
+	public GoalPan(Server parent) {
 		this.setBackground(Color.WHITE);
 		this.compInit();
 	}

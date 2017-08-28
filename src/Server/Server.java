@@ -30,21 +30,45 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
 
-import Server.ImageSlidePan;
-
-
 class ConnectionThread extends Thread {
+	
+	
+	private ConnectionThread self = this;
+	
+	public ConnectionThread getSelf() {
+		return self;
+	}
 
-	String name;
-	String gender;
-	String id;
-	String pw;
+	public void setSelf(ConnectionThread self) {
+		this.self = self;
+	}
+
+	private String name;
+	private String gender;
+	private String id;
+	private String pw;
 
 	private String dailyList;
 	// private int dailyList [] = new int[3] ;
 	private Socket socket = null;
 	private DataInputStream dis;
 	private DataOutputStream dos;
+
+	public DataInputStream getDis() {
+		return dis;
+	}
+
+	public void setDis(DataInputStream dis) {
+		this.dis = dis;
+	}
+
+	public DataOutputStream getDos() {
+		return dos;
+	}
+
+	public void setDos(DataOutputStream dos) {
+		this.dos = dos;
+	}
 
 	public ConnectionThread(Socket socket) {
 		try {
@@ -137,7 +161,9 @@ class ConnectionThread extends Thread {
 						else{
 							dos.writeUTF("비어있는ComboList데이터");
 						}
-						//3.로그인성공후 등록된 회원의 waterlist전송.
+						//3.로그인성공후 등록된 회원의 watercuplist전송.
+						
+						
 
 					} else {
 						dos.writeUTF("로그인실패");
@@ -185,6 +211,10 @@ class ConnectionThread extends Thread {
 					
 					
 				}
+				
+				else if(cmd.equals("커뮤니티데이터수신")) {
+					
+				}
 
 			}
 
@@ -204,6 +234,12 @@ class ConnectionThread extends Thread {
 }
 
 public class Server extends JFrame {
+	
+	
+	
+	
+	
+	
 	// 매니저
 	public static Manager manager = new Manager();
 	// 컴포넌트변수
@@ -249,9 +285,8 @@ public class Server extends JFrame {
 		private JPanel namePan = new JPanel();
 		private JPanel logoutPan = new JPanel();
 		private JLabel profilename = new JLabel();
-		private JLabel profilePhoto = new JLabel();
 		private JButton logout = new JButton("로그아웃");
-		private String result;
+		
 		// 카드레이아웃 여기있음
 		private CardLayout card = new CardLayout();
 		
@@ -272,21 +307,21 @@ public class Server extends JFrame {
 
 		// COMPNENT - goalPan 목표
 		private JPanel goalPan = new JPanel();
-		private goalPan goal = new goalPan(self);
+		private GoalPan goal = new GoalPan(self);
 		private JScrollPane goalSc = new JScrollPane(goalPan);// 스크롤
 		
 		// COMPNENT - exercisePan 운동
 		private JPanel exercisePan = new JPanel();
-		private exercisePan exercise = new exercisePan(self);
+		private ExercisePan exercise = new ExercisePan(self);
 		private JScrollPane exerciseSc = new JScrollPane(exercisePan);// 스크롤
 
 		// COMPNENT - communityPan 커뮤니티
 		private JPanel communityPan = new JPanel();
-		private communityPan community = new communityPan(self);
+		private CommunityPan community = new CommunityPan();
 		private JScrollPane communitySc = new JScrollPane(communityPan);// 스크롤
 
 	public void compInit() {
-
+		
 		setLayout(null);
 		// 투명
 		imgSlide.setPreferredSize(new Dimension(400, 700));
