@@ -61,6 +61,7 @@ public class BasicShape extends JFrame {
 	private JButton videoBt = new JButton("운동");
 	private JButton imgBoardBt = new JButton("커뮤니티");
 	private JButton calandarBt = new JButton("캘린더");
+	private JButton GraphBt = new JButton("그래프");
 	private JPanel category = new JPanel(new GridLayout(5, 1));
 	private JPanel titlePan = new JPanel();
 	private JPanel sidepan = new JPanel(new GridLayout(5, 1));
@@ -146,8 +147,13 @@ public class BasicShape extends JFrame {
 	private JScrollPane dailySc = new JScrollPane(dailyPan);// 스크롤
 	
 	private CalandarPan calandarpan = new CalandarPan();
-	
+
 	private JScrollPane calandarSc = new JScrollPane(calandarpan);
+	
+	
+	private myGoalPan mygoalPan = new myGoalPan();
+	private JScrollPane goalSc = new JScrollPane(mygoalPan);
+	
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
 	private VideoPan video = new VideoPan();
@@ -229,6 +235,7 @@ public class BasicShape extends JFrame {
 		category.add(videoBt);
 		category.add(imgBoardBt);
 		category.add(calandarBt);
+		category.add(GraphBt);
 		
 		
 
@@ -276,6 +283,7 @@ public class BasicShape extends JFrame {
 		mainPan.add(planSc, "NameplanPane");
 		mainPan.add(videoSc, "NamevideoPane");
 		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
+		mainPan.add(mygoalPan, "NamegoalBoard");
 
 		// 이름을 부여함 .
 		// 부여된 이름을 가지고 이벤트 처리부분에서
@@ -507,6 +515,15 @@ public class BasicShape extends JFrame {
 				card.show(self.mainPan, "NameimgBoard");
 			}
 		});
+		
+		GraphBt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clientConnect();
+				new PictureBoardPan(client,dis,dos);
+				card.show(self.mainPan, "NamegoalBoard");
+			}
+		});
+		
 		// 제목 리스너
 		title.addMouseListener(new MouseAdapter() {
 			

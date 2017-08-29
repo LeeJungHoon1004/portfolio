@@ -14,7 +14,7 @@ import java.sql.*;
 import java.io.*;
 import javax.swing.*;
  
-class Calandar extends JFrame implements ActionListener
+class Calandar extends JPanel implements ActionListener
 {
        String [] days = {"일","월","화","수","목","금","토"};
        int year ,month,day,todays,memoday=0;
@@ -126,9 +126,8 @@ class Calandar extends JFrame implements ActionListener
              btnDel.addActionListener(this);	//메모삭제
  
 
-             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //닫는기능
-             setTitle("7조 프로젝트 스케쥴러");
-             setBounds(200,200,450,400);	//(x,y,가로,세로) 프레임창의 위치
+          
+          
              setVisible(true);   
        
 
