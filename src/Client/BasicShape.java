@@ -116,6 +116,7 @@ public class BasicShape extends JFrame {
 	private TitledBorder tborder = new TitledBorder("");
 	private JPanel homePan = new JPanel(new GridLayout(1, 1));
 	private JScrollPane homeSc = new JScrollPane(homePan);
+
 	private String name = getName();
 	private String userID  =null;
 	private String userPW  =null;
@@ -143,14 +144,14 @@ public class BasicShape extends JFrame {
 	// COMPNENT - dailyPan
 
 	private Dailypan dailyPan = new Dailypan(self);
-
 	private JScrollPane dailySc = new JScrollPane(dailyPan);// ½ºÅ©·Ñ
 	
-	private CalandarPan calandarpan = new CalandarPan();
 
+	private JPanel calandarPan = new JPanel();
+	private CalandarPan calandarpan = new CalandarPan();
 	private JScrollPane calandarSc = new JScrollPane(calandarpan);
-	
-	
+
+
 	private myGoalPan mygoalPan = new myGoalPan();
 	private JScrollPane goalSc = new JScrollPane(mygoalPan);
 	

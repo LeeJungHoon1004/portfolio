@@ -19,39 +19,28 @@ import javax.swing.JPanel;
 
 
 public class CalandarPan extends JPanel {
-    /** The currently-interesting year (not modulo 1900!) */
+   
     protected int yy;
 
-    /** Currently-interesting month and day */
     protected int mm, dd;
 
-    /** The buttons to be displayed */
     protected JButton labs[][];
 
-    /** The number of day squares to leave blank at the start of this month */
     protected int leadGap = 0;
 
-    /** A Calendar object used throughout */
     Calendar calendar = new GregorianCalendar();
 
-    /** Today's year */
     protected final int thisYear = calendar.get(Calendar.YEAR);
 
-    /** Today's month */
     protected final int thisMonth = calendar.get(Calendar.MONTH);
 
-    /** One of the buttons. We just keep its reference for getBackground(). */
     private JButton b0;
 
-    /** The month choice */
     private JComboBox monthChoice;
 
-    /** The year choice */
     private JComboBox yearChoice;
 
-    /**
-         * Construct a Cal, starting with today.
-         */
+   
     CalandarPan() {
         super();
         setYYMMDD(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
@@ -59,12 +48,7 @@ public class CalandarPan extends JPanel {
         recompute();
     }
 
-    /**
-         * Construct a Cal, given the leading days and the total days
-         * 
-         * @exception IllegalArgumentException
-         *                    If year out of range
-         */
+    
 //    CalandarPan(int year, int month, int today) {
 //        super();
 //        setYYMMDD(year, month, today);
@@ -79,10 +63,11 @@ public class CalandarPan extends JPanel {
         dd = today;
     }
 
-    String[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+    String[] months = { "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" };
 
     /** Build the GUI. Assumes that setYYMMDD has been called. */
     private void buildGUI()
+    
     {
         getAccessibleContext().setAccessibleDescription("Calendar not accessible yet. Sorry!");
         setBorder(BorderFactory.createEtchedBorder());
@@ -126,19 +111,19 @@ public class CalandarPan extends JPanel {
                 }
             }
         });
-        add(BorderLayout.CENTER, tp);
+        add(tp ,BorderLayout.NORTH );
 
         JPanel bp = new JPanel();
         bp.setLayout(new GridLayout(7, 7));
         labs = new JButton[6][7]; // first row is days
 
-        bp.add(b0 = new JButton("S"));
-        bp.add(new JButton("M"));
-        bp.add(new JButton("T"));
-        bp.add(new JButton("W"));
-        bp.add(new JButton("R"));
-        bp.add(new JButton("F"));
-        bp.add(new JButton("S"));
+        bp.add(b0 = new JButton("일요일"));
+        bp.add(new JButton("월요일"));
+        bp.add(new JButton("화요일"));
+        bp.add(new JButton("수요일"));
+        bp.add(new JButton("목요일"));
+        bp.add(new JButton("금요일"));
+        bp.add(new JButton("토요일"));
 
         ActionListener dateSetter = new ActionListener() {
             public void actionPerformed(ActionEvent e)
@@ -163,7 +148,7 @@ public class CalandarPan extends JPanel {
                 labs[i][j].addActionListener(dateSetter);
             }
 
-        add(BorderLayout.SOUTH, bp);
+        add(BorderLayout.CENTER, bp);
     }
 
     public final static int dom[] = { 31, 28, 31, 30, /* jan feb mar apr */
