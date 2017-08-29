@@ -21,24 +21,16 @@ import javax.swing.JPanel;
 public class CalandarPan extends JPanel {
    
     protected int yy;
-
     protected int mm, dd;
-
     protected JButton labs[][];
-
     protected int leadGap = 0;
-
     Calendar calendar = new GregorianCalendar();
-
     protected final int thisYear = calendar.get(Calendar.YEAR);
-
     protected final int thisMonth = calendar.get(Calendar.MONTH);
-
     private JButton b0;
-
     private JComboBox monthChoice;
-
     private JComboBox yearChoice;
+    private JButton resetBt = new JButton("추가버튼");
 
    
     CalandarPan() {
@@ -48,13 +40,6 @@ public class CalandarPan extends JPanel {
         recompute();
     }
 
-    
-//    CalandarPan(int year, int month, int today) {
-//        super();
-//        setYYMMDD(year, month, today);
-//        buildGUI();
-//        recompute();
-//    }
 
     private void setYYMMDD(int year, int month, int today)
     {
@@ -68,6 +53,7 @@ public class CalandarPan extends JPanel {
     /** Build the GUI. Assumes that setYYMMDD has been called. */
     private void buildGUI()
     
+    
     {
         getAccessibleContext().setAccessibleDescription("Calendar not accessible yet. Sorry!");
         setBorder(BorderFactory.createEtchedBorder());
@@ -75,10 +61,13 @@ public class CalandarPan extends JPanel {
         setLayout(new BorderLayout());
 
         JPanel tp = new JPanel();
+        
+        tp.setBackground(Color.white);
         tp.add(monthChoice = new JComboBox());
         for (int i = 0; i < months.length; i++)
             monthChoice.addItem(months[i]);
         monthChoice.setSelectedItem(months[mm]);
+        
         monthChoice.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
             {
@@ -95,6 +84,7 @@ public class CalandarPan extends JPanel {
         monthChoice.getAccessibleContext().setAccessibleDescription("Choose a month of the year");
 
         tp.add(yearChoice = new JComboBox());
+        tp.add(resetBt);
         yearChoice.setEditable(true);
         for (int i = yy - 5; i < yy + 5; i++)
             yearChoice.addItem(Integer.toString(i));
@@ -124,6 +114,7 @@ public class CalandarPan extends JPanel {
         bp.add(new JButton("목요일"));
         bp.add(new JButton("금요일"));
         bp.add(new JButton("토요일"));
+        bp.setBackground(Color.white);
 
         ActionListener dateSetter = new ActionListener() {
             public void actionPerformed(ActionEvent e)
@@ -199,6 +190,7 @@ public class CalandarPan extends JPanel {
 
         // Say we need to be drawn on the screen
         repaint();
+    
     }
 
     /**
@@ -255,7 +247,7 @@ public class CalandarPan extends JPanel {
             dd = newDay;
         // Now shade the correct square
         Component square = labs[(leadGap + newDay - 1) / 7][(leadGap + newDay - 1) % 7];
-        square.setBackground(Color.red);
+        square.setBackground(Color.YELLOW);
         square.repaint();
         activeDay = newDay;
     }

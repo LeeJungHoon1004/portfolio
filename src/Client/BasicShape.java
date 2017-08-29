@@ -109,7 +109,7 @@ public class BasicShape extends JFrame {
 	private JPanel mainPan = new JPanel(card);
 	private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
 	// COMPNENT - homePan
-	private Image titleimage = new ImageIcon("타이틀06.jpg").getImage().getScaledInstance(1194, 100,
+	private Image titleimage = new ImageIcon("타이틀3.jpg").getImage().getScaledInstance(1194, 100,
 			java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon titleicon = new ImageIcon(titleimage);
 
@@ -151,9 +151,9 @@ public class BasicShape extends JFrame {
 	private CalandarPan calandarpan = new CalandarPan();
 	private JScrollPane calandarSc = new JScrollPane(calandarpan);
 
-
-	private myGoalPan mygoalPan = new myGoalPan();
-	private JScrollPane goalSc = new JScrollPane(mygoalPan);
+	private JPanel mygoalPan = new JPanel();
+	private myGoalPan mygoalpan = new myGoalPan();
+	private JScrollPane mygoalPanSc = new JScrollPane(mygoalpan);
 	
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
@@ -212,8 +212,13 @@ public class BasicShape extends JFrame {
 		// ---------운동
 		videoPan.setBackground(Color.white);
 		this.video.setPreferredSize(new Dimension(965, 1600));
+		
+		
 
 		this.videoPan.add(video);
+		
+		
+		
 		// ---------커뮤니티
 		//pbp.setBackground(Color.white);
 		//imgPanel.setBackground(Color.white);
@@ -229,6 +234,8 @@ public class BasicShape extends JFrame {
 		panbox1.setBackground(Color.WHITE);
 		panbox2.setBackground(Color.WHITE);
 		panbox3.setBackground(Color.WHITE);
+		
+		
 
 		category.add(homeBt);
 		category.add(planBt);
@@ -284,7 +291,7 @@ public class BasicShape extends JFrame {
 		mainPan.add(planSc, "NameplanPane");
 		mainPan.add(videoSc, "NamevideoPane");
 		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
-		mainPan.add(mygoalPan, "NamegoalBoard");
+		mainPan.add(mygoalPanSc, "NamegoalBoard");
 
 		// 이름을 부여함 .
 		// 부여된 이름을 가지고 이벤트 처리부분에서
