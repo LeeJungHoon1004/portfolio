@@ -257,7 +257,8 @@ public class BasicShape extends JFrame {
 		panbox.add(panbox2);
 		panbox.add(panbox3);
 		// CardLayout이 들어있는 profilePan에 넣음.
-
+		
+		profilePan.setBackground(Color.white);
 		panboxx.setBackground(Color.white);
 		namePan.setBackground(Color.white);
 		logoutPan.setBackground(Color.white);
@@ -436,7 +437,7 @@ public class BasicShape extends JFrame {
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 
 			}
-
+			
 		});
 		// 로그아웃 버튼
 		logout.addActionListener(new ActionListener() {
