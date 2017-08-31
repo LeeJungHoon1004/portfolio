@@ -164,7 +164,7 @@ public class BasicShape extends JFrame {
 
 	// COMPNENT - imgBoardPan
 	private JPanel imgPanel = new JPanel();
-	//private PictureBoardPan pbp = new PictureBoardPan();
+	private PictureBoardPan pbp = new PictureBoardPan();
 	private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
 
 	// COMPNENT - planPan
@@ -213,7 +213,7 @@ public class BasicShape extends JFrame {
 
 		// ---------운동
 		videoPan.setBackground(Color.white);
-		this.video.setPreferredSize(new Dimension(965, 1600));
+		this.video.setPreferredSize(new Dimension(965, 500));
 		
 		
 
@@ -222,10 +222,10 @@ public class BasicShape extends JFrame {
 		
 		
 		// ---------커뮤니티
-		//pbp.setBackground(Color.white);
-		//imgPanel.setBackground(Color.white);
-		//this.pbp.setPreferredSize(new Dimension(975, 1600));
-		//this.imgPanel.add(pbp);
+		pbp.setBackground(Color.white);
+		imgPanel.setBackground(Color.white);
+		this.pbp.setPreferredSize(new Dimension(975, 640));
+		this.imgPanel.add(pbp);
 
 		this.lbID.setIcon(iconid);
 		this.lbPW.setIcon(iconpw);
@@ -265,7 +265,8 @@ public class BasicShape extends JFrame {
 		namePan.setBackground(Color.white);
 		logoutPan.setBackground(Color.white);
 		planPan.setBackground(Color.WHITE);
-
+		imgPanel.setBackground(Color.white);
+		
 		profilename.setText(name + " 님 환영합니다!");
 		namePan.add(profilename);
 		logoutPan.add(logout);
@@ -293,7 +294,7 @@ public class BasicShape extends JFrame {
 		mainPan.add(calandarSc, "NamecalandarPane");
 		mainPan.add(planSc, "NameplanPane");
 		mainPan.add(videoSc, "NamevideoPane");
-		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
+		mainPan.add(imgPanel, "NameimgBoard"); // 카드로 끼워넣는팬에
 		mainPan.add(mygoalPanSc, "NamegoalBoard");
 
 		// 이름을 부여함 .
@@ -528,7 +529,6 @@ public class BasicShape extends JFrame {
 		// 커뮤니티 버튼
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				new PictureBoardPan(client,dis,dos);
 				card.show(self.mainPan, "NameimgBoard");
 			}

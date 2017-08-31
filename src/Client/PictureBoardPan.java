@@ -54,20 +54,11 @@ public class PictureBoardPan extends JPanel {
 
 	
 	private int index;// jlist 선택한 인덱스 번호
-
 	private TitledBorder tborder = new TitledBorder("");
-	private CardLayout card = new CardLayout();
-	private JPanel mainboardPan = new JPanel();
-
-	private JPanel board1 = new JPanel();
-	private JPanel board2 = new JPanel();
-	private JPanel board3 = new JPanel();
-	private JPanel board4 = new JPanel();
-	private JPanel board5 = new JPanel();
-
-	private JPanel floor3 = new JPanel();
-	private JPanel floor4 = new JPanel();
-
+	
+	private JPanel floor1 = new JPanel();
+	private JPanel floor2 = new JPanel();
+	
 	private JButton upload = new JButton("글올리기");
 	private JButton remove = new JButton("글삭제");
 
@@ -78,30 +69,25 @@ public class PictureBoardPan extends JPanel {
 	private int cnt = 0;
 
 	public void compInit() {
-		System.out.println("4");
 		setLayout(new BorderLayout(1, 1));
-
-		board1.setPreferredSize(new Dimension(600, 700));
-		floor3.setPreferredSize(new Dimension(600, 50));
-
-		floor3.add(upload);
-		floor3.add(remove);
-
 
 		list = new JList(dlm);
 		sc = new JScrollPane(list);
 		list.setCellRenderer(new CellRenderer());
 
-		sc.setPreferredSize(new Dimension(580, 630));
-
+		sc.setPreferredSize(new Dimension(970, 500));
+		floor2.setPreferredSize(new Dimension(970,90));
 		sc.setBorder(tborder);
-		board1.add(sc);
+		
+		floor1.add(sc);
+		floor2.add(upload);
+		floor2.add(remove);
 
-		mainboardPan.add(board1, "page1");
-
-
-		add(mainboardPan, BorderLayout.CENTER);
-		add(floor3, BorderLayout.SOUTH);
+		floor1.setBackground(Color.white);
+		floor2.setBackground(Color.white);
+		
+		add(floor1, BorderLayout.CENTER);
+		add(floor2, BorderLayout.SOUTH);
 
 	}
 
@@ -222,7 +208,7 @@ public class PictureBoardPan extends JPanel {
 		
 	}
 
-	public PictureBoardPan(BasicShape parent) {
+	public PictureBoardPan() {
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {

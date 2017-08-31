@@ -80,6 +80,10 @@ public class AddPictureBoard extends JDialog {
 		buttonPan.add(commit);
 		buttonPan.add(cancel);
 
+		picturePan.setBackground(Color.white);
+		pathPan.setBackground(Color.white);
+		buttonPan.setBackground(Color.white);
+		
 		add(picturePan, BorderLayout.NORTH);
 		add(pathPan, BorderLayout.CENTER);
 		add(buttonPan, BorderLayout.SOUTH);
