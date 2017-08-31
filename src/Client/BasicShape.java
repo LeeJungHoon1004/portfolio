@@ -159,7 +159,7 @@ public class BasicShape extends JFrame {
 	
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
-	private VideoPan video = new VideoPan();
+	//private VideoPan video = new VideoPan();
 	private JScrollPane videoSc = new JScrollPane(videoPan);// 스크롤
 
 	// COMPNENT - imgBoardPan
@@ -213,11 +213,11 @@ public class BasicShape extends JFrame {
 
 		// ---------운동
 		videoPan.setBackground(Color.white);
-		this.video.setPreferredSize(new Dimension(965, 500));
+//		this.video.setPreferredSize(new Dimension(965, 500));
 		
 		
 
-		this.videoPan.add(video);
+	//	this.videoPan.add(video);
 		
 		
 		
