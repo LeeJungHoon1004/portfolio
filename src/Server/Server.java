@@ -12,8 +12,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -21,6 +28,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
@@ -28,6 +36,8 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
+
+import Server.FileList;
 
 
 class ConnectionThread extends Thread {
@@ -49,10 +59,21 @@ class ConnectionThread extends Thread {
 	private String pw;
 
 	private String dailyList;
+	
 	// private int dailyList [] = new int[3] ;
-	private Socket socket = null;
-	private DataInputStream dis;
-	private DataOutputStream dos;
+			//소켓
+			private Socket socket = null;
+			//아웃 스트림
+			private FileOutputStream fos = null;
+			private BufferedOutputStream bos = null;
+			private ObjectOutputStream oos = null;
+			private DataOutputStream dos = null;
+			//인풋스트림
+			private FileInputStream fis = null;
+			private BufferedInputStream bis = null;
+			private DataInputStream dis = null;
+			private ObjectInputStream ois = null;
+
 
 	public DataInputStream getDis() {
 		return dis;
@@ -212,7 +233,77 @@ class ConnectionThread extends Thread {
 					
 				}
 				
-				else if(cmd.equals("커뮤니티데이터수신")) {
+				//커뮤니티팬에서 받은 이미지와 String 데이터 수신
+				else if(cmd.equals("소켓연결후데이터수신")) {
+				
+					// 전송하려는 파일의 이름 , 크기 , 내용물(파일자체) , 파일의 타이틀 ,파일의 내용
+					String title = null;
+					String contents = null;
+					String fileName = null;
+					int fileSize = 0;
+					byte[] fileContents = null;
+					
+					//2.클라이언트에서 데이터를 받습니다 (2.ClientRam to ServerRam)
+					ois = new ObjectInputStream(socket.getInputStream());
+					FileList fl1 = (FileList) ois.readObject();
+					FileList fl2 = (FileList) ois.readObject();
+//					FileList fl3 = (FileList) ois.readObject();
+					
+					
+					
+					
+					System.out.println(fl1.getTitle()); //제목
+					System.out.println(fl1.getContents());//코멘트
+					System.out.println(fl1.getFileName());//파일이름
+					System.out.println(fl1.getFileSize());//파일의 크기(int)
+					System.out.println(fl1.getFileContents());//파일의 내용물(byte [])
+					
+					
+					System.out.println(fl2.getTitle());
+					System.out.println(fl2.getContents());
+					System.out.println(fl2.getFileName());
+					System.out.println(fl2.getFileSize());
+					System.out.println(fl2.getFileContents());
+					
+					
+//					System.out.println(fl3.getTitle());
+//					System.out.println(fl3.getContents());
+//					System.out.println(fl3.getFileName());
+//					System.out.println(fl3.getFileSize());
+//					System.out.println(fl3.getFileContents());
+					
+					//3.클라이언트에서 받은 데이터를 경로에 저장합니다 (3.Ram to Hdd)
+					fileContents = fl1.getFileContents();
+					File f = new File("D:/6월자바_이정훈_2차/자바기반웹개발자양성_7월/Server/" + fl1.getFileName());
+					fos = new FileOutputStream(f);
+					bos = new BufferedOutputStream(fos);
+					dos = new DataOutputStream(bos);
+					dos.write(fileContents);
+					dos.flush();
+					
+					fileContents = fl2.getFileContents();
+					File f2 = new File("D:/6월자바_이정훈_2차/자바기반웹개발자양성_7월/Server/" + fl2.getFileName());
+					fos = new FileOutputStream(f2);
+					dos = new DataOutputStream(fos);
+					dos.write(fileContents);
+					dos.flush();
+					
+//					fileContents = fl3.getFileContents();
+//					File f3 = new File("E:/프로그래밍/Java언어/자바기반웹프로그래머양성_7월/Server/" + fl3.getFileName());
+//					fos = new FileOutputStream(f3);
+//					dos = new DataOutputStream(fos);
+//					dos.write(fileContents);
+//					dos.flush();
+					
+					System.out.println("클라이언트에서 받은 데이터를 하드디스크로 저장완료.");
+					
+					dos.close();
+					
+					
+					
+				}
+				else if(cmd.equals("클라이언트데이터 송신")) {
+					
 					
 				}
 
@@ -251,11 +342,6 @@ public class Server extends JFrame {
 
 
 		private Font font = new Font("바탕", Font.ITALIC, 30);
-		private JButton homeBt = new JButton("홈");
-		
-		private JButton goalBt = new JButton("목표");
-		private JButton exerciseBt = new JButton("운동");
-		private JButton communityBt = new JButton("커뮤니티");
 		private JPanel category = new JPanel(new GridLayout(5, 1));
 		private JPanel titlePan = new JPanel();
 		private JPanel sidepan = new JPanel(new GridLayout(5, 1));
@@ -297,53 +383,22 @@ public class Server extends JFrame {
 				java.awt.Image.SCALE_SMOOTH);
 		private ImageIcon titleicon = new ImageIcon(titleimage);
 
-		private TitledBorder tborder = new TitledBorder("");
-		
 		private JPanel homePan = new JPanel(new GridLayout(1, 1));
 		private JScrollPane homeSc = new JScrollPane(homePan);
 		private String name = getName();
-		private ImageSlidePan imgSlide = new ImageSlidePan();
+//		private ImageSlidePan imgSlide = new ImageSlidePan();
 	
 
-		// COMPNENT - goalPan 목표
-		private JPanel goalPan = new JPanel();
-		private GoalPan goal = new GoalPan(self);
-		private JScrollPane goalSc = new JScrollPane(goalPan);// 스크롤
-		
-		// COMPNENT - exercisePan 운동
-		private JPanel exercisePan = new JPanel();
-		private ExercisePan exercise = new ExercisePan(self);
-		private JScrollPane exerciseSc = new JScrollPane(exercisePan);// 스크롤
-
-		// COMPNENT - communityPan 커뮤니티
-		private JPanel communityPan = new JPanel();
-		private CommunityPan community = new CommunityPan();
-		private JScrollPane communitySc = new JScrollPane(communityPan);// 스크롤
 
 	public void compInit() {
 		
 		setLayout(null);
 		// 투명
-		imgSlide.setPreferredSize(new Dimension(400, 700));
+		
 		// ---------홈
 		homePan.setBackground(Color.white);
-		this.homePan.add(imgSlide);
 
-		// ---------목표
-		goalPan.setBackground(Color.white);
-		this.goal.setPreferredSize(new Dimension(965, 1500));
-		this.goalPan.add(goal);
-		// ---------운동
-		exercisePan.setBackground(Color.white);
-		this.exercise.setPreferredSize(new Dimension(965, 1500));
-		this.exercisePan.add(exercise);
-		// ---------커뮤니티
-		communityPan.setBackground(Color.white);
-		this.community.setPreferredSize(new Dimension(965, 1500));
-		this.communityPan.add(community);
 
-		this.lbID.setIcon(iconid);
-		this.lbPW.setIcon(iconpw);
 
 		// compInit() - panelCard_StimulsPhoto
 		category.setBackground(Color.WHITE);
@@ -352,16 +407,7 @@ public class Server extends JFrame {
 		panbox2.setBackground(Color.WHITE);
 		panbox3.setBackground(Color.WHITE);
 
-		category.add(homeBt);
-		category.add(goalBt);
-		category.add(exerciseBt);
-		category.add(communityBt);
-		panbox1.add(lbID);
-		panbox1.add(inputID);
-		panbox2.add(lbPW);
-		panbox2.add(inputPW);
-		panbox3.add(login);
-		panbox3.add(membership);
+
 		panbox.add(panbox1);
 		panbox.add(panbox2);
 		panbox.add(panbox3);
@@ -370,21 +416,12 @@ public class Server extends JFrame {
 		panboxx.setBackground(Color.white);
 		namePan.setBackground(Color.white);
 		logoutPan.setBackground(Color.white);
-		profilename.setText(name + " 님 환영합니다!");
-		namePan.add(profilename);
-		logoutPan.add(logout);
-
-		panboxx.add(profilename, BorderLayout.CENTER);
-		panboxx.add(logoutPan, BorderLayout.CENTER);
-		profilePan.add(panbox, "loginBefore");
 		profilePan.add(panboxx, "loginAfter");
-
 		// =======================================================
 		// title.setFont(font);
 		title.setIcon(titleicon);
 		titlePan.add(title);
-		sidepan.add(profilePan);
-		sidepan.add(category);
+
 		titlePan.setBounds(0, 0, 1194, 100);
 		add(titlePan);
 		sidepan.setBounds(0, 101, 200, 640);
@@ -392,9 +429,6 @@ public class Server extends JFrame {
 		// CardLayout들어있는 mainPan에 패널들 넣음
 
 		mainPan.add(homeSc, "NamedefaultPan");
-		mainPan.add(goalSc, "NamegoalPan");
-		mainPan.add(exerciseSc, "NameexercisePan");
-		mainPan.add(communitySc, "NamecommunityPan"); // 카드로 끼워넣는팬에
 		// 이름을 부여함 .
 		// 부여된 이름을 가지고 이벤트 처리부분에서
 		// 카드의 이름으로 식별하여 visible함.
@@ -405,59 +439,9 @@ public class Server extends JFrame {
 
 	public void eventInit() {
 		
-		homeBt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				card.show(self.mainPan, "NamedefaultPan");
-			}
-		});
 		
+
 		
-		// 목표 버튼
-		goalBt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				card.show(self.mainPan, "NamegoalPan");
-			}							
-		});
-		// 운동 버튼
-		exerciseBt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				card.show(self.mainPan, "NameexercisePan");
-
-			}
-		});
-		// 커뮤니티 버튼
-		communityBt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				card.show(self.mainPan, "NamecommunityPan");
-			}
-		});
-		// 제목 리스너
-		title.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-
-			// 마우스버튼이 누른뒤 뗄때의 이벤트처리
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				card.show(self.mainPan, "NamedefaultPane");
-			}
-		});
 
 	}
 

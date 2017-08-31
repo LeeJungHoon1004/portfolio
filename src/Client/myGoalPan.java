@@ -3,6 +3,7 @@ package Client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,7 @@ public class myGoalPan extends JPanel {
        
       this.add(controlPanel, BorderLayout.SOUTH);
       this.add(drawingPanel, BorderLayout.CENTER);
-      this.setPreferredSize(new Dimension(920, 350));
+      this.setPreferredSize(new Dimension(920, 900));
       // myGoalPanel.add(drawingPanel, BorderLayout.CENTER);
    }
 

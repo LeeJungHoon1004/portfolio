@@ -1,5 +1,6 @@
 package Client;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.ButtonGroup;
@@ -57,7 +57,10 @@ public class SignUp extends JDialog {
 	private DataOutputStream dos;
 	private DataInputStream dis;
 
+	
 	public void compInit() {
+		
+		//setBackground(Color.white);
 		setLayout(new GridBagLayout());
 		
 		panName.setBorder(tborder);
@@ -114,6 +117,8 @@ public class SignUp extends JDialog {
 		c.gridy = 6;
 		c.gridx = 1;
 		add(panButtons, c);
+		
+		
 	}// end
 
 	public void eventInit() {

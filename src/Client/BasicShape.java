@@ -31,6 +31,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
+import Server.FileList;
 //github.com/LeeJungHoon1004/portfolio.git	
 
 public class BasicShape extends JFrame {
@@ -109,13 +110,14 @@ public class BasicShape extends JFrame {
 	private JPanel mainPan = new JPanel(card);
 	private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
 	// COMPNENT - homePan
-	private Image titleimage = new ImageIcon("타이틀06.jpg").getImage().getScaledInstance(1194, 100,
+	private Image titleimage = new ImageIcon("타이틀3.jpg").getImage().getScaledInstance(1194, 100,
 			java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon titleicon = new ImageIcon(titleimage);
 
 	private TitledBorder tborder = new TitledBorder("");
 	private JPanel homePan = new JPanel(new GridLayout(1, 1));
 	private JScrollPane homeSc = new JScrollPane(homePan);
+
 	private String name = getName();
 	private String userID  =null;
 	private String userPW  =null;
@@ -143,16 +145,16 @@ public class BasicShape extends JFrame {
 	// COMPNENT - dailyPan
 
 	private Dailypan dailyPan = new Dailypan(self);
-
 	private JScrollPane dailySc = new JScrollPane(dailyPan);// 스크롤
 	
-	private CalandarPan calandarpan = new CalandarPan();
 
+	private JPanel calandarPan = new JPanel();
+	private CalandarPan calandarpan = new CalandarPan();
 	private JScrollPane calandarSc = new JScrollPane(calandarpan);
-	
-	
-	private myGoalPan mygoalPan = new myGoalPan();
-	private JScrollPane goalSc = new JScrollPane(mygoalPan);
+
+	private JPanel mygoalPan = new JPanel();
+	private myGoalPan mygoalpan = new myGoalPan();
+	private JScrollPane mygoalPanSc = new JScrollPane(mygoalpan);
 	
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
@@ -211,8 +213,13 @@ public class BasicShape extends JFrame {
 		// ---------운동
 		videoPan.setBackground(Color.white);
 		this.video.setPreferredSize(new Dimension(965, 1600));
+		
+		
 
 		this.videoPan.add(video);
+		
+		
+		
 		// ---------커뮤니티
 		//pbp.setBackground(Color.white);
 		//imgPanel.setBackground(Color.white);
@@ -228,6 +235,8 @@ public class BasicShape extends JFrame {
 		panbox1.setBackground(Color.WHITE);
 		panbox2.setBackground(Color.WHITE);
 		panbox3.setBackground(Color.WHITE);
+		
+		
 
 		category.add(homeBt);
 		category.add(planBt);
@@ -249,7 +258,8 @@ public class BasicShape extends JFrame {
 		panbox.add(panbox2);
 		panbox.add(panbox3);
 		// CardLayout이 들어있는 profilePan에 넣음.
-
+		
+		profilePan.setBackground(Color.white);
 		panboxx.setBackground(Color.white);
 		namePan.setBackground(Color.white);
 		logoutPan.setBackground(Color.white);
@@ -283,7 +293,7 @@ public class BasicShape extends JFrame {
 		mainPan.add(planSc, "NameplanPane");
 		mainPan.add(videoSc, "NamevideoPane");
 		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
-		mainPan.add(mygoalPan, "NamegoalBoard");
+		mainPan.add(mygoalPanSc, "NamegoalBoard");
 
 		// 이름을 부여함 .
 		// 부여된 이름을 가지고 이벤트 처리부분에서
@@ -294,8 +304,8 @@ public class BasicShape extends JFrame {
 
 	}
 	
-	public void receiveData() {
-		
+	public void receiveDataAfterLogin() {
+				
 		// 로그인이후시점에서 서버로부터 받는 데이터를 처리합니다.
 		// 1.목표 - 캘린더 달성한데이터 Num 값으로 받고 받은데이터는 합계sum 을 만들어서 누적시킨뒤
 		// 한달동안 모아진 sum 값을 가지고 보상함.
@@ -346,7 +356,7 @@ public class BasicShape extends JFrame {
 		
 	}
 	
-
+	//서버로 소켓접속
 	public void clientConnect() {
 
 		try {
@@ -359,6 +369,13 @@ public class BasicShape extends JFrame {
 		}
 
 	}// end
+	
+	//서버 접속후 데이터 수신.
+	public void receiveDataBeforeLogin() {
+		//Article , URL 데이터 수신
+		
+		
+	}
 
 	public String getResult() {
 		// 로그인 버튼
@@ -418,7 +435,7 @@ public class BasicShape extends JFrame {
 
 					profilename.setText(getName() + " 님 환영합니다!");
 					card.show(self.profilePan, "loginAfter");
-					receiveData();
+			//		receiveDataAfterLogin();
 					
 
 				} else if (result.equals("로그인실패")) {
@@ -428,7 +445,7 @@ public class BasicShape extends JFrame {
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 
 			}
-
+			
 		});
 		// 로그아웃 버튼
 		logout.addActionListener(new ActionListener() {
@@ -548,6 +565,7 @@ public class BasicShape extends JFrame {
 		comp();
 		eventInit();
 		clientConnect();
+		receiveDataBeforeLogin();
 		setVisible(true);
 	}
 

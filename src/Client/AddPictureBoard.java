@@ -30,7 +30,6 @@ public class AddPictureBoard extends JDialog {
 	private Socket client;
 	private DataInputStream dis;
 	private DataOutputStream dos;
-
 	private AddPictureBoard self = this;
 	private TitledBorder tborder = new TitledBorder("");
 	// ======FILE CHOOSER=======================
