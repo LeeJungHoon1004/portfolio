@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -527,7 +528,7 @@ public class BasicShape extends JFrame {
 		// 커뮤니티 버튼
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				clientConnect();
+				
 				new PictureBoardPan(client,dis,dos);
 				card.show(self.mainPan, "NameimgBoard");
 			}
@@ -536,7 +537,6 @@ public class BasicShape extends JFrame {
 		GraphBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clientConnect();
-				new PictureBoardPan(client,dis,dos);
 				card.show(self.mainPan, "NamegoalBoard");
 			}
 		});
@@ -556,6 +556,7 @@ public class BasicShape extends JFrame {
 	}
 
 	public BasicShape() {
+		clientConnect();
 		setTitle("기본shape테스트");
 		// setSize(700, 500);
 		setSize(1200, 750);
@@ -567,6 +568,20 @@ public class BasicShape extends JFrame {
 		clientConnect();
 		receiveDataBeforeLogin();
 		setVisible(true);
+		
+		
+		//프로그램의 공통파일 만들기! 
+		String path = "C:/Users/Administrator/4weeksWorkout";
+		// 파일 객체 생성
+		File file = new File(path);
+		// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
+		if (!file.exists()) {
+			// 디렉토리 생성 메서드
+			file.mkdirs();
+			System.out.println("created directory successfully!");
+		}
+		
+		
 	}
 
 	public static void main(String[] args) {
