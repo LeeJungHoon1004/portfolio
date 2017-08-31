@@ -57,19 +57,128 @@ public class VideoPan extends JPanel {
 	private FileOutputStream fos;
 	private BufferedOutputStream bos;
 //===========================================================	
+	private ImageIcon ic1;
+	private ImageIcon ic2 ;
+	private ImageIcon ic3 ;
+	private ImageIcon ic4 ;
+	private ImageIcon ic5 ;
+	private ImageIcon ic6 ;
+	private ImageIcon ic7 ;
+	private ImageIcon ic8 ;
+	private ImageIcon ic9 ;
+	private ImageIcon ic10 ;
+	private ImageIcon ic11 ;
+	private ImageIcon ic12 ;
+	private ImageIcon ic13 ;
+	private ImageIcon ic14;
+	private ImageIcon ic15;
+	private ImageIcon ic16;
+	private ImageIcon ic17;
+	private ImageIcon ic18;
+	private ImageIcon ic19 ;
+	private ImageIcon ic20;
+	private ImageIcon ic21 ;
+	private ImageIcon ic22;
+	private ImageIcon ic23;
+	private ImageIcon ic24;
+	private ImageIcon ic25 ;
+	
+	private JButton b1 ;
+	private JButton b2 ;
+	private JButton b3;
+	private JButton b4;
+	private JButton b5 ;
+	private JButton b6;
+	private JButton b7;
+	private JButton b8 ;
+	private JButton b9 ;
+	private JButton b10;
+	private JButton b11 ;
+	private JButton b12;
+	private JButton b13 ;
+	private JButton b14;
+	private JButton b15 ;
+	private JButton b16 ;
+	private JButton b17;
+	private JButton b18 ;
+	private JButton b19 ;
+	private JButton b20 ;
+	private JButton b21;
+	private JButton b22 ;
+	private JButton b23 ;
+	private JButton b24 ;
+	private JButton b25 ;
+	
+	
+	
+	
 	private String[] urls;
 	private String[] fileNames;
 	private int fileSize = 0;
 	private String path = "C:/Users/Administrator/4weeksWorkout/";
+	private String[] imgpath;
 	
-	private JButton[] b;
-	private ImageIcon[] ic;
 	
 	public void insertImage() {
-		for(int i=0;i<30;i++) {
-			ic[i] = new ImageIcon(path+fileNames[i]);
-			b[i].setIcon(ic[i]);
+		
+		for(int i=0;i<25;i++) {
+			imgpath[i] = path+fileNames[i];
 		}
+		
+		ic1 = new ImageIcon(imgpath[0]);
+		ic2 = new ImageIcon(imgpath[1]);
+		ic3 = new ImageIcon(imgpath[2]);
+		ic4 = new ImageIcon(imgpath[3]);
+		ic5 = new ImageIcon(imgpath[4]);
+		ic6 = new ImageIcon(imgpath[5]);
+		ic7 = new ImageIcon(imgpath[6]);
+		ic8 = new ImageIcon(imgpath[7]);
+		ic9 = new ImageIcon(imgpath[8]);
+		ic10 = new ImageIcon(imgpath[9]);
+		ic11 = new ImageIcon(imgpath[10]);
+		ic12 = new ImageIcon(imgpath[11]);
+		ic13 = new ImageIcon(imgpath[12]);
+		ic14 = new ImageIcon(imgpath[13]);
+		ic15 = new ImageIcon(imgpath[14]);
+		ic16 = new ImageIcon(imgpath[15]);
+		ic17 = new ImageIcon(imgpath[16]);
+		ic18 = new ImageIcon(imgpath[17]);
+		ic19 = new ImageIcon(imgpath[18]);
+		ic20 = new ImageIcon(imgpath[19]);
+		ic21 = new ImageIcon(imgpath[20]);
+		ic22 = new ImageIcon(imgpath[21]);
+		ic23 = new ImageIcon(imgpath[22]);
+		ic24 = new ImageIcon(imgpath[23]);
+		ic25 = new ImageIcon(imgpath[24]);
+		
+		b1 = new JButton(ic1);
+		b2 = new JButton(ic2);
+		b3 = new JButton(ic3);
+		b4 = new JButton(ic4);
+		b5 = new JButton(ic5);
+		b6 = new JButton(ic6);
+		b7 = new JButton(ic7);
+		b8 = new JButton(ic8);
+		b9 = new JButton(ic9);
+		b10 = new JButton(ic10);
+		b11 = new JButton(ic11);
+		b12 = new JButton(ic12);
+		b13 = new JButton(ic13);
+		b14 = new JButton(ic14);
+		b15 = new JButton(ic15);
+		b16 = new JButton(ic16);
+		b17 = new JButton(ic17);
+		b18 = new JButton(ic18);
+		b19 = new JButton(ic19);
+		b20 = new JButton(ic20);
+		b21 = new JButton(ic21);
+		b22 = new JButton(ic22);
+		b23 = new JButton(ic23);
+		b24 = new JButton(ic24);
+		b25 = new JButton(ic25);
+		
+		
+	
 	}
 	
 	public void unmarsharlling() {
@@ -126,35 +235,32 @@ public class VideoPan extends JPanel {
 		dancePan.setBackground(Color.white);
 		smiPan.setBackground(Color.white);
 		
-		b[0].setPreferredSize(new Dimension(200, 150));
-		b[1].setPreferredSize(new Dimension(200, 150));
-		b[2].setPreferredSize(new Dimension(200, 150));
-		b[3].setPreferredSize(new Dimension(200, 150));
-		b[4].setPreferredSize(new Dimension(200, 150));
-
-		b[5].setPreferredSize(new Dimension(200, 150));
-		b[6].setPreferredSize(new Dimension(200, 150));
-		b[7].setPreferredSize(new Dimension(200, 150));
-		b[8].setPreferredSize(new Dimension(200, 150));
-		b[9].setPreferredSize(new Dimension(200, 150));
-
-		b[10].setPreferredSize(new Dimension(200, 150));
-		b[11].setPreferredSize(new Dimension(200, 150));
-		b[12].setPreferredSize(new Dimension(200, 150));
-		b[13].setPreferredSize(new Dimension(200, 150));
-		b[14].setPreferredSize(new Dimension(200, 150));
-
-		b[15].setPreferredSize(new Dimension(200, 150));
-		b[16].setPreferredSize(new Dimension(200, 150));
-		b[17].setPreferredSize(new Dimension(200, 150));
-		b[18].setPreferredSize(new Dimension(200, 150));
-		b[19].setPreferredSize(new Dimension(200, 150));
+		b1.setPreferredSize(new Dimension(200, 150));
+		b2.setPreferredSize(new Dimension(200, 150));
+		b3 .setPreferredSize(new Dimension(200, 150));
+		b4.setPreferredSize(new Dimension(200, 150));
+		b5.setPreferredSize(new Dimension(200, 150));
+		b6.setPreferredSize(new Dimension(200, 150));
+		b7.setPreferredSize(new Dimension(200, 150));
+		b8.setPreferredSize(new Dimension(200, 150));
+		b9.setPreferredSize(new Dimension(200, 150));
+		b10.setPreferredSize(new Dimension(200, 150));
+		b11.setPreferredSize(new Dimension(200, 150));
+		b12.setPreferredSize(new Dimension(200, 150));
+		b13.setPreferredSize(new Dimension(200, 150));
+		b14.setPreferredSize(new Dimension(200, 150));
+		b15.setPreferredSize(new Dimension(200, 150));
+		b16.setPreferredSize(new Dimension(200, 150));
+		b17.setPreferredSize(new Dimension(200, 150));
+		b18.setPreferredSize(new Dimension(200, 150));
+		b19.setPreferredSize(new Dimension(200, 150));
+		b20.setPreferredSize(new Dimension(200, 150));
+		b21.setPreferredSize(new Dimension(200, 150));
+		b22.setPreferredSize(new Dimension(200, 150));
+		b23.setPreferredSize(new Dimension(200, 150));
+		b24.setPreferredSize(new Dimension(200, 150));
+		b25.setPreferredSize(new Dimension(200, 150));
 		
-		b[20].setPreferredSize(new Dimension(200, 150));
-		b[21].setPreferredSize(new Dimension(200, 150));
-		b[22].setPreferredSize(new Dimension(200, 150));
-		b[23].setPreferredSize(new Dimension(200, 150));
-		b[24].setPreferredSize(new Dimension(200, 150));
 		
 		renew.setPreferredSize(new Dimension(100,70));
 		
@@ -162,43 +268,43 @@ public class VideoPan extends JPanel {
 		add(encourage);
 		
 		yogaPan.setBorder(yoga);
-		yogaPan.add(b[0]);
-		yogaPan.add(b[1]);
-		yogaPan.add(b[2]);
-		yogaPan.add(b[3]);
-		yogaPan.add(b[4]);
+		yogaPan.add(b1);
+		yogaPan.add(b2);
+		yogaPan.add(b3);
+		yogaPan.add(b4);
+		yogaPan.add(b5);
 		add(yogaSc);
 
 		stretchPan.setBorder(stretching);
-		stretchPan.add(b[5]);
-		stretchPan.add(b[6]);
-		stretchPan.add(b[7]);
-		stretchPan.add(b[8]);
-		stretchPan.add(b[9]);
+		stretchPan.add(b6);
+		stretchPan.add(b7);
+		stretchPan.add(b8);
+		stretchPan.add(b9);
+		stretchPan.add(b10);
 		add(stretchSc);
 
 		mileyPan.setBorder(miley);
-		mileyPan.add(b[10]);
-		mileyPan.add(b[11]);
-		mileyPan.add(b[12]);
-		mileyPan.add(b[13]);
-		mileyPan.add(b[14]);
+		mileyPan.add(b11);
+		mileyPan.add(b12);
+		mileyPan.add(b13);
+		mileyPan.add(b14);
+		mileyPan.add(b15);
 		add(mileySc);
 
 		dancePan.setBorder(dance);
-		dancePan.add(b[15]);
-		dancePan.add(b[16]);
-		dancePan.add(b[17]);
-		dancePan.add(b[18]);
-		dancePan.add(b[19]);
+		dancePan.add(b16);
+		dancePan.add(b17);
+		dancePan.add(b18);
+		dancePan.add(b19);
+		dancePan.add(b20);
 		add(danceSc);
 		
 		smiPan.setBorder(smi);
-		smiPan.add(b[20]);
-		smiPan.add(b[21]);
-		smiPan.add(b[22]);
-		smiPan.add(b[23]);
-		smiPan.add(b[24]);
+		smiPan.add(b21);
+		smiPan.add(b22);
+		smiPan.add(b23);
+		smiPan.add(b24);
+		smiPan.add(b25);
 		add(smiSc);
 		
 		add(renew,BorderLayout.CENTER);
@@ -213,7 +319,7 @@ public class VideoPan extends JPanel {
 			}
 		});
 		
-		b[0].addActionListener(new ActionListener() {
+		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {
 						Desktop d = Desktop.getDesktop();
@@ -222,7 +328,7 @@ public class VideoPan extends JPanel {
 						e1.printStackTrace();
 					}
 			}
-		});b[1].addActionListener(new ActionListener() {
+		});b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -232,7 +338,7 @@ public class VideoPan extends JPanel {
 				}
 		}
 	});
-		b[2].addActionListener(new ActionListener() {
+		b3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {
 						Desktop d = Desktop.getDesktop();
@@ -242,7 +348,7 @@ public class VideoPan extends JPanel {
 					}
 			}
 		});
-		b[3].addActionListener(new ActionListener() {
+		b4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {
 						Desktop d = Desktop.getDesktop();
@@ -252,7 +358,7 @@ public class VideoPan extends JPanel {
 					}
 			}
 		});
-		b[4].addActionListener(new ActionListener() {
+		b5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {
 						Desktop d = Desktop.getDesktop();
@@ -265,7 +371,7 @@ public class VideoPan extends JPanel {
 	}//end
 	
 	public void eventInitStretching() {
-		b[5].addActionListener(new ActionListener() {
+		b6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -275,7 +381,7 @@ public class VideoPan extends JPanel {
 				}
 			}
 		});
-		b[6].addActionListener(new ActionListener() {
+		b7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -285,7 +391,7 @@ public class VideoPan extends JPanel {
 				}
 			}
 		});
-		b[7].addActionListener(new ActionListener() {
+		b8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -295,7 +401,7 @@ public class VideoPan extends JPanel {
 				}
 			}
 		});
-		b[8].addActionListener(new ActionListener() {
+		b9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -305,7 +411,7 @@ public class VideoPan extends JPanel {
 				}
 			}
 		});
-		b[9].addActionListener(new ActionListener() {
+		b10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -318,7 +424,7 @@ public class VideoPan extends JPanel {
 	}
 	
 	public void eventInitMiley() {
-		b[10].addActionListener(new ActionListener() {
+		b11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -329,7 +435,7 @@ public class VideoPan extends JPanel {
 				
 			}
 		});
-		b[11].addActionListener(new ActionListener() {
+		b12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -340,7 +446,7 @@ public class VideoPan extends JPanel {
 				
 			}
 		});
-		b[12].addActionListener(new ActionListener() {
+		b13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -351,7 +457,7 @@ public class VideoPan extends JPanel {
 				
 			}
 		});
-		b[13].addActionListener(new ActionListener() {
+		b14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -362,7 +468,7 @@ public class VideoPan extends JPanel {
 				
 			}
 		});
-		b[14].addActionListener(new ActionListener() {
+		b15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -377,7 +483,7 @@ public class VideoPan extends JPanel {
 	}//end
 
 	public void eventInitDance() {
-		b[15].addActionListener(new ActionListener() {
+		b16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -387,7 +493,7 @@ public class VideoPan extends JPanel {
 				}
 			}
 		});
-		b[16].addActionListener(new ActionListener() {
+		b17.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -397,7 +503,7 @@ public class VideoPan extends JPanel {
 				}
 			}
 		});
-		b[17].addActionListener(new ActionListener() {
+		b18.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -407,7 +513,7 @@ public class VideoPan extends JPanel {
 				}
 			}
 		});
-		b[18].addActionListener(new ActionListener() {
+		b19.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -417,7 +523,7 @@ public class VideoPan extends JPanel {
 				}
 			}
 		});
-		b[19].addActionListener(new ActionListener() {
+		b20.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -431,7 +537,7 @@ public class VideoPan extends JPanel {
 	
 	public void eventInitSmi() {
 
-		b[20].addActionListener(new ActionListener() {
+		b21.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 						try {
 							Desktop d = Desktop.getDesktop();
@@ -441,7 +547,7 @@ public class VideoPan extends JPanel {
 						}
 			}
 		});
-		b[21].addActionListener(new ActionListener() {
+		b22.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 						try {
@@ -452,7 +558,7 @@ public class VideoPan extends JPanel {
 						}
 			}
 		});
-		b[22].addActionListener(new ActionListener() {
+		b23.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 						try {
@@ -463,7 +569,7 @@ public class VideoPan extends JPanel {
 						}
 			}
 		});
-		b[23].addActionListener(new ActionListener() {
+		b24.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 						try {
@@ -474,7 +580,7 @@ public class VideoPan extends JPanel {
 						}
 			}
 		});
-		b[24].addActionListener(new ActionListener() {
+		b25.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 						try {
 							Desktop d = Desktop.getDesktop();
@@ -494,8 +600,8 @@ public class VideoPan extends JPanel {
 	
 	public VideoPan() {
 		this.setBackground(Color.white);
-		//unmarsharlling();
-		//insertImage();
+		unmarsharlling();
+		insertImage();
 		compInit();
 		eventInitYoga();
 		eventInitMiley();
