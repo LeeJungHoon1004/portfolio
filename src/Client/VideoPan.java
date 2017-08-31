@@ -1,19 +1,23 @@
 package Client;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.net.Socket;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,73 +25,16 @@ import javax.swing.border.TitledBorder;
 
 public class VideoPan extends JPanel {
 
-	private TitledBorder yoga = new TitledBorder("요가");
-	private TitledBorder stretching = new TitledBorder("스트레칭");
-	private TitledBorder miley = new TitledBorder("마일리사이러스");
-	private TitledBorder dance = new TitledBorder("춤 다이어트");
-	private TitledBorder smi = new TitledBorder("스미홈트");
-	
+		
+	private TitledBorder yoga = new TitledBorder("");
+	private TitledBorder stretching = new TitledBorder("");
+	private TitledBorder miley = new TitledBorder("");
+	private TitledBorder dance = new TitledBorder("");
+	private TitledBorder smi = new TitledBorder("");
 //===========================================================	
 	private ImageIcon imgE1 = new ImageIcon("KakaoTalk_20170820_180152201.jpg");
 	private JLabel encourage = new JLabel(imgE1);
-//===========================================================
-	private ImageIcon imgY1 = new ImageIcon("y1.JPG");
-	private ImageIcon imgY2 = new ImageIcon("y2.JPG");
-	private ImageIcon imgY3 = new ImageIcon("y3.JPG");
-	private ImageIcon imgY4 = new ImageIcon("y4.JPG");
-	private ImageIcon imgY5 = new ImageIcon("y5.JPG");
-	private JButton videoY1 = new JButton(imgY1);
-	private JButton videoY2 = new JButton(imgY2);
-	private JButton videoY3 = new JButton(imgY3);
-	private JButton videoY4 = new JButton(imgY4);
-	private JButton videoY5 = new JButton(imgY5);
-//===========================================================
-	private ImageIcon imgs1 = new ImageIcon("s1.JPG");
-	private ImageIcon imgs11 = new ImageIcon("s1.JPG");
-	private ImageIcon imgs2 = new ImageIcon("s2.JPG");
-	private ImageIcon imgs3 = new ImageIcon("s3.JPG");
-	private ImageIcon imgs4 = new ImageIcon("s4.JPG");
-	private ImageIcon imgs5 = new ImageIcon("s5.JPG");
-	private JButton videoS1 = new JButton(imgs1);
-	private JButton videoS11 = new JButton(imgs1);
-	private JButton videoS2 = new JButton(imgs2);
-	private JButton videoS3 = new JButton(imgs3);
-	private JButton videoS4 = new JButton(imgs4);
-	private JButton videoS5 = new JButton(imgs5);
-//===========================================================
-	private ImageIcon imgM1 = new ImageIcon("m1.JPG");
-	private ImageIcon imgM2 = new ImageIcon("m2.JPG");
-	private ImageIcon imgM3 = new ImageIcon("m3.JPG");
-	private ImageIcon imgM4 = new ImageIcon("m4.JPG");
-	private ImageIcon imgM5 = new ImageIcon("m5.JPG");
-	private JButton miley1 = new JButton(imgM1);
-	private JButton miley2 = new JButton(imgM2);
-	private JButton miley3 = new JButton(imgM3);
-	private JButton miley4 = new JButton(imgM4);
-	private JButton miley5 = new JButton(imgM5);
-//===========================================================
-	private ImageIcon imgD1 = new ImageIcon("d1.jpg");
-	private ImageIcon imgD2 = new ImageIcon("d2.JPG");
-	private ImageIcon imgD3 = new ImageIcon("d3.JPG");
-	private ImageIcon imgD4 = new ImageIcon("d4.JPG");
-	private ImageIcon imgD5 = new ImageIcon("d5.JPG");
-	private JButton dance1 = new JButton(imgD1);
-	private JButton dance2 = new JButton(imgD2);
-	private JButton dance3 = new JButton(imgD3);
-	private JButton dance4 = new JButton(imgD4);
-	private JButton dance5 = new JButton(imgD5);
-//===========================================================
-	private ImageIcon imgSmi1 = new ImageIcon("smi1.JPG");
-	private ImageIcon imgSmi2 = new ImageIcon("smi2.JPG");
-	private ImageIcon imgSmi3 = new ImageIcon("smi3.JPG");
-	private ImageIcon imgSmi4 = new ImageIcon("smi4.JPG");
-	private ImageIcon imgSmi5 = new ImageIcon("smi5.JPG");
-	private JButton smi1 = new JButton(imgSmi1);
-	private JButton smi2 = new JButton(imgSmi2);
-	private JButton smi3 = new JButton(imgSmi3);
-	private JButton smi4 = new JButton(imgSmi4);
-	private JButton smi5 = new JButton(imgSmi5);
-	private JButton moreSmi = new JButton("스미트홈 더보기..");
+	private JButton renew = new JButton("갱신");
 //===========================================================
 	private JPanel healthPan = new JPanel();
 	private JPanel yogaPan = new JPanel();
@@ -102,12 +49,76 @@ public class VideoPan extends JPanel {
 	private JScrollPane mileySc = new JScrollPane(mileyPan);
 	private JScrollPane danceSc = new JScrollPane(dancePan);
 	private JScrollPane smiSc = new JScrollPane(smiPan);
+//===========================================================	
+	private Socket client;
+	private DataInputStream dis;
+	private DataOutputStream dos;
+	private ObjectInputStream ois;
+	private FileOutputStream fos;
+	private BufferedOutputStream bos;
+//===========================================================	
+	private String[] urls;
+	private String[] fileNames;
+	private int fileSize = 0;
+	private String path = "C:/Users/Administrator/4weeksWorkout/";
+	
+	private JButton[] b;
+	private ImageIcon[] ic;
+	
+	public void insertImage() {
+		for(int i=0;i<30;i++) {
+			ic[i] = new ImageIcon(path+fileNames[i]);
+			b[i].setIcon(ic[i]);
+		}
+	}
+	
+	public void unmarsharlling() {
+		try {
+			ImageIcon image;
+			String url = null;
+			String fileName = null;
+			int fileSize = 0;
+			byte[] filecontents = null;	
+			
+			dos.writeUTF("비디오패널 갱신");
+			
+			ois = new ObjectInputStream(client.getInputStream());
+			VideoFileList vfl = (VideoFileList) ois.readObject();
+		
+			System.out.println(vfl.getUrl());
+			System.out.println(vfl.getFilename());
+			System.out.println(vfl.getFileSize());
+			System.out.println(vfl.getFilecontents());
+		
+			filecontents = vfl.getFilecontents();
+			File f = new File("");
+			fos = new FileOutputStream(f);
+			bos = new BufferedOutputStream(fos);
+			dos = new DataOutputStream(bos);
+			dos.write(filecontents);
+			dos.flush();
+			
+			System.out.println("비디오패널 언마셜링 성공");
+		
+			for(int i=0;i<30;i++) {
+				fileNames[i] = vfl.getFilename();
+				urls[i] = vfl.getUrl();
+			}//배열에 데이터 넣기완료
+			
+			System.out.println("배열에 데이터 넣기 완료");
+			
+			dos.close();
+		}catch(Exception e) {
+			System.out.println("비디오패널 언마셜링 실패");
+		}
+	}
+	
+	
 	
 	public void compInit() {
 
-		setLayout(new GridLayout(7, 1));
+		setLayout(new GridLayout(8, 1));
 
-		
 		healthPan.setBackground(Color.white);
 		yogaPan.setBackground(Color.white);
 		stretchPan.setBackground(Color.white);
@@ -115,131 +126,137 @@ public class VideoPan extends JPanel {
 		dancePan.setBackground(Color.white);
 		smiPan.setBackground(Color.white);
 		
-		
-		
-		videoY1.setPreferredSize(new Dimension(200, 150));
-		videoY2.setPreferredSize(new Dimension(200, 150));
-		videoY3.setPreferredSize(new Dimension(200, 150));
-		videoY4.setPreferredSize(new Dimension(200, 150));
-		videoY5.setPreferredSize(new Dimension(200, 150));
+		b[0].setPreferredSize(new Dimension(200, 150));
+		b[1].setPreferredSize(new Dimension(200, 150));
+		b[2].setPreferredSize(new Dimension(200, 150));
+		b[3].setPreferredSize(new Dimension(200, 150));
+		b[4].setPreferredSize(new Dimension(200, 150));
 
-		videoS1.setPreferredSize(new Dimension(200, 150));
-		videoS11.setPreferredSize(new Dimension(200, 150));
-		videoS2.setPreferredSize(new Dimension(200, 150));
-		videoS3.setPreferredSize(new Dimension(200, 150));
-		videoS4.setPreferredSize(new Dimension(200, 150));
-		videoS5.setPreferredSize(new Dimension(200, 150));
+		b[5].setPreferredSize(new Dimension(200, 150));
+		b[6].setPreferredSize(new Dimension(200, 150));
+		b[7].setPreferredSize(new Dimension(200, 150));
+		b[8].setPreferredSize(new Dimension(200, 150));
+		b[9].setPreferredSize(new Dimension(200, 150));
 
-		miley1.setPreferredSize(new Dimension(200, 150));
-		miley2.setPreferredSize(new Dimension(200, 150));
-		miley3.setPreferredSize(new Dimension(200, 150));
-		miley4.setPreferredSize(new Dimension(200, 150));
-		miley5.setPreferredSize(new Dimension(200, 150));
+		b[10].setPreferredSize(new Dimension(200, 150));
+		b[11].setPreferredSize(new Dimension(200, 150));
+		b[12].setPreferredSize(new Dimension(200, 150));
+		b[13].setPreferredSize(new Dimension(200, 150));
+		b[14].setPreferredSize(new Dimension(200, 150));
 
-		dance1.setPreferredSize(new Dimension(200, 150));
-		dance2.setPreferredSize(new Dimension(200, 150));
-		dance3.setPreferredSize(new Dimension(200, 150));
-		dance4.setPreferredSize(new Dimension(200, 150));
-		dance5.setPreferredSize(new Dimension(200, 150));
+		b[15].setPreferredSize(new Dimension(200, 150));
+		b[16].setPreferredSize(new Dimension(200, 150));
+		b[17].setPreferredSize(new Dimension(200, 150));
+		b[18].setPreferredSize(new Dimension(200, 150));
+		b[19].setPreferredSize(new Dimension(200, 150));
 		
-		smi1.setPreferredSize(new Dimension(200, 150));
-		smi2.setPreferredSize(new Dimension(200, 150));
-		smi3.setPreferredSize(new Dimension(200, 150));
-		smi4.setPreferredSize(new Dimension(200, 150));
-		smi5.setPreferredSize(new Dimension(200, 150));
+		b[20].setPreferredSize(new Dimension(200, 150));
+		b[21].setPreferredSize(new Dimension(200, 150));
+		b[22].setPreferredSize(new Dimension(200, 150));
+		b[23].setPreferredSize(new Dimension(200, 150));
+		b[24].setPreferredSize(new Dimension(200, 150));
 		
+		renew.setPreferredSize(new Dimension(100,70));
 		
 
 		add(encourage);
 		
 		yogaPan.setBorder(yoga);
-		yogaPan.add(videoY1);
-		yogaPan.add(videoY2);
-		yogaPan.add(videoY3);
-		yogaPan.add(videoY4);
-		yogaPan.add(videoY5);
+		yogaPan.add(b[0]);
+		yogaPan.add(b[1]);
+		yogaPan.add(b[2]);
+		yogaPan.add(b[3]);
+		yogaPan.add(b[4]);
 		add(yogaSc);
 
 		stretchPan.setBorder(stretching);
-		stretchPan.add(videoS1);
-		stretchPan.add(videoS11);
-		stretchPan.add(videoS2);
-		stretchPan.add(videoS3);
-		stretchPan.add(videoS4);
-		stretchPan.add(videoS5);
+		stretchPan.add(b[5]);
+		stretchPan.add(b[6]);
+		stretchPan.add(b[7]);
+		stretchPan.add(b[8]);
+		stretchPan.add(b[9]);
 		add(stretchSc);
 
 		mileyPan.setBorder(miley);
-		mileyPan.add(miley1);
-		mileyPan.add(miley2);
-		mileyPan.add(miley3);
-		mileyPan.add(miley4);
-		mileyPan.add(miley5);
+		mileyPan.add(b[10]);
+		mileyPan.add(b[11]);
+		mileyPan.add(b[12]);
+		mileyPan.add(b[13]);
+		mileyPan.add(b[14]);
 		add(mileySc);
 
 		dancePan.setBorder(dance);
-		dancePan.add(dance1);
-		dancePan.add(dance2);
-		dancePan.add(dance3);
-		dancePan.add(dance4);
-		dancePan.add(dance5);
+		dancePan.add(b[15]);
+		dancePan.add(b[16]);
+		dancePan.add(b[17]);
+		dancePan.add(b[18]);
+		dancePan.add(b[19]);
 		add(danceSc);
 		
 		smiPan.setBorder(smi);
-		smiPan.add(smi1);
-		smiPan.add(smi2);
-		smiPan.add(smi3);
-		smiPan.add(smi4);
-		smiPan.add(smi5);
-		smiPan.add(moreSmi);
+		smiPan.add(b[20]);
+		smiPan.add(b[21]);
+		smiPan.add(b[22]);
+		smiPan.add(b[23]);
+		smiPan.add(b[24]);
 		add(smiSc);
+		
+		add(renew,BorderLayout.CENTER);
 	}
 	
 	public void eventInitYoga() {
-		videoY1.addActionListener(new ActionListener() {
+		
+		renew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				unmarsharlling();
+				insertImage();
+			}
+		});
+		
+		b[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {
 						Desktop d = Desktop.getDesktop();
-						d.browse(new URI("https://youtu.be/m_cgE75m5Og"));
+						d.browse(new URI(urls[0]));
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
 			}
-		});videoY2.addActionListener(new ActionListener() {
+		});b[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/i7IbvLzCmjo"));
+					d.browse(new URI(urls[1]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 		}
 	});
-		videoY3.addActionListener(new ActionListener() {
+		b[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {
 						Desktop d = Desktop.getDesktop();
-						d.browse(new URI("https://youtu.be/BUqB9xoIjLU"));
+						d.browse(new URI(urls[2]));
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
 			}
 		});
-		videoY4.addActionListener(new ActionListener() {
+		b[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {
 						Desktop d = Desktop.getDesktop();
-						d.browse(new URI("https://youtu.be/yAQcbywKi_M"));
+						d.browse(new URI(urls[3]));
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
 			}
 		});
-		videoY5.addActionListener(new ActionListener() {
+		b[4].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {
 						Desktop d = Desktop.getDesktop();
-						d.browse(new URI("https://youtu.be/rcp84GZa6C0"));
+						d.browse(new URI(urls[4]));
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -248,61 +265,51 @@ public class VideoPan extends JPanel {
 	}//end
 	
 	public void eventInitStretching() {
-		videoS1.addActionListener(new ActionListener() {
+		b[5].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/1m6SZ4ksbBY"));
+					d.browse(new URI(urls[5]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		videoS11.addActionListener(new ActionListener() {
+		b[6].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/w1VCSOAEZJ4"));
+					d.browse(new URI(urls[6]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		videoS2.addActionListener(new ActionListener() {
+		b[7].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/FB2OF9Y32zA"));
+					d.browse(new URI(urls[7]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		videoS3.addActionListener(new ActionListener() {
+		b[8].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/SAsE6JUbSWQ"));
+					d.browse(new URI(urls[8]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		videoS4.addActionListener(new ActionListener() {
+		b[9].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/ZcsUQD5sloc"));
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		videoS5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/2u97jwzp0Jw"));
+					d.browse(new URI(urls[9]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -311,55 +318,55 @@ public class VideoPan extends JPanel {
 	}
 	
 	public void eventInitMiley() {
-		miley1.addActionListener(new ActionListener() {
+		b[10].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/MG69sFM1UIw"));
+					d.browse(new URI(urls[10]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 				
 			}
 		});
-		miley2.addActionListener(new ActionListener() {
+		b[11].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/hxjKZcOT17E"));
+					d.browse(new URI(urls[11]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 				
 			}
 		});
-		miley3.addActionListener(new ActionListener() {
+		b[12].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/i1ZzdBgLtZg"));
+					d.browse(new URI(urls[12]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 				
 			}
 		});
-		miley4.addActionListener(new ActionListener() {
+		b[13].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/hAGfBjvIRFI"));
+					d.browse(new URI(urls[13]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 				
 			}
 		});
-		miley5.addActionListener(new ActionListener() {
+		b[14].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/HrpW5PliIdU"));
+					d.browse(new URI(urls[14]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -370,51 +377,51 @@ public class VideoPan extends JPanel {
 	}//end
 
 	public void eventInitDance() {
-		dance1.addActionListener(new ActionListener() {
+		b[15].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/oe6ACKMyF7I"));
+					d.browse(new URI(urls[15]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		dance2.addActionListener(new ActionListener() {
+		b[16].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/6SQCPSwf0L4?list=PLB4yVOSJeHiixd5wATDVqJ9cV7JwvVlgs"));
+					d.browse(new URI(urls[16]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		dance3.addActionListener(new ActionListener() {
+		b[17].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/nvL_A1XNxVY?list=PLB4yVOSJeHiixd5wATDVqJ9cV7JwvVlgs"));
+					d.browse(new URI(urls[17]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		dance4.addActionListener(new ActionListener() {
+		b[18].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/JP508l9jd-w?list=PLB4yVOSJeHiixd5wATDVqJ9cV7JwvVlgs"));
+					d.browse(new URI(urls[18]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		dance5.addActionListener(new ActionListener() {
+		b[19].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
-					d.browse(new URI("https://youtu.be/GcHHIGpWqRM?list=PLB4yVOSJeHiixd5wATDVqJ9cV7JwvVlgs"));
+					d.browse(new URI(urls[19]));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -424,95 +431,71 @@ public class VideoPan extends JPanel {
 	
 	public void eventInitSmi() {
 
-		smi1.addActionListener(new ActionListener() {
+		b[20].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dance1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
 						try {
 							Desktop d = Desktop.getDesktop();
-							d.browse(new URI("https://youtu.be/vFXFZ6Y7AiM"));
+							d.browse(new URI(urls[20]));
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
-					}
-				});
 			}
 		});
-		smi2.addActionListener(new ActionListener() {
+		b[21].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dance1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+				
 						try {
 							Desktop d = Desktop.getDesktop();
-							d.browse(new URI("https://youtu.be/uYmdt_DW95I"));
+							d.browse(new URI(urls[21]));
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
-					}
-				});
 			}
 		});
-		smi3.addActionListener(new ActionListener() {
+		b[22].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dance1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+				
 						try {
 							Desktop d = Desktop.getDesktop();
-							d.browse(new URI("https://youtu.be/wfN2cKAv3q0"));
+							d.browse(new URI(urls[22]));
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
-					}
-				});
 			}
 		});
-		smi4.addActionListener(new ActionListener() {
+		b[23].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dance1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+				
 						try {
 							Desktop d = Desktop.getDesktop();
-							d.browse(new URI("https://youtu.be/bjjJzYn8fEc"));
+							d.browse(new URI(urls[23]));
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
-					}
-				});
 			}
 		});
-		smi5.addActionListener(new ActionListener() {
+		b[24].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dance1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
 						try {
 							Desktop d = Desktop.getDesktop();
-							d.browse(new URI("https://youtu.be/QRGSr9aju_8"));
+							d.browse(new URI(urls[24]));
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
-					}
-				});
-			}
-		});
-		moreSmi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dance1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							Desktop d = Desktop.getDesktop();
-							d.browse(new URI("https://www.youtube.com/results?search_query=%EC%8A%A4%EB%AF%B8%ED%99%88%ED%8A%B8+30%EC%9D%BC+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8"));
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
-					}
-				});
 			}
 		});
 	}
 	
+	public VideoPan(Socket client,DataInputStream dis,DataOutputStream dos) {
+		this.client = client;
+		this.dis = dis;
+		this.dos = dos;
+	}
 	
 	public VideoPan() {
 		this.setBackground(Color.white);
+		//unmarsharlling();
+		//insertImage();
 		compInit();
 		eventInitYoga();
 		eventInitMiley();
