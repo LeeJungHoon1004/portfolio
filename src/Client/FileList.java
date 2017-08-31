@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.io.Serializable;
 
 import javax.swing.ImageIcon;
-
+//파일 완성
 public class FileList implements Serializable {
 	/**
 	 * 
