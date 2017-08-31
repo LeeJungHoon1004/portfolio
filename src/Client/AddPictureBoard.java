@@ -213,12 +213,14 @@ public class AddPictureBoard extends JDialog {
 		}
 	}
 
-	public AddPictureBoard(PictureBoardPan parent) {
+	public AddPictureBoard(PictureBoardPan parent , Socket client, DataInputStream dis, DataOutputStream dos) {
 		this.setBackground(Color.white);
 		setSize(600, 800);
 		setLocationRelativeTo(parent);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
+		this.client = client;
+		this.dis = dis;
+		this.dos = dos;
 		compInit();
 		eventInit();
 
@@ -227,9 +229,9 @@ public class AddPictureBoard extends JDialog {
 		setModal(true);
 	}
 
-	public AddPictureBoard(Socket client, DataInputStream dis, DataOutputStream dos) {
-		this.client = client;
-		this.dis = dis;
-		this.dos = dos;
-	}
+//	public AddPictureBoard(Socket client, DataInputStream dis, DataOutputStream dos) {
+//		this.client = client;
+//		this.dis = dis;
+//		this.dos = dos;
+//	}
 }

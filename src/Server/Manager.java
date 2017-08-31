@@ -204,6 +204,19 @@ public class Manager implements ManagerInterface{
 		return result;
 	
 	}
+	@Override
+	public void insertUrlData(VideoFileList vfl) throws Exception {
+		Connection con =this.getConnection();
+		
+//		String sql = "update url set watercuplist =? where fileName =?";
+//		PreparedStatement pstat = con.prepareStatement(sql);
+//		pstat.setString(1,ChangeCupList);
+//		pstat.setString(2,id);
+//		int result = pstat.executeUpdate();
+//		con.commit();
+//		con.close();
+//		return result ;	
+	}
 
 	
 

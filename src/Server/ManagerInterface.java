@@ -64,6 +64,7 @@ public interface ManagerInterface {
 	public String getComboListData(Member m)throws Exception;
 	public String getwaterCupListData(Member m)throws Exception;
 
+	public void insertUrlData(VideoFileList vfl) throws Exception;
 	
 	
 }

@@ -12,11 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.ImageIcon;
@@ -31,9 +29,6 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
-
-import Server.FileList;
-//github.com/LeeJungHoon1004/portfolio.git	
 
 public class BasicShape extends JFrame {
 
@@ -565,7 +560,7 @@ public class BasicShape extends JFrame {
 		cp.setBackground(Color.WHITE);
 		comp();
 		eventInit();
-		clientConnect();
+//		clientConnect();
 		receiveDataBeforeLogin();
 		setVisible(true);
 		

@@ -7,11 +7,18 @@ public class VideoFileList {
 	private byte[] filecontents;//파일내용물
 	
 	public VideoFileList(String url, String filename, int fileSize, byte[] filecontents) {
-		super();
+		
 		this.url = url;
 		this.filename = filename;
 		this.fileSize = fileSize;
 		this.filecontents = filecontents;
+	}
+	
+	public VideoFileList(String url, String filename, int fileSize){
+		
+		this.url = url;
+		this.filename = filename;
+		this.fileSize = fileSize;
 	}
 
 	public String getUrl() {

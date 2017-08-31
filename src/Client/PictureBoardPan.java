@@ -105,8 +105,8 @@ public class PictureBoardPan extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				cnt++;
 
-				new AddPictureBoard(self).setVisible(true);// JDialog 보이기!
-				new AddPictureBoard(client, dis, dos);// 소켓통신 전달(?)
+			//	new AddPictureBoard().setVisible(true);// JDialog 보이기!
+				new AddPictureBoard(self,client, dis, dos).setVisible(true);;// 소켓통신 전달(?)
 				
 				unmarshalling();
 				repaint();
