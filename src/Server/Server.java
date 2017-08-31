@@ -3,15 +3,10 @@ package Server;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
@@ -23,6 +18,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,14 +26,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.TitledBorder;
-
-import Server.FileList;
+import javax.swing.table.DefaultTableModel;
 
 
 class ConnectionThread extends Thread {
@@ -325,43 +318,16 @@ class ConnectionThread extends Thread {
 }
 
 public class Server extends JFrame {
-	
-	
-	
-	
-	
-	
 	// 매니저
 	public static Manager manager = new Manager();
 	// 컴포넌트변수
 		private Server self = this;
 
 	//Component Variable
-		private Container cp = this.getContentPane();
 		private JLabel title = new JLabel();
-
-
-		private Font font = new Font("바탕", Font.ITALIC, 30);
 		private JPanel category = new JPanel(new GridLayout(5, 1));
 		private JPanel titlePan = new JPanel();
 		private JPanel sidepan = new JPanel(new GridLayout(5, 1));
-		// ▽▽▽▽▽▽▽▽▽▽프로필 바뀜▽▽▽▽▽▽▽▽▽▽▽▽
-		// 로그아웃 중일때
-		private JLabel lbID = new JLabel();
-		private JLabel lbPW = new JLabel();
-
-		private Image idimage = new ImageIcon("ID (3).jpg").getImage().getScaledInstance(98, 30,
-				java.awt.Image.SCALE_SMOOTH);
-		private ImageIcon iconid = new ImageIcon(idimage);
-
-		private Image pwimage = new ImageIcon("PW (2).jpg").getImage().getScaledInstance(98, 30,
-				java.awt.Image.SCALE_SMOOTH);
-		private ImageIcon iconpw = new ImageIcon(pwimage);
-		private JTextField inputID = new JTextField();
-
-		private JPasswordField inputPW = new JPasswordField();
-		private JButton membership = new JButton("회원가입");
-		private JButton login = new JButton("로그인");
 		private JPanel panbox1 = new JPanel(new GridLayout(1, 2));
 		private JPanel panbox2 = new JPanel(new GridLayout(1, 2));
 		private JPanel panbox3 = new JPanel(new GridLayout(1, 2));
@@ -370,11 +336,10 @@ public class Server extends JFrame {
 		private JPanel panboxx = new JPanel(new GridLayout(3, 1));
 		private JPanel namePan = new JPanel();
 		private JPanel logoutPan = new JPanel();
-		private JLabel profilename = new JLabel();
-		private JButton logout = new JButton("로그아웃");
-		
 		// 카드레이아웃 여기있음
 		private CardLayout card = new CardLayout();
+		
+		
 		
 		private JPanel mainPan = new JPanel(card);
 		private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
@@ -383,31 +348,160 @@ public class Server extends JFrame {
 				java.awt.Image.SCALE_SMOOTH);
 		private ImageIcon titleicon = new ImageIcon(titleimage);
 
-		private JPanel homePan = new JPanel(new GridLayout(1, 1));
+		private JPanel homePan = new JPanel(new GridLayout(3,1));
 		private JScrollPane homeSc = new JScrollPane(homePan);
-		private String name = getName();
-//		private ImageSlidePan imgSlide = new ImageSlidePan();
-	
-
-
-	public void compInit() {
+		
+		//homePan 에다가 부착함.
+		//urlPan
+		private JPanel urlWholePan = new JPanel(new BorderLayout());
+		private JPanel urlPan = new JPanel(new GridLayout(5,6));
+		private JPanel urlButtonPan = new JPanel(new GridLayout(5,1));
+		
+		private JLabel yogaLabel = new JLabel("요가");
+		private JButton yogaButton1 = new JButton("요가1");
+		private JButton yogaButton2 = new JButton("요가2");
+		private JButton yogaButton3 = new JButton("요가3");
+		private JButton yogaButton4 = new JButton("요가4");
+		private JButton yogaButton5 = new JButton("요가5");
+		
+		private JLabel stretchingLabel = new JLabel("스트레칭");
+		private JButton stretchingButton1 = new JButton("스트레칭1");
+		private JButton stretchingButton2 = new JButton("스트레칭2");
+		private JButton stretchingButton3 = new JButton("스트레칭3");
+		private JButton stretchingButton4 = new JButton("스트레칭4");
+		private JButton stretchingButton5 = new JButton("스트레칭5");
+		
+		private JLabel mileyCyrusLabel = new JLabel("마일리사이러스");
+		private JButton mileyCyrusButton1 = new JButton("마일리사이러스1");
+		private JButton mileyCyrusButton2 = new JButton("마일리사이러스2");
+		private JButton mileyCyrusButton3 = new JButton("마일리사이러스3");
+		private JButton mileyCyrusButton4 = new JButton("마일리사이러스4");
+		private JButton mileyCyrusButton5 = new JButton("마일리사이러스5");
+		
+		private JLabel homeDietLabel = new JLabel("홈다이어트");
+		private JButton homeDietButton1 = new JButton("홈다이어트1");
+		private JButton homeDietButton2 = new JButton("홈다이어트2");
+		private JButton homeDietButton3 = new JButton("홈다이어트3");
+		private JButton homeDietButton4 = new JButton("홈다이어트4");
+		private JButton homeDietButton5 = new JButton("홈다이어트5");
+		
+		private JLabel smihottLabel = new JLabel("스미홈트");
+		private JButton smihottButton1 = new JButton("스미홈트1");
+		private JButton smihottButton2 = new JButton("스미홈트2");
+		private JButton smihottButton3 = new JButton("스미홈트3");
+		private JButton smihottButton4 = new JButton("스미홈트4");
+		private JButton smihottButton5 = new JButton("스미홈트5");
+		
+		private JButton urlRenewalButton  = new JButton("URL갱신");
+		private JButton urlConfirmButton = new JButton("URL확인");
+		private JButton urlDeleteButton = new JButton("URL삭제");
+		
+		//homePan에다가 부착함.
+		//articlePan
+		private JPanel articleWholePan = new JPanel(new BorderLayout());
+		private JPanel articlePan = new JPanel(new BorderLayout());
+		private JPanel articleButtonPan = new JPanel(new GridLayout(5,1));
+		
+		private String [] columnArticle = new String[] { "글번호",  "ID(작성자)" , "글제목(title)", "작성시간(REGDATE)"};
+		private String [][] data ;
+		
+	    private Vector<String> userColumn = new Vector<String>();
+	    private DefaultTableModel model  ;
+	    private JTable  userTable ;
+	    private JScrollPane listJS ;
+		
+		private JButton articleRenewalButton = new JButton("목록갱신");
+		private JButton articleDeleteButton = new JButton("목록삭제");
+		
+		public void columnAdd() {
+			model  = new DefaultTableModel(data,columnArticle);
+		//	model = new DefaultTableModel(userColumn, 0);
+			userTable = new JTable(model);
+		    listJS=new JScrollPane(userTable);
+			
+			userTable.getColumn("글번호").setPreferredWidth(30);
+			userTable.getColumn("ID(작성자)").setPreferredWidth(280);
+	    	userTable.getColumn("글제목(title)").setPreferredWidth(100);
+	    	userTable.getColumn("작성시간(REGDATE)").setPreferredWidth(250);
+		//    userTable.getColumn("FileName").setPreferredWidth(50);
+		//    userTable.getColumn("FileSize").setPreferredWidth(100);
+		    
+		    
+		    
+	    }
+		
+		public void compInit() {
 		
 		setLayout(null);
 		// 투명
 		
 		// ---------홈
 		homePan.setBackground(Color.white);
+		//homePan - articlePan
+		//글번호,작성자(id),글제목(title),작성시간(regdate)
+		this.articlePan.setLayout(new BorderLayout());
+		this.articlePan.add(listJS);
+		
+		this.articleButtonPan.add(articleRenewalButton);
+		this.articleButtonPan.add(articleDeleteButton);
+		
+		this.articlePan.setBackground(Color.WHITE);
+		this.articleButtonPan.setBackground(Color.WHITE);
+		this.articleWholePan.add(articleButtonPan , BorderLayout.EAST);
+		this.articleWholePan.add(articlePan, BorderLayout.CENTER);
+		this.homePan.add(articleWholePan);
+		//homePan - urlPan
+		//요가,스트레칭,마일리사이러스,홈다이어트,스미홈트
+		this.urlPan.add(yogaLabel);
+		this.urlPan.add(yogaButton1);
+		this.urlPan.add(yogaButton2);
+		this.urlPan.add(yogaButton3);
+		this.urlPan.add(yogaButton4);
+		this.urlPan.add(yogaButton5);
+		
+		this.urlPan.add(stretchingLabel);
+		this.urlPan.add(stretchingButton1);
+		this.urlPan.add(stretchingButton2);
+		this.urlPan.add(stretchingButton3);
+		this.urlPan.add(stretchingButton4);
+		this.urlPan.add(stretchingButton5);
+		
+		this.urlPan.add(mileyCyrusLabel);
+		this.urlPan.add(mileyCyrusButton1);
+		this.urlPan.add(mileyCyrusButton2);
+		this.urlPan.add(mileyCyrusButton3);
+		this.urlPan.add(mileyCyrusButton4);
+		this.urlPan.add(mileyCyrusButton5);
+		
+		this.urlPan.add(homeDietLabel);
+		this.urlPan.add(homeDietButton1);
+		this.urlPan.add(homeDietButton2);
+		this.urlPan.add(homeDietButton3);
+		this.urlPan.add(homeDietButton4);
+		this.urlPan.add(homeDietButton5);
 
-
-
+		this.urlPan.add(smihottLabel);
+		this.urlPan.add(smihottButton1);
+		this.urlPan.add(smihottButton2);
+		this.urlPan.add(smihottButton3);
+		this.urlPan.add(smihottButton4);
+		this.urlPan.add(smihottButton5);
+		this.urlWholePan.add(urlPan , BorderLayout.CENTER);
+		
+		this.urlButtonPan.add(urlRenewalButton);
+		this.urlButtonPan.add(urlConfirmButton);
+		this.urlButtonPan.add(urlDeleteButton);
+		this.urlWholePan.add(urlButtonPan , BorderLayout.EAST);
+		
+		this.homePan.add(urlWholePan);
 		// compInit() - panelCard_StimulsPhoto
+		this.urlButtonPan.setBackground(Color.WHITE);
+		this.urlPan.setBackground(Color.white);
 		category.setBackground(Color.WHITE);
 		sidepan.setBackground(Color.WHITE);
 		panbox1.setBackground(Color.WHITE);
 		panbox2.setBackground(Color.WHITE);
 		panbox3.setBackground(Color.WHITE);
-
-
 		panbox.add(panbox1);
 		panbox.add(panbox2);
 		panbox.add(panbox3);
@@ -421,14 +515,12 @@ public class Server extends JFrame {
 		// title.setFont(font);
 		title.setIcon(titleicon);
 		titlePan.add(title);
-
 		titlePan.setBounds(0, 0, 1194, 100);
-		add(titlePan);
+		this.add(titlePan);
 		sidepan.setBounds(0, 101, 200, 640);
-		add(sidepan);
+		this.add(sidepan);
 		// CardLayout들어있는 mainPan에 패널들 넣음
-
-		mainPan.add(homeSc, "NamedefaultPan");
+		this.mainPan.add(homeSc, "NamedefaultPan");
 		// 이름을 부여함 .
 		// 부여된 이름을 가지고 이벤트 처리부분에서
 		// 카드의 이름으로 식별하여 visible함.
@@ -438,8 +530,18 @@ public class Server extends JFrame {
 		}
 
 	public void eventInit() {
-		
-		
+		//yogaButton1에대한 이벤트처리입니다.
+		this.yogaButton1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String fileName =JOptionPane.showInputDialog("파일의이름 입력");
+				String urlPath =JOptionPane.showInputDialog("URL입력");
+				JOptionPane.showConfirmDialog(null,"파일이름:"+ fileName + "\n"+"URL:"+urlPath );
+				
+			}
+			
+		});
 
 		
 
@@ -452,6 +554,7 @@ public class Server extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setBackground(Color.WHITE);
 		this.setDefaultCloseOperation(Server.EXIT_ON_CLOSE);
+		this.columnAdd();
 		this.compInit();
 		this.eventInit();
 		this.setVisible(true);
