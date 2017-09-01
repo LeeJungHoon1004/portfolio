@@ -50,20 +50,38 @@ public class UrlDialog extends JDialog{
 	
 	public void compInit() {
 	this.panel_center.add(button_yoga1);
-	this.panel_center.add(button_yoga1);
-	this.panel_center.add(button_yoga1);
-	this.panel_center.add(button_yoga1);
-	this.panel_center.add(button_yoga1);
+	this.panel_center.add(button_yoga2);
+	this.panel_center.add(button_yoga3);
+	this.panel_center.add(button_yoga4);
+	this.panel_center.add(button_yoga5);
 	
 	this.panel_center.add(button_stretching1);
-	this.panel_center.add(button_stretching1);
-	this.panel_center.add(button_stretching1);
-	this.panel_center.add(button_stretching1);
-	this.panel_center.add(button_stretching1);
+	this.panel_center.add(button_stretching2);
+	this.panel_center.add(button_stretching3);
+	this.panel_center.add(button_stretching4);
+	this.panel_center.add(button_stretching5);
 	
 	this.panel_center.add(button_mileyCyrus1);
+	this.panel_center.add(button_mileyCyrus2);
+	this.panel_center.add(button_mileyCyrus3);
+	this.panel_center.add(button_mileyCyrus4);
+	this.panel_center.add(button_mileyCyrus5);
+	
 	this.panel_center.add(button_homeDiet1);
+	this.panel_center.add(button_homeDiet2);
+	this.panel_center.add(button_homeDiet3);
+	this.panel_center.add(button_homeDiet4);
+	this.panel_center.add(button_homeDiet5);
+	
 	this.panel_center.add(button_smihott1);
+	this.panel_center.add(button_smihott2);
+	this.panel_center.add(button_smihott3);
+	this.panel_center.add(button_smihott4);
+	this.panel_center.add(button_smihott5);
+	
+	
+	
+	
 	this.panel_south.add(button_close);	
 		
 	this.add(panel_center , BorderLayout.CENTER);
@@ -86,7 +104,7 @@ public class UrlDialog extends JDialog{
 		this.eventInit();
 		this.setSize(800, 800);
 		this.setLocationRelativeTo(parent);
-		this.setDefaultCloseOperation(UrlDialog.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(UrlDialog.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 	}
 
