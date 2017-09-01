@@ -242,6 +242,7 @@ public class Manager implements ManagerInterface{
 		pstat.setString(1,vfl.getUrlPath());
 		pstat.setString(2,vfl.getUrlFileName());
 		pstat.setInt(3, vfl.getUrlFileSize());
+		pstat.setString(4, vfl.getUrlButtonName());
 		int result = pstat.executeUpdate();
 		con.commit();
 		con.close();
