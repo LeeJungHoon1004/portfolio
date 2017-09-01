@@ -15,12 +15,15 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.URI;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
 public class VideoPan extends JPanel {
@@ -112,14 +115,17 @@ public class VideoPan extends JPanel {
 	
 	
 	
-	private String[] urls;
-	private String[] fileNames;
-	private int fileSize = 0;
+	private String[] urls = null;
+	private String[] fileNames = null;
+	int[] fileSize = null;
+	byte[] filecontents = null;	
 	private String path = "C:/Users/Administrator/4weeksWorkout/";
 	private String[] imgpath;
 	
 	
 	public void insertImage() {
+		
+		unmarsharlling();
 		
 		for(int i=0;i<25;i++) {
 			imgpath[i] = path+fileNames[i];
@@ -177,29 +183,34 @@ public class VideoPan extends JPanel {
 		b24 = new JButton(ic24);
 		b25 = new JButton(ic25);
 		
-		
-	
 	}
 	
 	public void unmarsharlling() {
 		try {
-			ImageIcon image;
-			String url = null;
-			String fileName = null;
-			int fileSize = 0;
-			byte[] filecontents = null;	
 			
 			dos.writeUTF("비디오패널 갱신");
 			
 			ois = new ObjectInputStream(client.getInputStream());
-			VideoFileList vfl = (VideoFileList) ois.readObject();
-		
-			System.out.println(vfl.getUrl());
-			System.out.println(vfl.getFilename());
-			System.out.println(vfl.getFileSize());
-			System.out.println(vfl.getFilecontents());
-		
-			filecontents = vfl.getFilecontents();
+			
+			ArrayList < VideoFileList> vflList = new ArrayList < VideoFileList> ();
+			vflList =(ArrayList)ois.readObject();
+			
+			for(int i = 0 ; i< vflList.size() ; i++) {
+			
+			urls[i] = vflList.get(i).getUrl();
+			fileNames[i] = vflList.get(i).getFilename();
+			fileSize[i] = vflList.get(i).getFileSize();
+			filecontents =vflList.get(i).getFilecontents();
+			
+			System.out.println(urls[i]);
+			System.out.println(fileNames[i]);
+			System.out.println(fileSize[i]);
+			System.out.println(filecontents);
+			
+			}
+			//배열에 데이터 넣기완료
+			System.out.println("배열에 데이터 넣기 완료");
+			
 			File f = new File("");
 			fos = new FileOutputStream(f);
 			bos = new BufferedOutputStream(fos);
@@ -208,13 +219,6 @@ public class VideoPan extends JPanel {
 			dos.flush();
 			
 			System.out.println("비디오패널 언마셜링 성공");
-		
-			for(int i=0;i<30;i++) {
-				fileNames[i] = vfl.getFilename();
-				urls[i] = vfl.getUrl();
-			}//배열에 데이터 넣기완료
-			
-			System.out.println("배열에 데이터 넣기 완료");
 			
 			dos.close();
 		}catch(Exception e) {
@@ -267,6 +271,7 @@ public class VideoPan extends JPanel {
 
 		add(encourage);
 		
+		yogaPan.setBackground(Color.white);
 		yogaPan.setBorder(yoga);
 		yogaPan.add(b1);
 		yogaPan.add(b2);
@@ -275,6 +280,7 @@ public class VideoPan extends JPanel {
 		yogaPan.add(b5);
 		add(yogaSc);
 
+		stretchPan.setBackground(Color.white);
 		stretchPan.setBorder(stretching);
 		stretchPan.add(b6);
 		stretchPan.add(b7);
@@ -283,6 +289,7 @@ public class VideoPan extends JPanel {
 		stretchPan.add(b10);
 		add(stretchSc);
 
+		mileyPan.setBackground(Color.white);
 		mileyPan.setBorder(miley);
 		mileyPan.add(b11);
 		mileyPan.add(b12);
@@ -291,6 +298,7 @@ public class VideoPan extends JPanel {
 		mileyPan.add(b15);
 		add(mileySc);
 
+		dancePan.setBackground(Color.white);
 		dancePan.setBorder(dance);
 		dancePan.add(b16);
 		dancePan.add(b17);
@@ -299,6 +307,7 @@ public class VideoPan extends JPanel {
 		dancePan.add(b20);
 		add(danceSc);
 		
+		smiPan.setBackground(Color.white);
 		smiPan.setBorder(smi);
 		smiPan.add(b21);
 		smiPan.add(b22);
@@ -307,15 +316,15 @@ public class VideoPan extends JPanel {
 		smiPan.add(b25);
 		add(smiSc);
 		
-		add(renew,BorderLayout.CENTER);
+		add(renew);
 	}
 	
 	public void eventInitYoga() {
 		
 		renew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				unmarsharlling();
 				insertImage();
+				//△언마셜링 메소드도 포함되어있음
 			}
 		});
 		
@@ -593,20 +602,36 @@ public class VideoPan extends JPanel {
 	}
 	
 	public VideoPan(Socket client,DataInputStream dis,DataOutputStream dos) {
+		
 		this.client = client;
 		this.dis = dis;
 		this.dos = dos;
-	}
-	
-	public VideoPan() {
+		
 		this.setBackground(Color.white);
-		unmarsharlling();
+		
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// If Nimbus is not available, you can set the GUI to another look
+			// and feel.
+		}
+		
+		
 		insertImage();
+		//△언마셜링 메소드도 포함되어있음
 		compInit();
+		
 		eventInitYoga();
+		eventInitStretching();
 		eventInitMiley();
 		eventInitDance();
-
+		eventInitSmi();
+		
 	}
 
 }

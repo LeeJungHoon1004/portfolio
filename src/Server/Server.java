@@ -375,11 +375,15 @@ public class Server extends JFrame {
 
 	private JButton urlRenewalButton = new JButton("URL갱신");
 	private JButton urlConfirmButton = new JButton("URL확인");
-	private JButton urlDeleteButton = new JButton("URL삭제");
+
+	private String[] buttonName = new String[25];
+	private int[] fileSize = new int[25];
+	private String[] targetUrlImageFileName = new String[25];
+	private File targetFile[] = new File[25];
 
 	private String urlImageFileName[] = new String[25];
 	private String urlPath[] = new String[25];
-	private String ServerdirectoryPath ;
+	private String ServerdirectoryPath;
 	// homePan에다가 부착함.
 	// articlePan
 	private JPanel articleWholePan = new JPanel(new BorderLayout());
@@ -472,7 +476,6 @@ public class Server extends JFrame {
 
 		this.urlButtonPan.add(urlRenewalButton);
 		this.urlButtonPan.add(urlConfirmButton);
-		this.urlButtonPan.add(urlDeleteButton);
 		this.urlWholePan.add(urlButtonPan, BorderLayout.EAST);
 
 		this.homePan.add(urlWholePan);
@@ -512,9 +515,9 @@ public class Server extends JFrame {
 	}
 
 	public void eventInit() {
-		
+
 		File home = new File(ServerdirectoryPath);
-		
+
 		// yogaButton1에대한 이벤트처리입니다.
 		this.yogaButton1.addActionListener(new ActionListener() {
 
@@ -571,7 +574,7 @@ public class Server extends JFrame {
 			}
 
 		});
-		this.stretchingButton1.addActionListener(new ActionListener(){
+		this.stretchingButton1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -579,11 +582,10 @@ public class Server extends JFrame {
 				urlPath[5] = JOptionPane.showInputDialog("URL입력");
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[5] + "\n" + "URL:" + urlPath[5]);
 
-				
 			}
-			
+
 		});
-		this.stretchingButton2.addActionListener(new ActionListener(){
+		this.stretchingButton2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -591,12 +593,11 @@ public class Server extends JFrame {
 				urlPath[6] = JOptionPane.showInputDialog("URL입력");
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[6] + "\n" + "URL:" + urlPath[6]);
 
-				
 			}
-			
+
 		});
-		
-		this.stretchingButton3.addActionListener(new ActionListener(){
+
+		this.stretchingButton3.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -604,12 +605,11 @@ public class Server extends JFrame {
 				urlPath[7] = JOptionPane.showInputDialog("URL입력");
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[7] + "\n" + "URL:" + urlPath[7]);
 
-				
 			}
-			
+
 		});
 
-		this.stretchingButton4.addActionListener(new ActionListener(){
+		this.stretchingButton4.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -617,12 +617,11 @@ public class Server extends JFrame {
 				urlPath[8] = JOptionPane.showInputDialog("URL입력");
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[8] + "\n" + "URL:" + urlPath[8]);
 
-				
 			}
-			
+
 		});
-		
-		this.stretchingButton5.addActionListener(new ActionListener(){
+
+		this.stretchingButton5.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -630,12 +629,11 @@ public class Server extends JFrame {
 				urlPath[9] = JOptionPane.showInputDialog("URL입력");
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[9] + "\n" + "URL:" + urlPath[9]);
 
-				
 			}
-			
+
 		});
-		
-		this.mileyCyrusButton1.addActionListener(new ActionListener(){
+
+		this.mileyCyrusButton1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -644,9 +642,9 @@ public class Server extends JFrame {
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[10] + "\n" + "URL:" + urlPath[10]);
 
 			}
-			
+
 		});
-		this.mileyCyrusButton2.addActionListener(new ActionListener(){
+		this.mileyCyrusButton2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -655,10 +653,10 @@ public class Server extends JFrame {
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[11] + "\n" + "URL:" + urlPath[11]);
 
 			}
-			
+
 		});
-		
-		this.mileyCyrusButton3.addActionListener(new ActionListener(){
+
+		this.mileyCyrusButton3.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -667,9 +665,9 @@ public class Server extends JFrame {
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[12] + "\n" + "URL:" + urlPath[12]);
 
 			}
-			
+
 		});
-		this.mileyCyrusButton4.addActionListener(new ActionListener(){
+		this.mileyCyrusButton4.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -678,9 +676,9 @@ public class Server extends JFrame {
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[13] + "\n" + "URL:" + urlPath[13]);
 
 			}
-			
+
 		});
-		this.mileyCyrusButton5.addActionListener(new ActionListener(){
+		this.mileyCyrusButton5.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -689,10 +687,10 @@ public class Server extends JFrame {
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[14] + "\n" + "URL:" + urlPath[14]);
 
 			}
-			
+
 		});
-		
-		this.homeDietButton1.addActionListener(new ActionListener(){
+
+		this.homeDietButton1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -700,11 +698,10 @@ public class Server extends JFrame {
 				urlPath[15] = JOptionPane.showInputDialog("URL입력");
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[15] + "\n" + "URL:" + urlPath[15]);
 
-				
 			}
-			
+
 		});
-		this.homeDietButton2.addActionListener(new ActionListener(){
+		this.homeDietButton2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -712,11 +709,10 @@ public class Server extends JFrame {
 				urlPath[16] = JOptionPane.showInputDialog("URL입력");
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[16] + "\n" + "URL:" + urlPath[16]);
 
-				
 			}
-			
+
 		});
-		this.homeDietButton3.addActionListener(new ActionListener(){
+		this.homeDietButton3.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -724,11 +720,10 @@ public class Server extends JFrame {
 				urlPath[17] = JOptionPane.showInputDialog("URL입력");
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[17] + "\n" + "URL:" + urlPath[17]);
 
-				
 			}
-			
+
 		});
-		this.homeDietButton4.addActionListener(new ActionListener(){
+		this.homeDietButton4.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -736,11 +731,10 @@ public class Server extends JFrame {
 				urlPath[18] = JOptionPane.showInputDialog("URL입력");
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[18] + "\n" + "URL:" + urlPath[18]);
 
-				
 			}
-			
+
 		});
-		this.homeDietButton5.addActionListener(new ActionListener(){
+		this.homeDietButton5.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -748,11 +742,10 @@ public class Server extends JFrame {
 				urlPath[19] = JOptionPane.showInputDialog("URL입력");
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[19] + "\n" + "URL:" + urlPath[19]);
 
-				
 			}
-			
+
 		});
-		this.smihottButton1.addActionListener(new ActionListener(){
+		this.smihottButton1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -761,9 +754,9 @@ public class Server extends JFrame {
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[20] + "\n" + "URL:" + urlPath[20]);
 
 			}
-			
+
 		});
-		this.smihottButton2.addActionListener(new ActionListener(){
+		this.smihottButton2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -772,9 +765,9 @@ public class Server extends JFrame {
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[21] + "\n" + "URL:" + urlPath[21]);
 
 			}
-			
+
 		});
-		this.smihottButton3.addActionListener(new ActionListener(){
+		this.smihottButton3.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -783,9 +776,9 @@ public class Server extends JFrame {
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[22] + "\n" + "URL:" + urlPath[22]);
 
 			}
-			
+
 		});
-		this.smihottButton4.addActionListener(new ActionListener(){
+		this.smihottButton4.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -794,49 +787,66 @@ public class Server extends JFrame {
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[23] + "\n" + "URL:" + urlPath[23]);
 
 			}
-			
+
 		});
-		
-		this.smihottButton5.addActionListener(new ActionListener(){
+
+		this.smihottButton5.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[24] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[24] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[24] + "\n" + "URL:" + urlPath[24]);
 
-				//DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
-			//	long currentTime = System.currentTimeMillis();
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[24] + "\n" + "URL:" + urlPath[24],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-				String buttonName = "smihottButton5";
-				String targetUrlImageFileName = smihottButton5+"_"+urlImageFileName[24]+"_"+urlPath[24]+"_"+currentTime;
-				File targetFile = new File(home.getPath() + "/" + targetUrlImageFileName);
-				int fileSize = 0;
-				fileSize = (int)targetFile.length();
-				VideoFileList vfl = new VideoFileList(urlPath[24], targetUrlImageFileName, fileSize ,buttonName);
-				
-//				try {
-//					int result = Server.manager.getUrlData(vfl);
-//					if(result >0){ //결과가 존재한다 - > 업데이트
-//						Server.manager.updateUrlData(vfl);
-//					}
-//					else{//결과가 없다 - > 인서트
-//						Server.manager.insertUrlData(vfl);
-//					}
-//					System.out.println("스미홈트5번 버튼 데이터입력 성공.");
-//				} catch (Exception e1) {
-//					System.out.println("스미홈트5번 버튼 데이터입력 오류다.");
-//					e1.printStackTrace();
-//				}
+					buttonName[24] = "smihottButton5";
+					targetUrlImageFileName[24] = buttonName[24] + "_" + urlImageFileName[24] + "_" + urlPath[24];
+					targetFile[24] = new File(home.getPath() + "/" + targetUrlImageFileName[24]);
+					fileSize[24] = (int) targetFile[24].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[24], targetUrlImageFileName[24], fileSize[24],
+							buttonName[24]);
+					System.out.println("요가5번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("스미홈트5번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("스미홈트5번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
-			
+
 		});
+
+		this.urlConfirmButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+				// JOptionPane.showConfirmDialog(null, "저장하시겠습니까?", JOptionPane.YES_NO_OPTION);
+				// JOptionPane.show
+			}
+
+		});
+
 	}
 
 	// 생성자
 	public Server() {
-		
-		//프로그램의 공통파일 만들기! 
+
+		// 프로그램의 공통파일 만들기!
 		ServerdirectoryPath = "C:/4weeksWorkoutServer";
 		// 파일 객체 생성
 		File file = new File(ServerdirectoryPath);
@@ -846,7 +856,7 @@ public class Server extends JFrame {
 			file.mkdirs();
 			System.out.println("created directory successfully!");
 		}
-		
+
 		this.setSize(1200, 750);
 		this.setTitle("서버");
 		this.setLocationRelativeTo(null);
@@ -856,8 +866,7 @@ public class Server extends JFrame {
 		this.compInit();
 		this.eventInit();
 		this.setVisible(true);
-		
-		
+
 	}
 
 	public static void main(String[] args) throws Exception {

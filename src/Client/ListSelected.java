@@ -45,9 +45,14 @@ public class ListSelected extends JDialog {
 		
 	}
 	
-	public ListSelected(PictureBoardPan parent) {
-		this.setBackground(Color.WHITE);
+	public ListSelected(PictureBoardPan parent,String img,String title,String comment) {
 		
+		
+		this.imgIcon = new ImageIcon(img);
+		//this.writer.setText(writer);
+		this.title.setText(title);
+		this.comment.setText(comment);
+		this.setBackground(Color.WHITE);
 		setSize(500, 500);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -57,11 +62,6 @@ public class ListSelected extends JDialog {
 		setModal(true);
 	}
 
-	public ListSelected(String img,String title,String comment) {
-		this.imgIcon = new ImageIcon(img);
-		//this.writer.setText(writer);
-		this.title.setText(title);
-		this.comment.setText(comment);
-	}
+
 	
 }

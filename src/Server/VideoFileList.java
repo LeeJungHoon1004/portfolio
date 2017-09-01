@@ -7,56 +7,59 @@ public class VideoFileList implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String urlPath;
-	private String filename;// 파일의 이름.
-	private int fileSize;// 파일사이즈
-	private byte[] filecontents;// 파일내용물
-	private String buttonName;
-	public VideoFileList(String urlPath, String filename, int fileSize, byte[] filecontents) {
+	private String urlFileName;// 파일의 이름.
+	private int urlFileSize;// 파일사이즈
+	
+	private String urlButtonName;
+	private byte[] fileContents;// 파일내용물
+	
+	
+	
+	public VideoFileList(String urlPath, String urlFileName, int urlFileSize, String urlButtonName) {
 		super();
 		this.urlPath = urlPath;
-		this.filename = filename;
-		this.fileSize = fileSize;
-		this.filecontents = filecontents;
+		this.urlFileName = urlFileName;
+		this.urlFileSize = urlFileSize;
+		this.urlButtonName = urlButtonName;
 	}
-
-	public VideoFileList(String urlPath, String filename, int fileSize ,String buttonName) {
-
+	public VideoFileList(String urlPath, String urlFileName, int urlFileSize, String urlButtonName,
+			byte[] fileContents) {
+		super();
 		this.urlPath = urlPath;
-		this.filename = filename;
-		this.fileSize = fileSize;
-		this.buttonName = buttonName;
+		this.urlFileName = urlFileName;
+		this.urlFileSize = urlFileSize;
+		this.urlButtonName = urlButtonName;
+		this.fileContents = fileContents;
 	}
-
-	public String getUrl() {
+	public String getUrlPath() {
 		return urlPath;
 	}
-
-	public void setUrl(String urlPath) {
+	public void setUrlPath(String urlPath) {
 		this.urlPath = urlPath;
 	}
-
-	public String getFilename() {
-		return filename;
+	public String getUrlFileName() {
+		return urlFileName;
 	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setUrlFileName(String urlFileName) {
+		this.urlFileName = urlFileName;
 	}
-
-	public int getFileSize() {
-		return fileSize;
+	public int getUrlFileSize() {
+		return urlFileSize;
 	}
-
-	public void setFileSize(int fileSize) {
-		this.fileSize = fileSize;
+	public void setUrlFileSize(int urlFileSize) {
+		this.urlFileSize = urlFileSize;
 	}
-
-	public byte[] getFilecontents() {
-		return filecontents;
+	public String getUrlButtonName() {
+		return urlButtonName;
 	}
-
-	public void setFilecontents(byte[] filecontents) {
-		this.filecontents = filecontents;
+	public void setUrlButtonName(String urlButtonName) {
+		this.urlButtonName = urlButtonName;
 	}
-
+	public byte[] getFileContents() {
+		return fileContents;
+	}
+	public void setFileContents(byte[] fileContents) {
+		this.fileContents = fileContents;
+	}
+	
 }

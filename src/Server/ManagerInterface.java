@@ -64,7 +64,8 @@ public interface ManagerInterface {
 	public String getComboListData(Member m)throws Exception;
 	public String getwaterCupListData(Member m)throws Exception;
 
-	public void insertUrlData(VideoFileList vfl) throws Exception;
-	
+	public boolean isExistUrlData(VideoFileList vfl) throws Exception;
+	public int insertUrlData(VideoFileList vfl) throws Exception;
+	public int updateUrlData(VideoFileList vfl) throws Exception;
 	
 }

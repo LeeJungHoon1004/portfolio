@@ -205,17 +205,47 @@ public class Manager implements ManagerInterface{
 	
 	}
 	@Override
-	public void insertUrlData(VideoFileList vfl) throws Exception {
+	public boolean isExistUrlData(VideoFileList vfl) throws Exception {
 		Connection con =this.getConnection();
+		String sql = "select * from url where buttonname = ?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, vfl.getUrlButtonName());
 		
-//		String sql = "update url set watercuplist =? where fileName =?";
-//		PreparedStatement pstat = con.prepareStatement(sql);
-//		pstat.setString(1,ChangeCupList);
-//		pstat.setString(2,id);
-//		int result = pstat.executeUpdate();
-//		con.commit();
-//		con.close();
-//		return result ;	
+		ResultSet rs = pstat.executeQuery(); 
+		boolean result = rs.next();
+		//해당 버튼에 대해서 데이터가 존재하면 true 존재하지않으면 false
+		// 존재하면 -> 데이터를 업데이트 
+		// 존재하지않으면 -> 데이터를 인서트
+		con.close();
+		return result;
+	}
+	@Override
+	public int insertUrlData(VideoFileList vfl) throws Exception {
+		Connection con =this.getConnection();
+		String sql = "insert into url(seq,url,filename,filesize,buttonname,regdate) values(url_seq.nextval , ? , ? ,? ,? , sysdate)";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, vfl.getUrlPath());
+		pstat.setString(2, vfl.getUrlFileName());
+		pstat.setInt(3, vfl.getUrlFileSize());
+		pstat.setString(4, vfl.getUrlButtonName());
+		int result = pstat.executeUpdate();
+		con.commit();
+		con.close();
+		return result;
+	}
+	
+	@Override
+	public int updateUrlData(VideoFileList vfl) throws Exception {
+		Connection con =this.getConnection();
+		String sql = "update url set seq = url_seq.nextval ,set url =? , filename = ? , filesize =? ,regdate = sysdate where buttonname =?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1,vfl.getUrlPath());
+		pstat.setString(2,vfl.getUrlFileName());
+		pstat.setInt(3, vfl.getUrlFileSize());
+		int result = pstat.executeUpdate();
+		con.commit();
+		con.close();
+		return result ;	
 	}
 
 	
