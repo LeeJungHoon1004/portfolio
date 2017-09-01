@@ -106,7 +106,7 @@ public class PictureBoardPan extends JPanel {
 				cnt++;
 
 			//	new AddPictureBoard().setVisible(true);// JDialog 보이기!
-				new AddPictureBoard(self,client, dis, dos).setVisible(true);;// 소켓통신 전달(?)
+				new AddPictureBoard(self,client, dis, dos).setVisible(true);
 				
 				unmarshalling();
 				repaint();
@@ -149,8 +149,8 @@ public class PictureBoardPan extends JPanel {
 				String title = fl[index].getTitle();
 				String comment = fl[index].getContents();
 				
-				new ListSelected(img,title,comment);
-				new ListSelected(self).setVisible(true);
+				
+				new ListSelected(self, img,title,comment).setVisible(true);
 			}
 		});
 
