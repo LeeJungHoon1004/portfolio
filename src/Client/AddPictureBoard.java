@@ -1,14 +1,16 @@
 package Client;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
-import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +19,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -50,42 +51,58 @@ public class AddPictureBoard extends JDialog {
 	private TitledBorder tborder = new TitledBorder("");
 	// ======FILE CHOOSER=======================
 	private JFileChooser fc = new JFileChooser();
-	private File img;
-
-	private ImageIcon imgIcon;
-	private JLabel picture = new JLabel(imgIcon);
+	private File file;
+	private int returnVal;
+	
+	private JLabel picture = new JLabel();
 	private JButton findPicture = new JButton("사진");
+	private JLabel titleLabel = new JLabel("글제목:");
 	private JTextField picturePath = new JTextField();
 	private JTextField comment = new JTextField();
-	private JTextField title = new JTextField();
+	private JTextField titleField = new JTextField();
 
 	private JPanel picturePan = new JPanel();
-	private JPanel pathPan = new JPanel();
+	private JPanel PahtPan = new JPanel();
+	private JPanel titlePan = new JPanel();
+	private JPanel dataPan = new JPanel();
 	private JPanel buttonPan = new JPanel();
 
+	
+	
 	private JButton commit = new JButton("올리기");
 	private JButton cancel = new JButton("돌아가기");
 
 	public void compInit() {
-		setLayout(new BorderLayout(1, 1));
-		picture.setPreferredSize(new Dimension(520, 565));
+		setLayout(new BorderLayout(0,0));
+		picturePan.setPreferredSize(new Dimension(510, 510));
 		picturePath.setPreferredSize(new Dimension(455, 30));
-		comment.setPreferredSize(new Dimension(520, 100));
-
-		picture.setBorder(tborder);
-		picturePan.add(picture, BorderLayout.NORTH);
-		pathPan.add(findPicture, BorderLayout.WEST);
-		pathPan.add(picturePath, BorderLayout.EAST);
-		pathPan.add(comment, BorderLayout.SOUTH);
+		titleField.setPreferredSize(new Dimension(455, 30));
+		comment.setPreferredSize(new Dimension(520, 110));
+		
+		picturePan.setBorder(tborder);
+		picturePan.add(picture);
+		
+		PahtPan.add(findPicture, BorderLayout.WEST);
+		PahtPan.add(picturePath, BorderLayout.EAST);
+		
+		titlePan.add(titleLabel, BorderLayout.WEST);
+		titlePan.add(titleField, BorderLayout.EAST);
+		
+		dataPan.add(PahtPan, BorderLayout.NORTH);
+		dataPan.add(titlePan, BorderLayout.CENTER);
+		dataPan.add(comment, BorderLayout.SOUTH);
 		buttonPan.add(commit);
 		buttonPan.add(cancel);
 
 		picturePan.setBackground(Color.white);
-		pathPan.setBackground(Color.white);
+		dataPan.setBackground(Color.white);
 		buttonPan.setBackground(Color.white);
+		PahtPan.setBackground(Color.white);
+		titlePan.setBackground(Color.white);
+		
 		
 		add(picturePan, BorderLayout.NORTH);
-		add(pathPan, BorderLayout.CENTER);
+		add(dataPan, BorderLayout.CENTER);
 		add(buttonPan, BorderLayout.SOUTH);
 	}
 
@@ -100,29 +117,32 @@ public class AddPictureBoard extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// 로컬파일찾은후 텍스트필드에 경로 붙이기.
 				fileChooser();
-				img = fc.getSelectedFile();// 이미지 file형으로 return.
-				picturePath.setText(img.getPath() + "/" + img.getName());
-
-				System.out.println(img.getPath() + "/");
-
-				imgIcon = new ImageIcon(img.getPath() + "/" + img.getName());
-				picture = new JLabel(imgIcon);
-				picturePan.add(picture, BorderLayout.NORTH);
-				add(picturePan, BorderLayout.NORTH);
-				repaint();
-
+				
+				if(returnVal == JFileChooser.APPROVE_OPTION)
+				   {
+					file = fc.getSelectedFile();
+					picture.setIcon(new ImageIcon(file.getPath()));
+					picturePath.setText(file.getPath());
+				    repaint();
+				    
+				   }
+				   else if (returnVal == JFileChooser.ERROR_OPTION) 
+				   {
+					   JOptionPane.showMessageDialog(AddPictureBoard.this, "error", "FCDemo", JOptionPane.OK_OPTION);
+				   }			
+				
 				System.out.println("파일찾기완료");
 			}
 		});
 
 		commit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				//
+				
 				try {
-					dos.writeUTF("추가");
+					dos.writeUTF("커뮤니티 추가");
 					marshalling();
-					JOptionPane.showMessageDialog(null, "게시물 올리기 완료");
+					
+					JOptionPane.showMessageDialog(null, "커뮤니티 업로드 완료");
 					dispose();
 				} catch (IOException e1) {
 					System.out.println("커뮤니티 마셜링 실패");
@@ -132,25 +152,16 @@ public class AddPictureBoard extends JDialog {
 		});
 	}
 
+	
 	public void fileChooser() {
 		fc.setAccessory(new ImagePreview(fc));
+		fc.setMultiSelectionEnabled(true);
+		//여러개 선택 가능.
+		fc.setFileFilter
+	    (new javax.swing.filechooser.FileNameExtensionFilter("JPEG", "jpeg","JPG","jpg","PNG","png"));
+		//사진 파일 필터
 		fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-		switch (fc.showOpenDialog(AddPictureBoard.this)) { // △파일열기.
-		case JFileChooser.APPROVE_OPTION:// 열기버튼
-			// img = fc.getSelectedFile(); // img에 선택한 파일 넣음.
-
-			break;
-
-		// case JFileChooser.CANCEL_OPTION:
-		// JOptionPane.showMessageDialog(AddPictureBoard.this, "Cancelled", "FCDemo",
-		// JOptionPane.OK_OPTION);
-		// break;
-
-		case JFileChooser.ERROR_OPTION:
-			JOptionPane.showMessageDialog(AddPictureBoard.this, "error", "FCDemo", JOptionPane.OK_OPTION);
-		}
-
-		// return img;
+		returnVal = fc.showOpenDialog(AddPictureBoard.this); // △파일열기.
 	}
 
 	public void marshalling() {
@@ -177,11 +188,10 @@ public class AddPictureBoard extends JDialog {
 			System.out.println(tmp.getAbsolutePath() + " : " + tmp.getName());
 		}
 
-		fileName="클라이언트1.txt";
-		File targetFile = new File(home.getPath() + "/" + fileName);
-		// System.out.println(home.getPath()+"/"+fileName);
-		title="클라이언트1.txt";
-		contents="클라이언트1.txt";
+		
+		File targetFile = new File(picturePath.getText());
+		title=titleField.getText();
+		contents=comment.getText();
 		fileName=targetFile.getName();
 		fileSize=(int)targetFile.length();
 		fileContents=new byte[fileSize];
@@ -194,19 +204,6 @@ public class AddPictureBoard extends JDialog {
 		FileList fl1 = new FileList(title, contents, fileName, fileSize, fileContents);
 		oos.writeObject(fl1);fileName="d1.JPG";targetFile=new File(home.getPath()+"/"+fileName);
 		//====================================================파일1개 보내기
-//		
-//		fileName="d1.JPG";
-//		targetFile = new File(home.getPath() + "/" + fileName);
-//		title="d1.JPG";
-//		contents="d1.JPG내용";
-//		fileName=targetFile.getName();
-//		fileSize=(int)targetFile.length();
-//		fileContents=new byte[fileSize];
-//		// 파일컨텐츠에 실제 파일을 담아준다.
-//		fis=new FileInputStream(targetFile);fis.read(fileContents);fis.close();
-//		FileList fl2 = new FileList(title, contents, fileName, fileSize, fileContents);
-//		oos.writeObject(fl2);
-//		//====================================================파일2개 보내기
 		
 		}catch(Exception e1) {
 			System.out.println("마셜링 실패");
@@ -229,9 +226,4 @@ public class AddPictureBoard extends JDialog {
 		setModal(true);
 	}
 
-//	public AddPictureBoard(Socket client, DataInputStream dis, DataOutputStream dos) {
-//		this.client = client;
-//		this.dis = dis;
-//		this.dos = dos;
-//	}
 }
