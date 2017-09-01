@@ -803,7 +803,7 @@ public class Server extends JFrame {
 
 					buttonName[24] = "smihottButton5";
 					targetUrlImageFileName[24] = buttonName[24] + "_" + urlImageFileName[24] + "_" + urlPath[24];
-					targetFile[24] = new File(home.getPath() + "/" + targetUrlImageFileName[24]);
+					targetFile[24] = new File(home.getPath() + "/" + urlImageFileName[24]);
 					fileSize[24] = (int) targetFile[24].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )

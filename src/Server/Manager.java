@@ -237,7 +237,7 @@ public class Manager implements ManagerInterface{
 	@Override
 	public int updateUrlData(VideoFileList vfl) throws Exception {
 		Connection con =this.getConnection();
-		String sql = "update url set seq = url_seq.nextval ,set url =? , filename = ? , filesize =? ,regdate = sysdate where buttonname =?";
+		String sql = "update url set   seq = url_seq.nextval , url =? , filename = ? , filesize =? ,regdate = sysdate where buttonname =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1,vfl.getUrlPath());
 		pstat.setString(2,vfl.getUrlFileName());
