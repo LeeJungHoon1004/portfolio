@@ -1,5 +1,6 @@
 package Client;
 
+
 public class VideoFileList {
 	private String url;
 	private String filename;//파일의 이름. 

@@ -1,5 +1,6 @@
 package Client;
 
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -53,6 +54,8 @@ public class PictureBoardPan extends JPanel {
 	private ObjectInputStream ois = null;
 
 	
+//	private String userID;
+//	private String userPW;
 	private int index;// jlist 선택한 인덱스 번호
 	private TitledBorder tborder = new TitledBorder("");
 	
@@ -71,10 +74,11 @@ public class PictureBoardPan extends JPanel {
 	public void compInit() {
 		setLayout(new BorderLayout(1, 1));
 
-		list = new JList(dlm);
-		sc = new JScrollPane(list);
-		list.setCellRenderer(new CellRenderer());
-
+//		list = new JList(dlm);
+//		sc = new JScrollPane(list);
+//		list.setCellRenderer(new CellRenderer());
+		renew();
+		
 		sc.setPreferredSize(new Dimension(970, 500));
 		floor2.setPreferredSize(new Dimension(970,90));
 		sc.setBorder(tborder);
@@ -91,25 +95,16 @@ public class PictureBoardPan extends JPanel {
 
 	}
 
-	public void addList() {
-		
-		for(int i = 0;i<cnt;i++) {
-			new CellRenderer();
-		}
-//https://m.blog.naver.com/PostView.nhn?blogId=heoguni&logNo=130170350764&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
-
-	}
-
 	public void eventInit() {
 		upload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cnt++;
-
-			//	new AddPictureBoard().setVisible(true);// JDialog 보이기!
-				new AddPictureBoard(self,client, dis, dos).setVisible(true);
 				
-				unmarshalling();
-				repaint();
+				new AddPictureBoard(self,client, dis, dos).setVisible(true);
+				// JDialog 보이기!
+				
+				renew();//renew 안에 unmarshalling도 들어있음.
+				//repaint();
 
 			}
 		});
@@ -121,7 +116,7 @@ public class PictureBoardPan extends JPanel {
 		
 				 try {
 					 dos.writeUTF("리스트 삭제");
-					 dos.writeInt(index);
+					 dos.writeInt(index);//삭제할 리스트의 프라이머리 번호
 				 } catch (Exception e1) {
 					 System.out.println("삭제 실패");
 				 } // 서버에 게시글 없앤다고 보냄.
@@ -137,6 +132,9 @@ public class PictureBoardPan extends JPanel {
 				 list.ensureIndexIsVisible(index);
 		
 				 JOptionPane.showMessageDialog(null, "게시글이 삭제되었습니다");
+				 
+				 renew();
+				 //삭제후 갱신
 		 		}
 		 });
 
@@ -144,11 +142,10 @@ public class PictureBoardPan extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				
 				index = list.getSelectedIndex();
-				FileList[] fl = new FileList[index];
-				String img = ""+"/"+fl[index].getFileName();
-				String title = fl[index].getTitle();
-				String comment = fl[index].getContents();
-				
+				ArrayList<FileList> fl = new ArrayList<FileList>();
+				String img = ""+"/"+fl.get(index).getFileName();
+				String title = fl.get(index).getTitle();
+				String comment = fl.get(index).getContents();
 				
 				new ListSelected(self, img,title,comment).setVisible(true);
 			}
@@ -156,8 +153,17 @@ public class PictureBoardPan extends JPanel {
 
 	}
 
+	public void renew() {//갱신 메소드
+		unmarshalling();
+		list = new JList(dlm);
+		sc = new JScrollPane(list);
+		list.setCellRenderer(new CellRenderer());
+	}
+	
 	public void unmarshalling() {
 		try {
+			
+			dos.writeUTF("커뮤니티패널 갱신");
 		// 전송하려는 파일의 이름 , 크기 , 내용물(파일자체) , 파일의 타이틀 ,파일의 내용
 		String title = null;
 		String contents = null;
@@ -168,8 +174,6 @@ public class PictureBoardPan extends JPanel {
 		// 2.클라이언트에서 데이터를 받습니다 (2.ClientRam to ServerRam)
 		ois = new ObjectInputStream(client.getInputStream());
 		FileList fl1 = (FileList) ois.readObject();
-		//FileList fl2 = (FileList) ois.readObject();
-		// FileList fl3 = (FileList) ois.readObject();
 
 		System.out.println(fl1.getTitle()); // 제목
 		System.out.println(fl1.getContents());// 코멘트
@@ -178,20 +182,13 @@ public class PictureBoardPan extends JPanel {
 		System.out.println(fl1.getFileContents());// 파일의 내용물(byte [])
 
 		fileContents = fl1.getFileContents();
-		File f = new File("L:/김현수/서버/" + fl1.getFileName());
+		File f = new File("C:/Users/Administrator/4weeksWorkout/" + fl1.getFileName());
 		fos = new FileOutputStream(f);
 		bos = new BufferedOutputStream(fos);
 		dos = new DataOutputStream(bos);
 		dos.write(fileContents);
 		dos.flush();
 		//===========================파일1개 언마셜링
-//		fileContents = fl2.getFileContents();
-//		File f2 = new File("L:/김현수/서버/" + fl2.getFileName());
-//		fos = new FileOutputStream(f2);
-//		dos = new DataOutputStream(fos);
-//		dos.write(fileContents);
-//		dos.flush();
-		//===========================파일2개 언마셜링
 		System.out.println("클라이언트에서 받은 데이터를 하드디스크로 저장완료.");
 
 		dos.close();
@@ -205,10 +202,8 @@ public class PictureBoardPan extends JPanel {
 		this.client = client;
 		this.dis = dis;
 		this.dos = dos;
-		
-	}
-
-	public PictureBoardPan() {
+//		this.userID = userID;
+//		this.userPW = userPW;
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
