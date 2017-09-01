@@ -1,5 +1,7 @@
 package Server;
 
+import java.util.ArrayList;
+
 public interface ManagerInterface {
 	/**
 	 * ¸â¹ö(name , id , pw , gender)
@@ -67,7 +69,7 @@ public interface ManagerInterface {
 	public boolean isExistUrlData(VideoFileList vfl) throws Exception;
 	public int insertUrlData(VideoFileList vfl) throws Exception;
 	public int updateUrlData(VideoFileList vfl) throws Exception;
-	
+	public ArrayList <VideoFileList> getUrlAllDAta(VideoFileList[] vflList) throws Exception;
 	
 	
 	

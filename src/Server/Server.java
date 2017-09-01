@@ -18,6 +18,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -381,6 +382,7 @@ public class Server extends JFrame {
 
 	private String urlImageFileName[] = new String[25];
 	private String urlPath[] = new String[25];
+	private VideoFileList [] vflList = new VideoFileList[25];
 	private String ServerdirectoryPath;
 	// homePan에다가 부착함.
 	// articlePan
@@ -531,19 +533,19 @@ public class Server extends JFrame {
 					buttonName[0] = "yogaButton1";
 					targetUrlImageFileName[0] = buttonName[0] + "_" + urlImageFileName[0] + "_" + urlPath[0];
 					targetFile[0] = new File(home.getPath() + "/" + urlImageFileName[0]);
-					fileSize[0] = (int) targetFile[24].length();
+					fileSize[0] = (int) targetFile[0].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[0], targetUrlImageFileName[0], fileSize[0],
+					vflList[0] = new VideoFileList(urlPath[0], targetUrlImageFileName[0], fileSize[0],
 							buttonName[0]);
 					System.out.println("요가1번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[0]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[0]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[0]);
 						}
 						
 						System.out.println("요가1번 버튼 데이터입력 성공.");
@@ -572,16 +574,16 @@ public class Server extends JFrame {
 					fileSize[1] = (int) targetFile[1].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[1], targetUrlImageFileName[1], fileSize[1],
+					vflList[1] = new VideoFileList(urlPath[1], targetUrlImageFileName[1], fileSize[1],
 							buttonName[1]);
 					System.out.println("요가2번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[1]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[1]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[1]);
 						}
 						
 						System.out.println("요가2번 버튼 데이터입력 성공.");
@@ -610,16 +612,16 @@ public class Server extends JFrame {
 					fileSize[2] = (int) targetFile[2].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[2], targetUrlImageFileName[2], fileSize[2],
+					vflList[2] = new VideoFileList(urlPath[2], targetUrlImageFileName[2], fileSize[2],
 							buttonName[2]);
 					System.out.println("요가3번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[2]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[2]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[2]);
 						}
 						
 						System.out.println("요가3번 버튼 데이터입력 성공.");
@@ -648,16 +650,16 @@ public class Server extends JFrame {
 					fileSize[3] = (int) targetFile[3].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[3], targetUrlImageFileName[3], fileSize[3],
+					vflList[3] = new VideoFileList(urlPath[3], targetUrlImageFileName[3], fileSize[3],
 							buttonName[3]);
 					System.out.println("요가4번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[3]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[3]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[3]);
 						}
 						
 						System.out.println("요가4번 버튼 데이터입력 성공.");
@@ -686,16 +688,16 @@ public class Server extends JFrame {
 					fileSize[4] = (int) targetFile[4].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[4], targetUrlImageFileName[4], fileSize[4],
+					vflList[4] = new VideoFileList(urlPath[4], targetUrlImageFileName[4], fileSize[4],
 							buttonName[4]);
 					System.out.println("요가5번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[4]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[4]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[4]);
 						}
 						
 						System.out.println("요가5번 버튼 데이터입력 성공.");
@@ -724,16 +726,16 @@ public class Server extends JFrame {
 					fileSize[5] = (int) targetFile[5].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[5], targetUrlImageFileName[5], fileSize[5],
+					vflList[5] = new VideoFileList(urlPath[5], targetUrlImageFileName[5], fileSize[5],
 							buttonName[5]);
 					System.out.println("스트레칭1번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[5]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[5]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[5]);
 						}
 						
 						System.out.println("스트레칭1번 버튼 데이터입력 성공.");
@@ -762,16 +764,16 @@ public class Server extends JFrame {
 					fileSize[6] = (int) targetFile[6].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[6], targetUrlImageFileName[6], fileSize[6],
+					vflList[6] = new VideoFileList(urlPath[6], targetUrlImageFileName[6], fileSize[6],
 							buttonName[6]);
 					System.out.println("스트레칭2번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[6]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[6]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[6]);
 						}
 						
 						System.out.println("스트레칭2번 버튼 데이터입력 성공.");
@@ -801,16 +803,16 @@ public class Server extends JFrame {
 					fileSize[7] = (int) targetFile[7].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[7], targetUrlImageFileName[7], fileSize[7],
+					vflList[7] = new VideoFileList(urlPath[7], targetUrlImageFileName[7], fileSize[7],
 							buttonName[7]);
 					System.out.println("스트레칭3번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[7]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[7]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[7]);
 						}
 						
 						System.out.println("스트레칭3번 버튼 데이터입력 성공.");
@@ -840,16 +842,16 @@ public class Server extends JFrame {
 					fileSize[8] = (int) targetFile[8].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[8], targetUrlImageFileName[8], fileSize[8],
+					vflList[8] = new VideoFileList(urlPath[8], targetUrlImageFileName[8], fileSize[8],
 							buttonName[8]);
 					System.out.println("스트레칭4번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[8]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[8]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[8]);
 						}
 						
 						System.out.println("스트레칭4번 버튼 데이터입력 성공.");
@@ -879,16 +881,16 @@ public class Server extends JFrame {
 					fileSize[9] = (int) targetFile[9].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[9], targetUrlImageFileName[9], fileSize[9],
+					vflList[9] = new VideoFileList(urlPath[9], targetUrlImageFileName[9], fileSize[9],
 							buttonName[9]);
 					System.out.println("스트레칭5번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[9]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[9]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[9]);
 						}
 						
 						System.out.println("스트레칭5번 버튼 데이터입력 성공.");
@@ -918,16 +920,16 @@ public class Server extends JFrame {
 					fileSize[10] = (int) targetFile[10].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[10], targetUrlImageFileName[10], fileSize[10],
+					vflList[10] = new VideoFileList(urlPath[10], targetUrlImageFileName[10], fileSize[10],
 							buttonName[10]);
 					System.out.println("마일리사이러스1번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[10]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[10]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[10]);
 						}
 						
 						System.out.println("마일리사이러스1번 버튼 데이터입력 성공.");
@@ -956,16 +958,16 @@ public class Server extends JFrame {
 					fileSize[11] = (int) targetFile[11].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[11], targetUrlImageFileName[11], fileSize[11],
+					vflList[11] = new VideoFileList(urlPath[11], targetUrlImageFileName[11], fileSize[11],
 							buttonName[11]);
 					System.out.println("마일리사이러스2번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[11]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[11]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[11]);
 						}
 						
 						System.out.println("마일리사이러스2번 버튼 데이터입력 성공.");
@@ -995,16 +997,16 @@ public class Server extends JFrame {
 					fileSize[12] = (int) targetFile[12].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[12], targetUrlImageFileName[12], fileSize[12],
+					vflList[12] = new VideoFileList(urlPath[12], targetUrlImageFileName[12], fileSize[12],
 							buttonName[12]);
 					System.out.println("마일리사이러스3번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[12]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[12]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[12]);
 						}
 						
 						System.out.println("마일리사이러스3번 버튼 데이터입력 성공.");
@@ -1033,16 +1035,16 @@ public class Server extends JFrame {
 					fileSize[13] = (int) targetFile[13].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[13], targetUrlImageFileName[13], fileSize[13],
+					vflList[13] = new VideoFileList(urlPath[13], targetUrlImageFileName[13], fileSize[13],
 							buttonName[13]);
 					System.out.println("마일리사이러스4번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[13]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[13]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[13]);
 						}
 						
 						System.out.println("마일리사이러스4번 버튼 데이터입력 성공.");
@@ -1071,16 +1073,16 @@ public class Server extends JFrame {
 					fileSize[14] = (int) targetFile[14].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[14], targetUrlImageFileName[14], fileSize[14],
+					vflList[14] = new VideoFileList(urlPath[14], targetUrlImageFileName[14], fileSize[14],
 							buttonName[14]);
 					System.out.println("마일리사이러스5번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[14]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[14]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[14]);
 						}
 						
 						System.out.println("마일리사이러스5번 버튼 데이터입력 성공.");
@@ -1110,16 +1112,16 @@ public class Server extends JFrame {
 					fileSize[15] = (int) targetFile[15].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[15], targetUrlImageFileName[15], fileSize[15],
+					vflList[15] = new VideoFileList(urlPath[15], targetUrlImageFileName[15], fileSize[15],
 							buttonName[15]);
 					System.out.println("홈다이어트1번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[15]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[15]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[15]);
 						}
 						
 						System.out.println("홈다이어트1번 버튼 데이터입력 성공.");
@@ -1148,16 +1150,16 @@ public class Server extends JFrame {
 					fileSize[16] = (int) targetFile[16].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[16], targetUrlImageFileName[16], fileSize[16],
+					vflList[16] = new VideoFileList(urlPath[16], targetUrlImageFileName[16], fileSize[16],
 							buttonName[16]);
 					System.out.println("홈다이어트2번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[16]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[16]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[16]);
 						}
 						
 						System.out.println("홈다이어트2번 버튼 데이터입력 성공.");
@@ -1186,16 +1188,16 @@ public class Server extends JFrame {
 					fileSize[17] = (int) targetFile[17].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[17], targetUrlImageFileName[17], fileSize[17],
+					vflList[17] = new VideoFileList(urlPath[17], targetUrlImageFileName[17], fileSize[17],
 							buttonName[17]);
 					System.out.println("홈다이어트3번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[17]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[17]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[17]);
 						}
 						
 						System.out.println("홈다이어트3번 버튼 데이터입력 성공.");
@@ -1224,16 +1226,16 @@ public class Server extends JFrame {
 					fileSize[18] = (int) targetFile[18].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[18], targetUrlImageFileName[18], fileSize[18],
+					vflList[18] = new VideoFileList(urlPath[18], targetUrlImageFileName[18], fileSize[18],
 							buttonName[18]);
 					System.out.println("홈다이어트4번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[18]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[18]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[18]);
 						}
 						
 						System.out.println("홈다이어트4번 버튼 데이터입력 성공.");
@@ -1262,16 +1264,16 @@ public class Server extends JFrame {
 					fileSize[19] = (int) targetFile[19].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[19], targetUrlImageFileName[19], fileSize[19],
+					vflList[19] = new VideoFileList(urlPath[19], targetUrlImageFileName[19], fileSize[19],
 							buttonName[19]);
 					System.out.println("홈다이어트5번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[19]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[19]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[19]);
 						}
 						
 						System.out.println("홈다이어트5번 버튼 데이터입력 성공.");
@@ -1300,16 +1302,16 @@ public class Server extends JFrame {
 					fileSize[20] = (int) targetFile[20].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[20], targetUrlImageFileName[20], fileSize[20],
+					vflList[20] = new VideoFileList(urlPath[20], targetUrlImageFileName[20], fileSize[20],
 							buttonName[20]);
 					System.out.println("스미홈트1번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[20]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[20]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[20]);
 						}
 						
 						System.out.println("스미홈트1번 버튼 데이터입력 성공.");
@@ -1338,16 +1340,16 @@ public class Server extends JFrame {
 					fileSize[21] = (int) targetFile[21].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[21], targetUrlImageFileName[21], fileSize[21],
+					vflList[21] = new VideoFileList(urlPath[21], targetUrlImageFileName[21], fileSize[21],
 							buttonName[21]);
 					System.out.println("스미홈트2번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[21]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[21]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[21]);
 						}
 						
 						System.out.println("스미홈트2번 버튼 데이터입력 성공.");
@@ -1376,16 +1378,16 @@ public class Server extends JFrame {
 					fileSize[22] = (int) targetFile[22].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[22], targetUrlImageFileName[22], fileSize[22],
+					vflList[22] = new VideoFileList(urlPath[22], targetUrlImageFileName[22], fileSize[22],
 							buttonName[22]);
 					System.out.println("스미홈트3번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[22]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[22]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[22]);
 						}
 						
 						System.out.println("스미홈트3번 버튼 데이터입력 성공.");
@@ -1414,16 +1416,16 @@ public class Server extends JFrame {
 					fileSize[23] = (int) targetFile[23].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[23], targetUrlImageFileName[23], fileSize[23],
+					vflList[23] = new VideoFileList(urlPath[23], targetUrlImageFileName[23], fileSize[23],
 							buttonName[23]);
 					System.out.println("스미홈트4번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[23]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[23]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[23]);
 						}
 						
 						System.out.println("스미홈트4번 버튼 데이터입력 성공.");
@@ -1453,16 +1455,16 @@ public class Server extends JFrame {
 					fileSize[24] = (int) targetFile[24].length();
 					
 					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
-					VideoFileList vfl = new VideoFileList(urlPath[24], targetUrlImageFileName[24], fileSize[24],
+					vflList[24] = new VideoFileList(urlPath[24], targetUrlImageFileName[24], fileSize[24],
 							buttonName[24]);
-					System.out.println("요가5번 데이터전송준비끝.");
+					System.out.println("스미홈트5번 데이터전송준비끝.");
 
 					try {
-						boolean result = Server.manager.isExistUrlData(vfl);
+						boolean result = Server.manager.isExistUrlData(vflList[24]);
 						if (result) { // 결과가 존재한다 - > 업데이트
-							Server.manager.updateUrlData(vfl);
+							Server.manager.updateUrlData(vflList[24]);
 						} else {// 결과가 없다 - > 인서트
-							Server.manager.insertUrlData(vfl);
+							Server.manager.insertUrlData(vflList[24]);
 						}
 						
 						System.out.println("스미홈트5번 버튼 데이터입력 성공.");
@@ -1479,7 +1481,18 @@ public class Server extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ArrayList<VideoFileList> receivedvflList =new ArrayList<VideoFileList>()  ;
+				try{
+				receivedvflList =Server.manager.getUrlAllDAta(vflList);
+//				for(int i =0 ; i <receivedvflList.size() ; i++) {
+//					
+//				}
 				
+				System.out.println("비디오파일리스트 배열 보낸뒤 ArrayList형태로 받은 receivedvflList : "+receivedvflList.size());
+				}catch(Exception e1) {
+					System.out.println("url확인버튼 누를때 에러 발생.");
+					e1.printStackTrace();
+				}
 				new UrlDialog(self).setVisible(true);
 				
 				
