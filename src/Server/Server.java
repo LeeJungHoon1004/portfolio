@@ -525,8 +525,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[0] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[0] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[0] + "\n" + "URL:" + urlPath[0]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[0] + "\n" + "URL:" + urlPath[0],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[0] = "smihottButton5";
+					targetUrlImageFileName[0] = buttonName[0] + "_" + urlImageFileName[0] + "_" + urlPath[0];
+					targetFile[0] = new File(home.getPath() + "/" + urlImageFileName[0]);
+					fileSize[0] = (int) targetFile[24].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[0], targetUrlImageFileName[0], fileSize[0],
+							buttonName[0]);
+					System.out.println("요가1번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("요가1번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("요가1번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -536,8 +563,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[1] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[1] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[1] + "\n" + "URL:" + urlPath[1]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[1] + "\n" + "URL:" + urlPath[1],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[1] = "smihottButton5";
+					targetUrlImageFileName[1] = buttonName[1] + "_" + urlImageFileName[1] + "_" + urlPath[1];
+					targetFile[1] = new File(home.getPath() + "/" + urlImageFileName[1]);
+					fileSize[1] = (int) targetFile[1].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[1], targetUrlImageFileName[1], fileSize[1],
+							buttonName[1]);
+					System.out.println("요가2번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("요가2번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("요가2번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -547,8 +601,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[2] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[2] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[2] + "\n" + "URL:" + urlPath[2]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[2] + "\n" + "URL:" + urlPath[2],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[2] = "smihottButton5";
+					targetUrlImageFileName[2] = buttonName[2] + "_" + urlImageFileName[2] + "_" + urlPath[2];
+					targetFile[2] = new File(home.getPath() + "/" + urlImageFileName[2]);
+					fileSize[2] = (int) targetFile[2].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[2], targetUrlImageFileName[2], fileSize[2],
+							buttonName[2]);
+					System.out.println("요가3번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("요가3번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("요가3번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -558,8 +639,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[3] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[3] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[3] + "\n" + "URL:" + urlPath[3]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[3] + "\n" + "URL:" + urlPath[3],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[3] = "smihottButton5";
+					targetUrlImageFileName[3] = buttonName[3] + "_" + urlImageFileName[3] + "_" + urlPath[3];
+					targetFile[3] = new File(home.getPath() + "/" + urlImageFileName[3]);
+					fileSize[3] = (int) targetFile[3].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[3], targetUrlImageFileName[3], fileSize[3],
+							buttonName[3]);
+					System.out.println("요가4번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("요가4번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("요가4번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -569,8 +677,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[4] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[4] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[4] + "\n" + "URL:" + urlPath[4]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[4] + "\n" + "URL:" + urlPath[4],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[4] = "smihottButton5";
+					targetUrlImageFileName[4] = buttonName[4] + "_" + urlImageFileName[4] + "_" + urlPath[4];
+					targetFile[4] = new File(home.getPath() + "/" + urlImageFileName[4]);
+					fileSize[4] = (int) targetFile[4].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[4], targetUrlImageFileName[4], fileSize[4],
+							buttonName[4]);
+					System.out.println("요가5번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("요가5번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("요가5번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -580,8 +715,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[5] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[5] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[5] + "\n" + "URL:" + urlPath[5]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[5] + "\n" + "URL:" + urlPath[5],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[5] = "smihottButton5";
+					targetUrlImageFileName[5] = buttonName[5] + "_" + urlImageFileName[5] + "_" + urlPath[5];
+					targetFile[5] = new File(home.getPath() + "/" + urlImageFileName[5]);
+					fileSize[5] = (int) targetFile[5].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[5], targetUrlImageFileName[5], fileSize[5],
+							buttonName[5]);
+					System.out.println("스트레칭1번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("스트레칭1번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("스트레칭1번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -591,8 +753,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[6] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[6] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[6] + "\n" + "URL:" + urlPath[6]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[6] + "\n" + "URL:" + urlPath[6],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[6] = "smihottButton5";
+					targetUrlImageFileName[6] = buttonName[6] + "_" + urlImageFileName[6] + "_" + urlPath[6];
+					targetFile[6] = new File(home.getPath() + "/" + urlImageFileName[6]);
+					fileSize[6] = (int) targetFile[6].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[6], targetUrlImageFileName[6], fileSize[6],
+							buttonName[6]);
+					System.out.println("스트레칭2번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("스트레칭2번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("스트레칭2번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -603,8 +792,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[7] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[7] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[7] + "\n" + "URL:" + urlPath[7]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[7] + "\n" + "URL:" + urlPath[7],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[7] = "smihottButton5";
+					targetUrlImageFileName[7] = buttonName[7] + "_" + urlImageFileName[7] + "_" + urlPath[7];
+					targetFile[7] = new File(home.getPath() + "/" + urlImageFileName[7]);
+					fileSize[7] = (int) targetFile[7].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[7], targetUrlImageFileName[7], fileSize[7],
+							buttonName[7]);
+					System.out.println("스트레칭3번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("스트레칭3번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("스트레칭3번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -615,8 +831,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[8] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[8] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[8] + "\n" + "URL:" + urlPath[8]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[8] + "\n" + "URL:" + urlPath[8],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[8] = "smihottButton5";
+					targetUrlImageFileName[8] = buttonName[8] + "_" + urlImageFileName[8] + "_" + urlPath[8];
+					targetFile[8] = new File(home.getPath() + "/" + urlImageFileName[8]);
+					fileSize[8] = (int) targetFile[8].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[8], targetUrlImageFileName[8], fileSize[8],
+							buttonName[8]);
+					System.out.println("스트레칭4번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("스트레칭4번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("스트레칭4번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -627,8 +870,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[9] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[9] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[9] + "\n" + "URL:" + urlPath[9]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[9] + "\n" + "URL:" + urlPath[9],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[9] = "smihottButton5";
+					targetUrlImageFileName[9] = buttonName[9] + "_" + urlImageFileName[9] + "_" + urlPath[9];
+					targetFile[9] = new File(home.getPath() + "/" + urlImageFileName[9]);
+					fileSize[9] = (int) targetFile[9].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[9], targetUrlImageFileName[9], fileSize[9],
+							buttonName[9]);
+					System.out.println("스트레칭5번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("스트레칭5번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("스트레칭5번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -639,8 +909,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[10] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[10] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[10] + "\n" + "URL:" + urlPath[10]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[10] + "\n" + "URL:" + urlPath[10],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[10] = "smihottButton5";
+					targetUrlImageFileName[10] = buttonName[10] + "_" + urlImageFileName[10] + "_" + urlPath[10];
+					targetFile[10] = new File(home.getPath() + "/" + urlImageFileName[10]);
+					fileSize[10] = (int) targetFile[10].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[10], targetUrlImageFileName[10], fileSize[10],
+							buttonName[10]);
+					System.out.println("마일리사이러스1번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("마일리사이러스1번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("마일리사이러스1번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -650,8 +947,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[11] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[11] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[11] + "\n" + "URL:" + urlPath[11]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[11] + "\n" + "URL:" + urlPath[11],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[11] = "smihottButton5";
+					targetUrlImageFileName[11] = buttonName[11] + "_" + urlImageFileName[11] + "_" + urlPath[11];
+					targetFile[11] = new File(home.getPath() + "/" + urlImageFileName[11]);
+					fileSize[11] = (int) targetFile[11].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[11], targetUrlImageFileName[11], fileSize[11],
+							buttonName[11]);
+					System.out.println("마일리사이러스2번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("마일리사이러스2번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("마일리사이러스2번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -662,8 +986,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[12] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[12] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[12] + "\n" + "URL:" + urlPath[12]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[12] + "\n" + "URL:" + urlPath[12],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[12] = "smihottButton5";
+					targetUrlImageFileName[12] = buttonName[12] + "_" + urlImageFileName[12] + "_" + urlPath[12];
+					targetFile[12] = new File(home.getPath() + "/" + urlImageFileName[12]);
+					fileSize[12] = (int) targetFile[12].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[12], targetUrlImageFileName[12], fileSize[12],
+							buttonName[12]);
+					System.out.println("마일리사이러스3번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("마일리사이러스3번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("마일리사이러스3번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -673,8 +1024,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[13] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[13] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[13] + "\n" + "URL:" + urlPath[13]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[13] + "\n" + "URL:" + urlPath[13],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[13] = "smihottButton5";
+					targetUrlImageFileName[13] = buttonName[13] + "_" + urlImageFileName[13] + "_" + urlPath[13];
+					targetFile[13] = new File(home.getPath() + "/" + urlImageFileName[13]);
+					fileSize[13] = (int) targetFile[13].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[13], targetUrlImageFileName[13], fileSize[13],
+							buttonName[13]);
+					System.out.println("마일리사이러스4번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("마일리사이러스4번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("마일리사이러스4번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -684,8 +1062,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[14] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[14] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[14] + "\n" + "URL:" + urlPath[14]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[14] + "\n" + "URL:" + urlPath[14],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[14] = "smihottButton5";
+					targetUrlImageFileName[14] = buttonName[14] + "_" + urlImageFileName[14] + "_" + urlPath[14];
+					targetFile[14] = new File(home.getPath() + "/" + urlImageFileName[14]);
+					fileSize[14] = (int) targetFile[14].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[14], targetUrlImageFileName[14], fileSize[14],
+							buttonName[14]);
+					System.out.println("마일리사이러스5번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("마일리사이러스5번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("마일리사이러스5번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -696,8 +1101,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[15] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[15] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[15] + "\n" + "URL:" + urlPath[15]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[15] + "\n" + "URL:" + urlPath[15],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[15] = "smihottButton5";
+					targetUrlImageFileName[15] = buttonName[15] + "_" + urlImageFileName[15] + "_" + urlPath[15];
+					targetFile[15] = new File(home.getPath() + "/" + urlImageFileName[15]);
+					fileSize[15] = (int) targetFile[15].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[15], targetUrlImageFileName[15], fileSize[15],
+							buttonName[15]);
+					System.out.println("홈다이어트1번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("홈다이어트1번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("홈다이어트1번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -707,8 +1139,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[16] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[16] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[16] + "\n" + "URL:" + urlPath[16]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[16] + "\n" + "URL:" + urlPath[16],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[16] = "smihottButton5";
+					targetUrlImageFileName[16] = buttonName[16] + "_" + urlImageFileName[16] + "_" + urlPath[16];
+					targetFile[16] = new File(home.getPath() + "/" + urlImageFileName[16]);
+					fileSize[16] = (int) targetFile[16].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[16], targetUrlImageFileName[16], fileSize[16],
+							buttonName[16]);
+					System.out.println("홈다이어트2번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("홈다이어트2번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("홈다이어트2번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -718,8 +1177,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[17] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[17] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[17] + "\n" + "URL:" + urlPath[17]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[17] + "\n" + "URL:" + urlPath[17],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[17] = "smihottButton5";
+					targetUrlImageFileName[17] = buttonName[17] + "_" + urlImageFileName[17] + "_" + urlPath[17];
+					targetFile[17] = new File(home.getPath() + "/" + urlImageFileName[17]);
+					fileSize[17] = (int) targetFile[17].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[17], targetUrlImageFileName[17], fileSize[17],
+							buttonName[17]);
+					System.out.println("홈다이어트3번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("홈다이어트3번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("홈다이어트3번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -729,8 +1215,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[18] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[18] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[18] + "\n" + "URL:" + urlPath[18]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[18] + "\n" + "URL:" + urlPath[18],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[18] = "smihottButton5";
+					targetUrlImageFileName[18] = buttonName[18] + "_" + urlImageFileName[18] + "_" + urlPath[18];
+					targetFile[18] = new File(home.getPath() + "/" + urlImageFileName[18]);
+					fileSize[18] = (int) targetFile[18].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[18], targetUrlImageFileName[18], fileSize[18],
+							buttonName[18]);
+					System.out.println("홈다이어트4번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("홈다이어트4번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("홈다이어트4번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -740,8 +1253,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[19] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[19] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[19] + "\n" + "URL:" + urlPath[19]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[19] + "\n" + "URL:" + urlPath[19],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[19] = "smihottButton5";
+					targetUrlImageFileName[19] = buttonName[19] + "_" + urlImageFileName[19] + "_" + urlPath[19];
+					targetFile[19] = new File(home.getPath() + "/" + urlImageFileName[19]);
+					fileSize[19] = (int) targetFile[19].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[19], targetUrlImageFileName[19], fileSize[19],
+							buttonName[19]);
+					System.out.println("홈다이어트5번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("홈다이어트5번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("홈다이어트5번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -751,8 +1291,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[20] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[20] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[20] + "\n" + "URL:" + urlPath[20]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[20] + "\n" + "URL:" + urlPath[20],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[20] = "smihottButton5";
+					targetUrlImageFileName[20] = buttonName[20] + "_" + urlImageFileName[20] + "_" + urlPath[20];
+					targetFile[20] = new File(home.getPath() + "/" + urlImageFileName[20]);
+					fileSize[20] = (int) targetFile[20].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[20], targetUrlImageFileName[20], fileSize[20],
+							buttonName[20]);
+					System.out.println("스미홈트1번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("스미홈트1번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("스미홈트1번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -762,8 +1329,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[21] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[21] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[21] + "\n" + "URL:" + urlPath[21]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[21] + "\n" + "URL:" + urlPath[21],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[21] = "smihottButton5";
+					targetUrlImageFileName[21] = buttonName[21] + "_" + urlImageFileName[21] + "_" + urlPath[21];
+					targetFile[21] = new File(home.getPath() + "/" + urlImageFileName[21]);
+					fileSize[21] = (int) targetFile[21].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[21], targetUrlImageFileName[21], fileSize[21],
+							buttonName[21]);
+					System.out.println("스미홈트2번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("스미홈트2번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("스미홈트2번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -773,8 +1367,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[22] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[22] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[22] + "\n" + "URL:" + urlPath[22]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[22] + "\n" + "URL:" + urlPath[22],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[22] = "smihottButton5";
+					targetUrlImageFileName[22] = buttonName[22] + "_" + urlImageFileName[22] + "_" + urlPath[22];
+					targetFile[22] = new File(home.getPath() + "/" + urlImageFileName[22]);
+					fileSize[22] = (int) targetFile[22].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[22], targetUrlImageFileName[22], fileSize[22],
+							buttonName[22]);
+					System.out.println("스미홈트3번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("스미홈트3번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("스미홈트3번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
@@ -784,8 +1405,35 @@ public class Server extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				urlImageFileName[23] = JOptionPane.showInputDialog("파일의이름 입력");
 				urlPath[23] = JOptionPane.showInputDialog("URL입력");
-				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[23] + "\n" + "URL:" + urlPath[23]);
 
+				if (JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[23] + "\n" + "URL:" + urlPath[23],
+						"알림", JOptionPane.YES_NO_OPTION) == 0) {
+					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
+
+					buttonName[23] = "smihottButton5";
+					targetUrlImageFileName[23] = buttonName[23] + "_" + urlImageFileName[23] + "_" + urlPath[23];
+					targetFile[23] = new File(home.getPath() + "/" + urlImageFileName[23]);
+					fileSize[23] = (int) targetFile[23].length();
+					
+					//vfl 인스턴스화 (경로 , 파일이름 ,사이즈 , 버튼이름 )
+					VideoFileList vfl = new VideoFileList(urlPath[23], targetUrlImageFileName[23], fileSize[23],
+							buttonName[23]);
+					System.out.println("스미홈트4번 데이터전송준비끝.");
+
+					try {
+						boolean result = Server.manager.isExistUrlData(vfl);
+						if (result) { // 결과가 존재한다 - > 업데이트
+							Server.manager.updateUrlData(vfl);
+						} else {// 결과가 없다 - > 인서트
+							Server.manager.insertUrlData(vfl);
+						}
+						
+						System.out.println("스미홈트4번 버튼 데이터입력 성공.");
+					} catch (Exception e1) {
+						System.out.println("스미홈트4번 버튼 데이터입력 오류다.");
+						e1.printStackTrace();
+					} // - try/catch
+				} // -if
 			}
 
 		});
