@@ -367,6 +367,15 @@ public class BasicShape extends JFrame {
 
 	}// end
 	
+	public void receiveData() {
+		try {
+		dos = new DataOutputStream(client.getOutputStream());
+		dos.writeUTF("데이터수신");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	//서버 접속후 데이터 수신.
 	public void receiveDataBeforeLogin() {
 		//Article , URL 데이터 수신
@@ -550,8 +559,10 @@ public class BasicShape extends JFrame {
 
 	}
 
+	 
 	public BasicShape() {
 		clientConnect();
+
 		setTitle("기본shape테스트");
 		// setSize(700, 500);
 		setSize(1200, 750);

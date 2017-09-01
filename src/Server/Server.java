@@ -35,15 +35,13 @@ import javax.swing.table.DefaultTableModel;
 class ConnectionThread extends Thread {
 
 	private ConnectionThread self = this;
-
 	public ConnectionThread getSelf() {
 		return self;
 	}
-
 	public void setSelf(ConnectionThread self) {
 		this.self = self;
 	}
-
+	
 	private String name;
 	private String gender;
 	private String id;
@@ -530,7 +528,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[0] = "smihottButton5";
+					buttonName[0] = "yogaButton1";
 					targetUrlImageFileName[0] = buttonName[0] + "_" + urlImageFileName[0] + "_" + urlPath[0];
 					targetFile[0] = new File(home.getPath() + "/" + urlImageFileName[0]);
 					fileSize[0] = (int) targetFile[24].length();
@@ -568,7 +566,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[1] = "smihottButton5";
+					buttonName[1] = "yogaButton2";
 					targetUrlImageFileName[1] = buttonName[1] + "_" + urlImageFileName[1] + "_" + urlPath[1];
 					targetFile[1] = new File(home.getPath() + "/" + urlImageFileName[1]);
 					fileSize[1] = (int) targetFile[1].length();
@@ -606,7 +604,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[2] = "smihottButton5";
+					buttonName[2] = "yogaButton3";
 					targetUrlImageFileName[2] = buttonName[2] + "_" + urlImageFileName[2] + "_" + urlPath[2];
 					targetFile[2] = new File(home.getPath() + "/" + urlImageFileName[2]);
 					fileSize[2] = (int) targetFile[2].length();
@@ -644,7 +642,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[3] = "smihottButton5";
+					buttonName[3] = "yogaButton4";
 					targetUrlImageFileName[3] = buttonName[3] + "_" + urlImageFileName[3] + "_" + urlPath[3];
 					targetFile[3] = new File(home.getPath() + "/" + urlImageFileName[3]);
 					fileSize[3] = (int) targetFile[3].length();
@@ -682,7 +680,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[4] = "smihottButton5";
+					buttonName[4] = "yogaButton5";
 					targetUrlImageFileName[4] = buttonName[4] + "_" + urlImageFileName[4] + "_" + urlPath[4];
 					targetFile[4] = new File(home.getPath() + "/" + urlImageFileName[4]);
 					fileSize[4] = (int) targetFile[4].length();
@@ -720,7 +718,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[5] = "smihottButton5";
+					buttonName[5] = "stretchingButton1";
 					targetUrlImageFileName[5] = buttonName[5] + "_" + urlImageFileName[5] + "_" + urlPath[5];
 					targetFile[5] = new File(home.getPath() + "/" + urlImageFileName[5]);
 					fileSize[5] = (int) targetFile[5].length();
@@ -758,7 +756,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[6] = "smihottButton5";
+					buttonName[6] = "stretchingButton2";
 					targetUrlImageFileName[6] = buttonName[6] + "_" + urlImageFileName[6] + "_" + urlPath[6];
 					targetFile[6] = new File(home.getPath() + "/" + urlImageFileName[6]);
 					fileSize[6] = (int) targetFile[6].length();
@@ -797,7 +795,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[7] = "smihottButton5";
+					buttonName[7] = "stretchingButton3";
 					targetUrlImageFileName[7] = buttonName[7] + "_" + urlImageFileName[7] + "_" + urlPath[7];
 					targetFile[7] = new File(home.getPath() + "/" + urlImageFileName[7]);
 					fileSize[7] = (int) targetFile[7].length();
@@ -836,7 +834,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[8] = "smihottButton5";
+					buttonName[8] = "stretchingButton4";
 					targetUrlImageFileName[8] = buttonName[8] + "_" + urlImageFileName[8] + "_" + urlPath[8];
 					targetFile[8] = new File(home.getPath() + "/" + urlImageFileName[8]);
 					fileSize[8] = (int) targetFile[8].length();
@@ -875,7 +873,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[9] = "smihottButton5";
+					buttonName[9] = "stretchingButton5";
 					targetUrlImageFileName[9] = buttonName[9] + "_" + urlImageFileName[9] + "_" + urlPath[9];
 					targetFile[9] = new File(home.getPath() + "/" + urlImageFileName[9]);
 					fileSize[9] = (int) targetFile[9].length();
@@ -914,7 +912,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[10] = "smihottButton5";
+					buttonName[10] = "mileyCyrusButton1";
 					targetUrlImageFileName[10] = buttonName[10] + "_" + urlImageFileName[10] + "_" + urlPath[10];
 					targetFile[10] = new File(home.getPath() + "/" + urlImageFileName[10]);
 					fileSize[10] = (int) targetFile[10].length();
@@ -952,7 +950,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[11] = "smihottButton5";
+					buttonName[11] = "mileyCyrusButton2";
 					targetUrlImageFileName[11] = buttonName[11] + "_" + urlImageFileName[11] + "_" + urlPath[11];
 					targetFile[11] = new File(home.getPath() + "/" + urlImageFileName[11]);
 					fileSize[11] = (int) targetFile[11].length();
@@ -991,7 +989,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[12] = "smihottButton5";
+					buttonName[12] = "mileyCyrusButton3";
 					targetUrlImageFileName[12] = buttonName[12] + "_" + urlImageFileName[12] + "_" + urlPath[12];
 					targetFile[12] = new File(home.getPath() + "/" + urlImageFileName[12]);
 					fileSize[12] = (int) targetFile[12].length();
@@ -1029,7 +1027,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[13] = "smihottButton5";
+					buttonName[13] = "mileyCyrusButton4";
 					targetUrlImageFileName[13] = buttonName[13] + "_" + urlImageFileName[13] + "_" + urlPath[13];
 					targetFile[13] = new File(home.getPath() + "/" + urlImageFileName[13]);
 					fileSize[13] = (int) targetFile[13].length();
@@ -1067,7 +1065,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[14] = "smihottButton5";
+					buttonName[14] = "mileyCyrusButton5";
 					targetUrlImageFileName[14] = buttonName[14] + "_" + urlImageFileName[14] + "_" + urlPath[14];
 					targetFile[14] = new File(home.getPath() + "/" + urlImageFileName[14]);
 					fileSize[14] = (int) targetFile[14].length();
@@ -1106,7 +1104,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[15] = "smihottButton5";
+					buttonName[15] = "homeDietButton1";
 					targetUrlImageFileName[15] = buttonName[15] + "_" + urlImageFileName[15] + "_" + urlPath[15];
 					targetFile[15] = new File(home.getPath() + "/" + urlImageFileName[15]);
 					fileSize[15] = (int) targetFile[15].length();
@@ -1144,7 +1142,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[16] = "smihottButton5";
+					buttonName[16] = "homeDietButton2";
 					targetUrlImageFileName[16] = buttonName[16] + "_" + urlImageFileName[16] + "_" + urlPath[16];
 					targetFile[16] = new File(home.getPath() + "/" + urlImageFileName[16]);
 					fileSize[16] = (int) targetFile[16].length();
@@ -1182,7 +1180,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[17] = "smihottButton5";
+					buttonName[17] = "homeDietButton3";
 					targetUrlImageFileName[17] = buttonName[17] + "_" + urlImageFileName[17] + "_" + urlPath[17];
 					targetFile[17] = new File(home.getPath() + "/" + urlImageFileName[17]);
 					fileSize[17] = (int) targetFile[17].length();
@@ -1220,7 +1218,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[18] = "smihottButton5";
+					buttonName[18] = "homeDietButton4";
 					targetUrlImageFileName[18] = buttonName[18] + "_" + urlImageFileName[18] + "_" + urlPath[18];
 					targetFile[18] = new File(home.getPath() + "/" + urlImageFileName[18]);
 					fileSize[18] = (int) targetFile[18].length();
@@ -1258,7 +1256,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[19] = "smihottButton5";
+					buttonName[19] = "homeDietButton5";
 					targetUrlImageFileName[19] = buttonName[19] + "_" + urlImageFileName[19] + "_" + urlPath[19];
 					targetFile[19] = new File(home.getPath() + "/" + urlImageFileName[19]);
 					fileSize[19] = (int) targetFile[19].length();
@@ -1296,7 +1294,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[20] = "smihottButton5";
+					buttonName[20] = "smihottButton1";
 					targetUrlImageFileName[20] = buttonName[20] + "_" + urlImageFileName[20] + "_" + urlPath[20];
 					targetFile[20] = new File(home.getPath() + "/" + urlImageFileName[20]);
 					fileSize[20] = (int) targetFile[20].length();
@@ -1334,7 +1332,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[21] = "smihottButton5";
+					buttonName[21] = "smihottButton2";
 					targetUrlImageFileName[21] = buttonName[21] + "_" + urlImageFileName[21] + "_" + urlPath[21];
 					targetFile[21] = new File(home.getPath() + "/" + urlImageFileName[21]);
 					fileSize[21] = (int) targetFile[21].length();
@@ -1372,7 +1370,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[22] = "smihottButton5";
+					buttonName[22] = "smihottButton3";
 					targetUrlImageFileName[22] = buttonName[22] + "_" + urlImageFileName[22] + "_" + urlPath[22];
 					targetFile[22] = new File(home.getPath() + "/" + urlImageFileName[22]);
 					fileSize[22] = (int) targetFile[22].length();
@@ -1410,7 +1408,7 @@ public class Server extends JFrame {
 						"알림", JOptionPane.YES_NO_OPTION) == 0) {
 					// DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
 
-					buttonName[23] = "smihottButton5";
+					buttonName[23] = "smihottButton4";
 					targetUrlImageFileName[23] = buttonName[23] + "_" + urlImageFileName[23] + "_" + urlPath[23];
 					targetFile[23] = new File(home.getPath() + "/" + urlImageFileName[23]);
 					fileSize[23] = (int) targetFile[23].length();
@@ -1481,10 +1479,12 @@ public class Server extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-				// JOptionPane.showConfirmDialog(null, "저장하시겠습니까?", JOptionPane.YES_NO_OPTION);
-				// JOptionPane.show
+				
+				new UrlDialog(self).setVisible(true);
+				
+				
+				
+				
 			}
 
 		});
