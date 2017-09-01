@@ -806,7 +806,7 @@ public class Server extends JFrame {
 				JOptionPane.showConfirmDialog(null, "파일이름:" + urlImageFileName[24] + "\n" + "URL:" + urlPath[24]);
 
 				//DB에 저장할 파일이름 형식은 버튼이름_파일이름_url_현재시각 로 한다.
-				long currentTime = System.currentTimeMillis();
+			//	long currentTime = System.currentTimeMillis();
 
 				String buttonName = "smihottButton5";
 				String targetUrlImageFileName = smihottButton5+"_"+urlImageFileName[24]+"_"+urlPath[24]+"_"+currentTime;
@@ -837,7 +837,7 @@ public class Server extends JFrame {
 	public Server() {
 		
 		//프로그램의 공통파일 만들기! 
-		ServerdirectoryPath = "C:/Users/Administrator/4weeksWorkoutServer";
+		ServerdirectoryPath = "C:/4weeksWorkoutServer";
 		// 파일 객체 생성
 		File file = new File(ServerdirectoryPath);
 		// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
