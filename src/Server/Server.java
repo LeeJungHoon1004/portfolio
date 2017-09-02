@@ -1490,7 +1490,7 @@ public class Server extends JFrame {
 				
 				System.out.println("비디오파일리스트 배열 보낸뒤 ArrayList형태로 받은 receivedvflList : "+receivedvflList.size());
 				}catch(Exception e1) {
-					System.out.println("url확인버튼 누를때 에러 발생.");
+				//	System.out.println("url확인버튼 누를때 에러 발생.");
 					e1.printStackTrace();
 				}
 				new UrlDialog(self).setVisible(true);
