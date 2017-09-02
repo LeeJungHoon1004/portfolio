@@ -219,7 +219,7 @@ public class Manager implements ManagerInterface {
 		pstat.setString(2, vfl.getUrlFileName());
 		pstat.setInt(3, vfl.getUrlFileSize());
 		pstat.setString(4, vfl.getUrlTargetFilePath());
-		pstat.setString(4, vfl.getUrlButtonName());
+		pstat.setString(5, vfl.getUrlButtonName());
 		int result = pstat.executeUpdate();
 		con.commit();
 		con.close();
@@ -257,20 +257,20 @@ public class Manager implements ManagerInterface {
 				String urlFileName = rs.getString("filename");
 				int urlFileSize = rs.getInt("filesize");
 				String urlButtonName = rs.getString("buttonname");
-				String urlTargetFile = rs.getString("targetfile"); //각각컴포넌트들에 들어갈 파일들의 저장경로
+				String urlTargetFilePath = rs.getString("targetfile"); //각각컴포넌트들에 들어갈 파일들의 저장경로
 			//	System.out.println("urlPath" + urlFileName);
-				VideoFileList tmpVideoFileList = new VideoFileList(urlPath, urlFileName, urlFileSize, urlButtonName , urlTargetFile);
+				VideoFileList tmpVideoFileList = new VideoFileList(urlPath, urlFileName, urlFileSize, urlButtonName , urlTargetFilePath);
 				
 				resultList.add(tmpVideoFileList);
 				
 			}
-			for(int i =0 ; i < resultList.size(); i++) {
-				System.out.println(resultList.get(i).getUrlFileName()); //실제파일이름 -- > 버튼이름_파일이름_파일경로
-				System.out.println(resultList.get(i).getUrlPath());
-				System.out.println(resultList.get(i).getUrlFileSize());
-				System.out.println(resultList.get(i).getUrlTargetFile());
-			
-			}
+//			for(int i =0 ; i < resultList.size(); i++) {
+//				System.out.println(resultList.get(i).getUrlFileName()); //실제파일이름 -- > 버튼이름_파일이름_파일경로
+//				System.out.println(resultList.get(i).getUrlPath());
+//				System.out.println(resultList.get(i).getUrlFileSize());
+//				System.out.println(resultList.get(i).getUrlTargetFilePath());
+//			
+//			}
 		
 
 		return resultList;

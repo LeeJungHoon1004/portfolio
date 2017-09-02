@@ -1,30 +1,15 @@
 package Collection;
 
-import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
-import java.net.URI;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.TitledBorder;
 
 import Server.VideoFileList;
 
@@ -44,10 +29,10 @@ public class VideoPan extends JFrame {
 	private BufferedOutputStream bos;
 	// ===========================================================
 
-	private String[] urls = null;
-	private String[] fileNames = null;
-	private String[] urlButtons = null;
-	int[] fileSize = null;
+	private String urls = null;
+	private String fileNames = null;
+	private String urlButtons = null;
+	int fileSize =0;
 	byte[] filecontents = null;
 	private String path = "C:/Users/Administrator/4weeksWorkout/";
 	private String[] imgpath;
@@ -72,24 +57,24 @@ public class VideoPan extends JFrame {
 
 			ArrayList<VideoFileList> vflList = new ArrayList<VideoFileList>();
 			vflList = (ArrayList<VideoFileList>) ois.readObject();
-
+			System.out.println("ois로 리스트 전달받기 성공");
+			System.out.println(vflList.size());
 			for (int i = 0; i < vflList.size(); i++) {
-
 				//names[i] = 
 				//fnames[i] = names[i].split("_");
-				urls[i] = vflList.get(i).getUrlPath();
-				fileNames[i] = vflList.get(i).getUrlFileName();
-				urlButtons[i] = vflList.get(i).getUrlButtonName();
-				fileSize[i] = vflList.get(i).getUrlFileSize();
+				urls = vflList.get(i).getUrlPath();
+				fileNames = vflList.get(i).getUrlFileName();
+				urlButtons = vflList.get(i).getUrlButtonName();
+				fileSize= vflList.get(i).getUrlFileSize();
 				filecontents = vflList.get(i).getFileContents();
 
 				//imgpath[i] = path + fileNames[i];
 
-				System.out.println("url 데이터 : "+urls[i]);
-				System.out.println("fileNames 데이터 : "+fileNames[i]);
-				System.out.println("urlButtons 데이터 : "+urlButtons[i]);
-				System.out.println("fileSize 데이터 : "+fileSize[i]);
-				System.out.println("filecontents 데이터 : "+filecontents[i]);
+				System.out.println("url 데이터 : "+urls);
+				System.out.println("fileNames 데이터 : "+fileNames);
+				System.out.println("urlButtons 데이터 : "+urlButtons);
+				System.out.println("fileSize 데이터 : "+fileSize);
+				System.out.println("filecontents 데이터 : "+filecontents);
 				//System.out.println(imgpath[i]);
 				System.out.println("====================");
 			}
