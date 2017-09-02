@@ -1,5 +1,6 @@
 package Client;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -12,6 +13,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.URI;
@@ -113,8 +115,6 @@ public class VideoPan extends JPanel {
 	private JButton b25 ;
 	
 	
-	
-	
 	private String[] urls = null;
 	private String[] fileNames = null;
 	int[] fileSize = null;
@@ -123,13 +123,10 @@ public class VideoPan extends JPanel {
 	private String[] imgpath;
 	
 	
+	
 	public void insertImage() {
 		
 		unmarsharlling();
-		
-		for(int i=0;i<25;i++) {
-			imgpath[i] = path+fileNames[i];
-		}
 		
 		ic1 = new ImageIcon(imgpath[0]);
 		ic2 = new ImageIcon(imgpath[1]);
@@ -185,6 +182,7 @@ public class VideoPan extends JPanel {
 		
 	}
 	
+	
 	public void unmarsharlling() {
 		try {
 			
@@ -201,11 +199,13 @@ public class VideoPan extends JPanel {
 			fileNames[i] = vflList.get(i).getFilename();
 			fileSize[i] = vflList.get(i).getFileSize();
 			filecontents =vflList.get(i).getFilecontents();
+			imgpath[i] = path+fileNames[i];
 			
 			System.out.println(urls[i]);
 			System.out.println(fileNames[i]);
 			System.out.println(fileSize[i]);
 			System.out.println(filecontents);
+			System.out.println(imgpath[i]);
 			
 			}
 			//배열에 데이터 넣기완료
@@ -325,6 +325,7 @@ public class VideoPan extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				insertImage();
 				//△언마셜링 메소드도 포함되어있음
+				//△언마셜링에 서버시그널 포함.
 			}
 		});
 		
@@ -607,6 +608,11 @@ public class VideoPan extends JPanel {
 		this.dis = dis;
 		this.dos = dos;
 		
+		insertImage();
+		//△언마셜링 메소드도 포함되어있음
+		//△언마셜링에 서버시그널 포함.
+		
+		
 		this.setBackground(Color.white);
 		
 		try {
@@ -621,9 +627,6 @@ public class VideoPan extends JPanel {
 			// and feel.
 		}
 		
-		
-		insertImage();
-		//△언마셜링 메소드도 포함되어있음
 		compInit();
 		
 		eventInitYoga();

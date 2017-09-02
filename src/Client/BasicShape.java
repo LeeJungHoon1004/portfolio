@@ -1,5 +1,6 @@
 package Client;
 
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -154,12 +155,12 @@ public class BasicShape extends JFrame {
 	
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
-	//private VideoPan video = new VideoPan();
+	//private VideoPan video = new VideoPan(client,dis,dos);
 	private JScrollPane videoSc = new JScrollPane(videoPan);// 스크롤
 
 	// COMPNENT - imgBoardPan
 	private JPanel imgPanel = new JPanel();
-	private PictureBoardPan pbp = new PictureBoardPan();
+	private PictureBoardPan pbp = new PictureBoardPan(client,dis,dos);
 	private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
 
 	// COMPNENT - planPan
@@ -388,7 +389,7 @@ public class BasicShape extends JFrame {
 		userID = inputID.getText();
 		userPW = inputPW.getText();
 		try {
-			dos.writeUTF("로그인");
+			dos.writeUTF("로그인");//로그인 시그널
 			dos.writeUTF(userID);
 			dos.writeUTF(userPW);
 			System.out.println("데이터보내기 성공");
@@ -433,7 +434,7 @@ public class BasicShape extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				// 소켓생성후 커넥트 , 로그인성공실패 에따른 ui출력
-
+				
 				getResult();
 
 				// 서버에 계정 보냄.△△△△△△△
