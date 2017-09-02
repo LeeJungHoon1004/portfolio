@@ -1,5 +1,6 @@
 package Server;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -212,11 +213,12 @@ public class Manager implements ManagerInterface {
 	@Override
 	public int insertUrlData(VideoFileList vfl) throws Exception {
 		Connection con = this.getConnection();
-		String sql = "insert into url(seq,url,filename,filesize,buttonname,regdate) values(url_seq.nextval , ? , ? ,? ,? , sysdate)";
+		String sql = "insert into url(seq,url,filename,filesize,targetfile ,buttonname,regdate) values(url_seq.nextval , ? , ? ,?,? ,? , sysdate)";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, vfl.getUrlPath());
 		pstat.setString(2, vfl.getUrlFileName());
 		pstat.setInt(3, vfl.getUrlFileSize());
+		pstat.setString(4, vfl.getUrlTargetFilePath());
 		pstat.setString(4, vfl.getUrlButtonName());
 		int result = pstat.executeUpdate();
 		con.commit();
@@ -227,12 +229,13 @@ public class Manager implements ManagerInterface {
 	@Override
 	public int updateUrlData(VideoFileList vfl) throws Exception {
 		Connection con = this.getConnection();
-		String sql = "update url set   seq = url_seq.nextval , url =? , filename = ? , filesize =? ,regdate = sysdate where buttonname =?";
+		String sql = "update url set   seq = url_seq.nextval , url =? , filename = ? , filesize =?  , targetfile = ?,regdate = sysdate where buttonname =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, vfl.getUrlPath());
 		pstat.setString(2, vfl.getUrlFileName());
 		pstat.setInt(3, vfl.getUrlFileSize());
-		pstat.setString(4, vfl.getUrlButtonName());
+		pstat.setString(4, vfl.getUrlTargetFilePath());
+		pstat.setString(5, vfl.getUrlButtonName());
 		int result = pstat.executeUpdate();
 		con.commit();
 		con.close();
@@ -240,33 +243,35 @@ public class Manager implements ManagerInterface {
 	}
 
 	@Override
-	public ArrayList<VideoFileList> getUrlAllDAta(VideoFileList[] vflList) throws Exception {
+	public ArrayList<VideoFileList> getUrlAllDAta() throws Exception {
 		Connection con = this.getConnection();
-		System.out.println("매개변수로받은 vflList의 크기 :" + vflList.length);
 		
-		String sql = "select * from url where buttonName = ?";
+		String sql = "select * from url ";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		ArrayList<VideoFileList> resultList = new ArrayList<VideoFileList>();
-		String  tmp ;
-		for (int i = 0; i < vflList.length; i++) {
-			
-			tmp =vflList[i].getUrlButtonName();
-			System.out.println(tmp);
-			pstat.setString(1, tmp);
+					
 			ResultSet rs = pstat.executeQuery();
 			
 			while (rs.next()) {
-
 				String urlPath = rs.getString("url");
 				String urlFileName = rs.getString("filename");
 				int urlFileSize = rs.getInt("filesize");
 				String urlButtonName = rs.getString("buttonname");
-
-				VideoFileList tmpVideoFileList = new VideoFileList(urlPath, urlFileName, urlFileSize, urlButtonName);
-
+				String urlTargetFile = rs.getString("targetfile"); //각각컴포넌트들에 들어갈 파일들의 저장경로
+			//	System.out.println("urlPath" + urlFileName);
+				VideoFileList tmpVideoFileList = new VideoFileList(urlPath, urlFileName, urlFileSize, urlButtonName , urlTargetFile);
+				
 				resultList.add(tmpVideoFileList);
+				
 			}
-		}
+			for(int i =0 ; i < resultList.size(); i++) {
+				System.out.println(resultList.get(i).getUrlFileName()); //실제파일이름 -- > 버튼이름_파일이름_파일경로
+				System.out.println(resultList.get(i).getUrlPath());
+				System.out.println(resultList.get(i).getUrlFileSize());
+				System.out.println(resultList.get(i).getUrlTargetFile());
+			
+			}
+		
 
 		return resultList;
 

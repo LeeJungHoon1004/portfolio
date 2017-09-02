@@ -69,7 +69,7 @@ public interface ManagerInterface {
 	public boolean isExistUrlData(VideoFileList vfl) throws Exception;
 	public int insertUrlData(VideoFileList vfl) throws Exception;
 	public int updateUrlData(VideoFileList vfl) throws Exception;
-	public ArrayList <VideoFileList> getUrlAllDAta(VideoFileList[] vflList) throws Exception;
+	public ArrayList <VideoFileList> getUrlAllDAta() throws Exception;
 	
 	
 	
