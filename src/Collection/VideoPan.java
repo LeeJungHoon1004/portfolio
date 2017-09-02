@@ -26,6 +26,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
+import Server.VideoFileList;
+
 public class VideoPan extends JFrame {
 	
 	//Socket client, DataInputStream dis, DataOutputStream dos
@@ -51,11 +53,20 @@ public class VideoPan extends JFrame {
 	private String[] imgpath;
 
 	public void unmarsharlling() {
+		
 		try {
-
-			
+			 client = new Socket("127.0.0.1",40000);
+			 dis = new DataInputStream(client.getInputStream());
+			 dos = new DataOutputStream(client.getOutputStream());
+			}catch(Exception e1) {
+				System.out.println("초기연결 실패");
+			}
+		
+		
+		try {
 			dos.writeUTF("url데이터발신");
-
+			System.out.println(client.isClosed());
+			System.out.println(client.isConnected());
 			
 			ois = new ObjectInputStream(client.getInputStream());
 
@@ -66,11 +77,11 @@ public class VideoPan extends JFrame {
 
 				//names[i] = 
 				//fnames[i] = names[i].split("_");
-				urls[i] = vflList.get(i).getUrl();
-				fileNames[i] = vflList.get(i).getFilename();
-				urlButtons[i] = vflList.get(i).getUrlButtons();
-				fileSize[i] = vflList.get(i).getFileSize();
-				filecontents = vflList.get(i).getFilecontents();
+				urls[i] = vflList.get(i).getUrlPath();
+				fileNames[i] = vflList.get(i).getUrlFileName();
+				urlButtons[i] = vflList.get(i).getUrlButtonName();
+				fileSize[i] = vflList.get(i).getUrlFileSize();
+				filecontents = vflList.get(i).getFileContents();
 
 				//imgpath[i] = path + fileNames[i];
 
@@ -105,13 +116,7 @@ public class VideoPan extends JFrame {
 	
 	
 	public VideoPan() {
-		try {
-		 client = new Socket("192.168.53.4",40000);
-		 dis = new DataInputStream(client.getInputStream());
-		 dos = new DataOutputStream(client.getOutputStream());
-		}catch(Exception e1) {
-			System.out.println("초기연결 실패");
-		}
+		
 		
 		unmarsharlling();
 		//insertImage();
@@ -122,7 +127,7 @@ public class VideoPan extends JFrame {
 		setVisible(true);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		new VideoPan();
 	}
 }

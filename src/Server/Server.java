@@ -288,30 +288,25 @@ class ConnectionThread extends Thread {
 					dos.close();
 
 				} else if (cmd.equals("url데이터발신")) {
-//				//	fis = new FileInputStream()
-//				
-//				//	fis.read(fileContents);
-//					
-				
+					System.out.println("cmd : url데이터발신 성공.");
 					for(int i = 0 ; i<Server.receivedvflList.size(); i++) {
+						
 						String urlPath=	Server.receivedvflList.get(i).getUrlPath();
 						String urlFileName=	Server.receivedvflList.get(i).getUrlFileName();
 						int urlfileSize=Server.receivedvflList.get(i).getUrlFileSize();
 						byte[] fileContents = new byte[urlfileSize];		
-						//receivedvflList.get(i).getUrlTargetFile();
 						String urlButtonName = Server.receivedvflList.get(i).getUrlButtonName();
 						String urlTargetFilePath = Server.receivedvflList.get(i).getUrlTargetFilePath();
+						
 						//클라이언트로 전달하는 타겟파일은 이거사용
 						File targetFile =new File (urlTargetFilePath); //DB에 저장되있는 실제 파일의 경로를 인자로넣어서 실제 파일 인스턴스로만듬
 						
 						//파일컨텐츠에 실제 파일을 담아준다.
 						fis = new FileInputStream(targetFile);
 						fis.read(fileContents);
-						
 						VideoFileList tmpVideoFileList = new VideoFileList(urlPath, urlFileName, urlfileSize, urlButtonName, fileContents );
 						sendingvflList.add(tmpVideoFileList);
 						}
-					
 						oos = new ObjectOutputStream(socket.getOutputStream());	
 						//vflList의 데이터로 묶은 ArrayList를 발송한다.
 						oos.writeObject(sendingvflList); 
