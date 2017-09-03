@@ -271,8 +271,8 @@ public class BasicShape extends JFrame {
 		videoPan = new JPanel();
 		videoSc = new JScrollPane(videoPan);
 		videoPan.setBackground(Color.white);
-		videoPan.setPreferredSize(new Dimension(965, 500));
-		this.video.setPreferredSize(new Dimension(965, 500));
+		videoPan.setPreferredSize(new Dimension(965, 1000));
+		this.video.setPreferredSize(new Dimension(965, 1000));
 		this.videoPan.add(video);
 
 		// ---------Ä¿¹Â´ÏÆ¼

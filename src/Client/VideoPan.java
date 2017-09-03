@@ -122,7 +122,7 @@ public class VideoPan extends JPanel {
 	public void insertImage() {
 		
 		for(int i=0;i<25;i++){
-			imgpath[i] = path+fileNames[i];
+			imgpath[i] = path+ "/" + fileNames[i];
 		}
 		
 		
@@ -227,7 +227,7 @@ public class VideoPan extends JPanel {
 
 		add(encourage);
 
-		yogaPan.setPreferredSize(new Dimension(250,200));
+//		yogaPan.setPreferredSize(new Dimension(250,200));
 		yogaPan.setBorder(yoga);
 		yogaPan.add(b1);
 		yogaPan.add(b2);
@@ -236,7 +236,7 @@ public class VideoPan extends JPanel {
 		yogaPan.add(b5);
 		add(yogaSc);
 
-		stretchPan.setPreferredSize(new Dimension(250,200));
+//		stretchPan.setPreferredSize(new Dimension(250,200));
 		stretchPan.setBorder(stretching);
 		stretchPan.add(b6);
 		stretchPan.add(b7);
@@ -245,7 +245,7 @@ public class VideoPan extends JPanel {
 		stretchPan.add(b10);
 		add(stretchSc);
 
-		mileyPan.setPreferredSize(new Dimension(250,200));
+//		mileyPan.setPreferredSize(new Dimension(250,200));
 		mileyPan.setBorder(miley);
 		mileyPan.add(b11);
 		mileyPan.add(b12);
@@ -254,7 +254,7 @@ public class VideoPan extends JPanel {
 		mileyPan.add(b15);
 		add(mileySc);
 
-		dancePan.setPreferredSize(new Dimension(250,200));
+//		dancePan.setPreferredSize(new Dimension(250,200));
 		dancePan.setBorder(dance);
 		dancePan.add(b16);
 		dancePan.add(b17);
@@ -263,7 +263,7 @@ public class VideoPan extends JPanel {
 		dancePan.add(b20);
 		add(danceSc);
 
-		smiPan.setPreferredSize(new Dimension(250,200));
+//		smiPan.setPreferredSize(new Dimension(250,200));
 		smiPan.setBorder(smi);
 		smiPan.add(b21);
 		smiPan.add(b22);
