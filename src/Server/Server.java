@@ -174,13 +174,13 @@ class ConnectionThread extends Thread {
 						// 2.1 DB에 해당 회원의 ComboListData있는지 조사
 						// 2.2 DB에 해당 회원의 ComboListData유무에 따라
 						// 2.2.1명령커맨드보내거나 2.2.2리스트 보내거나
-						String sentComboListData = Server.manager.getComboListData(m2);
-						System.out.println("DB에 저장되어있는 ComboListData :" + sentComboListData);
-						if (sentComboListData != null) {
-							dos.writeUTF(sentComboListData);
-						} else {
-							dos.writeUTF("비어있는ComboList데이터");
-						}
+//						String sentComboListData = Server.manager.getComboListData(m2);
+//						System.out.println("DB에 저장되어있는 ComboListData :" + sentComboListData);
+//						if (sentComboListData != null) {
+//							dos.writeUTF(sentComboListData);
+//						} else {
+//							dos.writeUTF("비어있는ComboList데이터");
+//						}
 						// 3.로그인성공후 등록된 회원의 watercuplist전송.
 
 					} else {
@@ -289,7 +289,7 @@ class ConnectionThread extends Thread {
 
 					System.out.println("클라이언트에서 받은 데이터를 하드디스크로 저장완료.");
 
-					dos.close();
+					
 
 				} else if (cmd.equals("url데이터발신")) {
 					System.out.println("cmd : url데이터발신 성공.");

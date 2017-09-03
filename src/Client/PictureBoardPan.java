@@ -40,6 +40,7 @@ import javax.swing.event.ListSelectionListener;
 
 public class PictureBoardPan extends JPanel {
 
+	private BasicShape parent ;
 	private PictureBoardPan self = this;
 	private Socket client;
 	// 아웃 스트림
@@ -182,7 +183,7 @@ public class PictureBoardPan extends JPanel {
 		System.out.println(fl1.getFileContents());// 파일의 내용물(byte [])
 
 		fileContents = fl1.getFileContents();
-		File f = new File("C:/Users/Administrator/4weeksWorkout/" + fl1.getFileName());
+		File f = new File("C:/4W" +"/"+ fl1.getFileName());
 		fos = new FileOutputStream(f);
 		bos = new BufferedOutputStream(fos);
 		dos = new DataOutputStream(bos);
@@ -191,17 +192,18 @@ public class PictureBoardPan extends JPanel {
 		//===========================파일1개 언마셜링
 		System.out.println("클라이언트에서 받은 데이터를 하드디스크로 저장완료.");
 
-		dos.close();
+		
 		}catch(Exception e ) {
 			System.out.println("커뮤니티 데이터 받기 실패");
 		}
 	}
 
 
-	public PictureBoardPan(Socket client,DataInputStream dis,DataOutputStream dos) {
+	public PictureBoardPan(BasicShape parent , Socket client) {
 		this.client = client;
-		this.dis = dis;
-		this.dos = dos;
+		this.parent = parent;
+		this.dos = parent.getDos();
+		this.dis = parent.getDis();
 //		this.userID = userID;
 //		this.userPW = userPW;
 		try {

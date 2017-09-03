@@ -53,9 +53,9 @@ public class VideoPan extends JPanel {
 	private JScrollPane danceSc = new JScrollPane(dancePan);
 	private JScrollPane smiSc = new JScrollPane(smiPan);
 //===========================================================	
-	private Socket client;
-	private DataInputStream dis;
-	private DataOutputStream dos;
+	private Socket client ;
+	private DataOutputStream dos ;
+	private DataInputStream dis ;
 	private ObjectInputStream ois;
 	private FileOutputStream fos;
 	private BufferedOutputStream bos;
@@ -118,7 +118,7 @@ public class VideoPan extends JPanel {
 	private String[] fileNames = new String[25];
 	int[] fileSize =new int[25];
 	byte[] filecontents = new byte[25];	
-	private String path = "C:/Users/Administrator/4weeksWorkout";
+	private String path = "C:/4W";
 	private String[] imgpath = new String[25];
 	private String[] urlButtons = new String [25];
 	
@@ -198,17 +198,20 @@ public class VideoPan extends JPanel {
 //			System.out.println(vflList.size());
 			
 			//ArrayList<VideoFileList> receivedvflList = new ArrayList<VideoFileList>();
-			System.out.println(parent.getVflList().size());
+	//		this.dis = parent.getDis();
+	//		this.dos = parent.getDos();
+	//		this.client = parent.getClient();
 			
-			for (int i = 0; i < parent.getVflList().size(); i++) {
+			
+			for (int i = 0; i < parent.conveyList.size(); i++) {
 				
-				urls[i] = parent.getVflList().get(i).getUrlPath();
-				splitN[i] = parent.getVflList().get(i).getUrlFileName();
+				urls[i] = parent.conveyList.get(i).getUrlPath();
+				splitN[i] = parent.conveyList.get(i).getUrlFileName();
 				String[] tmp;
 				tmp = splitN[i].split("_");
-				urlButtons [i] = parent.getVflList().get(i).getUrlButtonName();
-				fileSize[i] = parent.getVflList().get(i).getUrlFileSize();
-				filecontents = parent.getVflList().get(i).getFileContents();
+				urlButtons [i] = parent.conveyList.get(i).getUrlButtonName();
+				fileSize[i] = parent.conveyList.get(i).getUrlFileSize();
+				filecontents = parent.conveyList.get(i).getFileContents();
 
 			//	VideoFileList vfl = new VideoFileList(path, path, flags, path, filecontents);
 				fileNames[i] = tmp[1];
@@ -225,7 +228,7 @@ public class VideoPan extends JPanel {
 				System.out.println("====================");
 				System.out.println("운동영상 배열에 데이터 넣기 완료");
 			}
-			
+			System.out.println("운동영상 배열 포문 지남.");
 			// 배열에 데이터 넣기완료
 			
 
@@ -619,12 +622,30 @@ public class VideoPan extends JPanel {
 			}
 		});
 	}
+	public VideoPan() {
 	
-	public VideoPan(BasicShape parent,Socket client,DataInputStream dis,DataOutputStream dos) {
+		
+	this.setBackground(Color.white);
+		
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// If Nimbus is not available, you can set the GUI to another look
+			// and feel.
+		}
+		
+	}
+	public VideoPan(BasicShape parent,Socket client) {
+		
 		this.parent = parent;
-		this.client = client;
-		this.dis = dis;
-		this.dos = dos;
+//		this.client = client;
+//		this.dis = parent.getDis();
+//		this.dos = parent.getDos();
 		
 		insertImage();
 		//△언마셜링 메소드도 포함되어있음

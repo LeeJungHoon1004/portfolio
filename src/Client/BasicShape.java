@@ -38,34 +38,10 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
+import Server.VideoFileList;
 public class BasicShape extends JFrame {
 
-	String receivedComboListData;
-	String tmpComboListData[];
-	String receiveaction[] = null;
-	int tmpcombo1;
-	String tmpComboString1;
-	int tmpcombo2;
-	String tmpComboString2;
-	int tmpcombo3;
-	String tmpComboString3;
-	String tmpComboStringList;
-	
-	//어레이리스트
-		private ArrayList<VideoFileList> vflList ;
-		
-	
-	// ========ComboList Variable====================
-	
-	public ArrayList<VideoFileList> getVflList() {
-			return vflList;
-		}
-
-		public void setVflList(ArrayList<VideoFileList> vflList) {
-			this.vflList = vflList;
-		}
-
-	private Socket client;
+	private Socket client = null;
 	// 아웃 스트림
 	private FileOutputStream fos = null;
 	private BufferedOutputStream bos = null;
@@ -78,6 +54,42 @@ public class BasicShape extends JFrame {
 	private ObjectInputStream ois = null;
 	
 	// =======SOCKET========================
+	
+	
+	String receivedComboListData;
+	String tmpComboListData[];
+	String receiveaction[] = null;
+	int tmpcombo1;
+	String tmpComboString1;
+	int tmpcombo2;
+	String tmpComboString2;
+	int tmpcombo3;
+	String tmpComboString3;
+	String tmpComboStringList;
+	
+	//어레이리스트
+		public static ArrayList<VideoFileList> vflList ;
+		public static ArrayList<VideoFileList> conveyList ; 
+	
+	// ========ComboList Variable====================
+	
+	public ArrayList<VideoFileList> getConveyList() {
+			return conveyList;
+		}
+
+		public void setConveyList(ArrayList<VideoFileList> conveyList) {
+			this.conveyList = conveyList;
+		}
+
+	public ArrayList<VideoFileList> getVflList() {
+			return vflList;
+		}
+
+		public void setVflList(ArrayList<VideoFileList> vflList) {
+			this.vflList = vflList;
+		}
+
+
 	private Container cp = this.getContentPane();
 	private JLabel title = new JLabel();
 
@@ -167,12 +179,12 @@ public class BasicShape extends JFrame {
 	
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
-	private VideoPan video = new VideoPan(self ,client,dis,dos);
+	private VideoPan video = new VideoPan();
 	private JScrollPane videoSc = new JScrollPane(videoPan);// 스크롤
 
 	// COMPNENT - imgBoardPan
 	private JPanel imgPanel = new JPanel();
-	private PictureBoardPan pbp = new PictureBoardPan(client,dis,dos);
+	private PictureBoardPan pbp = new PictureBoardPan(self,client);
 	private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
 
 	// COMPNENT - planPan
@@ -337,57 +349,57 @@ public class BasicShape extends JFrame {
 
 	}
 	
-	public void receiveDataAfterLogin() {
-				
-		// 로그인이후시점에서 서버로부터 받는 데이터를 처리합니다.
-		// 1.목표 - 캘린더 달성한데이터 Num 값으로 받고 받은데이터는 합계sum 을 만들어서 누적시킨뒤
-		// 한달동안 모아진 sum 값을 가지고 보상함.
-		
-		// 4.동영상url리스트+메타데이터(String)
-		// 5.(로그인이후시점에서 서버컴퓨터에서 보내는데이터)업로드한사진 + 코멘트데이터 ( String)
-		// 1.콤보리스트데이터 받기.
-		try {
-			receivedComboListData = dis.readUTF();
-			System.out.println("수신한receivedComboListData 값 :" + receivedComboListData);
-			// 로그인후 받은 콤보리스트 데이터가 null값이아니면 쪼개서 리스트를 분리한다.
-			//수신한데이터가 null이아니면 쪼개서 분리한다.
-			//수신한데이터가 null이면 비어있는데이터라고 출력한다.
-			if(receivedComboListData !=null) {
-				tmpComboListData = receivedComboListData.split(",");
-				receiveaction = new String[] { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
-						"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트", "6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기",
-						"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
-
-				tmpcombo1 = Integer.parseInt(tmpComboListData[0]);
-				tmpComboString1 = receiveaction[tmpcombo1];
-
-				tmpcombo2 = Integer.parseInt(tmpComboListData[1]);
-				tmpComboString2 = receiveaction[tmpcombo2];
-
-				tmpcombo3 = Integer.parseInt(tmpComboListData[2]);
-				tmpComboString3 = receiveaction[tmpcombo3];
-
-				tmpComboStringList = tmpComboString1 + tmpComboString2 + tmpComboString3;
-			}
-			else if(receivedComboListData.equals("비어있는ComboList데이터")){
-				
-				tmpComboStringList ="비어있는ComboList데이터";
-			}
-		} catch (Exception e1) {
-			System.out.println("콤보리스트에서 받는곳에서 에러발생지점.");
-			e1.printStackTrace();
-		}
-
-		// 2.물컵데이터받기.
-		// try {
-		// String receicedWaterCupData = dis.readUTF();
-		// System.out.println("물컵데이터받기 :" + receicedWaterCupData);
-		// } catch (Exception e2) {
-		// System.out.println("물컵리스트 받는곳에서 에러발생");
-		// e2.printStackTrace();
-		// }
-		
-	}
+//	public void receiveDataAfterLogin() {
+//				
+//		// 로그인이후시점에서 서버로부터 받는 데이터를 처리합니다.
+//		// 1.목표 - 캘린더 달성한데이터 Num 값으로 받고 받은데이터는 합계sum 을 만들어서 누적시킨뒤
+//		// 한달동안 모아진 sum 값을 가지고 보상함.
+//		
+//		// 4.동영상url리스트+메타데이터(String)
+//		// 5.(로그인이후시점에서 서버컴퓨터에서 보내는데이터)업로드한사진 + 코멘트데이터 ( String)
+//		// 1.콤보리스트데이터 받기.
+//		try {
+//			receivedComboListData = dis.readUTF();
+//			System.out.println("수신한receivedComboListData 값 :" + receivedComboListData);
+//			// 로그인후 받은 콤보리스트 데이터가 null값이아니면 쪼개서 리스트를 분리한다.
+//			//수신한데이터가 null이아니면 쪼개서 분리한다.
+//			//수신한데이터가 null이면 비어있는데이터라고 출력한다.
+//			if(receivedComboListData !=null) {
+//				tmpComboListData = receivedComboListData.split(",");
+//				receiveaction = new String[] { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
+//						"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트", "6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기",
+//						"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
+//
+//				tmpcombo1 = Integer.parseInt(tmpComboListData[0]);
+//				tmpComboString1 = receiveaction[tmpcombo1];
+//
+//				tmpcombo2 = Integer.parseInt(tmpComboListData[1]);
+//				tmpComboString2 = receiveaction[tmpcombo2];
+//
+//				tmpcombo3 = Integer.parseInt(tmpComboListData[2]);
+//				tmpComboString3 = receiveaction[tmpcombo3];
+//
+//				tmpComboStringList = tmpComboString1 + tmpComboString2 + tmpComboString3;
+//			}
+//			else if(receivedComboListData.equals("비어있는ComboList데이터")){
+//				
+//				tmpComboStringList ="비어있는ComboList데이터";
+//			}
+//		} catch (Exception e1) {
+//			System.out.println("콤보리스트에서 받는곳에서 에러발생지점.");
+//			e1.printStackTrace();
+//		}
+//
+//		// 2.물컵데이터받기.
+//		// try {
+//		// String receicedWaterCupData = dis.readUTF();
+//		// System.out.println("물컵데이터받기 :" + receicedWaterCupData);
+//		// } catch (Exception e2) {
+//		// System.out.println("물컵리스트 받는곳에서 에러발생");
+//		// e2.printStackTrace();
+//		// }
+//		
+//	}
 	
 	//서버로 소켓접속
 	public void clientConnect() {
@@ -403,8 +415,9 @@ public class BasicShape extends JFrame {
 
 	}// end
 	
-	public void receiveData() {
+	public ArrayList<VideoFileList> receiveData() {
 		try {
+
 	//	dos = new DataOutputStream(client.getOutputStream());
 		dos.writeUTF("데이터수신");
 		}catch(Exception e) {
@@ -412,6 +425,7 @@ public class BasicShape extends JFrame {
 		}
 	
 		try {
+
 			dos.writeUTF("url데이터발신");
 			System.out.println(client.isClosed());
 			System.out.println(client.isConnected());
@@ -420,6 +434,7 @@ public class BasicShape extends JFrame {
 
 			 vflList = new ArrayList<VideoFileList>();
 			vflList = (ArrayList<VideoFileList>) ois.readObject();
+			
 			
 			System.out.println("ois로 리스트 전달받기 성공");
 			System.out.println(vflList.size());
@@ -454,22 +469,17 @@ public class BasicShape extends JFrame {
 //			dos.write(filecontents);
 //			dos.flush();
 
-			System.out.println("비디오패널 언마셜링 성공");
+			System.out.println("운동영상패널 언마셜링 성공");
 
-			dos.close();
+			
+			//dos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		return vflList;
+		
 	}
-	
-	//서버 접속후 데이터 수신.
-	public void receiveDataBeforeLogin() {
-		//Article , URL 데이터 수신
-			
-	}//end
-
-	
 	
 	
 	public String getResult() {
@@ -603,6 +613,8 @@ public class BasicShape extends JFrame {
 		// 운동 버튼
 		videoBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new VideoPan(self,client);
+				conveyList =receiveData();//운동영상 패널 데이터 받기 //vflList 담겨있음.. 
 				card.show(self.mainPan, "NamevideoPane");
 
 			}
@@ -617,7 +629,7 @@ public class BasicShape extends JFrame {
 		
 		GraphBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				clientConnect();
+		//		clientConnect();
 				card.show(self.mainPan, "NamegoalBoard");
 			}
 		});
@@ -638,26 +650,16 @@ public class BasicShape extends JFrame {
 
 	 
 	public BasicShape() {
-		clientConnect();
 		
+		clientConnect();
 		setTitle("기본shape테스트");
-		// setSize(700, 500);
 		setSize(1200, 750);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		cp.setBackground(Color.WHITE);
-		receiveData();
+		 
 		comp();
 		eventInit();
-		
-		
-		
-	//	System.out.println(client.isClosed());
-	//	System.out.println(client.isConnected());
-		
-		
-		
-		//receiveDataBeforeLogin();
 		setVisible(true);
 		
 		
@@ -666,7 +668,8 @@ public class BasicShape extends JFrame {
 	public static void main(String[] args) {
 		
 		//프로그램의 공통파일 만들기! 
-				String path = "C:/4weeksWorkout";
+				String path = "C:/4W";
+
 				// 파일 객체 생성
 				File file = new File(path);
 				// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
@@ -687,12 +690,12 @@ public class BasicShape extends JFrame {
 			// If Nimbus is not available, you can set the GUI to another look
 			// and feel.
 		}
+		
+		
 		new BasicShape();
+	
+	
 	}// main end
 }
-// <a target="_blank" href="http://msource.tistory.com/5"
-// class="tx-link">http://msource.tistory.com/5</a>;;
-// 카드레이아웃 쉬운 설명
-// <a target="_blank" href="http://www.w3ii.com/ko/swing/swing_cardlayout.html"
-// class="tx-link">http://www.w3ii.com/ko/swing/swing_cardlayout.html</a>;;
-// 카드레이아웃 클래스
+
+
