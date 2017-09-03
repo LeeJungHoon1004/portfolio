@@ -37,7 +37,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
-
+import Server.VideoFileList;
 public class BasicShape extends JFrame {
 
 	private Socket client;

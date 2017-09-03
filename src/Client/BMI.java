@@ -140,13 +140,11 @@ public class BMI extends JPanel {
 		} catch (Exception e) {
 			System.out.println("bmi 초기연결 실패");
 		}
-		
 		try {
 			name = dis.readUTF();
 		}catch(Exception e1) {
 			System.out.println("bmi 이름데이터받기 실패");
 		}
-		
 		return name;
 	}
 	
