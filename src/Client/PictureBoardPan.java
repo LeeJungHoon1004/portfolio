@@ -34,7 +34,8 @@ import Server.FileList;
 //http://yonoo88.tistory.com/230
 
 public class PictureBoardPan extends JPanel {
-	private BasicShape parent ;
+
+	private BasicShape parent;
 	private PictureBoardPan self = this;
 	private Socket client;
 	// 아웃 스트림
@@ -48,7 +49,6 @@ public class PictureBoardPan extends JPanel {
 	private DataInputStream dis = null;
 	private ObjectInputStream ois = null;
 
-	
 //	private String userID;
 //	private String userPW;
 	private int index;// jlist 선택한 인덱스 번호
@@ -61,8 +61,8 @@ public class PictureBoardPan extends JPanel {
 	private JButton remove = new JButton("글삭제");
 
 	private ArrayList<FileList> fl;
-	private DefaultListModel dlm = new DefaultListModel();
 	private JList list;
+	private DefaultListModel dlm;
 	private JScrollPane sc;
 	private CellRenderer cellrender;
 	private int cnt = 0;
@@ -99,7 +99,7 @@ public class PictureBoardPan extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				cnt++;
 				
-				new AddPictureBoard(parent,self,client, dis, dos).setVisible(true);
+				new AddPictureBoard(parent ,self,client, dis, dos).setVisible(true);
 				// JDialog 보이기!
 				
 				renew();//renew 안에 unmarshalling도 들어있음.
@@ -155,23 +155,18 @@ public class PictureBoardPan extends JPanel {
 
 	public void renew() {//갱신 메소드
 		
+		dlm = new DefaultListModel();
+//		for(int i=0;i<dlm.getSize();i++){
+//			dlm.addElement(new CellRenderer(title, filename));
+//		}
 		list = new JList(dlm);
-		dlm = (DefaultListModel)list.getModel();
-		String title = null; 
-		String fileName = null;
-		
-		for(int i=0;i<dlm.getSize();i++){
-			title = fl.get(i).getTitle();
-			fileName = fl.get(i).getFileName();
-			//dlm.addElement((fl.get(i).getTitle()));
-			dlm.addElement(new CellRenderer(title ,fileName ));
-		}
+
 		sc = new JScrollPane(list);
-		//list.setCellRenderer(new CellRenderer(fl));
+		list.setCellRenderer(new CellRenderer(fl));
 	}
 
 
-	public PictureBoardPan(BasicShape parent ,Socket client,DataInputStream dis, DataOutputStream dos,
+	public PictureBoardPan(BasicShape parent,Socket client,DataInputStream dis, DataOutputStream dos,
 					ArrayList<FileList> fl) {
 		this.parent = parent;
 		this.client = client;
