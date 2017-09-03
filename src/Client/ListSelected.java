@@ -21,7 +21,6 @@ public class ListSelected extends JDialog {
 	//private JLabel writer = new JLabel();
 	private JLabel title = new JLabel();
 	private JLabel comment = new JLabel();
-	
 	private JScrollPane sc = new JScrollPane(comment);
 	private JPanel pan = new JPanel();
 	
@@ -47,7 +46,6 @@ public class ListSelected extends JDialog {
 	}
 	
 	public ListSelected(PictureBoardPan parent,String img,String title,String comment) {
-		
 		
 		this.imgIcon = new ImageIcon(img);
 		//this.writer.setText(writer);

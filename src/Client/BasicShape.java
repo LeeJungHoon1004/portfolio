@@ -186,15 +186,9 @@ public class BasicShape extends JFrame {
 	private JScrollPane videoSc;// 스크롤
 
 	// COMPNENT - imgBoardPan
-//	private JPanel imgPanel;
-//	private PictureBoardPan pbp;
-//	private JScrollPane picSc;// 스크롤
-	private PictureBoardPan	pbp ;
-//	System.out.println("!!");
-	private JPanel	imgPanel ;
-//	System.out.println("!!!");
-	private JScrollPane picSc ;// 스크롤
-//	System.out.println("!!!!");
+	private JPanel imgPanel;
+	private PictureBoardPan pbp;
+	private JScrollPane picSc;// 스크롤
 
 	// COMPNENT - planPan
 	private JPanel planPan = new JPanel();
@@ -294,21 +288,17 @@ public class BasicShape extends JFrame {
 			System.out.println("BasicShape의 CompInit에서 dis,dos를 소켓과 다시 연결하는 과정에서 오류발생.");
 			e.printStackTrace();
 		}
-
-//	//	pbp = new PictureBoardPan(title , contents , filename);
-//		System.out.println("!!");
-//		imgPanel = new JPanel();
-//		System.out.println("!!!");
-//		picSc = new JScrollPane(imgPanel);// 스크롤
-//		System.out.println("!!!!");
-
 		pbp = new PictureBoardPan(client, dis,dos,fl);
 		System.out.println("!!");
+		
 		imgPanel = new JPanel();
+		
 		System.out.println("!!!");
+		
 		picSc = new JScrollPane(imgPanel);// 스크롤
+		
 		System.out.println("!!!!");
-
+		
 		pbp.setBackground(Color.white);
 		imgPanel.setBackground(Color.white);
 		this.pbp.setPreferredSize(new Dimension(975, 640));
@@ -377,7 +367,7 @@ public class BasicShape extends JFrame {
 		mainPan.add(calandarSc, "NamecalandarPane");
 		mainPan.add(planSc, "NameplanPane");
 		mainPan.add(videoSc, "NamevideoPane");
-		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
+		mainPan.add(imgPanel, "NameimgBoard"); // 카드로 끼워넣는팬에
 		mainPan.add(mygoalPanSc, "NamegoalBoard");
 
 		// 이름을 부여함 .
@@ -518,11 +508,11 @@ public class BasicShape extends JFrame {
 		return vflList;
 	}
 
-	public ArrayList<FileList> receivedCommunityData() {
+	public ArrayList<FileList> videoData() {
 
 		try {
 
-			dos.writeUTF("커뮤니티패널갱신");
+			dos.writeUTF("커뮤니티패널 갱신");
 			// 전송하려는 파일의 이름 , 크기 , 내용물(파일자체) , 파일의 타이틀 ,파일의 내용
 			String title = null;
 			String contents = null;
@@ -532,27 +522,21 @@ public class BasicShape extends JFrame {
 
 			// 2.클라이언트에서 데이터를 받습니다 (2.ClientRam to ServerRam)
 			ois = new ObjectInputStream(client.getInputStream());
-			ArrayList<FileList> receivedPostingList = new ArrayList<FileList> ();
-			receivedPostingList = (ArrayList<FileList>) ois.readObject();
-			
-			for(int i = 0 ; receivedPostingList.size() <i ; i++){
-			System.out.println(receivedPostingList.get(i).getTitle()); // 제목
-			System.out.println(receivedPostingList.get(i).getContents());// 코멘트
-			System.out.println(receivedPostingList.get(i).getFileName());// 파일이름
-			System.out.println(receivedPostingList.get(i).getFileSize());// 파일의 크기(int)
-			System.out.println(receivedPostingList.get(i).getFileContents());// 파일의 내용물(byte [])
-			
-			fileContents = receivedPostingList.get(i).getFileContents();
-			
-			//3.Server에서 받은 ArrayList의 실제 파일이미지를 자기 하드디스크 경로에 저장. 
-//			File f = new File("C:/4W" + "/" + fl1.getFileName());
-//			fos = new FileOutputStream(f);
-//			bos = new BufferedOutputStream(fos);
-//			dos = new DataOutputStream(bos);
-//			dos.write(fileContents);
-//			dos.flush();
-			}
-			
+			FileList fl1 = (FileList) ois.readObject();
+
+			System.out.println(fl1.getTitle()); // 제목
+			System.out.println(fl1.getContents());// 코멘트
+			System.out.println(fl1.getFileName());// 파일이름
+			System.out.println(fl1.getFileSize());// 파일의 크기(int)
+			System.out.println(fl1.getFileContents());// 파일의 내용물(byte [])
+
+			fileContents = fl1.getFileContents();
+			File f = new File("C:/4W" + "/" + fl1.getFileName());
+			fos = new FileOutputStream(f);
+			bos = new BufferedOutputStream(fos);
+			dos = new DataOutputStream(bos);
+			dos.write(fileContents);
+			dos.flush();
 			// ===========================파일1개 언마셜링
 			System.out.println("클라이언트에서 받은 커뮤니티 데이터를 하드디스크로 저장완료.");
 
@@ -733,17 +717,15 @@ public class BasicShape extends JFrame {
 
 		clientConnect(); // sock
 		vflList = receiveData();// 운동영상 패널 데이터 받기 //dos가.. 자기 하드디스크 dos로 연결됨.
-		System.out.println("@");
+		fl = videoData();//커뮤니티 패널 데이터 받기
+		
+		// receiveDataAfterLogin();//물컵 데이터 받기
 		try {
 			dos = new DataOutputStream(client.getOutputStream());
 		} catch (Exception e) {
 			System.out.println("서버에서 데이터받고난이후에 DataOutputStream을 서버와 다시 연결하는도중에 문제생김.");
 			e.printStackTrace();
 		}
-		fl = receivedCommunityData();//커뮤니티 패널 데이터 받기
-		System.out.println("@@");
-		// receiveDataAfterLogin();//물컵 데이터 받기
-		
 		System.out.println("@@@@@@@@@@@@@@");
 		comp();
 		eventInit();

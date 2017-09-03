@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedOutputStream;
@@ -26,6 +27,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
 import Server.VideoFileList;
+
 public class VideoPan extends JPanel {
 
 	private BasicShape parent;
@@ -38,7 +40,7 @@ public class VideoPan extends JPanel {
 	// ===========================================================
 	private String[] urls = new String[25];
 	private String[] fileNames = new String[25];
-	private String path = "C:/4W";
+	private String path = "C:/4W/VideoPan";
 	private String[] imgpath = new String[25];
 	// ===========================================================
 	private TitledBorder yoga = new TitledBorder("");
@@ -121,11 +123,10 @@ public class VideoPan extends JPanel {
 
 	public void insertImage() {
 		
-		for(int i=0;i<25;i++){
-			imgpath[i] = path+ "/" + fileNames[i];
+		for (int i = 0; i < 25; i++) {
+			imgpath[i] = path + "/" + fileNames[i];
 		}
-		
-		
+
 		System.out.println("운동영상 컴포넌트 생성 메소드 진입");
 		ic1 = new ImageIcon(imgpath[0]);
 		ic2 = new ImageIcon(imgpath[1]);
@@ -181,7 +182,6 @@ public class VideoPan extends JPanel {
 
 	}
 
-
 	public void compInit() {
 
 		setLayout(new GridLayout(8, 1));
@@ -198,25 +198,25 @@ public class VideoPan extends JPanel {
 		b3.setPreferredSize(new Dimension(200, 150));
 		b4.setPreferredSize(new Dimension(200, 150));
 		b5.setPreferredSize(new Dimension(200, 150));
-		
+
 		b6.setPreferredSize(new Dimension(200, 150));
 		b7.setPreferredSize(new Dimension(200, 150));
 		b8.setPreferredSize(new Dimension(200, 150));
 		b9.setPreferredSize(new Dimension(200, 150));
 		b10.setPreferredSize(new Dimension(200, 150));
-		
+
 		b11.setPreferredSize(new Dimension(200, 150));
 		b12.setPreferredSize(new Dimension(200, 150));
 		b13.setPreferredSize(new Dimension(200, 150));
 		b14.setPreferredSize(new Dimension(200, 150));
 		b15.setPreferredSize(new Dimension(200, 150));
-		
+
 		b16.setPreferredSize(new Dimension(200, 150));
 		b17.setPreferredSize(new Dimension(200, 150));
 		b18.setPreferredSize(new Dimension(200, 150));
 		b19.setPreferredSize(new Dimension(200, 150));
 		b20.setPreferredSize(new Dimension(200, 150));
-		
+
 		b21.setPreferredSize(new Dimension(200, 150));
 		b22.setPreferredSize(new Dimension(200, 150));
 		b23.setPreferredSize(new Dimension(200, 150));
@@ -227,7 +227,7 @@ public class VideoPan extends JPanel {
 
 		add(encourage);
 
-//		yogaPan.setPreferredSize(new Dimension(250,200));
+		// yogaPan.setPreferredSize(new Dimension(250,200));
 		yogaPan.setBorder(yoga);
 		yogaPan.add(b1);
 		yogaPan.add(b2);
@@ -236,7 +236,7 @@ public class VideoPan extends JPanel {
 		yogaPan.add(b5);
 		add(yogaSc);
 
-//		stretchPan.setPreferredSize(new Dimension(250,200));
+		// stretchPan.setPreferredSize(new Dimension(250,200));
 		stretchPan.setBorder(stretching);
 		stretchPan.add(b6);
 		stretchPan.add(b7);
@@ -245,7 +245,7 @@ public class VideoPan extends JPanel {
 		stretchPan.add(b10);
 		add(stretchSc);
 
-//		mileyPan.setPreferredSize(new Dimension(250,200));
+		// mileyPan.setPreferredSize(new Dimension(250,200));
 		mileyPan.setBorder(miley);
 		mileyPan.add(b11);
 		mileyPan.add(b12);
@@ -254,7 +254,7 @@ public class VideoPan extends JPanel {
 		mileyPan.add(b15);
 		add(mileySc);
 
-//		dancePan.setPreferredSize(new Dimension(250,200));
+		// dancePan.setPreferredSize(new Dimension(250,200));
 		dancePan.setBorder(dance);
 		dancePan.add(b16);
 		dancePan.add(b17);
@@ -263,7 +263,7 @@ public class VideoPan extends JPanel {
 		dancePan.add(b20);
 		add(danceSc);
 
-//		smiPan.setPreferredSize(new Dimension(250,200));
+		// smiPan.setPreferredSize(new Dimension(250,200));
 		smiPan.setBorder(smi);
 		smiPan.add(b21);
 		smiPan.add(b22);
@@ -559,8 +559,10 @@ public class VideoPan extends JPanel {
 		});
 	}
 
-	public VideoPan(BasicShape parent, Socket client, ArrayList<VideoFileList> vflList2,
-						String[] urls,String[] names) {
+	public VideoPan(BasicShape parent, Socket client, ArrayList<VideoFileList> vflList2, String[] urls,
+			String[] names) {
+		
+
 		this.parent = parent;
 		this.client = client;
 		this.dis = parent.getDis();
@@ -590,10 +592,10 @@ public class VideoPan extends JPanel {
 				}
 			}
 		} catch (Exception e) {
-			// If Nimbus is not available, you can set the GUI to another look
+			// If Nimbus is not available, you can set the GUI to another
+			// look
 			// and feel.
 		}
 
 	}
-
 }
