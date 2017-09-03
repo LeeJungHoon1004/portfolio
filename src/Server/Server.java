@@ -413,7 +413,7 @@ public class Server extends JFrame {
 	private JButton smihottButton4 = new JButton("스미홈트4");
 	private JButton smihottButton5 = new JButton("스미홈트5");
 
-	private JButton urlSendButton = new JButton("URL전송");
+	private JButton urlConfirmButton = new JButton("URL확인");
 	private JButton urlRenewalButton = new JButton("URL갱신");
 
 	public static ArrayList<VideoFileList> receivedvflList;
@@ -533,7 +533,7 @@ public class Server extends JFrame {
 		this.urlPan.add(smihottButton5);
 		this.urlWholePan.add(urlPan, BorderLayout.CENTER);
 
-		this.urlButtonPan.add(urlSendButton);
+		this.urlButtonPan.add(urlConfirmButton);
 		this.urlButtonPan.add(urlRenewalButton);
 		this.urlWholePan.add(urlButtonPan, BorderLayout.EAST);
 
@@ -1562,7 +1562,7 @@ public class Server extends JFrame {
 		});
 
 		this.urlRenewalButton.addActionListener(new ActionListener() {
-
+			//url갱신버튼
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				receivedvflList = new ArrayList<VideoFileList>();
@@ -1591,8 +1591,8 @@ public class Server extends JFrame {
 
 		});
 
-		this.urlSendButton.addActionListener(new ActionListener() {
-
+		this.urlConfirmButton.addActionListener(new ActionListener() {
+			//url확인버튼
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {

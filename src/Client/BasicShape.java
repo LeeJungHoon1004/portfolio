@@ -177,9 +177,15 @@ public class BasicShape extends JFrame {
 	private JScrollPane videoSc;// 스크롤
 
 	// COMPNENT - imgBoardPan
-	private JPanel imgPanel;
-	private PictureBoardPan pbp;
-	private JScrollPane picSc;// 스크롤
+//	private JPanel imgPanel;
+//	private PictureBoardPan pbp;
+//	private JScrollPane picSc;// 스크롤
+	private PictureBoardPan	pbp = new PictureBoardPan(client ,dis ,dos);
+//	System.out.println("!!");
+	private JPanel	imgPanel = new JPanel();
+//	System.out.println("!!!");
+	private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
+//	System.out.println("!!!!");
 
 	// COMPNENT - planPan
 	private JPanel planPan = new JPanel();
@@ -285,12 +291,12 @@ public class BasicShape extends JFrame {
 			System.out.println("BasicShape의 CompInit에서 dis,dos를 소켓과 다시 연결하는 과정에서 오류발생.");
 			e.printStackTrace();
 		}
-	//	pbp = new PictureBoardPan(title , contents , filename);
-		System.out.println("!!");
-		imgPanel = new JPanel();
-		System.out.println("!!!");
-		picSc = new JScrollPane(imgPanel);// 스크롤
-		System.out.println("!!!!");
+//	//	pbp = new PictureBoardPan(title , contents , filename);
+//		System.out.println("!!");
+//		imgPanel = new JPanel();
+//		System.out.println("!!!");
+//		picSc = new JScrollPane(imgPanel);// 스크롤
+//		System.out.println("!!!!");
 		pbp.setBackground(Color.white);
 		imgPanel.setBackground(Color.white);
 		this.pbp.setPreferredSize(new Dimension(975, 640));
