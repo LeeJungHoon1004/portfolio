@@ -65,11 +65,15 @@ public class PictureBoardPan extends JPanel {
 	private JButton upload = new JButton("글올리기");
 	private JButton remove = new JButton("글삭제");
 
+	private ArrayList<FileList> fl;
 	private DefaultListModel dlm = new DefaultListModel();
 	private JList list;
 	private JScrollPane sc;
 	private CellRenderer cellrender;
 	private int cnt = 0;
+	private String[] title;
+	private String[] contents;
+	private String[] fileName;
 
 	public void compInit() {
 		setLayout(new BorderLayout(1, 1));
@@ -122,6 +126,7 @@ public class PictureBoardPan extends JPanel {
 				 } // 서버에 게시글 없앤다고 보냄.
 		
 				 list.remove(index); // 리스트모델에서 선택된 항목을 지운다.
+				 
 				 if (dlm.getSize() == 0) { // 리스트모델의 사이즈가 0이되면 삭제버튼을 누를 수 없게 한다.
 					 // btnDel.setEnabled(false);
 				 }
@@ -142,7 +147,7 @@ public class PictureBoardPan extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				
 				index = list.getSelectedIndex();
-				ArrayList<FileList> fl = new ArrayList<FileList>();
+				
 				String img = ""+"/"+fl.get(index).getFileName();
 				String title = fl.get(index).getTitle();
 				String comment = fl.get(index).getContents();
@@ -154,56 +159,20 @@ public class PictureBoardPan extends JPanel {
 	}
 
 	public void renew() {//갱신 메소드
-		unmarshalling();
 		list = new JList(dlm);
 		sc = new JScrollPane(list);
 		list.setCellRenderer(new CellRenderer());
 	}
-	
-	public void unmarshalling() {
-		try {
-			
-			dos.writeUTF("커뮤니티패널 갱신");
-		// 전송하려는 파일의 이름 , 크기 , 내용물(파일자체) , 파일의 타이틀 ,파일의 내용
-		String title = null;
-		String contents = null;
-		String fileName = null;
-		int fileSize = 0;
-		byte[] fileContents = null;
-
-		// 2.클라이언트에서 데이터를 받습니다 (2.ClientRam to ServerRam)
-		ois = new ObjectInputStream(client.getInputStream());
-		FileList fl1 = (FileList) ois.readObject();
-
-		System.out.println(fl1.getTitle()); // 제목
-		System.out.println(fl1.getContents());// 코멘트
-		System.out.println(fl1.getFileName());// 파일이름
-		System.out.println(fl1.getFileSize());// 파일의 크기(int)
-		System.out.println(fl1.getFileContents());// 파일의 내용물(byte [])
-
-		fileContents = fl1.getFileContents();
-		File f = new File("C:/4W" +"/"+ fl1.getFileName());
-		fos = new FileOutputStream(f);
-		bos = new BufferedOutputStream(fos);
-		dos = new DataOutputStream(bos);
-		dos.write(fileContents);
-		dos.flush();
-		//===========================파일1개 언마셜링
-		System.out.println("클라이언트에서 받은 데이터를 하드디스크로 저장완료.");
-
-		dos.close();
-		}catch(Exception e ) {
-			System.out.println("커뮤니티 데이터 받기 실패");
-		}
-	}
 
 
-	public PictureBoardPan(Socket client,DataInputStream dis,DataOutputStream dos) {
+	public PictureBoardPan(Socket client,DataInputStream dis, DataOutputStream dos,
+					ArrayList<FileList> fl) {
+		
 		this.client = client;
 		this.dis = dis;
 		this.dos = dos;
-//		this.userID = userID;
-//		this.userPW = userPW;
+		this.fl = fl;
+		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {

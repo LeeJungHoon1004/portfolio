@@ -38,6 +38,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
 import Server.VideoFileList;
+
 public class BasicShape extends JFrame {
 
 	private Socket client;
@@ -65,17 +66,25 @@ public class BasicShape extends JFrame {
 	String tmpComboString3;
 	String tmpComboStringList;
 
-	// 어레이리스트
+	// 운동영상 어레이리스트
 	private ArrayList<VideoFileList> vflList;
-	
-	private String[] urls = new String [25];
-	private String[] splitN= new String [25];
-	private String[] urlButtons= new String [25];
-	private int[] fileSize = new int [25];
+
+	private String[] urls = new String[25];
+	private String[] splitN = new String[25];
+	private String[] urlButtons = new String[25];
+	private int[] fileSize = new int[25];
 	private byte[] filecontents;
-	private String[] fileNames= new String [25];
+	private String[] fileNames = new String[25];
 	private String path = "C:/4W";
-	private String[] imgpath= new String [25];
+	private String[] imgpath = new String[25];
+
+	// 커뮤니티 어레이리스트
+	private ArrayList<FileList> fl;
+	private String title2;
+	private String contents;
+	private String fileName;
+	private int fileSize1 = 0;
+	private byte[] fileContents2 = null;
 
 	// ========ComboList Variable====================
 
@@ -185,7 +194,7 @@ public class BasicShape extends JFrame {
 	private JPanel planPan = new JPanel();
 	private PlanPan plan = new PlanPan(self);
 	private JScrollPane planSc = new JScrollPane(planPan);// 스크롤
-	
+
 	// ===========================================================================
 	public Socket getClient() {
 		return client;
@@ -224,7 +233,7 @@ public class BasicShape extends JFrame {
 	}
 
 	public void setUserPW(String userPW) {
-		
+
 		this.userPW = userPW;
 	}
 
@@ -245,12 +254,7 @@ public class BasicShape extends JFrame {
 	// =============================△△게터&세터△△=====================================
 
 	public void comp() {
-		
-		
-		
-		
-		
-		
+
 		setLayout(null);
 		// 투명
 
@@ -265,9 +269,8 @@ public class BasicShape extends JFrame {
 		this.planPan.add(plan);
 
 		// ---------운동
-		
-		
-		video = new VideoPan(self, client, vflList,urls,fileNames);
+
+		video = new VideoPan(self, client, vflList, urls, fileNames);
 		videoPan = new JPanel();
 		videoSc = new JScrollPane(videoPan);
 		videoPan.setBackground(Color.white);
@@ -278,14 +281,14 @@ public class BasicShape extends JFrame {
 		// ---------커뮤니티
 		System.out.println("!");
 		System.out.println("클라이언트 연결상태 확인 " + client.isConnected());
-		try{
-		dis = new DataInputStream(client.getInputStream());
-		dos = new DataOutputStream(client.getOutputStream());
-		}catch(Exception e){
+		try {
+			dis = new DataInputStream(client.getInputStream());
+			dos = new DataOutputStream(client.getOutputStream());
+		} catch (Exception e) {
 			System.out.println("BasicShape의 CompInit에서 dis,dos를 소켓과 다시 연결하는 과정에서 오류발생.");
 			e.printStackTrace();
 		}
-	//	pbp = new PictureBoardPan(title , contents , filename);
+		pbp = new PictureBoardPan(client, dis,dos,fl);
 		System.out.println("!!");
 		imgPanel = new JPanel();
 		System.out.println("!!!");
@@ -439,7 +442,7 @@ public class BasicShape extends JFrame {
 	public ArrayList<VideoFileList> receiveData() {
 		try {
 			dos.writeUTF("url데이터발신");
-			
+
 			ois = new ObjectInputStream(client.getInputStream());
 
 			vflList = new ArrayList<VideoFileList>();
@@ -466,7 +469,8 @@ public class BasicShape extends JFrame {
 			fileSize[i] = vflList.get(i).getUrlFileSize();
 			filecontents = vflList.get(i).getFileContents();
 
-			// VideoFileList vfl = new VideoFileList(path, path, flags, path, filecontents);
+			// VideoFileList vfl = new VideoFileList(path, path, flags, path,
+			// filecontents);
 			fileNames[i] = tmp[1];
 			System.out.println("비디오팬에서 받은 파일이름 :" + fileNames[i]);
 			imgpath[i] = path + "/" + fileNames[i];
@@ -499,11 +503,51 @@ public class BasicShape extends JFrame {
 		return vflList;
 	}
 
+	public ArrayList<FileList> videoData() {
+
+		try {
+
+			dos.writeUTF("커뮤니티패널 갱신");
+			// 전송하려는 파일의 이름 , 크기 , 내용물(파일자체) , 파일의 타이틀 ,파일의 내용
+			String title = null;
+			String contents = null;
+			String fileName = null;
+			int fileSize = 0;
+			byte[] fileContents = null;
+
+			// 2.클라이언트에서 데이터를 받습니다 (2.ClientRam to ServerRam)
+			ois = new ObjectInputStream(client.getInputStream());
+			FileList fl1 = (FileList) ois.readObject();
+
+			System.out.println(fl1.getTitle()); // 제목
+			System.out.println(fl1.getContents());// 코멘트
+			System.out.println(fl1.getFileName());// 파일이름
+			System.out.println(fl1.getFileSize());// 파일의 크기(int)
+			System.out.println(fl1.getFileContents());// 파일의 내용물(byte [])
+
+			fileContents = fl1.getFileContents();
+			File f = new File("C:/4W" + "/" + fl1.getFileName());
+			fos = new FileOutputStream(f);
+			bos = new BufferedOutputStream(fos);
+			dos = new DataOutputStream(bos);
+			dos.write(fileContents);
+			dos.flush();
+			// ===========================파일1개 언마셜링
+			System.out.println("클라이언트에서 받은 커뮤니티 데이터를 하드디스크로 저장완료.");
+
+			//dos.close();
+		} catch (Exception e) {
+			System.out.println("커뮤니티 데이터 받기 실패");
+		}
+
+		return fl;
+	}
+
 	public String getResult() {
 		// 로그인 버튼
 		userID = inputID.getText();
 		userPW = inputPW.getText();
-		
+
 		try {
 			dos.writeUTF("로그인");// 로그인 시그널
 			dos.writeUTF(userID);
@@ -625,7 +669,7 @@ public class BasicShape extends JFrame {
 		// });
 		// 운동 버튼
 		videoBt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {		
+			public void actionPerformed(ActionEvent e) {
 				card.show(self.mainPan, "NamevideoPane");
 
 			}
@@ -640,7 +684,7 @@ public class BasicShape extends JFrame {
 
 		GraphBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				card.show(self.mainPan, "NamegoalBoard");
 			}
 		});
@@ -666,16 +710,17 @@ public class BasicShape extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		cp.setBackground(Color.WHITE);
 
-		clientConnect(); //sock
+		clientConnect(); // sock
 		vflList = receiveData();// 운동영상 패널 데이터 받기 //dos가.. 자기 하드디스크 dos로 연결됨.
+		fl = videoData();//커뮤니티 패널 데이터 받기
 		
 		// receiveDataAfterLogin();//물컵 데이터 받기
-		try{
-		dos = new DataOutputStream(client.getOutputStream());
-		}catch(Exception e){
+		try {
+			dos = new DataOutputStream(client.getOutputStream());
+		} catch (Exception e) {
 			System.out.println("서버에서 데이터받고난이후에 DataOutputStream을 서버와 다시 연결하는도중에 문제생김.");
 			e.printStackTrace();
-			}
+		}
 		System.out.println("@@@@@@@@@@@@@@");
 		comp();
 		eventInit();
