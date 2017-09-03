@@ -1,7 +1,6 @@
 package Client;
 
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -13,7 +12,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.URI;
@@ -29,7 +27,8 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
 public class VideoPan extends JPanel {
-		
+	
+	private BasicShape parent ;
 	private TitledBorder yoga = new TitledBorder("");
 	private TitledBorder stretching = new TitledBorder("");
 	private TitledBorder miley = new TitledBorder("");
@@ -114,14 +113,14 @@ public class VideoPan extends JPanel {
 	private JButton b25 ;
 	
 	
-	private String[] urls = null;
-	private String[] splitN = null;
-	private String[] fileNames = null;
-	int[] fileSize = null;
-	byte[] filecontents = null;	
+	private String[] urls = new String[25];
+	private String[] splitN = new String[25];
+	private String[] fileNames = new String[25];
+	int[] fileSize =new int[25];
+	byte[] filecontents = new byte[25];	
 	private String path = "C:/Users/Administrator/4weeksWorkout";
-	private String[] imgpath;
-	private String[] urlButtons;
+	private String[] imgpath = new String[25];
+	private String[] urlButtons = new String [25];
 	
 	
 	
@@ -185,49 +184,49 @@ public class VideoPan extends JPanel {
 	
 	
 	public void unmarsharlling() {
-		
-//		try {
-//			 client = new Socket("127.0.0.1",40000);
-//			 dis = new DataInputStream(client.getInputStream());
-//			 dos = new DataOutputStream(client.getOutputStream());
-//			}catch(Exception e1) {
-//				System.out.println("초기연결 실패");
-//			}
-		
+
 		
 		try {
-			dos.writeUTF("url데이터발신");
-			System.out.println(client.isClosed());
-			System.out.println(client.isConnected());
+//			dos.writeUTF("url데이터발신");
+//			System.out.println(client.isClosed());
+//			System.out.println(client.isConnected());
+//			
+//			ois = new ObjectInputStream(client.getInputStream());
+
+//			vflList = (ArrayList<VideoFileList>) ois.readObject();
+//			System.out.println("ois로 리스트 전달받기 성공");
+//			System.out.println(vflList.size());
 			
-			ois = new ObjectInputStream(client.getInputStream());
+			//ArrayList<VideoFileList> receivedvflList = new ArrayList<VideoFileList>();
+			System.out.println();
+			for (int i = 0; i < parent.getVflList().size(); i++) {
+				
+				urls[i] = parent.getVflList().get(i).getUrlPath();
+				splitN[i] = parent.getVflList().get(i).getUrlFileName();
+				String[] tmp;
+				tmp = splitN[i].split("_");
+				urlButtons [i] = parent.getVflList().get(i).getUrlButtonName();
+				fileSize[i] = parent.getVflList().get(i).getUrlFileSize();
+				filecontents = parent.getVflList().get(i).getFileContents();
 
-			ArrayList<VideoFileList> vflList = new ArrayList<VideoFileList>();
-			vflList = (ArrayList<VideoFileList>) ois.readObject();
-			System.out.println("ois로 리스트 전달받기 성공");
-			System.out.println(vflList.size());
-			for (int i = 0; i < vflList.size(); i++) {
-				//names[i] = 
-				//fnames[i] = names[i].split("_");
-				urls[i] = vflList.get(i).getUrlPath();
-				splitN[i] = vflList.get(i).getUrlFileName();
-				fileNames[i] = splitN[1];
-				urlButtons [i] = vflList.get(i).getUrlButtonName();
-				fileSize[i] = vflList.get(i).getUrlFileSize();
-				filecontents = vflList.get(i).getFileContents();
-
+			//	VideoFileList vfl = new VideoFileList(path, path, flags, path, filecontents);
+				fileNames[i] = tmp[1];
 				imgpath[i] = path +"/"+ fileNames[i];
-
-				System.out.println("url 데이터 : "+urls);
-				System.out.println("fileNames 데이터 : "+fileNames);
-				System.out.println("urlButtons 데이터 : "+urlButtons);
-				System.out.println("fileSize 데이터 : "+fileSize);
-				System.out.println("filecontents 데이터 : "+filecontents);
-				//System.out.println(imgpath[i]);
+				
+				
+				
+				System.out.println("url 데이터 : "+urls[i]);
+				System.out.println("fileNames 데이터 : "+fileNames[i]);
+				System.out.println("urlButtons 데이터 : "+urlButtons[i]);
+				System.out.println("fileSize 데이터 : "+fileSize[i]);
+				System.out.println("filecontents 데이터 : "+filecontents[i]);
+				System.out.println("imgpath 데이터 :" +imgpath[i]);
 				System.out.println("====================");
+				System.out.println("운동영상 배열에 데이터 넣기 완료");
 			}
+			
 			// 배열에 데이터 넣기완료
-			System.out.println("배열에 데이터 넣기 완료");
+			
 
 			File f = new File(path);
 			fos = new FileOutputStream(f);
@@ -620,8 +619,8 @@ public class VideoPan extends JPanel {
 		});
 	}
 	
-	public VideoPan(Socket client,DataInputStream dis,DataOutputStream dos) {
-		
+	public VideoPan(BasicShape parent,Socket client,DataInputStream dis,DataOutputStream dos) {
+		this.parent = parent;
 		this.client = client;
 		this.dis = dis;
 		this.dos = dos;
@@ -630,8 +629,15 @@ public class VideoPan extends JPanel {
 		//△언마셜링 메소드도 포함되어있음
 		//△언마셜링에 서버시그널 포함.
 		
+		compInit();
 		
-		this.setBackground(Color.white);
+		eventInitYoga();
+		eventInitStretching();
+		eventInitMiley();
+		eventInitDance();
+		eventInitSmi();
+		
+	this.setBackground(Color.white);
 		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -644,14 +650,6 @@ public class VideoPan extends JPanel {
 			// If Nimbus is not available, you can set the GUI to another look
 			// and feel.
 		}
-		
-		compInit();
-		
-		eventInitYoga();
-		eventInitStretching();
-		eventInitMiley();
-		eventInitDance();
-		eventInitSmi();
 		
 	}
 

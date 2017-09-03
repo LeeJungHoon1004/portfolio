@@ -13,10 +13,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -43,10 +50,33 @@ public class BasicShape extends JFrame {
 	int tmpcombo3;
 	String tmpComboString3;
 	String tmpComboStringList;
+	
+	//어레이리스트
+		private ArrayList<VideoFileList> vflList ;
+		
+	
 	// ========ComboList Variable====================
+	
+	public ArrayList<VideoFileList> getVflList() {
+			return vflList;
+		}
+
+		public void setVflList(ArrayList<VideoFileList> vflList) {
+			this.vflList = vflList;
+		}
+
 	private Socket client;
-	private DataOutputStream dos;
-	private DataInputStream dis;
+	// 아웃 스트림
+	private FileOutputStream fos = null;
+	private BufferedOutputStream bos = null;
+	private ObjectOutputStream oos = null;
+	private DataOutputStream dos = null;
+	// 인풋스트림
+	private FileInputStream fis = null;
+	private BufferedInputStream bis = null;
+	private DataInputStream dis = null;
+	private ObjectInputStream ois = null;
+	
 	// =======SOCKET========================
 	private Container cp = this.getContentPane();
 	private JLabel title = new JLabel();
@@ -74,7 +104,6 @@ public class BasicShape extends JFrame {
 	// 로그아웃 중일때
 	private JLabel lbID = new JLabel();
 	private JLabel lbPW = new JLabel();
-
 
 
 	private Image idimage = new ImageIcon("ID (3).jpg").getImage().getScaledInstance(98, 30,
@@ -118,22 +147,6 @@ public class BasicShape extends JFrame {
 	private String name = getName();
 	private String userID  =null;
 	private String userPW  =null;
-	public String getUserID() {
-		return userID;
-	}
-
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
-
-	public String getUserPW() {
-		return userPW;
-	}
-
-	public void setUserPW(String userPW) {
-		this.userPW = userPW;
-	}
-
 	
 	private ImageSlide imgSlide = new ImageSlide();
 //	private BMI bmi = new BMI();
@@ -144,7 +157,6 @@ public class BasicShape extends JFrame {
 	private Dailypan dailyPan = new Dailypan(self);
 	private JScrollPane dailySc = new JScrollPane(dailyPan);// 스크롤
 	
-
 	private JPanel calandarPan = new JPanel();
 	private CalandarPan calandarpan = new CalandarPan();
 	private JScrollPane calandarSc = new JScrollPane(calandarpan);
@@ -155,7 +167,7 @@ public class BasicShape extends JFrame {
 	
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
-	private VideoPan video = new VideoPan(client,dis,dos);
+	private VideoPan video = new VideoPan(self ,client,dis,dos);
 	private JScrollPane videoSc = new JScrollPane(videoPan);// 스크롤
 
 	// COMPNENT - imgBoardPan
@@ -168,7 +180,9 @@ public class BasicShape extends JFrame {
 	private PlanPan plan = new PlanPan(self);
 	private JScrollPane planSc = new JScrollPane(planPan);// 스크롤
 
-
+	
+	
+//===========================================================================
 	public Socket getClient() {
 		return client;
 	}
@@ -184,15 +198,41 @@ public class BasicShape extends JFrame {
 	public void setDos(DataOutputStream dos) {
 		this.dos = dos;
 	}
-
 	public DataInputStream getDis() {
 		return dis;
 	}
-
 	public void setDis(DataInputStream dis) {
 		this.dis = dis;
 	}
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	public String getUserPW() {
+		return userPW;
+	}
+	public void setUserPW(String userPW) {
+		this.userPW = userPW;
+	}
+	public String getName() {
 
+		try {
+			name = dis.readUTF();
+		} catch (Exception e1) {
+			// System.out.println("홈-프로필 이름데이터받기 실패");
+		}
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+//=============================△△게터&세터△△=====================================
+	
+	
 	public void comp() {
 		setLayout(null);
 		// 투명
@@ -210,12 +250,7 @@ public class BasicShape extends JFrame {
 		// ---------운동
 		videoPan.setBackground(Color.white);
 		this.video.setPreferredSize(new Dimension(965, 500));
-		
-		
-
 		this.videoPan.add(video);
-		
-		
 		
 		// ---------커뮤니티
 		pbp.setBackground(Color.white);
@@ -358,7 +393,7 @@ public class BasicShape extends JFrame {
 	public void clientConnect() {
 
 		try {
-			client = new Socket("127.0.0.1", 40000);
+			client = new Socket("192.168.53.4", 40000);
 			dos = new DataOutputStream(client.getOutputStream());
 			dis = new DataInputStream(client.getInputStream());
 			System.out.println("초기연결성공");
@@ -375,15 +410,68 @@ public class BasicShape extends JFrame {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	
+		try {
+			dos.writeUTF("url데이터발신");
+			System.out.println(client.isClosed());
+			System.out.println(client.isConnected());
+			
+			ois = new ObjectInputStream(client.getInputStream());
+
+			 vflList = new ArrayList<VideoFileList>();
+			vflList = (ArrayList<VideoFileList>) ois.readObject();
+			
+			System.out.println("ois로 리스트 전달받기 성공");
+			System.out.println(vflList.size());
+			
+//			for (int i = 0; i < vflList.size(); i++) {
+//				//names[i] = 
+//				//fnames[i] = names[i].split("_");
+//				urls[i] = vflList.get(i).getUrlPath();
+//				splitN[i] = vflList.get(i).getUrlFileName();
+//				fileNames[i] = splitN[1];
+//				urlButtons [i] = vflList.get(i).getUrlButtonName();
+//				fileSize[i] = vflList.get(i).getUrlFileSize();
+//				filecontents = vflList.get(i).getFileContents();
+//
+//				imgpath[i] = path +"/"+ fileNames[i];
+//
+//				System.out.println("url 데이터 : "+urls);
+//				System.out.println("fileNames 데이터 : "+fileNames);
+//				System.out.println("urlButtons 데이터 : "+urlButtons);
+//				System.out.println("fileSize 데이터 : "+fileSize);
+//				System.out.println("filecontents 데이터 : "+filecontents);
+//				//System.out.println(imgpath[i]);
+//				System.out.println("====================");
+//			}
+//			배열에 데이터 넣기완료
+//			System.out.println("배열에 데이터 넣기 완료");
+//
+//			File f = new File(path);
+//			fos = new FileOutputStream(f);
+//			bos = new BufferedOutputStream(fos);
+//			dos = new DataOutputStream(bos);
+//			dos.write(filecontents);
+//			dos.flush();
+
+			System.out.println("비디오패널 언마셜링 성공");
+
+			dos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	//서버 접속후 데이터 수신.
 	public void receiveDataBeforeLogin() {
 		//Article , URL 데이터 수신
-		
-		
-	}
+			
+	}//end
 
+	
+	
+	
 	public String getResult() {
 		// 로그인 버튼
 		userID = inputID.getText();
@@ -415,20 +503,7 @@ public class BasicShape extends JFrame {
 		return result;
 	}// end
 
-	public String getName() {
-
-		try {
-			name = dis.readUTF();
-		} catch (Exception e1) {
-			// System.out.println("홈-프로필 이름데이터받기 실패");
-		}
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	
 	public void eventInit() {
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -496,6 +571,7 @@ public class BasicShape extends JFrame {
 
 				card.show(self.mainPan, "NameplanPane");
 
+				
 			}
 
 		});
@@ -562,8 +638,8 @@ public class BasicShape extends JFrame {
 
 	 
 	public BasicShape() {
-		clientConnect();
-
+		//clientConnect();
+		
 		setTitle("기본shape테스트");
 		// setSize(700, 500);
 		setSize(1200, 750);
@@ -572,26 +648,33 @@ public class BasicShape extends JFrame {
 		cp.setBackground(Color.WHITE);
 		comp();
 		eventInit();
-//		clientConnect();
-		receiveDataBeforeLogin();
+		
+		clientConnect();
+		
+		System.out.println(client.isClosed());
+		System.out.println(client.isConnected());
+		
+		receiveData();
+		
+		//receiveDataBeforeLogin();
 		setVisible(true);
-		
-		
-		//프로그램의 공통파일 만들기! 
-		String path = "C:/Users/Administrator/4weeksWorkout";
-		// 파일 객체 생성
-		File file = new File(path);
-		// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
-		if (!file.exists()) {
-			// 디렉토리 생성 메서드
-			file.mkdirs();
-			System.out.println("created directory successfully!");
-		}
 		
 		
 	}
 
 	public static void main(String[] args) {
+		
+		//프로그램의 공통파일 만들기! 
+				String path = "C:/Users/Administrator/4weeksWorkout";
+				// 파일 객체 생성
+				File file = new File(path);
+				// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
+				if (!file.exists()) {
+					// 디렉토리 생성 메서드
+					file.mkdirs();
+					System.out.println("created directory successfully!");
+				}
+				
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
