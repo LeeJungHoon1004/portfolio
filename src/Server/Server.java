@@ -226,71 +226,6 @@ class ConnectionThread extends Thread {
 
 				}
 
-				// 커뮤니티팬에서 받은 이미지와 String 데이터 수신
-				else if (cmd.equals("소켓연결후데이터수신")) {
-
-					// 전송하려는 파일의 이름 , 크기 , 내용물(파일자체) , 파일의 타이틀 ,파일의 내용
-					String title = null;
-					String contents = null;
-					String fileName = null;
-					int fileSize = 0;
-					byte[] fileContents = null;
-
-					// 2.클라이언트에서 데이터를 받습니다 (2.ClientRam to ServerRam)
-					ois = new ObjectInputStream(socket.getInputStream());
-					FileList fl1 = (FileList) ois.readObject();
-					FileList fl2 = (FileList) ois.readObject();
-					// FileList fl3 = (FileList) ois.readObject();
-
-					System.out.println(fl1.getTitle()); // 제목
-					System.out.println(fl1.getContents());// 코멘트
-					System.out.println(fl1.getFileName());// 파일이름
-					System.out.println(fl1.getFileSize());// 파일의 크기(int)
-					System.out.println(fl1.getFileContents());// 파일의 내용물(byte
-																// [])
-
-					System.out.println(fl2.getTitle());
-					System.out.println(fl2.getContents());
-					System.out.println(fl2.getFileName());
-					System.out.println(fl2.getFileSize());
-					System.out.println(fl2.getFileContents());
-
-					// System.out.println(fl3.getTitle());
-					// System.out.println(fl3.getContents());
-					// System.out.println(fl3.getFileName());
-					// System.out.println(fl3.getFileSize());
-					// System.out.println(fl3.getFileContents());
-
-					// 3.클라이언트에서 받은 데이터를 경로에 저장합니다 (3.Ram to Hdd)
-					fileContents = fl1.getFileContents();
-					File f = new File("D:/6월자바_이정훈_2차/자바기반웹개발자양성_7월/Server/" + fl1.getFileName());
-					fos = new FileOutputStream(f);
-					bos = new BufferedOutputStream(fos);
-					dos = new DataOutputStream(bos);
-					dos.write(fileContents);
-					dos.flush();
-
-					fileContents = fl2.getFileContents();
-					File f2 = new File("D:/6월자바_이정훈_2차/자바기반웹개발자양성_7월/Server/" + fl2.getFileName());
-					fos = new FileOutputStream(f2);
-					dos = new DataOutputStream(fos);
-					dos.write(fileContents);
-					dos.flush();
-
-					// fileContents = fl3.getFileContents();
-					// File f3 = new
-					// File("E:/프로그래밍/Java언어/자바기반웹프로그래머양성_7월/Server/" +
-					// fl3.getFileName());
-					// fos = new FileOutputStream(f3);
-					// dos = new DataOutputStream(fos);
-					// dos.write(fileContents);
-					// dos.flush();
-
-					System.out.println("클라이언트에서 받은 데이터를 하드디스크로 저장완료.");
-
-					
-
-				}
 				else if(cmd.equals("커뮤니티에게시글추가")){
 					File home = new File("C:/4weeksWorkoutServerPosting");
 					
@@ -307,6 +242,8 @@ class ConnectionThread extends Thread {
 					System.out.println(fl.getFileName()); //클라이언트에서받은 파일이름(이미지)
 					System.out.println(fl.getFileSize()); //파일의 크기(int)
 					System.out.println(fl.getFileContents()); //내용물
+					
+					//파일받은뒤에 파일이름을 .. 수신시각과 조합해서 변경해줘야 안겹친다. 
 					
 				}
 				

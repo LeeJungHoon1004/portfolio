@@ -34,7 +34,7 @@ import Server.FileList;
 //http://yonoo88.tistory.com/230
 
 public class PictureBoardPan extends JPanel {
-
+	private BasicShape parent ;
 	private PictureBoardPan self = this;
 	private Socket client;
 	// 아웃 스트림
@@ -99,7 +99,7 @@ public class PictureBoardPan extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				cnt++;
 				
-				new AddPictureBoard(self,client, dis, dos).setVisible(true);
+				new AddPictureBoard(parent,self,client, dis, dos).setVisible(true);
 				// JDialog 보이기!
 				
 				renew();//renew 안에 unmarshalling도 들어있음.
@@ -160,9 +160,9 @@ public class PictureBoardPan extends JPanel {
 	}
 
 
-	public PictureBoardPan(Socket client,DataInputStream dis, DataOutputStream dos,
+	public PictureBoardPan(BasicShape parent ,Socket client,DataInputStream dis, DataOutputStream dos,
 					ArrayList<FileList> fl) {
-		
+		this.parent = parent;
 		this.client = client;
 		this.dis = dis;
 		this.dos = dos;

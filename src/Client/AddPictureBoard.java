@@ -30,6 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import Server.FileList;
 
 //오브젝트 스트림 = 객체직렬화 / 객체직렬화 소켓통신
 //<a target="_blank" href="http://nicebury.tistory.com/15" class="tx-link">http://nicebury.tistory.com/15</a>;
@@ -37,6 +38,7 @@ import javax.swing.border.TitledBorder;
 public class AddPictureBoard extends JDialog {
 
 	private Socket client;
+	private BasicShape parent2;
 	private FileOutputStream fos = null;
 	private BufferedOutputStream bos = null;
 	private ObjectOutputStream oos = null;
@@ -53,8 +55,8 @@ public class AddPictureBoard extends JDialog {
 	private JFileChooser fc = new JFileChooser();
 	private File file;
 	private int returnVal;
-	private String userID;
-	private String userPW;
+	private String id;
+	
 	
 	private JLabel picture = new JLabel();
 	private JButton findPicture = new JButton("사진");
@@ -158,7 +160,7 @@ public class AddPictureBoard extends JDialog {
 
 		try {
 
-			dos.writeUTF("커뮤니티에 게시글 추가");
+			dos.writeUTF("커뮤니티에게시글추가");
 
 			String id =null;
 			
@@ -167,13 +169,13 @@ public class AddPictureBoard extends JDialog {
 			String fileName = null;
 			int fileSize = 0;
 			byte[] fileContents = null;
-			File home = new File("L:/김현수/클라이언트");
-			File[] files = home.listFiles();
+		//	File home = new File("L:/김현수/클라이언트");
+		//	File[] files = home.listFiles();
 
-			for (File tmp : files) {
-				System.out.println(tmp.getAbsolutePath() + " : " + tmp.length());
-				System.out.println(tmp.getAbsolutePath() + " : " + tmp.getName());
-			}
+		//	for (File tmp : files) {
+		//		System.out.println(tmp.getAbsolutePath() + " : " + tmp.length());
+		//		System.out.println(tmp.getAbsolutePath() + " : " + tmp.getName());
+		//	}
 
 			File targetFile = new File(picturePath.getText());
 			title = titleField.getText();
@@ -191,8 +193,8 @@ public class AddPictureBoard extends JDialog {
 			// 파일a제목 , 파일a내용 , 타겟팅한 파일의 이름 , 파일크기 , 파일을 바이트배열로 담아서 내용묶음
 			FileList fl1 = new FileList(id, title, contents, fileName, fileSize, fileContents);
 			oos.writeObject(fl1);
-			fileName = "d1.JPG";
-			targetFile = new File(home.getPath() + "/" + fileName);
+		//	fileName = "d1.JPG";
+		//	targetFile = new File(home.getPath() + "/" + fileName);
 			// ====================================================파일1개 보내기
 
 		} catch (Exception e1) {
@@ -200,11 +202,11 @@ public class AddPictureBoard extends JDialog {
 		}
 	}
 
-	public AddPictureBoard(PictureBoardPan parent, Socket client, DataInputStream dis, DataOutputStream dos) {
+	public AddPictureBoard(BasicShape parent2 ,PictureBoardPan parent, Socket client, DataInputStream dis, DataOutputStream dos) {
 		this.client = client;
 		this.dis = dis;
 		this.dos = dos;
-		
+		this.id = parent2.getUserID();
 		this.setBackground(Color.white);
 		setSize(600, 800);
 		setLocationRelativeTo(parent);

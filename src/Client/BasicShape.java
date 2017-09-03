@@ -289,7 +289,7 @@ public class BasicShape extends JFrame {
 			System.out.println("BasicShape의 CompInit에서 dis,dos를 소켓과 다시 연결하는 과정에서 오류발생.");
 			e.printStackTrace();
 		}
-		pbp = new PictureBoardPan(client, dis,dos,fl);
+		pbp = new PictureBoardPan(self,client, dis,dos,fl);
 		System.out.println("!!");
 		
 		imgPanel = new JPanel();
