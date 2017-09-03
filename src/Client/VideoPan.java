@@ -1,6 +1,5 @@
 package Client;
 
-
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -26,110 +25,106 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
-import Server.VideoFileList;
-
 public class VideoPan extends JPanel {
-	
-	private BasicShape parent ;
+
+	private BasicShape parent;
 	private Socket client;
 	private DataOutputStream dos;
 	private DataInputStream dis;
 	private ObjectInputStream ois;
 	private FileOutputStream fos;
 	private BufferedOutputStream bos;
-//===========================================================	
+	// ===========================================================
 	private String[] urls = new String[25];
-	private String[] splitN = new String[25];
 	private String[] fileNames = new String[25];
-	int[] fileSize =new int[25];
-	byte[] filecontents = new byte[25];	
 	private String path = "C:/4W";
 	private String[] imgpath = new String[25];
-	private String[] urlButtons = new String [25];
-//===========================================================	
+	// ===========================================================
 	private TitledBorder yoga = new TitledBorder("");
 	private TitledBorder stretching = new TitledBorder("");
 	private TitledBorder miley = new TitledBorder("");
 	private TitledBorder dance = new TitledBorder("");
 	private TitledBorder smi = new TitledBorder("");
-//===========================================================	
+	// ===========================================================
 	private ImageIcon imgE1 = new ImageIcon("KakaoTalk_20170820_180152201.jpg");
 	private JLabel encourage = new JLabel(imgE1);
 	private JButton renew = new JButton("갱신");
-//===========================================================
+	// ===========================================================
 	private JPanel healthPan = new JPanel();
 	private JPanel yogaPan = new JPanel();
 	private JPanel stretchPan = new JPanel();
 	private JPanel mileyPan = new JPanel();
 	private JPanel dancePan = new JPanel();
 	private JPanel smiPan = new JPanel();
-	
+
 	private JScrollPane healthSc = new JScrollPane(healthPan);
 	private JScrollPane yogaSc = new JScrollPane(yogaPan);
 	private JScrollPane stretchSc = new JScrollPane(stretchPan);
 	private JScrollPane mileySc = new JScrollPane(mileyPan);
 	private JScrollPane danceSc = new JScrollPane(dancePan);
 	private JScrollPane smiSc = new JScrollPane(smiPan);
-//===========================================================	
+	// ===========================================================
 	private ImageIcon ic1;
-	private ImageIcon ic2 ;
-	private ImageIcon ic3 ;
-	private ImageIcon ic4 ;
-	private ImageIcon ic5 ;
-	private ImageIcon ic6 ;
-	private ImageIcon ic7 ;
-	private ImageIcon ic8 ;
-	private ImageIcon ic9 ;
-	private ImageIcon ic10 ;
-	private ImageIcon ic11 ;
-	private ImageIcon ic12 ;
-	private ImageIcon ic13 ;
+	private ImageIcon ic2;
+	private ImageIcon ic3;
+	private ImageIcon ic4;
+	private ImageIcon ic5;
+	private ImageIcon ic6;
+	private ImageIcon ic7;
+	private ImageIcon ic8;
+	private ImageIcon ic9;
+	private ImageIcon ic10;
+	private ImageIcon ic11;
+	private ImageIcon ic12;
+	private ImageIcon ic13;
 	private ImageIcon ic14;
 	private ImageIcon ic15;
 	private ImageIcon ic16;
 	private ImageIcon ic17;
 	private ImageIcon ic18;
-	private ImageIcon ic19 ;
+	private ImageIcon ic19;
 	private ImageIcon ic20;
-	private ImageIcon ic21 ;
+	private ImageIcon ic21;
 	private ImageIcon ic22;
 	private ImageIcon ic23;
 	private ImageIcon ic24;
-	private ImageIcon ic25 ;
-	
-	private JButton b1 ;
-	private JButton b2 ;
+	private ImageIcon ic25;
+
+	private JButton b1;
+	private JButton b2;
 	private JButton b3;
 	private JButton b4;
-	private JButton b5 ;
+	private JButton b5;
 	private JButton b6;
 	private JButton b7;
-	private JButton b8 ;
-	private JButton b9 ;
+	private JButton b8;
+	private JButton b9;
 	private JButton b10;
-	private JButton b11 ;
+	private JButton b11;
 	private JButton b12;
-	private JButton b13 ;
+	private JButton b13;
 	private JButton b14;
-	private JButton b15 ;
-	private JButton b16 ;
+	private JButton b15;
+	private JButton b16;
 	private JButton b17;
-	private JButton b18 ;
-	private JButton b19 ;
-	private JButton b20 ;
+	private JButton b18;
+	private JButton b19;
+	private JButton b20;
 	private JButton b21;
-	private JButton b22 ;
-	private JButton b23 ;
-	private JButton b24 ;
-	private JButton b25 ;
+	private JButton b22;
+	private JButton b23;
+	private JButton b24;
+	private JButton b25;
 	private ArrayList<VideoFileList> vflList;
-//===========================================================
-	
-	
-	
+	// ===========================================================
+
 	public void insertImage() {
 		
-		unmarsharlling();
+		for(int i=0;i<25;i++){
+			imgpath[i] = path+fileNames[i];
+		}
+		
+		
 		System.out.println("운동영상 컴포넌트 생성 메소드 진입");
 		ic1 = new ImageIcon(imgpath[0]);
 		ic2 = new ImageIcon(imgpath[1]);
@@ -156,7 +151,7 @@ public class VideoPan extends JPanel {
 		ic23 = new ImageIcon(imgpath[22]);
 		ic24 = new ImageIcon(imgpath[23]);
 		ic25 = new ImageIcon(imgpath[24]);
-		
+
 		b1 = new JButton(ic1);
 		b2 = new JButton(ic2);
 		b3 = new JButton(ic3);
@@ -182,18 +177,10 @@ public class VideoPan extends JPanel {
 		b23 = new JButton(ic23);
 		b24 = new JButton(ic24);
 		b25 = new JButton(ic25);
-		
-	}
-	
-	
-	public void unmarsharlling() {
-		
-		System.out.println("운동영상 언마셜링 메소드 진입");
 
 	}
-	
-	
-	
+
+
 	public void compInit() {
 
 		setLayout(new GridLayout(8, 1));
@@ -204,40 +191,42 @@ public class VideoPan extends JPanel {
 		mileyPan.setBackground(Color.white);
 		dancePan.setBackground(Color.white);
 		smiPan.setBackground(Color.white);
-		
-		b1.setPreferredSize(new Dimension(300, 200));
-		b2.setPreferredSize(new Dimension(300, 200));
-		b3 .setPreferredSize(new Dimension(300, 200));
+
+		b1.setPreferredSize(new Dimension(200, 150));
+		b2.setPreferredSize(new Dimension(200, 150));
+		b3.setPreferredSize(new Dimension(200, 150));
 		b4.setPreferredSize(new Dimension(200, 150));
 		b5.setPreferredSize(new Dimension(200, 150));
+		
 		b6.setPreferredSize(new Dimension(200, 150));
 		b7.setPreferredSize(new Dimension(200, 150));
 		b8.setPreferredSize(new Dimension(200, 150));
 		b9.setPreferredSize(new Dimension(200, 150));
 		b10.setPreferredSize(new Dimension(200, 150));
+		
 		b11.setPreferredSize(new Dimension(200, 150));
 		b12.setPreferredSize(new Dimension(200, 150));
 		b13.setPreferredSize(new Dimension(200, 150));
 		b14.setPreferredSize(new Dimension(200, 150));
 		b15.setPreferredSize(new Dimension(200, 150));
+		
 		b16.setPreferredSize(new Dimension(200, 150));
 		b17.setPreferredSize(new Dimension(200, 150));
 		b18.setPreferredSize(new Dimension(200, 150));
 		b19.setPreferredSize(new Dimension(200, 150));
 		b20.setPreferredSize(new Dimension(200, 150));
+		
 		b21.setPreferredSize(new Dimension(200, 150));
 		b22.setPreferredSize(new Dimension(200, 150));
 		b23.setPreferredSize(new Dimension(200, 150));
 		b24.setPreferredSize(new Dimension(200, 150));
 		b25.setPreferredSize(new Dimension(200, 150));
-		
-		
-		renew.setPreferredSize(new Dimension(100,70));
-		
+
+		renew.setPreferredSize(new Dimension(100, 70));
 
 		add(encourage);
-		
-		yogaPan.setBackground(Color.white);
+
+		yogaPan.setPreferredSize(new Dimension(250,200));
 		yogaPan.setBorder(yoga);
 		yogaPan.add(b1);
 		yogaPan.add(b2);
@@ -246,7 +235,7 @@ public class VideoPan extends JPanel {
 		yogaPan.add(b5);
 		add(yogaSc);
 
-		stretchPan.setBackground(Color.white);
+		stretchPan.setPreferredSize(new Dimension(250,200));
 		stretchPan.setBorder(stretching);
 		stretchPan.add(b6);
 		stretchPan.add(b7);
@@ -255,7 +244,7 @@ public class VideoPan extends JPanel {
 		stretchPan.add(b10);
 		add(stretchSc);
 
-		mileyPan.setBackground(Color.white);
+		mileyPan.setPreferredSize(new Dimension(250,200));
 		mileyPan.setBorder(miley);
 		mileyPan.add(b11);
 		mileyPan.add(b12);
@@ -264,7 +253,7 @@ public class VideoPan extends JPanel {
 		mileyPan.add(b15);
 		add(mileySc);
 
-		dancePan.setBackground(Color.white);
+		dancePan.setPreferredSize(new Dimension(250,200));
 		dancePan.setBorder(dance);
 		dancePan.add(b16);
 		dancePan.add(b17);
@@ -272,8 +261,8 @@ public class VideoPan extends JPanel {
 		dancePan.add(b19);
 		dancePan.add(b20);
 		add(danceSc);
-		
-		smiPan.setBackground(Color.white);
+
+		smiPan.setPreferredSize(new Dimension(250,200));
 		smiPan.setBorder(smi);
 		smiPan.add(b21);
 		smiPan.add(b22);
@@ -281,30 +270,31 @@ public class VideoPan extends JPanel {
 		smiPan.add(b24);
 		smiPan.add(b25);
 		add(smiSc);
-		
+
 		add(renew);
 	}
-	
+
 	public void eventInitYoga() {
-		
+
 		renew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				insertImage();
-				//△언마셜링 메소드도 포함되어있음
-				//△언마셜링에 서버시그널 포함.
+				// △언마셜링 메소드도 포함되어있음
+				// △언마셜링에 서버시그널 포함.
 			}
 		});
-		
+
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					try {
-						Desktop d = Desktop.getDesktop();
-						d.browse(new URI(urls[0]));
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI(urls[0]));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
-		});b2.addActionListener(new ActionListener() {
+		});
+		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Desktop d = Desktop.getDesktop();
@@ -312,40 +302,40 @@ public class VideoPan extends JPanel {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-		}
-	});
+			}
+		});
 		b3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					try {
-						Desktop d = Desktop.getDesktop();
-						d.browse(new URI(urls[2]));
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI(urls[2]));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		b4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					try {
-						Desktop d = Desktop.getDesktop();
-						d.browse(new URI(urls[3]));
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI(urls[3]));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		b5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					try {
-						Desktop d = Desktop.getDesktop();
-						d.browse(new URI(urls[4]));
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI(urls[4]));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
-	}//end
-	
+	}// end
+
 	public void eventInitStretching() {
 		b6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -398,7 +388,7 @@ public class VideoPan extends JPanel {
 			}
 		});
 	}
-	
+
 	public void eventInitMiley() {
 		b11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -408,7 +398,7 @@ public class VideoPan extends JPanel {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		b12.addActionListener(new ActionListener() {
@@ -419,7 +409,7 @@ public class VideoPan extends JPanel {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		b13.addActionListener(new ActionListener() {
@@ -430,7 +420,7 @@ public class VideoPan extends JPanel {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		b14.addActionListener(new ActionListener() {
@@ -441,7 +431,7 @@ public class VideoPan extends JPanel {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		b15.addActionListener(new ActionListener() {
@@ -452,11 +442,11 @@ public class VideoPan extends JPanel {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
-		
-	}//end
+
+	}// end
 
 	public void eventInitDance() {
 		b16.addActionListener(new ActionListener() {
@@ -510,84 +500,87 @@ public class VideoPan extends JPanel {
 			}
 		});
 	}
-	
+
 	public void eventInitSmi() {
 
 		b21.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-						try {
-							Desktop d = Desktop.getDesktop();
-							d.browse(new URI(urls[20]));
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI(urls[20]));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		b22.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-						try {
-							Desktop d = Desktop.getDesktop();
-							d.browse(new URI(urls[21]));
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
+
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI(urls[21]));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		b23.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-						try {
-							Desktop d = Desktop.getDesktop();
-							d.browse(new URI(urls[22]));
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
+
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI(urls[22]));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		b24.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-						try {
-							Desktop d = Desktop.getDesktop();
-							d.browse(new URI(urls[23]));
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
+
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI(urls[23]));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		b25.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-						try {
-							Desktop d = Desktop.getDesktop();
-							d.browse(new URI(urls[24]));
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
+				try {
+					Desktop d = Desktop.getDesktop();
+					d.browse(new URI(urls[24]));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 	}
-	
-	public VideoPan(BasicShape parent,Socket client,ArrayList<VideoFileList> vflList2) {
+
+	public VideoPan(BasicShape parent, Socket client, ArrayList<VideoFileList> vflList2,
+						String[] urls,String[] names) {
 		this.parent = parent;
 		this.client = client;
 		this.dis = parent.getDis();
 		this.dos = parent.getDos();
 		this.vflList = vflList2;
+		this.urls = urls;
+		this.fileNames = names;
 		insertImage();
-		//△언마셜링 메소드도 포함되어있음
-		//△언마셜링에 서버시그널 포함.
-		
+		// △언마셜링 메소드도 포함되어있음
+		// △언마셜링에 서버시그널 포함.
+
 		compInit();
-		
+
 		eventInitYoga();
 		eventInitStretching();
 		eventInitMiley();
 		eventInitDance();
 		eventInitSmi();
-		
-	this.setBackground(Color.white);
-		
+
+		this.setBackground(Color.white);
+
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
@@ -599,7 +592,7 @@ public class VideoPan extends JPanel {
 			// If Nimbus is not available, you can set the GUI to another look
 			// and feel.
 		}
-		
+
 	}
 
 }

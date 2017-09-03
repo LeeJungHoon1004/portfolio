@@ -37,7 +37,6 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
-import Server.VideoFileList;
 
 public class BasicShape extends JFrame {
 
@@ -266,7 +265,9 @@ public class BasicShape extends JFrame {
 		this.planPan.add(plan);
 
 		// ---------¿îµ¿
-		video = new VideoPan(self, client, vflList);
+		
+		
+		video = new VideoPan(self, client, vflList,urls,fileNames);
 		videoPan = new JPanel();
 		videoSc = new JScrollPane(videoPan);
 		videoPan.setBackground(Color.white);
