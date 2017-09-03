@@ -2,7 +2,6 @@ package Client;
 
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -11,20 +10,15 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,6 +29,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import Server.FileList;
 //스트링에 콤마 추가 제거
 //http://yonoo88.tistory.com/230
 
@@ -148,7 +143,7 @@ public class PictureBoardPan extends JPanel {
 				
 				index = list.getSelectedIndex();
 				
-				String img = ""+"/"+fl.get(index).getFileName();
+				String img = "C:/4W/PictureBoardPan"+"/"+fl.get(index).getFileName();
 				String title = fl.get(index).getTitle();
 				String comment = fl.get(index).getContents();
 				
@@ -161,7 +156,7 @@ public class PictureBoardPan extends JPanel {
 	public void renew() {//갱신 메소드
 		list = new JList(dlm);
 		sc = new JScrollPane(list);
-		list.setCellRenderer(new CellRenderer());
+		list.setCellRenderer(new CellRenderer( fl));
 	}
 
 

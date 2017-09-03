@@ -38,6 +38,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
 import Server.VideoFileList;
+import Server.FileList;
 
 public class BasicShape extends JFrame {
 
@@ -75,7 +76,7 @@ public class BasicShape extends JFrame {
 	private int[] fileSize = new int[25];
 	private byte[] filecontents;
 	private String[] fileNames = new String[25];
-	private String path = "C:/4W";
+	private String path = "C:/4W/VideoPan";
 	private String[] imgpath = new String[25];
 
 	// 커뮤니티 어레이리스트
@@ -186,15 +187,9 @@ public class BasicShape extends JFrame {
 	private JScrollPane videoSc;// 스크롤
 
 	// COMPNENT - imgBoardPan
-//	private JPanel imgPanel;
-//	private PictureBoardPan pbp;
-//	private JScrollPane picSc;// 스크롤
-	private PictureBoardPan	pbp ;
-//	System.out.println("!!");
-	private JPanel	imgPanel ;
-//	System.out.println("!!!");
-	private JScrollPane picSc ;// 스크롤
-//	System.out.println("!!!!");
+	private JPanel imgPanel;
+	private PictureBoardPan pbp;
+	private JScrollPane picSc;// 스크롤
 
 	// COMPNENT - planPan
 	private JPanel planPan = new JPanel();
@@ -294,21 +289,17 @@ public class BasicShape extends JFrame {
 			System.out.println("BasicShape의 CompInit에서 dis,dos를 소켓과 다시 연결하는 과정에서 오류발생.");
 			e.printStackTrace();
 		}
-
-//	//	pbp = new PictureBoardPan(title , contents , filename);
-//		System.out.println("!!");
-//		imgPanel = new JPanel();
-//		System.out.println("!!!");
-//		picSc = new JScrollPane(imgPanel);// 스크롤
-//		System.out.println("!!!!");
-
 		pbp = new PictureBoardPan(client, dis,dos,fl);
 		System.out.println("!!");
+		
 		imgPanel = new JPanel();
+		
 		System.out.println("!!!");
+		
 		picSc = new JScrollPane(imgPanel);// 스크롤
+		
 		System.out.println("!!!!");
-
+		
 		pbp.setBackground(Color.white);
 		imgPanel.setBackground(Color.white);
 		this.pbp.setPreferredSize(new Dimension(975, 640));
@@ -377,7 +368,7 @@ public class BasicShape extends JFrame {
 		mainPan.add(calandarSc, "NamecalandarPane");
 		mainPan.add(planSc, "NameplanPane");
 		mainPan.add(videoSc, "NamevideoPane");
-		mainPan.add(picSc, "NameimgBoard"); // 카드로 끼워넣는팬에
+		mainPan.add(imgPanel, "NameimgBoard"); // 카드로 끼워넣는팬에
 		mainPan.add(mygoalPanSc, "NamegoalBoard");
 
 		// 이름을 부여함 .
@@ -522,8 +513,10 @@ public class BasicShape extends JFrame {
 
 		try {
 
+
 			dos.writeUTF("커뮤니티패널갱신");
 			// 전송받는 파일의 이름 , 크기 , 내용물(파일자체) , 파일의 타이틀 ,파일의 내용
+
 			String title = null;
 			String contents = null;
 			String fileName = null;
@@ -532,32 +525,31 @@ public class BasicShape extends JFrame {
 
 			// 2.서버에서 데이터를 받습니다 (2.ServerRam to ClientRam)
 			ois = new ObjectInputStream(client.getInputStream());
-			ArrayList<FileList> receivedPostingList = new ArrayList<FileList> ();
-			receivedPostingList = (ArrayList<FileList>) ois.readObject();
-			
-			for(int i = 0 ; receivedPostingList.size() <i ; i++){
+			ArrayList <FileList> receivedPostingList = new ArrayList <FileList>();
+			receivedPostingList = (ArrayList <FileList>) ois.readObject();
+
+			for(int i = 0 ; i< receivedPostingList.size(); i++){
 			System.out.println(receivedPostingList.get(i).getTitle()); // 제목
 			System.out.println(receivedPostingList.get(i).getContents());// 코멘트
 			System.out.println(receivedPostingList.get(i).getFileName());// 파일이름
 			System.out.println(receivedPostingList.get(i).getFileSize());// 파일의 크기(int)
 			System.out.println(receivedPostingList.get(i).getFileContents());// 파일의 내용물(byte [])
+			System.out.println(receivedPostingList.get(i).getId());
 			
 			fileContents = receivedPostingList.get(i).getFileContents();
-			
-			//3.Server에서 받은 ArrayList의 실제 파일이미지를 자기 하드디스크 경로에 저장. 
-//			File f = new File("C:/4W" + "/" + fl1.getFileName());
-//			fos = new FileOutputStream(f);
-//			bos = new BufferedOutputStream(fos);
-//			dos = new DataOutputStream(bos);
-//			dos.write(fileContents);
-//			dos.flush();
+			File f = new File("C:/4W/PictureBoardPan" + "/" + receivedPostingList.get(i).getFileName());
+			fos = new FileOutputStream(f);
+			bos = new BufferedOutputStream(fos);
+			dos = new DataOutputStream(bos);
+			dos.write(fileContents);
+			dos.flush();
 			}
-			
 			// ===========================파일1개 언마셜링
 			System.out.println("클라이언트에서 받은 커뮤니티 데이터를 하드디스크로 저장완료.");
 
 			//dos.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("커뮤니티 데이터 받기 실패");
 		}
 
@@ -745,7 +737,6 @@ public class BasicShape extends JFrame {
 
 		clientConnect(); // sock
 		vflList = receiveData();// 운동영상 패널 데이터 받기 //dos가.. 자기 하드디스크 dos로 연결됨.
-		System.out.println("@");
 		try {
 			dos = new DataOutputStream(client.getOutputStream());
 		} catch (Exception e) {
@@ -753,9 +744,9 @@ public class BasicShape extends JFrame {
 			e.printStackTrace();
 		}
 		fl = receivedCommunityData();//커뮤니티 패널 데이터 받기
-		System.out.println("@@");
-		// receiveDataAfterLogin();//물컵 데이터 받기
 		
+		// receiveDataAfterLogin();//물컵 데이터 받기
+	
 		System.out.println("@@@@@@@@@@@@@@");
 		comp();
 		eventInit();
@@ -766,16 +757,24 @@ public class BasicShape extends JFrame {
 
 	public static void main(String[] args) {
 
-		// 프로그램의 공통파일 만들기!
-		String path = "C:/4W";
-		// 파일 객체 생성
-		File file = new File(path);
-		// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
-		if (!file.exists()) {
-			// 디렉토리 생성 메서드
-			file.mkdirs();
-			System.out.println("created directory successfully!");
-		}
+		String path1 = "C:/4W/PictureBoardPan";
+	      // 파일 객체 생성
+	      File file1 = new File(path1);
+	      // !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
+	      if (!file1.exists()) {
+	         // 디렉토리 생성 메서드
+	         file1.mkdirs();
+	         System.out.println("created directory successfully!");
+	      }
+	      String path2 = "C:/4W/VideoPan";
+	      // 파일 객체 생성
+	      File file2 = new File(path2);
+	      // !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
+	      if (!file2.exists()) {
+	         // 디렉토리 생성 메서드
+	         file2.mkdirs();
+	         System.out.println("created directory successfully!");
+	      }
 
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

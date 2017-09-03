@@ -366,11 +366,15 @@ class ConnectionThread extends Thread {
 						fileSize = (int)tmp.length();
 						fileContents = new byte[fileSize];
 						
+						fis = new FileInputStream(home.getPath() + "/" + fileName);
+						fis.read(fileContents);
+						
 						FileList tmpFileList = new FileList(id,title , contents , fileName , fileSize, fileContents);
 						sendingflList.add(tmpFileList);
 					}
-					oos.writeObject(sendingflList);
 					
+					oos.writeObject(sendingflList);
+					System.out.println("서버에서 커뮤니티ArrayList 전송했다.");
 					
 				
 					

@@ -158,7 +158,7 @@ public class AddPictureBoard extends JDialog {
 
 		try {
 
-			dos.writeUTF("커뮤니티에게시글추가");
+			dos.writeUTF("커뮤니티에 게시글 추가");
 
 			String id =null;
 			
@@ -167,6 +167,13 @@ public class AddPictureBoard extends JDialog {
 			String fileName = null;
 			int fileSize = 0;
 			byte[] fileContents = null;
+			File home = new File("L:/김현수/클라이언트");
+			File[] files = home.listFiles();
+
+			for (File tmp : files) {
+				System.out.println(tmp.getAbsolutePath() + " : " + tmp.length());
+				System.out.println(tmp.getAbsolutePath() + " : " + tmp.getName());
+			}
 
 			File targetFile = new File(picturePath.getText());
 			title = titleField.getText();
@@ -175,7 +182,6 @@ public class AddPictureBoard extends JDialog {
 			fileSize = (int) targetFile.length();
 			fileContents = new byte[fileSize];
 			// 파일컨텐츠에 실제 파일을 담아준다.
-			
 			fis = new FileInputStream(targetFile);
 			fis.read(fileContents);
 			fis.close();
@@ -183,9 +189,10 @@ public class AddPictureBoard extends JDialog {
 			// "의 파일 내용물 :" + fileContents );
 			oos = new ObjectOutputStream(client.getOutputStream());
 			// 파일a제목 , 파일a내용 , 타겟팅한 파일의 이름 , 파일크기 , 파일을 바이트배열로 담아서 내용묶음
-			FileList fl1 = new FileList(title, contents, fileName, fileSize, fileContents);
+			FileList fl1 = new FileList(id, title, contents, fileName, fileSize, fileContents);
 			oos.writeObject(fl1);
-			
+			fileName = "d1.JPG";
+			targetFile = new File(home.getPath() + "/" + fileName);
 			// ====================================================파일1개 보내기
 
 		} catch (Exception e1) {
