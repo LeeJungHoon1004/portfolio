@@ -26,9 +26,27 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
+import Server.VideoFileList;
+
 public class VideoPan extends JPanel {
 	
 	private BasicShape parent ;
+	private Socket client;
+	private DataOutputStream dos;
+	private DataInputStream dis;
+	private ObjectInputStream ois;
+	private FileOutputStream fos;
+	private BufferedOutputStream bos;
+//===========================================================	
+	private String[] urls = new String[25];
+	private String[] splitN = new String[25];
+	private String[] fileNames = new String[25];
+	int[] fileSize =new int[25];
+	byte[] filecontents = new byte[25];	
+	private String path = "C:/4W";
+	private String[] imgpath = new String[25];
+	private String[] urlButtons = new String [25];
+//===========================================================	
 	private TitledBorder yoga = new TitledBorder("");
 	private TitledBorder stretching = new TitledBorder("");
 	private TitledBorder miley = new TitledBorder("");
@@ -52,13 +70,6 @@ public class VideoPan extends JPanel {
 	private JScrollPane mileySc = new JScrollPane(mileyPan);
 	private JScrollPane danceSc = new JScrollPane(dancePan);
 	private JScrollPane smiSc = new JScrollPane(smiPan);
-//===========================================================	
-	private Socket client;
-	private DataOutputStream dos;
-	private DataInputStream dis;
-	private ObjectInputStream ois;
-	private FileOutputStream fos;
-	private BufferedOutputStream bos;
 //===========================================================	
 	private ImageIcon ic1;
 	private ImageIcon ic2 ;
@@ -111,23 +122,15 @@ public class VideoPan extends JPanel {
 	private JButton b23 ;
 	private JButton b24 ;
 	private JButton b25 ;
-	
-	
-	private String[] urls = new String[25];
-	private String[] splitN = new String[25];
-	private String[] fileNames = new String[25];
-	int[] fileSize =new int[25];
-	byte[] filecontents = new byte[25];	
-	private String path = "C:/4W";
-	private String[] imgpath = new String[25];
-	private String[] urlButtons = new String [25];
+	private ArrayList<VideoFileList> vflList;
+//===========================================================
 	
 	
 	
 	public void insertImage() {
 		
 		unmarsharlling();
-		
+		System.out.println("운동영상 컴포넌트 생성 메소드 진입");
 		ic1 = new ImageIcon(imgpath[0]);
 		ic2 = new ImageIcon(imgpath[1]);
 		ic3 = new ImageIcon(imgpath[2]);
@@ -184,63 +187,9 @@ public class VideoPan extends JPanel {
 	
 	
 	public void unmarsharlling() {
-
 		
-		try {
-//			dos.writeUTF("url데이터발신");
-//			System.out.println(client.isClosed());
-//			System.out.println(client.isConnected());
-//			
-//			ois = new ObjectInputStream(client.getInputStream());
+		System.out.println("운동영상 언마셜링 메소드 진입");
 
-//			vflList = (ArrayList<VideoFileList>) ois.readObject();
-//			System.out.println("ois로 리스트 전달받기 성공");
-//			System.out.println(vflList.size());
-			
-			//ArrayList<VideoFileList> receivedvflList = new ArrayList<VideoFileList>();
-			System.out.println();
-			for (int i = 0; i < parent.getVflList().size(); i++) {
-				
-				urls[i] = parent.getVflList().get(i).getUrlPath();
-				splitN[i] = parent.getVflList().get(i).getUrlFileName();
-				String[] tmp;
-				tmp = splitN[i].split("_");
-				urlButtons [i] = parent.getVflList().get(i).getUrlButtonName();
-				fileSize[i] = parent.getVflList().get(i).getUrlFileSize();
-				filecontents = parent.getVflList().get(i).getFileContents();
-
-			//	VideoFileList vfl = new VideoFileList(path, path, flags, path, filecontents);
-				fileNames[i] = tmp[1];
-				imgpath[i] = path +"/"+ fileNames[i];
-				
-				
-				
-				System.out.println("url 데이터 : "+urls[i]);
-				System.out.println("fileNames 데이터 : "+fileNames[i]);
-				System.out.println("urlButtons 데이터 : "+urlButtons[i]);
-				System.out.println("fileSize 데이터 : "+fileSize[i]);
-				System.out.println("filecontents 데이터 : "+filecontents[i]);
-				System.out.println("imgpath 데이터 :" +imgpath[i]);
-				System.out.println("====================");
-				System.out.println("운동영상 배열에 데이터 넣기 완료");
-			}
-			System.out.println("운동영상 배열 포문 지남.");
-			// 배열에 데이터 넣기완료
-			
-
-			File f = new File(path);
-			fos = new FileOutputStream(f);
-			bos = new BufferedOutputStream(fos);
-			dos = new DataOutputStream(bos);
-			dos.write(filecontents);
-			dos.flush();
-
-			System.out.println("비디오패널 언마셜링 성공");
-
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
 	
@@ -256,9 +205,9 @@ public class VideoPan extends JPanel {
 		dancePan.setBackground(Color.white);
 		smiPan.setBackground(Color.white);
 		
-		b1.setPreferredSize(new Dimension(200, 150));
-		b2.setPreferredSize(new Dimension(200, 150));
-		b3 .setPreferredSize(new Dimension(200, 150));
+		b1.setPreferredSize(new Dimension(300, 200));
+		b2.setPreferredSize(new Dimension(300, 200));
+		b3 .setPreferredSize(new Dimension(300, 200));
 		b4.setPreferredSize(new Dimension(200, 150));
 		b5.setPreferredSize(new Dimension(200, 150));
 		b6.setPreferredSize(new Dimension(200, 150));
@@ -619,12 +568,12 @@ public class VideoPan extends JPanel {
 		});
 	}
 	
-	public VideoPan(BasicShape parent,Socket client) {
+	public VideoPan(BasicShape parent,Socket client,ArrayList<VideoFileList> vflList2) {
 		this.parent = parent;
 		this.client = client;
 		this.dis = parent.getDis();
 		this.dos = parent.getDos();
-		
+		this.vflList = vflList2;
 		insertImage();
 		//△언마셜링 메소드도 포함되어있음
 		//△언마셜링에 서버시그널 포함.

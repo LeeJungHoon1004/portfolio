@@ -1,6 +1,5 @@
 package Client;
 
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -38,6 +37,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
+import Server.VideoFileList;
+
 public class BasicShape extends JFrame {
 
 	private Socket client;
@@ -51,10 +52,9 @@ public class BasicShape extends JFrame {
 	private BufferedInputStream bis = null;
 	private DataInputStream dis = null;
 	private ObjectInputStream ois = null;
-	
+
 	// =======SOCKET========================
-	
-	
+
 	String receivedComboListData;
 	String tmpComboListData[];
 	String receiveaction[] = null;
@@ -65,29 +65,35 @@ public class BasicShape extends JFrame {
 	int tmpcombo3;
 	String tmpComboString3;
 	String tmpComboStringList;
+
+	// 어레이리스트
+	private ArrayList<VideoFileList> vflList;
 	
-	//어레이리스트
-		private ArrayList<VideoFileList> vflList ;
-		
-	
+	private String[] urls = new String [25];
+	private String[] splitN= new String [25];
+	private String[] urlButtons= new String [25];
+	private int[] fileSize = new int [25];
+	private byte[] filecontents;
+	private String[] fileNames= new String [25];
+	private String path = "C:/4W";
+	private String[] imgpath= new String [25];
+
 	// ========ComboList Variable====================
-	
+
 	public ArrayList<VideoFileList> getVflList() {
-			return vflList;
-		}
+		return vflList;
+	}
 
-		public void setVflList(ArrayList<VideoFileList> vflList) {
-			this.vflList = vflList;
-		}
-
+	public void setVflList(ArrayList<VideoFileList> vflList) {
+		this.vflList = vflList;
+	}
 
 	private Container cp = this.getContentPane();
 	private JLabel title = new JLabel();
 
-
 	private Font font = new Font("바탕", Font.ITALIC, 30);
 	private JButton homeBt = new JButton("홈");
-	//private JButton dailyBt = new JButton("목표");
+	// private JButton dailyBt = new JButton("목표");
 	private JButton planBt = new JButton("목표");
 	private JButton videoBt = new JButton("운동");
 	private JButton imgBoardBt = new JButton("커뮤니티");
@@ -107,7 +113,6 @@ public class BasicShape extends JFrame {
 	// 로그아웃 중일때
 	private JLabel lbID = new JLabel();
 	private JLabel lbPW = new JLabel();
-
 
 	private Image idimage = new ImageIcon("ID (3).jpg").getImage().getScaledInstance(98, 30,
 			java.awt.Image.SCALE_SMOOTH);
@@ -148,18 +153,17 @@ public class BasicShape extends JFrame {
 	private JScrollPane homeSc = new JScrollPane(homePan);
 
 	private String name = getName();
-	private String userID  =null;
-	private String userPW  =null;
-	
-	private ImageSlide imgSlide = new ImageSlide();
-//	private BMI bmi = new BMI();
+	private String userID = null;
+	private String userPW = null;
 
+	private ImageSlide imgSlide = new ImageSlide();
+	// private BMI bmi = new BMI();
 
 	// COMPNENT - dailyPan
 
 	private Dailypan dailyPan = new Dailypan(self);
 	private JScrollPane dailySc = new JScrollPane(dailyPan);// 스크롤
-	
+
 	private JPanel calandarPan = new JPanel();
 	private CalandarPan calandarpan = new CalandarPan();
 	private JScrollPane calandarSc = new JScrollPane(calandarpan);
@@ -167,25 +171,23 @@ public class BasicShape extends JFrame {
 	private JPanel mygoalPan = new JPanel();
 	private myGoalPan mygoalpan = new myGoalPan();
 	private JScrollPane mygoalPanSc = new JScrollPane(mygoalpan);
-	
+
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
-	private VideoPan video = new VideoPan(self,client);
+	// private VideoPan video = new VideoPan(self,client);
 	private JScrollPane videoSc = new JScrollPane(videoPan);// 스크롤
 
 	// COMPNENT - imgBoardPan
 	private JPanel imgPanel = new JPanel();
-	private PictureBoardPan pbp = new PictureBoardPan(client,dis,dos);
+	private PictureBoardPan pbp = new PictureBoardPan(client, dis, dos);
 	private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
 
 	// COMPNENT - planPan
 	private JPanel planPan = new JPanel();
 	private PlanPan plan = new PlanPan(self);
 	private JScrollPane planSc = new JScrollPane(planPan);// 스크롤
-
 	
-	
-//===========================================================================
+	// ===========================================================================
 	public Socket getClient() {
 		return client;
 	}
@@ -201,24 +203,32 @@ public class BasicShape extends JFrame {
 	public void setDos(DataOutputStream dos) {
 		this.dos = dos;
 	}
+
 	public DataInputStream getDis() {
 		return dis;
 	}
+
 	public void setDis(DataInputStream dis) {
 		this.dis = dis;
 	}
+
 	public String getUserID() {
 		return userID;
 	}
+
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
+
 	public String getUserPW() {
 		return userPW;
 	}
+
 	public void setUserPW(String userPW) {
+		
 		this.userPW = userPW;
 	}
+
 	public String getName() {
 
 		try {
@@ -233,28 +243,28 @@ public class BasicShape extends JFrame {
 		this.name = name;
 	}
 
-//=============================△△게터&세터△△=====================================
-	
-	
+	// =============================△△게터&세터△△=====================================
+
 	public void comp() {
 		setLayout(null);
 		// 투명
 
 		imgSlide.setPreferredSize(new Dimension(400, 700));
-//		bmi.setPreferredSize(new Dimension(672, 800));
-//		bmi.setBorder(tborder);
+		// bmi.setPreferredSize(new Dimension(672, 800));
+		// bmi.setBorder(tborder);
 		this.homePan.add(imgSlide);
-//		this.homePan.add(bmi);
+		// this.homePan.add(bmi);
 
-		//목표(plan) 새로운 목표 패널임 (달력들어간거)
+		// 목표(plan) 새로운 목표 패널임 (달력들어간거)
 		planPan.setBackground(Color.white);
 		this.planPan.add(plan);
 
 		// ---------운동
 		videoPan.setBackground(Color.white);
-		this.video.setPreferredSize(new Dimension(965, 500));
-		this.videoPan.add(video);
-		
+		videoPan.setPreferredSize(new Dimension(965, 500));
+		// this.video.setPreferredSize(new Dimension(965, 500));
+		// this.videoPan.add(video);
+
 		// ---------커뮤니티
 		pbp.setBackground(Color.white);
 		imgPanel.setBackground(Color.white);
@@ -270,18 +280,14 @@ public class BasicShape extends JFrame {
 		panbox1.setBackground(Color.WHITE);
 		panbox2.setBackground(Color.WHITE);
 		panbox3.setBackground(Color.WHITE);
-		
-		
 
 		category.add(homeBt);
 		category.add(planBt);
-	//	category.add(dailyBt);
+		// category.add(dailyBt);
 		category.add(videoBt);
 		category.add(imgBoardBt);
 		category.add(calandarBt);
 		category.add(GraphBt);
-		
-		
 
 		panbox1.add(lbID);
 		panbox1.add(inputID);
@@ -293,14 +299,14 @@ public class BasicShape extends JFrame {
 		panbox.add(panbox2);
 		panbox.add(panbox3);
 		// CardLayout이 들어있는 profilePan에 넣음.
-		
+
 		profilePan.setBackground(Color.white);
 		panboxx.setBackground(Color.white);
 		namePan.setBackground(Color.white);
 		logoutPan.setBackground(Color.white);
 		planPan.setBackground(Color.WHITE);
 		imgPanel.setBackground(Color.white);
-		
+
 		profilename.setText(name + " 님 환영합니다!");
 		namePan.add(profilename);
 		logoutPan.add(logout);
@@ -339,13 +345,13 @@ public class BasicShape extends JFrame {
 		add(mainPan);
 
 	}
-	
+
 	public void receiveDataAfterLogin() {
-				
+
 		// 로그인이후시점에서 서버로부터 받는 데이터를 처리합니다.
 		// 1.목표 - 캘린더 달성한데이터 Num 값으로 받고 받은데이터는 합계sum 을 만들어서 누적시킨뒤
 		// 한달동안 모아진 sum 값을 가지고 보상함.
-		
+
 		// 4.동영상url리스트+메타데이터(String)
 		// 5.(로그인이후시점에서 서버컴퓨터에서 보내는데이터)업로드한사진 + 코멘트데이터 ( String)
 		// 1.콤보리스트데이터 받기.
@@ -353,13 +359,13 @@ public class BasicShape extends JFrame {
 			receivedComboListData = dis.readUTF();
 			System.out.println("수신한receivedComboListData 값 :" + receivedComboListData);
 			// 로그인후 받은 콤보리스트 데이터가 null값이아니면 쪼개서 리스트를 분리한다.
-			//수신한데이터가 null이아니면 쪼개서 분리한다.
-			//수신한데이터가 null이면 비어있는데이터라고 출력한다.
-			if(receivedComboListData !=null) {
+			// 수신한데이터가 null이아니면 쪼개서 분리한다.
+			// 수신한데이터가 null이면 비어있는데이터라고 출력한다.
+			if (receivedComboListData != null) {
 				tmpComboListData = receivedComboListData.split(",");
-				receiveaction = new String[] { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
-						"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트", "6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기",
-						"9.자기전 하늘자전거 5분", "10.일어나서 물한잔 원샷" };
+				receiveaction = new String[] { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기", "4.집에갈때 계단이용하기 ",
+						"5.스쿼트  30개씩 3세트", "6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기", "9.자기전 하늘자전거 5분",
+						"10.일어나서 물한잔 원샷" };
 
 				tmpcombo1 = Integer.parseInt(tmpComboListData[0]);
 				tmpComboString1 = receiveaction[tmpcombo1];
@@ -371,10 +377,9 @@ public class BasicShape extends JFrame {
 				tmpComboString3 = receiveaction[tmpcombo3];
 
 				tmpComboStringList = tmpComboString1 + tmpComboString2 + tmpComboString3;
-			}
-			else if(receivedComboListData.equals("비어있는ComboList데이터")){
-				
-				tmpComboStringList ="비어있는ComboList데이터";
+			} else if (receivedComboListData.equals("비어있는ComboList데이터")) {
+
+				tmpComboStringList = "비어있는ComboList데이터";
 			}
 		} catch (Exception e1) {
 			System.out.println("콤보리스트에서 받는곳에서 에러발생지점.");
@@ -389,10 +394,10 @@ public class BasicShape extends JFrame {
 		// System.out.println("물컵리스트 받는곳에서 에러발생");
 		// e2.printStackTrace();
 		// }
-		
+
 	}
-	
-	//서버로 소켓접속
+
+	// 서버로 소켓접속
 	public void clientConnect() {
 
 		try {
@@ -405,80 +410,91 @@ public class BasicShape extends JFrame {
 		}
 
 	}// end
-	
-	public void receiveData() {
+
+	public ArrayList<VideoFileList> receiveData() {
 		try {
 			dos.writeUTF("url데이터발신");
 			System.out.println(client.isClosed());
 			System.out.println(client.isConnected());
-			
+
 			ois = new ObjectInputStream(client.getInputStream());
 
-			 vflList = new ArrayList<VideoFileList>();
+			vflList = new ArrayList<VideoFileList>();
 			vflList = (ArrayList<VideoFileList>) ois.readObject();
-			
+
 			System.out.println("ois로 리스트 전달받기 성공");
 			System.out.println(vflList.size());
-			
-//			for (int i = 0; i < vflList.size(); i++) {
-//				//names[i] = 
-//				//fnames[i] = names[i].split("_");
-//				urls[i] = vflList.get(i).getUrlPath();
-//				splitN[i] = vflList.get(i).getUrlFileName();
-//				fileNames[i] = splitN[1];
-//				urlButtons [i] = vflList.get(i).getUrlButtonName();
-//				fileSize[i] = vflList.get(i).getUrlFileSize();
-//				filecontents = vflList.get(i).getFileContents();
-//
-//				imgpath[i] = path +"/"+ fileNames[i];
-//
-//				System.out.println("url 데이터 : "+urls);
-//				System.out.println("fileNames 데이터 : "+fileNames);
-//				System.out.println("urlButtons 데이터 : "+urlButtons);
-//				System.out.println("fileSize 데이터 : "+fileSize);
-//				System.out.println("filecontents 데이터 : "+filecontents);
-//				//System.out.println(imgpath[i]);
-//				System.out.println("====================");
-//			}
-//			배열에 데이터 넣기완료
-//			System.out.println("배열에 데이터 넣기 완료");
-//
-//			File f = new File(path);
-//			fos = new FileOutputStream(f);
-//			bos = new BufferedOutputStream(fos);
-//			dos = new DataOutputStream(bos);
-//			dos.write(filecontents);
-//			dos.flush();
 
-			System.out.println("운동영상패널 언마셜링 성공");
+			System.out.println("베이직 쉐이프 운동영상 언마셜링 성공");
 
-			//dos.close();
+			// dos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
+		for (int i = 0; i < vflList.size(); i++) {
+
+			urls[i] = vflList.get(i).getUrlPath();
+			splitN[i] = vflList.get(i).getUrlFileName();
+			String[] tmp;
+			tmp = splitN[i].split("_");
+
+			urlButtons[i] = vflList.get(i).getUrlButtonName();
+			fileSize[i] = vflList.get(i).getUrlFileSize();
+			filecontents = vflList.get(i).getFileContents();
+
+			// VideoFileList vfl = new VideoFileList(path, path, flags, path, filecontents);
+			fileNames[i] = tmp[1];
+			System.out.println("비디오팬에서 받은 파일이름 :" + fileNames[i]);
+			imgpath[i] = path + "/" + fileNames[i];
+
+			System.out.println("url 데이터 : " + urls[i]);
+			System.out.println("fileNames 데이터 : " + fileNames[i]);
+			System.out.println("urlButtons 데이터 : " + urlButtons[i]);
+			System.out.println("fileSize 데이터 : " + fileSize[i]);
+			System.out.println("filecontents 데이터 : " + filecontents[i]);
+			System.out.println("imgpath 데이터 :" + imgpath[i]);
+			System.out.println("====================");
+			System.out.println("운동영상 배열에 데이터 넣기 완료");
+
+			try {
+				File f = new File(imgpath[i]);
+				fos = new FileOutputStream(f);
+				bos = new BufferedOutputStream(fos);
+				dos = new DataOutputStream(bos);
+				dos.write(filecontents);
+				dos.flush();
+
+				System.out.println("운동영상 바이트 저장");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			System.out.println("운동영상 배열 포문 지남.");
+
+		}
+
+		return vflList;
 	}
-	
-	
+
 	public String getResult() {
 		// 로그인 버튼
 		userID = inputID.getText();
 		userPW = inputPW.getText();
 		try {
-			dos.writeUTF("로그인");//로그인 시그널
+			dos.writeUTF("로그인");// 로그인 시그널
 			dos.writeUTF(userID);
 			dos.writeUTF(userPW);
 			System.out.println("데이터보내기 성공");
 		} catch (Exception e1) {
 			System.out.println("데이터 보내기 실패");
 		}
-		
+
 		try {
 			result = dis.readUTF();
 			if (result.equals("로그인성공")) {
 				JOptionPane.showMessageDialog(null, "로그인 성공");
 				System.out.println("로그인 성공");
-				
+
 			} else if (result.equals("로그인실패")) {
 				JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.");
 				System.out.println("로그인 실패");
@@ -491,13 +507,12 @@ public class BasicShape extends JFrame {
 		return result;
 	}// end
 
-	
 	public void eventInit() {
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				// 소켓생성후 커넥트 , 로그인성공실패 에따른 ui출력
-				
+
 				getResult();
 
 				// 서버에 계정 보냄.△△△△△△△
@@ -505,8 +520,7 @@ public class BasicShape extends JFrame {
 
 					profilename.setText(getName() + " 님 환영합니다!");
 					card.show(self.profilePan, "loginAfter");
-			//		receiveDataAfterLogin();
-					
+					// receiveDataAfterLogin();
 
 				} else if (result.equals("로그인실패")) {
 
@@ -515,26 +529,25 @@ public class BasicShape extends JFrame {
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
 
 			}
-			
+
 		});
 		// 로그아웃 버튼
 		logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-					
-//					dos.close();
-//					dis.close();
-//					client.close();
-//					dos = null;
-//					dis = null;
-//					client = null;
-					self.userID = null;
-					self.userPW = null;
-					
-					System.out.println("성공적으로 소켓종료");
-					inputID.setText("");
-					inputPW.setText("");
-				
+
+				// dos.close();
+				// dis.close();
+				// client.close();
+				// dos = null;
+				// dis = null;
+				// client = null;
+				self.userID = null;
+				self.userPW = null;
+
+				System.out.println("성공적으로 소켓종료");
+				inputID.setText("");
+				inputPW.setText("");
+
 				card.show(self.profilePan, "loginBefore");
 			}
 		});
@@ -559,11 +572,10 @@ public class BasicShape extends JFrame {
 
 				card.show(self.mainPan, "NameplanPane");
 
-				
 			}
 
 		});
-		
+
 		calandarBt.addActionListener(new ActionListener() {
 
 			@Override
@@ -575,22 +587,26 @@ public class BasicShape extends JFrame {
 
 		});
 
-
 		// 목표 버튼
-//		dailyBt.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				// if() 하루시간이 지난이후시점.
-//				System.out.println("나의목표 :" + tmpComboStringList);
-//				// else 하루시간이 지나지않은시점. 안나옴.
-//				// JOptionPane.showMessageDialog( , );
-//
-//				// 프로필창 로그인여부에 따라 다름.△△△△△△△
-//				card.show(self.mainPan, "NamedailyPane");
-//			}
-//		});
+		// dailyBt.addActionListener(new ActionListener() {
+		// public void actionPerformed(ActionEvent e) {
+		// // if() 하루시간이 지난이후시점.
+		// System.out.println("나의목표 :" + tmpComboStringList);
+		// // else 하루시간이 지나지않은시점. 안나옴.
+		// // JOptionPane.showMessageDialog( , );
+		//
+		// // 프로필창 로그인여부에 따라 다름.△△△△△△△
+		// card.show(self.mainPan, "NamedailyPane");
+		// }
+		// });
 		// 운동 버튼
 		videoBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				vflList = receiveData();
+				VideoPan video = new VideoPan(self, client, vflList);
+				videoPan.add(video);
+				videoPan.repaint();
+				videoPan.setVisible(true);
 				card.show(self.mainPan, "NamevideoPane");
 
 			}
@@ -598,21 +614,20 @@ public class BasicShape extends JFrame {
 		// 커뮤니티 버튼
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//	new PictureBoardPan(client,dis,dos);
+				// new PictureBoardPan(client,dis,dos);
 				card.show(self.mainPan, "NameimgBoard");
 			}
 		});
-		
+
 		GraphBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clientConnect();
 				card.show(self.mainPan, "NamegoalBoard");
 			}
 		});
-		
+
 		// 제목 리스너
 		title.addMouseListener(new MouseAdapter() {
-			
 
 			// 마우스버튼이 누른뒤 뗄때의 이벤트처리
 			@Override
@@ -624,46 +639,42 @@ public class BasicShape extends JFrame {
 
 	}
 
-	 
 	public BasicShape() {
-		
-		clientConnect();
-		
-		System.out.println(client.isClosed());
-		System.out.println(client.isConnected());
-		
-		receiveData();//운동영상 패널 데이터 받기
-		receiveDataAfterLogin();//물컵 데이터 받기
-				
-		
+
 		setTitle("기본shape테스트");
 		setSize(1200, 750);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		cp.setBackground(Color.WHITE);
-		
+
+		clientConnect();
+
+		System.out.println(client.isClosed());
+		System.out.println(client.isConnected());
+
+		receiveData();// 운동영상 패널 데이터 받기
+		// receiveDataAfterLogin();//물컵 데이터 받기
+
 		comp();
 		eventInit();
-		
-		
+
 		setVisible(true);
-		
-		
+
 	}
 
 	public static void main(String[] args) {
-		
-		//프로그램의 공통파일 만들기! 
-				String path = "C:/4W";
-				// 파일 객체 생성
-				File file = new File(path);
-				// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
-				if (!file.exists()) {
-					// 디렉토리 생성 메서드
-					file.mkdirs();
-					System.out.println("created directory successfully!");
-				}
-				
+
+		// 프로그램의 공통파일 만들기!
+		String path = "C:/4W";
+		// 파일 객체 생성
+		File file = new File(path);
+		// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
+		if (!file.exists()) {
+			// 디렉토리 생성 메서드
+			file.mkdirs();
+			System.out.println("created directory successfully!");
+		}
+
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
@@ -675,12 +686,8 @@ public class BasicShape extends JFrame {
 			// If Nimbus is not available, you can set the GUI to another look
 			// and feel.
 		}
-		
-		
+
 		new BasicShape();
-	
-	
+
 	}// main end
 }
-
-
