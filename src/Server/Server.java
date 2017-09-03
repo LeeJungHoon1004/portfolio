@@ -32,7 +32,6 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.table.DefaultTableModel;
-import Server.VideoFileList;
 
 class ConnectionThread extends Thread {
 
@@ -291,7 +290,28 @@ class ConnectionThread extends Thread {
 
 					
 
-				} else if (cmd.equals("url데이터발신")) {
+				}
+				else if(cmd.equals("커뮤니티에게시글추가")){
+					File home = new File("C:/4weeksWorkoutServerPosting");
+					
+					ois = new ObjectInputStream(socket.getInputStream());
+					String title = null;
+					String contents = null;
+					String filename = null;
+					int fileSize = 0;
+					byte [] fileContents = null;
+					FileList fl = new FileList(title , contents ,filename ,  fileSize , fileContents); 
+					fl=(FileList) ois.readObject();
+					System.out.println(fl.getTitle()); //string 제목
+					System.out.println(fl.getContents()); //string 내용
+					System.out.println(fl.getFileName()); //클라이언트에서받은 파일이름(이미지)
+					System.out.println(fl.getFileSize()); //파일의 크기(int)
+					System.out.println(fl.getFileContents()); //내용물
+					
+				}
+				
+				
+				else if (cmd.equals("url데이터발신")) {
 					System.out.println("cmd : url데이터발신 성공.");
 					oos = new ObjectOutputStream(socket.getOutputStream());	
 					
@@ -328,7 +348,40 @@ class ConnectionThread extends Thread {
 						oos.writeObject(sendingvflList); 	
 				//		oos.close();
 				}//-else if
-
+				
+				else if(cmd.equals("커뮤니티패널갱신")){
+					System.out.println("커뮤니티패널갱신");
+					oos = new ObjectOutputStream(socket.getOutputStream());	
+					ArrayList<FileList> sendingflList = new ArrayList<FileList> ();
+					String title = "1";
+					String contents = "1";
+					String fileName= null;
+					int fileSize = 0;
+					byte[] fileContents = new byte[fileSize];
+					File home = new File("C:\tmp");
+					File[] files = home.listFiles();
+					for(File tmp : files){
+						fileName = tmp.getName();
+						fileSize = (int)tmp.length();
+						fileContents = new byte[fileSize];
+						
+						FileList tmpFileList = new FileList(title , contents , fileName , fileSize, fileContents);
+						sendingflList.add(tmpFileList);
+					}
+					oos.writeObject(sendingflList);
+					
+					
+				
+					
+					
+					
+					
+					
+					
+					
+				}
+				
+				
 			}//-while 
 				
 				
@@ -426,6 +479,7 @@ public class Server extends JFrame {
 	private String urlPath[] = new String[25];
 	private VideoFileList[] vflList = new VideoFileList[25];
 	private String ServerdirectoryPath;
+	private String ServerdirectoryPathPostring;
 	// homePan에다가 부착함.
 	// articlePan
 	private JPanel articleWholePan = new JPanel(new BorderLayout());
@@ -1632,7 +1686,15 @@ public class Server extends JFrame {
 			file.mkdirs();
 			System.out.println("created directory successfully!");
 		}
-
+		
+		ServerdirectoryPathPostring ="C:/4weeksWorkoutServerPosting";
+		File file2 = new File(ServerdirectoryPath);
+		// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
+		if (!file2.exists()) {
+			// 디렉토리 생성 메서드
+			file2.mkdirs();
+			System.out.println("created directory successfully!");
+		}
 		this.setSize(1200, 750);
 		this.setTitle("서버");
 		this.setLocationRelativeTo(null);
@@ -1643,7 +1705,6 @@ public class Server extends JFrame {
 		this.eventInit();
 		this.receiveDataBaseData();
 		this.setVisible(true);
-
 	}
 
 	public static void main(String[] args) throws Exception {
