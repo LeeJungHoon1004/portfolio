@@ -7,12 +7,13 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
 import Server.FileList;
-public class CellRenderer extends JLabel {
+public class CellRenderer extends DefaultListCellRenderer {
 
 	private ArrayList<FileList> fl;
 	
@@ -29,7 +30,7 @@ public class CellRenderer extends JLabel {
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 			boolean cellHasFocus)
 	{
-
+		JLabel lb = new JLabel();
 		
 		String path = "C:/4W/PictureBoardPan";
 		
@@ -40,8 +41,10 @@ public class CellRenderer extends JLabel {
 		Image changedImg= originImg.getScaledInstance(200, 80, Image.SCALE_SMOOTH );
 		ImageIcon image = new ImageIcon(changedImg);
 		//리스트에 있는 사진 크기 조정.△
-		this.setIcon(image);
-		this.setText(fl.get(i).getTitle());
+		
+		lb.setIcon(image);
+		lb.setText(fl.get(i).getTitle());
+		
 		}
 		
 		if (isSelected) {

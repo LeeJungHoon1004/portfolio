@@ -4,6 +4,7 @@ package Client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -18,6 +19,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -32,10 +34,9 @@ import javax.swing.event.ListSelectionListener;
 import Server.FileList;
 //스트링에 콤마 추가 제거
 //http://yonoo88.tistory.com/230
-import night0903.CellRenderer;
 
 public class PictureBoardPan extends JPanel {
-	private BasicShape parent ;
+
 	private PictureBoardPan self = this;
 	private Socket client;
 	// 아웃 스트림
@@ -49,7 +50,6 @@ public class PictureBoardPan extends JPanel {
 	private DataInputStream dis = null;
 	private ObjectInputStream ois = null;
 
-	
 //	private String userID;
 //	private String userPW;
 	private int index;// jlist 선택한 인덱스 번호
@@ -62,8 +62,8 @@ public class PictureBoardPan extends JPanel {
 	private JButton remove = new JButton("글삭제");
 
 	private ArrayList<FileList> fl;
-	private DefaultListModel dlm = new DefaultListModel();
 	private JList list;
+	private DefaultListModel dlm;
 	private JScrollPane sc;
 	private CellRenderer cellrender;
 	private int cnt = 0;
@@ -100,7 +100,7 @@ public class PictureBoardPan extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				cnt++;
 				
-				new AddPictureBoard(parent,self,client, dis, dos).setVisible(true);
+				new AddPictureBoard(self,client, dis, dos).setVisible(true);
 				// JDialog 보이기!
 				
 				renew();//renew 안에 unmarshalling도 들어있음.
@@ -156,19 +156,19 @@ public class PictureBoardPan extends JPanel {
 
 	public void renew() {//갱신 메소드
 		
-		list = new JList(dlm);
 		dlm = (DefaultListModel)list.getModel();
 		//for(int i=0;i<dlm.getSize();i++){
 			dlm.addElement(new CellRenderer(fl));
 		//}
+		list = new JList(dlm);
 		sc = new JScrollPane(list);
-		//list.setCellRenderer(new CellRenderer(fl));
+		list.setCellRenderer(new CellRenderer(fl));
 	}
 
 
-	public PictureBoardPan(BasicShape parent ,Socket client,DataInputStream dis, DataOutputStream dos,
+	public PictureBoardPan(Socket client,DataInputStream dis, DataOutputStream dos,
 					ArrayList<FileList> fl) {
-		this.parent = parent;
+		
 		this.client = client;
 		this.dis = dis;
 		this.dos = dos;
