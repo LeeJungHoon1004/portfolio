@@ -247,10 +247,8 @@ public class BasicShape extends JFrame {
 
 	public void comp() {
 		
-		vflList = receiveData();
-		video = new VideoPan(self, client, vflList);
-		videoPan = new JPanel();
-		videoSc = new JScrollPane(videoPan);
+		
+		
 		
 		
 		
@@ -268,6 +266,9 @@ public class BasicShape extends JFrame {
 		this.planPan.add(plan);
 
 		// ---------운동
+		video = new VideoPan(self, client, vflList);
+		videoPan = new JPanel();
+		videoSc = new JScrollPane(videoPan);
 		videoPan.setBackground(Color.white);
 		videoPan.setPreferredSize(new Dimension(965, 500));
 		this.video.setPreferredSize(new Dimension(965, 500));
@@ -409,7 +410,7 @@ public class BasicShape extends JFrame {
 	public void clientConnect() {
 
 		try {
-			client = new Socket("192.168.53.4", 40000);
+			client = new Socket("121.130.235.228", 40000);
 			dos = new DataOutputStream(client.getOutputStream());
 			dis = new DataInputStream(client.getInputStream());
 			System.out.println("초기연결성공");
@@ -422,9 +423,7 @@ public class BasicShape extends JFrame {
 	public ArrayList<VideoFileList> receiveData() {
 		try {
 			dos.writeUTF("url데이터발신");
-			System.out.println(client.isClosed());
-			System.out.println(client.isConnected());
-
+			
 			ois = new ObjectInputStream(client.getInputStream());
 
 			vflList = new ArrayList<VideoFileList>();
@@ -488,6 +487,7 @@ public class BasicShape extends JFrame {
 		// 로그인 버튼
 		userID = inputID.getText();
 		userPW = inputPW.getText();
+		
 		try {
 			dos.writeUTF("로그인");// 로그인 시그널
 			dos.writeUTF(userID);
@@ -624,7 +624,7 @@ public class BasicShape extends JFrame {
 
 		GraphBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				clientConnect();
+			
 				card.show(self.mainPan, "NamegoalBoard");
 			}
 		});
@@ -650,14 +650,22 @@ public class BasicShape extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		cp.setBackground(Color.WHITE);
 
-		clientConnect();
+		clientConnect(); //sock
 
 		System.out.println(client.isClosed());
 		System.out.println(client.isConnected());
 
-		receiveData();// 운동영상 패널 데이터 받기
+		vflList = receiveData();// 운동영상 패널 데이터 받기 //dos가.. 자기 하드디스크 dos로 연결됨.
 		// receiveDataAfterLogin();//물컵 데이터 받기
-
+		try{
+		dos = new DataOutputStream(client.getOutputStream());
+		}catch(Exception e){
+			System.out.println("서버에서 데이터받고난이후에 DataOutputStream을 서버와 다시 연결하는도중에 문제생김.");
+			e.printStackTrace();
+			}
+		
+		
+		
 		comp();
 		eventInit();
 

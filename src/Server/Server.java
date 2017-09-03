@@ -325,8 +325,8 @@ class ConnectionThread extends Thread {
 						}
 						
 						
-						oos.writeObject(sendingvflList); 
-
+						oos.writeObject(sendingvflList); 	
+						oos.close();
 				}//-else if
 
 			}//-while 
