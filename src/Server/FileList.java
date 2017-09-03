@@ -12,12 +12,19 @@ public class FileList implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private String id;
 	private String title; //파일과 같이보낼 제목
 	private String contents; //파일과 같이보낼 코멘트
 	private String fileName; //파일의 이름. 
 	private int fileSize; //파일사이즈
 	private byte [] fileContents; //파일내용물
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getFileName() {
 		return fileName;
 	}
@@ -49,8 +56,9 @@ public class FileList implements Serializable {
 	public void setFileContents(byte[] fileContents) {
 		this.fileContents = fileContents;
 	}
-	public FileList(String title, String contents, String fileName, int fileSize , byte[] fileContents) {
+	public FileList(String id,String title, String contents, String fileName, int fileSize , byte[] fileContents) {
 		super();
+		this.id = id;
 		this.title = title;
 		this.contents = contents;
 		this.fileName = fileName;

@@ -523,14 +523,14 @@ public class BasicShape extends JFrame {
 		try {
 
 			dos.writeUTF("커뮤니티패널갱신");
-			// 전송하려는 파일의 이름 , 크기 , 내용물(파일자체) , 파일의 타이틀 ,파일의 내용
+			// 전송받는 파일의 이름 , 크기 , 내용물(파일자체) , 파일의 타이틀 ,파일의 내용
 			String title = null;
 			String contents = null;
 			String fileName = null;
 			int fileSize = 0;
 			byte[] fileContents = null;
 
-			// 2.클라이언트에서 데이터를 받습니다 (2.ClientRam to ServerRam)
+			// 2.서버에서 데이터를 받습니다 (2.ServerRam to ClientRam)
 			ois = new ObjectInputStream(client.getInputStream());
 			ArrayList<FileList> receivedPostingList = new ArrayList<FileList> ();
 			receivedPostingList = (ArrayList<FileList>) ois.readObject();
@@ -632,7 +632,7 @@ public class BasicShape extends JFrame {
 				// client = null;
 				self.userID = null;
 				self.userPW = null;
-
+				result=null;//result 에 "로그인성공"으로 채워져있던값을비움.
 				System.out.println("성공적으로 소켓종료");
 				inputID.setText("");
 				inputPW.setText("");
@@ -698,6 +698,18 @@ public class BasicShape extends JFrame {
 		// 커뮤니티 버튼
 		imgBoardBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//로그인이후시점에는 result이 로그인성공
+				//로그아웃한이후시점에는 result가 null로 채워져있다.
+				if(result.equals("로그인성공")){
+					
+				}
+					
+				else{
+					JOptionPane.showMessageDialog(null,"로그인먼저해주세요");
+					return;
+				}
+				
+				
 				// new PictureBoardPan(client,dis,dos);
 				card.show(self.mainPan, "NameimgBoard");
 			}

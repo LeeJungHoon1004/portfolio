@@ -160,6 +160,8 @@ public class AddPictureBoard extends JDialog {
 
 			dos.writeUTF("커뮤니티에게시글추가");
 
+			String id =null;
+			
 			String title = null;
 			String contents = null;
 			String fileName = null;

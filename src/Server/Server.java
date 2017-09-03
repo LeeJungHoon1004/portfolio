@@ -300,7 +300,7 @@ class ConnectionThread extends Thread {
 					String filename = null;
 					int fileSize = 0;
 					byte [] fileContents = null;
-					FileList fl = new FileList(title , contents ,filename ,  fileSize , fileContents); 
+					FileList fl = new FileList(id, title , contents ,filename ,  fileSize , fileContents); 
 					fl=(FileList) ois.readObject();
 					System.out.println(fl.getTitle()); //string 제목
 					System.out.println(fl.getContents()); //string 내용
@@ -353,6 +353,7 @@ class ConnectionThread extends Thread {
 					System.out.println("커뮤니티패널갱신");
 					oos = new ObjectOutputStream(socket.getOutputStream());	
 					ArrayList<FileList> sendingflList = new ArrayList<FileList> ();
+					String id = "김현수";
 					String title = "1";
 					String contents = "1";
 					String fileName= null;
@@ -365,7 +366,7 @@ class ConnectionThread extends Thread {
 						fileSize = (int)tmp.length();
 						fileContents = new byte[fileSize];
 						
-						FileList tmpFileList = new FileList(title , contents , fileName , fileSize, fileContents);
+						FileList tmpFileList = new FileList(id,title , contents , fileName , fileSize, fileContents);
 						sendingflList.add(tmpFileList);
 					}
 					oos.writeObject(sendingflList);
@@ -466,8 +467,8 @@ public class Server extends JFrame {
 	private JButton smihottButton4 = new JButton("스미홈트4");
 	private JButton smihottButton5 = new JButton("스미홈트5");
 
-	private JButton urlConfirmButton = new JButton("URL확인");
 	private JButton urlRenewalButton = new JButton("URL갱신");
+	private JButton urlConfirmButton = new JButton("URL확인");
 
 	public static ArrayList<VideoFileList> receivedvflList;
 	private String[] buttonName = new String[25];
@@ -479,7 +480,7 @@ public class Server extends JFrame {
 	private String urlPath[] = new String[25];
 	private VideoFileList[] vflList = new VideoFileList[25];
 	private String ServerdirectoryPath;
-	private String ServerdirectoryPathPostring;
+	private String ServerdirectoryPathPosting;
 	// homePan에다가 부착함.
 	// articlePan
 	private JPanel articleWholePan = new JPanel(new BorderLayout());
@@ -496,6 +497,7 @@ public class Server extends JFrame {
 
 	private JButton articleRenewalButton = new JButton("목록갱신");
 	private JButton articleDeleteButton = new JButton("목록삭제");
+	
 
 	public void receiveDataBaseData() {
 
@@ -1684,16 +1686,16 @@ public class Server extends JFrame {
 		if (!file.exists()) {
 			// 디렉토리 생성 메서드
 			file.mkdirs();
-			System.out.println("created directory successfully!");
+			System.out.println("created directory : C:/4weeksWorkoutServer successfully!");
 		}
 		
-		ServerdirectoryPathPostring ="C:/4weeksWorkoutServerPosting";
-		File file2 = new File(ServerdirectoryPath);
+		ServerdirectoryPathPosting ="C:/4weeksWorkoutServerPosting";
+		File file2 = new File(ServerdirectoryPathPosting);
 		// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
 		if (!file2.exists()) {
 			// 디렉토리 생성 메서드
 			file2.mkdirs();
-			System.out.println("created directory successfully!");
+			System.out.println("created directory : C:/4weeksWorkoutServerPosting successfully!");
 		}
 		this.setSize(1200, 750);
 		this.setTitle("서버");
