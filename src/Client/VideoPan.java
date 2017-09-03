@@ -71,10 +71,6 @@ public class VideoPan extends JPanel {
 	private JScrollPane danceSc = new JScrollPane(dancePan);
 	private JScrollPane smiSc = new JScrollPane(smiPan);
 //===========================================================	
-
-	
-//===========================================================	
-
 	private ImageIcon ic1;
 	private ImageIcon ic2 ;
 	private ImageIcon ic3 ;
@@ -193,61 +189,6 @@ public class VideoPan extends JPanel {
 	public void unmarsharlling() {
 		
 		System.out.println("운동영상 언마셜링 메소드 진입");
-
-		try {
-
-//			vflList = (ArrayList<VideoFileList>) ois.readObject();
-//			System.out.println("ois로 리스트 전달받기 성공");
-//			System.out.println(vflList.size());
-			
-			//ArrayList<VideoFileList> receivedvflList = new ArrayList<VideoFileList>();
-	//		this.dis = parent.getDis();
-	//		this.dos = parent.getDos();
-	//		this.client = parent.getClient();
-			
-			
-			for (int i = 0; i < parent.conveyList.size(); i++) {
-				
-				urls[i] = parent.conveyList.get(i).getUrlPath();
-				splitN[i] = parent.conveyList.get(i).getUrlFileName();
-				String[] tmp;
-				tmp = splitN[i].split("_");
-				urlButtons [i] = parent.conveyList.get(i).getUrlButtonName();
-				fileSize[i] = parent.conveyList.get(i).getUrlFileSize();
-				filecontents = parent.conveyList.get(i).getFileContents();
-
-			//	VideoFileList vfl = new VideoFileList(path, path, flags, path, filecontents);
-				fileNames[i] = tmp[1];
-				imgpath[i] = path +"/"+ fileNames[i];
-				
-				
-				
-				System.out.println("url 데이터 : "+urls[i]);
-				System.out.println("fileNames 데이터 : "+fileNames[i]);
-				System.out.println("urlButtons 데이터 : "+urlButtons[i]);
-				System.out.println("fileSize 데이터 : "+fileSize[i]);
-				System.out.println("filecontents 데이터 : "+filecontents[i]);
-				System.out.println("imgpath 데이터 :" +imgpath[i]);
-				System.out.println("====================");
-				System.out.println("운동영상 배열에 데이터 넣기 완료");
-			}
-			System.out.println("운동영상 배열 포문 지남.");
-			// 배열에 데이터 넣기완료
-			
-
-			File f = new File(path);
-			fos = new FileOutputStream(f);
-			bos = new BufferedOutputStream(fos);
-			dos = new DataOutputStream(bos);
-			dos.write(filecontents);
-			dos.flush();
-
-			System.out.println("비디오패널 언마셜링 성공");
-
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 	}
 	
@@ -626,42 +567,13 @@ public class VideoPan extends JPanel {
 			}
 		});
 	}
-	public VideoPan() {
 	
-
-		
-	this.setBackground(Color.white);
-		
-		try {
-			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (Exception e) {
-			// If Nimbus is not available, you can set the GUI to another look
-			// and feel.
-		}
-		
-	}
-	
-		
-
 	public VideoPan(BasicShape parent,Socket client,ArrayList<VideoFileList> vflList2) {
-
 		this.parent = parent;
-
-//		this.client = client;
-//		this.dis = parent.getDis();
-//		this.dos = parent.getDos();
-		
-
 		this.client = client;
 		this.dis = parent.getDis();
 		this.dos = parent.getDos();
 		this.vflList = vflList2;
-
 		insertImage();
 		//△언마셜링 메소드도 포함되어있음
 		//△언마셜링에 서버시그널 포함.

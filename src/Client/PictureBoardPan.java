@@ -40,7 +40,6 @@ import javax.swing.event.ListSelectionListener;
 
 public class PictureBoardPan extends JPanel {
 
-	private BasicShape parent ;
 	private PictureBoardPan self = this;
 	private Socket client;
 	// 아웃 스트림
@@ -192,18 +191,17 @@ public class PictureBoardPan extends JPanel {
 		//===========================파일1개 언마셜링
 		System.out.println("클라이언트에서 받은 데이터를 하드디스크로 저장완료.");
 
-		
+		dos.close();
 		}catch(Exception e ) {
 			System.out.println("커뮤니티 데이터 받기 실패");
 		}
 	}
 
 
-	public PictureBoardPan(BasicShape parent , Socket client) {
+	public PictureBoardPan(Socket client,DataInputStream dis,DataOutputStream dos) {
 		this.client = client;
-		this.parent = parent;
-		this.dos = parent.getDos();
-		this.dis = parent.getDis();
+		this.dis = dis;
+		this.dos = dos;
 //		this.userID = userID;
 //		this.userPW = userPW;
 		try {
