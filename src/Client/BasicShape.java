@@ -405,7 +405,7 @@ public class BasicShape extends JFrame {
 	
 	public void receiveData() {
 		try {
-		dos = new DataOutputStream(client.getOutputStream());
+	//	dos = new DataOutputStream(client.getOutputStream());
 		dos.writeUTF("데이터수신");
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -638,7 +638,7 @@ public class BasicShape extends JFrame {
 
 	 
 	public BasicShape() {
-		//clientConnect();
+		clientConnect();
 		
 		setTitle("기본shape테스트");
 		// setSize(700, 500);
@@ -646,15 +646,16 @@ public class BasicShape extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		cp.setBackground(Color.WHITE);
+		receiveData();
 		comp();
 		eventInit();
 		
-		clientConnect();
 		
-		System.out.println(client.isClosed());
-		System.out.println(client.isConnected());
 		
-		receiveData();
+	//	System.out.println(client.isClosed());
+	//	System.out.println(client.isConnected());
+		
+		
 		
 		//receiveDataBeforeLogin();
 		setVisible(true);
@@ -665,7 +666,7 @@ public class BasicShape extends JFrame {
 	public static void main(String[] args) {
 		
 		//프로그램의 공통파일 만들기! 
-				String path = "C:/Users/Administrator/4weeksWorkout";
+				String path = "C:/4weeksWorkout";
 				// 파일 객체 생성
 				File file = new File(path);
 				// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌

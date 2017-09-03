@@ -198,7 +198,8 @@ public class VideoPan extends JPanel {
 //			System.out.println(vflList.size());
 			
 			//ArrayList<VideoFileList> receivedvflList = new ArrayList<VideoFileList>();
-			System.out.println();
+			System.out.println(parent.getVflList().size());
+			
 			for (int i = 0; i < parent.getVflList().size(); i++) {
 				
 				urls[i] = parent.getVflList().get(i).getUrlPath();
@@ -237,7 +238,7 @@ public class VideoPan extends JPanel {
 
 			System.out.println("비디오패널 언마셜링 성공");
 
-			dos.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
