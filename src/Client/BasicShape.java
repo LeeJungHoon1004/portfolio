@@ -734,15 +734,16 @@ public class BasicShape extends JFrame {
 		clientConnect(); // sock
 		vflList = receiveData();// 운동영상 패널 데이터 받기 //dos가.. 자기 하드디스크 dos로 연결됨.
 		System.out.println("@");
-		fl = receivedCommunityData();//커뮤니티 패널 데이터 받기
-		System.out.println("@@");
-		// receiveDataAfterLogin();//물컵 데이터 받기
 		try {
 			dos = new DataOutputStream(client.getOutputStream());
 		} catch (Exception e) {
 			System.out.println("서버에서 데이터받고난이후에 DataOutputStream을 서버와 다시 연결하는도중에 문제생김.");
 			e.printStackTrace();
 		}
+		fl = receivedCommunityData();//커뮤니티 패널 데이터 받기
+		System.out.println("@@");
+		// receiveDataAfterLogin();//물컵 데이터 받기
+		
 		System.out.println("@@@@@@@@@@@@@@");
 		comp();
 		eventInit();

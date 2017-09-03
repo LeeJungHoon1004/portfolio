@@ -358,7 +358,7 @@ class ConnectionThread extends Thread {
 					String fileName= null;
 					int fileSize = 0;
 					byte[] fileContents = new byte[fileSize];
-					File home = new File("C:\tmp");
+					File home = new File("C:/tmp");
 					File[] files = home.listFiles();
 					for(File tmp : files){
 						fileName = tmp.getName();
