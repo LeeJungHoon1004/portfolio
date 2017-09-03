@@ -18,7 +18,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -243,7 +245,17 @@ class ConnectionThread extends Thread {
 					System.out.println(fl.getFileSize()); //파일의 크기(int)
 					System.out.println(fl.getFileContents()); //내용물
 					
-					//파일받은뒤에 파일이름을 .. 수신시각과 조합해서 변경해줘야 안겹친다. 
+					//파일받은뒤에 파일이름을 .. 수신시각과 조합해서 변경해줘야 안겹친다.
+					
+					long time = System.currentTimeMillis(); 
+					SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+					String str = dayTime.format(new Date(time));
+					//파일이름을 변경한후 다시 파일자료로 묶는다.
+					String newFileName =str + "/"+ fl.getFileName() ;
+					System.out.println(newFileName);
+					
+
+			
 					
 				}
 				

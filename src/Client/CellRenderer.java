@@ -15,7 +15,8 @@ import Server.FileList;
 public class CellRenderer extends JLabel {
 
 	private ArrayList<FileList> fl;
-	
+	String [] titles ;
+	String [] filenames;
 	public CellRenderer(ArrayList<FileList> fl) {
 
 		this.fl = fl;
@@ -24,6 +25,18 @@ public class CellRenderer extends JLabel {
 		this.setPreferredSize(new Dimension(580, 100));
 		this.setIconTextGap(5);
 
+	}
+	
+	public CellRenderer(String title , String fileName){
+		
+//		for(int i = 0 ; i< fl.size() ; i++){
+//			titles[i] = fl.get(i).getTitle();
+//			filenames[i]= fl.get(i).getFileName();
+//			  title = titles[i];
+//			  fileName =filenames[i] ;
+//		}
+		
+		
 	}
 
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
