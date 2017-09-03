@@ -40,6 +40,21 @@ import javax.swing.border.TitledBorder;
 
 public class BasicShape extends JFrame {
 
+	private Socket client;
+	// 아웃 스트림
+	private FileOutputStream fos = null;
+	private BufferedOutputStream bos = null;
+	private ObjectOutputStream oos = null;
+	private DataOutputStream dos = null;
+	// 인풋스트림
+	private FileInputStream fis = null;
+	private BufferedInputStream bis = null;
+	private DataInputStream dis = null;
+	private ObjectInputStream ois = null;
+	
+	// =======SOCKET========================
+	
+	
 	String receivedComboListData;
 	String tmpComboListData[];
 	String receiveaction[] = null;
@@ -65,19 +80,7 @@ public class BasicShape extends JFrame {
 			this.vflList = vflList;
 		}
 
-	private Socket client;
-	// 아웃 스트림
-	private FileOutputStream fos = null;
-	private BufferedOutputStream bos = null;
-	private ObjectOutputStream oos = null;
-	private DataOutputStream dos = null;
-	// 인풋스트림
-	private FileInputStream fis = null;
-	private BufferedInputStream bis = null;
-	private DataInputStream dis = null;
-	private ObjectInputStream ois = null;
-	
-	// =======SOCKET========================
+
 	private Container cp = this.getContentPane();
 	private JLabel title = new JLabel();
 
@@ -167,7 +170,7 @@ public class BasicShape extends JFrame {
 	
 	// COMPNENT - videoPan
 	private JPanel videoPan = new JPanel();
-	private VideoPan video = new VideoPan(self ,client,dis,dos);
+	private VideoPan video = new VideoPan(self,client);
 	private JScrollPane videoSc = new JScrollPane(videoPan);// 스크롤
 
 	// COMPNENT - imgBoardPan
@@ -405,13 +408,6 @@ public class BasicShape extends JFrame {
 	
 	public void receiveData() {
 		try {
-		dos = new DataOutputStream(client.getOutputStream());
-		dos.writeUTF("데이터수신");
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	
-		try {
 			dos.writeUTF("url데이터발신");
 			System.out.println(client.isClosed());
 			System.out.println(client.isConnected());
@@ -454,22 +450,14 @@ public class BasicShape extends JFrame {
 //			dos.write(filecontents);
 //			dos.flush();
 
-			System.out.println("비디오패널 언마셜링 성공");
+			System.out.println("운동영상패널 언마셜링 성공");
 
-			dos.close();
+			//dos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
-	
-	//서버 접속후 데이터 수신.
-	public void receiveDataBeforeLogin() {
-		//Article , URL 데이터 수신
-			
-	}//end
-
-	
 	
 	
 	public String getResult() {
@@ -638,25 +626,26 @@ public class BasicShape extends JFrame {
 
 	 
 	public BasicShape() {
-		//clientConnect();
-		
-		setTitle("기본shape테스트");
-		// setSize(700, 500);
-		setSize(1200, 750);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		cp.setBackground(Color.WHITE);
-		comp();
-		eventInit();
 		
 		clientConnect();
 		
 		System.out.println(client.isClosed());
 		System.out.println(client.isConnected());
 		
-		receiveData();
+		receiveData();//운동영상 패널 데이터 받기
+		receiveDataAfterLogin();//물컵 데이터 받기
+				
 		
-		//receiveDataBeforeLogin();
+		setTitle("기본shape테스트");
+		setSize(1200, 750);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		cp.setBackground(Color.WHITE);
+		
+		comp();
+		eventInit();
+		
+		
 		setVisible(true);
 		
 		
@@ -665,7 +654,7 @@ public class BasicShape extends JFrame {
 	public static void main(String[] args) {
 		
 		//프로그램의 공통파일 만들기! 
-				String path = "C:/Users/Administrator/4weeksWorkout";
+				String path = "C:/4W";
 				// 파일 객체 생성
 				File file = new File(path);
 				// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
@@ -686,12 +675,12 @@ public class BasicShape extends JFrame {
 			// If Nimbus is not available, you can set the GUI to another look
 			// and feel.
 		}
+		
+		
 		new BasicShape();
+	
+	
 	}// main end
 }
-// <a target="_blank" href="http://msource.tistory.com/5"
-// class="tx-link">http://msource.tistory.com/5</a>;;
-// 카드레이아웃 쉬운 설명
-// <a target="_blank" href="http://www.w3ii.com/ko/swing/swing_cardlayout.html"
-// class="tx-link">http://www.w3ii.com/ko/swing/swing_cardlayout.html</a>;;
-// 카드레이아웃 클래스
+
+

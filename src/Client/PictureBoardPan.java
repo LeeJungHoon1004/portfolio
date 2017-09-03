@@ -182,7 +182,7 @@ public class PictureBoardPan extends JPanel {
 		System.out.println(fl1.getFileContents());// 파일의 내용물(byte [])
 
 		fileContents = fl1.getFileContents();
-		File f = new File("C:/Users/Administrator/4weeksWorkout/" + fl1.getFileName());
+		File f = new File("C:/4W" +"/"+ fl1.getFileName());
 		fos = new FileOutputStream(f);
 		bos = new BufferedOutputStream(fos);
 		dos = new DataOutputStream(bos);

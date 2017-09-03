@@ -54,8 +54,8 @@ public class VideoPan extends JPanel {
 	private JScrollPane smiSc = new JScrollPane(smiPan);
 //===========================================================	
 	private Socket client;
-	private DataInputStream dis;
 	private DataOutputStream dos;
+	private DataInputStream dis;
 	private ObjectInputStream ois;
 	private FileOutputStream fos;
 	private BufferedOutputStream bos;
@@ -118,7 +118,7 @@ public class VideoPan extends JPanel {
 	private String[] fileNames = new String[25];
 	int[] fileSize =new int[25];
 	byte[] filecontents = new byte[25];	
-	private String path = "C:/Users/Administrator/4weeksWorkout";
+	private String path = "C:/4W";
 	private String[] imgpath = new String[25];
 	private String[] urlButtons = new String [25];
 	
@@ -224,7 +224,7 @@ public class VideoPan extends JPanel {
 				System.out.println("====================");
 				System.out.println("운동영상 배열에 데이터 넣기 완료");
 			}
-			
+			System.out.println("운동영상 배열 포문 지남.");
 			// 배열에 데이터 넣기완료
 			
 
@@ -237,7 +237,7 @@ public class VideoPan extends JPanel {
 
 			System.out.println("비디오패널 언마셜링 성공");
 
-			dos.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -619,11 +619,11 @@ public class VideoPan extends JPanel {
 		});
 	}
 	
-	public VideoPan(BasicShape parent,Socket client,DataInputStream dis,DataOutputStream dos) {
+	public VideoPan(BasicShape parent,Socket client) {
 		this.parent = parent;
 		this.client = client;
-		this.dis = dis;
-		this.dos = dos;
+		this.dis = parent.getDis();
+		this.dos = parent.getDos();
 		
 		insertImage();
 		//△언마셜링 메소드도 포함되어있음
