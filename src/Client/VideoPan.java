@@ -186,13 +186,13 @@ public class VideoPan extends JPanel {
 	
 	public void unmarsharlling() {
 		
-		try {
-			 client = new Socket("127.0.0.1",40000);
-			 dis = new DataInputStream(client.getInputStream());
-			 dos = new DataOutputStream(client.getOutputStream());
-			}catch(Exception e1) {
-				System.out.println("초기연결 실패");
-			}
+//		try {
+//			 client = new Socket("127.0.0.1",40000);
+//			 dis = new DataInputStream(client.getInputStream());
+//			 dos = new DataOutputStream(client.getOutputStream());
+//			}catch(Exception e1) {
+//				System.out.println("초기연결 실패");
+//			}
 		
 		
 		try {
