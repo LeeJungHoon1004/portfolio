@@ -177,9 +177,9 @@ public class BasicShape extends JFrame {
 	private JScrollPane videoSc;// 스크롤
 
 	// COMPNENT - imgBoardPan
-	private JPanel imgPanel = new JPanel();
-	private PictureBoardPan pbp = new PictureBoardPan(client, dis, dos);
-	private JScrollPane picSc = new JScrollPane(imgPanel);// 스크롤
+	private JPanel imgPanel;
+	private PictureBoardPan pbp;
+	private JScrollPane picSc;// 스크롤
 
 	// COMPNENT - planPan
 	private JPanel planPan = new JPanel();
@@ -276,6 +276,21 @@ public class BasicShape extends JFrame {
 		this.videoPan.add(video);
 
 		// ---------커뮤니티
+		System.out.println("!");
+		System.out.println("클라이언트 연결상태 확인 " + client.isConnected());
+		try{
+		dis = new DataInputStream(client.getInputStream());
+		dos = new DataOutputStream(client.getOutputStream());
+		}catch(Exception e){
+			System.out.println("BasicShape의 CompInit에서 dis,dos를 소켓과 다시 연결하는 과정에서 오류발생.");
+			e.printStackTrace();
+		}
+	//	pbp = new PictureBoardPan(title , contents , filename);
+		System.out.println("!!");
+		imgPanel = new JPanel();
+		System.out.println("!!!");
+		picSc = new JScrollPane(imgPanel);// 스크롤
+		System.out.println("!!!!");
 		pbp.setBackground(Color.white);
 		imgPanel.setBackground(Color.white);
 		this.pbp.setPreferredSize(new Dimension(975, 640));
@@ -652,11 +667,8 @@ public class BasicShape extends JFrame {
 		cp.setBackground(Color.WHITE);
 
 		clientConnect(); //sock
-
-		System.out.println(client.isClosed());
-		System.out.println(client.isConnected());
-
 		vflList = receiveData();// 운동영상 패널 데이터 받기 //dos가.. 자기 하드디스크 dos로 연결됨.
+		
 		// receiveDataAfterLogin();//물컵 데이터 받기
 		try{
 		dos = new DataOutputStream(client.getOutputStream());
@@ -664,9 +676,7 @@ public class BasicShape extends JFrame {
 			System.out.println("서버에서 데이터받고난이후에 DataOutputStream을 서버와 다시 연결하는도중에 문제생김.");
 			e.printStackTrace();
 			}
-		
-		
-		
+		System.out.println("@@@@@@@@@@@@@@");
 		comp();
 		eventInit();
 
