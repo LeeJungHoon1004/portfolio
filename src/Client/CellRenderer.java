@@ -5,21 +5,19 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.ListCellRenderer;
+
 import Server.FileList;
-public class CellRenderer extends JLabel implements ListCellRenderer {
+public class CellRenderer extends JLabel {
 
 	private ArrayList<FileList> fl;
 	
 	public CellRenderer(ArrayList<FileList> fl) {
 
-		
 		this.fl = fl;
 		
 		this.setOpaque(true);

@@ -32,6 +32,7 @@ import javax.swing.event.ListSelectionListener;
 import Server.FileList;
 //스트링에 콤마 추가 제거
 //http://yonoo88.tistory.com/230
+import night0903.CellRenderer;
 
 public class PictureBoardPan extends JPanel {
 	private BasicShape parent ;
@@ -154,9 +155,14 @@ public class PictureBoardPan extends JPanel {
 	}
 
 	public void renew() {//갱신 메소드
+		
 		list = new JList(dlm);
+		dlm = (DefaultListModel)list.getModel();
+		//for(int i=0;i<dlm.getSize();i++){
+			dlm.addElement(new CellRenderer(fl));
+		//}
 		sc = new JScrollPane(list);
-		list.setCellRenderer(new CellRenderer( fl));
+		//list.setCellRenderer(new CellRenderer(fl));
 	}
 
 
