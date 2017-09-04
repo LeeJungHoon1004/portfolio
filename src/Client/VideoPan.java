@@ -52,6 +52,7 @@ public class VideoPan extends JPanel {
 	private ImageIcon imgE1 = new ImageIcon("KakaoTalk_20170820_180152201.jpg");
 	private JLabel encourage = new JLabel(imgE1);
 	private JButton renew = new JButton("°»½Å");
+	private JPanel renewPan = new JPanel();
 	// ===========================================================
 	private JPanel healthPan = new JPanel();
 	private JPanel yogaPan = new JPanel();
@@ -192,38 +193,39 @@ public class VideoPan extends JPanel {
 		mileyPan.setBackground(Color.white);
 		dancePan.setBackground(Color.white);
 		smiPan.setBackground(Color.white);
+		renewPan.setBackground(Color.white);
+		
+		b1.setPreferredSize(new Dimension(200, 140));
+		b2.setPreferredSize(new Dimension(200, 140));
+		b3.setPreferredSize(new Dimension(200, 140));
+		b4.setPreferredSize(new Dimension(200, 140));
+		b5.setPreferredSize(new Dimension(200, 140));
 
-		b1.setPreferredSize(new Dimension(200, 150));
-		b2.setPreferredSize(new Dimension(200, 150));
-		b3.setPreferredSize(new Dimension(200, 150));
-		b4.setPreferredSize(new Dimension(200, 150));
-		b5.setPreferredSize(new Dimension(200, 150));
+		b6.setPreferredSize(new Dimension(200, 140));
+		b7.setPreferredSize(new Dimension(200, 140));
+		b8.setPreferredSize(new Dimension(200, 140));
+		b9.setPreferredSize(new Dimension(200, 140));
+		b10.setPreferredSize(new Dimension(200, 140));
 
-		b6.setPreferredSize(new Dimension(200, 150));
-		b7.setPreferredSize(new Dimension(200, 150));
-		b8.setPreferredSize(new Dimension(200, 150));
-		b9.setPreferredSize(new Dimension(200, 150));
-		b10.setPreferredSize(new Dimension(200, 150));
+		b11.setPreferredSize(new Dimension(200, 140));
+		b12.setPreferredSize(new Dimension(200, 140));
+		b13.setPreferredSize(new Dimension(200, 140));
+		b14.setPreferredSize(new Dimension(200, 140));
+		b15.setPreferredSize(new Dimension(200, 140));
 
-		b11.setPreferredSize(new Dimension(200, 150));
-		b12.setPreferredSize(new Dimension(200, 150));
-		b13.setPreferredSize(new Dimension(200, 150));
-		b14.setPreferredSize(new Dimension(200, 150));
-		b15.setPreferredSize(new Dimension(200, 150));
+		b16.setPreferredSize(new Dimension(200, 140));
+		b17.setPreferredSize(new Dimension(200, 140));
+		b18.setPreferredSize(new Dimension(200, 140));
+		b19.setPreferredSize(new Dimension(200, 140));
+		b20.setPreferredSize(new Dimension(200, 140));
 
-		b16.setPreferredSize(new Dimension(200, 150));
-		b17.setPreferredSize(new Dimension(200, 150));
-		b18.setPreferredSize(new Dimension(200, 150));
-		b19.setPreferredSize(new Dimension(200, 150));
-		b20.setPreferredSize(new Dimension(200, 150));
+		b21.setPreferredSize(new Dimension(200, 140));
+		b22.setPreferredSize(new Dimension(200, 140));
+		b23.setPreferredSize(new Dimension(200, 140));
+		b24.setPreferredSize(new Dimension(200, 140));
+		b25.setPreferredSize(new Dimension(200, 140));
 
-		b21.setPreferredSize(new Dimension(200, 150));
-		b22.setPreferredSize(new Dimension(200, 150));
-		b23.setPreferredSize(new Dimension(200, 150));
-		b24.setPreferredSize(new Dimension(200, 150));
-		b25.setPreferredSize(new Dimension(200, 150));
-
-		renew.setPreferredSize(new Dimension(100, 70));
+		renew.setPreferredSize(new Dimension(80, 40));
 
 		add(encourage);
 
@@ -272,7 +274,8 @@ public class VideoPan extends JPanel {
 		smiPan.add(b25);
 		add(smiSc);
 
-		add(renew);
+		renewPan.add(renew);
+		add(renewPan);
 	}
 
 	public void eventInitYoga() {
