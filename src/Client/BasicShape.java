@@ -259,7 +259,7 @@ public class BasicShape extends JFrame {
 		setLayout(null);
 		// 투명
 
-		imgSlide.setPreferredSize(new Dimension(400, 700));
+		imgSlide.setPreferredSize(new Dimension(400, 1000));
 		// bmi.setPreferredSize(new Dimension(672, 800));
 		// bmi.setBorder(tborder);
 		this.homePan.add(imgSlide);
@@ -275,8 +275,8 @@ public class BasicShape extends JFrame {
 		videoPan = new JPanel();
 		videoSc = new JScrollPane(videoPan);
 		videoPan.setBackground(Color.white);
-		videoPan.setPreferredSize(new Dimension(965, 1000));
-		this.video.setPreferredSize(new Dimension(965, 1000));
+		//videoPan.setPreferredSize(new Dimension(965, 1000));
+		this.video.setPreferredSize(new Dimension(965, 1600));
 		this.videoPan.add(video);
 
 		// ---------커뮤니티
@@ -435,7 +435,7 @@ public class BasicShape extends JFrame {
 	public void clientConnect() {
 
 		try {
-			client = new Socket("121.130.235.228", 40000);
+			client = new Socket("192.168.53.4", 40000);
 			dos = new DataOutputStream(client.getOutputStream());
 			dis = new DataInputStream(client.getInputStream());
 			System.out.println("초기연결성공");
