@@ -435,7 +435,7 @@ public class BasicShape extends JFrame {
 	public void clientConnect() {
 
 		try {
-			client = new Socket("121.130.235.228", 40000);
+			client = new Socket("192.168.53.4", 40000);
 			dos = new DataOutputStream(client.getOutputStream());
 			dis = new DataInputStream(client.getInputStream());
 			System.out.println("초기연결성공");
