@@ -37,8 +37,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 
-import Server.VideoFileList;
 import Server.FileList;
+import Server.VideoFileList;
 
 public class BasicShape extends JFrame {
 
@@ -536,11 +536,11 @@ public class BasicShape extends JFrame {
 			}
 			// ===========================파일1개 언마셜링
 			System.out.println("클라이언트에서 받은 커뮤니티 데이터를 하드디스크로 저장완료.");
-
+			dos = new DataOutputStream(client.getOutputStream());
 			//dos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(" 데이터 받기 실패");
+			System.out.println("커뮤니티 데이터 받기 실패");
 		}
 
 		return fl;

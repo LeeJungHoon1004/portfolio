@@ -230,7 +230,6 @@ class ConnectionThread extends Thread {
 
 				else if(cmd.equals("커뮤니티에게시글추가")){
 					File home = new File("C:/4weeksWorkoutServerPosting");
-					
 					ois = new ObjectInputStream(socket.getInputStream());
 					String title = null;
 					String contents = null;
@@ -239,13 +238,6 @@ class ConnectionThread extends Thread {
 					byte [] fileContents = null;
 					FileList fl = new FileList(id, title , contents ,filename ,  fileSize , fileContents); 
 					fl=(FileList) ois.readObject();
-					System.out.println(fl.getId()); //보낸사람아이디
-					System.out.println(fl.getTitle()); //string 제목
-					System.out.println(fl.getContents()); //string 내용
-					System.out.println(fl.getFileName()); //클라이언트에서받은 파일이름(이미지)
-					System.out.println(fl.getFileSize()); //파일의 크기(int)
-					System.out.println(fl.getFileContents()); //내용물
-					
 					//파일받은뒤에 파일이름을 
 					//파일이름 = 수신시각+id+저장경로+파일이름 4개로 조합한다.
 					long time = System.currentTimeMillis(); 
@@ -253,10 +245,10 @@ class ConnectionThread extends Thread {
 					String str = dayTime.format(new Date(time));
 					//static필드에 저장되있는경로를 이용하여 저장될 장소를 만든다. 
 					//파일이름을 변경한후 다시 파일자료로 묶는다.
-					String newFileName =str + "/"+id+"/"+fl.getFileName() ;
-					
+					String newFileName =str + "/"+id+"/" + home.getPath()+"/"+fl.getFileName() ;
 					System.out.println(newFileName);
 					
+				//	Server.manager.insertPostingData();
 
 			
 					
@@ -306,18 +298,23 @@ class ConnectionThread extends Thread {
 					oos = new ObjectOutputStream(socket.getOutputStream());	
 					ArrayList<FileList> sendingflList = new ArrayList<FileList> ();
 					String id = "김현수";
-					String title = "1";
-					String contents = "1";
-					String fileName= null;
+					String title = "커뮤니티자료제목1";
+					String contents = "커뮤니티자료내용1";
+					String fileName= "d1.jpg";
 					int fileSize = 0;
-					byte[] fileContents = new byte[fileSize];
+					byte[] fileContents = null;
 					File home = new File("C:/tmp");
 					File[] files = home.listFiles();
 					for(File tmp : files){
+						
 						fileName = tmp.getName();
 						fileSize = (int)tmp.length();
 						fileContents = new byte[fileSize];
-						
+						System.out.println(id);
+						System.out.println("서버에서커뮤니티패널로전송");
+						System.out.println("커뮤니티파일이름:"+fileName);
+						System.out.println("커뮤니티파일사이즈:"+fileSize);
+						System.out.println("커뮤니티파일내용(byte):"+fileContents);
 						fis = new FileInputStream(home.getPath() + "/" + fileName);
 						fis.read(fileContents);
 						
