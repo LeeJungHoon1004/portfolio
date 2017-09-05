@@ -11,9 +11,10 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 
 import Server.FileList;
-public class CellRenderer extends DefaultListCellRenderer {
+public class CellRenderer extends JLabel implements ListCellRenderer {
 
 	private ArrayList<FileList> fl;
 	String [] titles ;

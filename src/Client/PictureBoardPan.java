@@ -62,7 +62,7 @@ public class PictureBoardPan extends JPanel {
 
 	private ArrayList<FileList> fl;
 	private JList list;
-	private DefaultListModel dlm;
+	//private DefaultListModel dlm;
 	private JScrollPane sc;
 	private CellRenderer cellrender;
 	private int cnt = 0;
@@ -108,35 +108,35 @@ public class PictureBoardPan extends JPanel {
 			}
 		});
 		
-		 remove.addActionListener(new ActionListener() {
-			 public void actionPerformed(ActionEvent e) {
-				 int index = list.getSelectedIndex(); // 선택된 항목의 인덱스를 가져온다.
-				 // 인덱스는 0부터 시작
-		
-				 try {
-					 dos.writeUTF("리스트 삭제");
-					 dos.writeInt(index);//삭제할 리스트의 프라이머리 번호
-				 } catch (Exception e1) {
-					 System.out.println("삭제 실패");
-				 } // 서버에 게시글 없앤다고 보냄.
-		
-				 list.remove(index); // 리스트모델에서 선택된 항목을 지운다.
-				 
-				 if (dlm.getSize() == 0) { // 리스트모델의 사이즈가 0이되면 삭제버튼을 누를 수 없게 한다.
-					 // btnDel.setEnabled(false);
-				 }
-				 if (index == dlm.getSize()) { // 인덱스와 리스트모델의 마지막항목이 같으면
-					 index--; // 즉,선택된 인덱스가 리스트의 마지막 항목이었으면
-				 } // 인덱스를 -1해서 인덱스를 옮겨준다.
-				 list.setSelectedIndex(index); //
-				 list.ensureIndexIsVisible(index);
-		
-				 JOptionPane.showMessageDialog(null, "게시글이 삭제되었습니다");
-				 
-				 renew();
-				 //삭제후 갱신
-		 		}
-		 });
+//		 remove.addActionListener(new ActionListener() {
+//			 public void actionPerformed(ActionEvent e) {
+//				 int index = list.getSelectedIndex(); // 선택된 항목의 인덱스를 가져온다.
+//				 // 인덱스는 0부터 시작
+//		
+//				 try {
+//					 dos.writeUTF("리스트 삭제");
+//					 dos.writeInt(index);//삭제할 리스트의 프라이머리 번호
+//				 } catch (Exception e1) {
+//					 System.out.println("삭제 실패");
+//				 } // 서버에 게시글 없앤다고 보냄.
+//		
+//				 list.remove(index); // 리스트모델에서 선택된 항목을 지운다.
+//				 
+//				 if (dlm.getSize() == 0) { // 리스트모델의 사이즈가 0이되면 삭제버튼을 누를 수 없게 한다.
+//					 // btnDel.setEnabled(false);
+//				 }
+//				 if (index == dlm.getSize()) { // 인덱스와 리스트모델의 마지막항목이 같으면
+//					 index--; // 즉,선택된 인덱스가 리스트의 마지막 항목이었으면
+//				 } // 인덱스를 -1해서 인덱스를 옮겨준다.
+//				 list.setSelectedIndex(index); //
+//				 list.ensureIndexIsVisible(index);
+//		
+//				 JOptionPane.showMessageDialog(null, "게시글이 삭제되었습니다");
+//				 
+//				 renew();
+//				 //삭제후 갱신
+//		 		}
+//		 });
 
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -155,11 +155,11 @@ public class PictureBoardPan extends JPanel {
 
 	public void renew() {//갱신 메소드
 		
-		dlm = new DefaultListModel();
+	//	dlm = new DefaultListModel();
 //		for(int i=0;i<dlm.getSize();i++){
 //			dlm.addElement(new CellRenderer(title, filename));
 //		}
-		list = new JList(dlm);
+		list = new JList();
 
 		sc = new JScrollPane(list);
 		list.setCellRenderer(new CellRenderer(fl));
