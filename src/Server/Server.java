@@ -577,6 +577,7 @@ public class Server extends JFrame {
 		this.add(sidepan);
 		// CardLayout들어있는 mainPan에 패널들 넣음
 		this.mainPan.add(homeSc, "NamedefaultPan");
+		homeSc.getVerticalScrollBar().setUnitIncrement(16);
 		// 이름을 부여함 .
 		// 부여된 이름을 가지고 이벤트 처리부분에서
 		// 카드의 이름으로 식별하여 visible함.

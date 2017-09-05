@@ -223,6 +223,7 @@ public class SignUp extends JDialog {
 					System.out.println(response);
 					if (response.equals("회원가입성공")) {
 						JOptionPane.showMessageDialog(self, "회원가입 되셨습니다.");
+						self.dispose();
 					} else if(response.equals("회원가입실패")){
 						JOptionPane.showMessageDialog(null, "이미 존재하는 ID입니다.");
 					}
