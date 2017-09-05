@@ -519,6 +519,7 @@ public class BasicShape extends JFrame {
 			receivedPostingList = (ArrayList <FileList>) ois.readObject();
 
 			for(int i = 0 ; i< receivedPostingList.size(); i++){
+				System.out.println("+++++++커뮤니티데이터+++++++");
 			System.out.println(receivedPostingList.get(i).getTitle()); // 제목
 			System.out.println(receivedPostingList.get(i).getContents());// 코멘트
 			System.out.println(receivedPostingList.get(i).getFileName());// 파일이름
@@ -727,12 +728,14 @@ public class BasicShape extends JFrame {
 
 		clientConnect(); // sock
 		vflList = receiveData();// 운동영상 패널 데이터 받기 //dos가.. 자기 하드디스크 dos로 연결됨.
+		
 		try {
 			dos = new DataOutputStream(client.getOutputStream());
 		} catch (Exception e) {
 			System.out.println("서버에서 데이터받고난이후에 DataOutputStream을 서버와 다시 연결하는도중에 문제생김.");
 			e.printStackTrace();
 		}
+		
 		fl = receivedCommunityData();//커뮤니티 패널 데이터 받기
 		
 		// receiveDataAfterLogin();//물컵 데이터 받기

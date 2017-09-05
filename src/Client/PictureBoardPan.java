@@ -18,7 +18,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -49,8 +51,6 @@ public class PictureBoardPan extends JPanel {
 	private DataInputStream dis = null;
 	private ObjectInputStream ois = null;
 
-//	private String userID;
-//	private String userPW;
 	private int index;// jlist 선택한 인덱스 번호
 	private TitledBorder tborder = new TitledBorder("");
 	
@@ -61,8 +61,8 @@ public class PictureBoardPan extends JPanel {
 	private JButton remove = new JButton("글삭제");
 
 	private ArrayList<FileList> fl;
-	private JList list;
 	private DefaultListModel dlm;
+	private JList list;
 	private JScrollPane sc;
 	private CellRenderer cellrender;
 	private int cnt = 0;
@@ -70,12 +70,36 @@ public class PictureBoardPan extends JPanel {
 	private String[] contents;
 	private String[] fileName;
 
+
+	public PictureBoardPan(BasicShape parent,Socket client,DataInputStream dis, DataOutputStream dos,
+					ArrayList<FileList> fl) {
+		this.parent = parent;
+		this.client = client;
+		this.dis = dis;
+		this.dos = dos;
+		this.fl = fl;
+		
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// If Nimbus is not available, you can set the GUI to another look
+			// and feel.
+		}
+		
+		this.setBackground(Color.white);
+		setSize(700, 800);
+		compInit();
+		eventInit();
+	}
+	
 	public void compInit() {
 		setLayout(new BorderLayout(1, 1));
 
-//		list = new JList(dlm);
-//		sc = new JScrollPane(list);
-//		list.setCellRenderer(new CellRenderer());
 		renew();
 		
 		sc.setPreferredSize(new Dimension(970, 500));
@@ -103,7 +127,6 @@ public class PictureBoardPan extends JPanel {
 				// JDialog 보이기!
 				
 				renew();//renew 안에 unmarshalling도 들어있음.
-				//repaint();
 
 			}
 		});
@@ -154,11 +177,17 @@ public class PictureBoardPan extends JPanel {
 	}
 
 	public void renew() {//갱신 메소드
-		
 		dlm = new DefaultListModel();
-//		for(int i=0;i<dlm.getSize();i++){
-//			dlm.addElement(new CellRenderer(title, filename));
-//		}
+		for(int i=0;i<fl.size();i++) {
+			String filename = fl.get(i).getFileName();
+			String coment = fl.get(i).getContents();
+			
+			JLabel lb = new JLabel();
+			lb.setIcon(new ImageIcon(filename));
+			lb.setText(coment);
+			
+			dlm.addElement(lb);
+		}
 		list = new JList(dlm);
 
 		sc = new JScrollPane(list);
@@ -166,30 +195,5 @@ public class PictureBoardPan extends JPanel {
 	}
 
 
-	public PictureBoardPan(BasicShape parent,Socket client,DataInputStream dis, DataOutputStream dos,
-					ArrayList<FileList> fl) {
-		this.parent = parent;
-		this.client = client;
-		this.dis = dis;
-		this.dos = dos;
-		this.fl = fl;
-		
-		try {
-			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (Exception e) {
-			// If Nimbus is not available, you can set the GUI to another look
-			// and feel.
-		}
-		
-		this.setBackground(Color.white);
-		setSize(700, 800);
-		compInit();
-		eventInit();
-	}
 
 }
