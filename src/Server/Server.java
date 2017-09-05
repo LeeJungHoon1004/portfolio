@@ -231,13 +231,23 @@ class ConnectionThread extends Thread {
 				else if(cmd.equals("커뮤니티에게시글추가")){
 					File home = new File("C:/4weeksWorkoutServerPosting");
 					ois = new ObjectInputStream(socket.getInputStream());
+					//클라이언트에서 커뮤니티 게시판에서 받은 데이터를 저장함
+					//
 					String title = null;
 					String contents = null;
 					String filename = null;
 					int fileSize = 0;
 					byte [] fileContents = null;
+					//자료형준비
 					FileList fl = new FileList(id, title , contents ,filename ,  fileSize , fileContents); 
+					//오브젝트스트림 데이터받음.
 					fl=(FileList) ois.readObject();
+					System.out.println("클라이언트쪽에서 받은 게시판자료의 아이디 :"+fl.getId());
+					System.out.println("클라이언트쪽에서 받은 게시판자료의:"+fl.getTitle());
+					System.out.println("클라이언트쪽에서 받은 게시판자료의:"+fl.getContents());
+					System.out.println("클라이언트쪽에서 받은 게시판자료의:"+fl.getFileName());
+					System.out.println("클라이언트쪽에서 받은 게시판자료의:"+fl.getFileSize());
+					System.out.println("클라이언트쪽에서 받은 게시판자료의:"+fl.getFileContents());
 					//파일받은뒤에 파일이름을 
 					//파일이름 = 수신시각+id+저장경로+파일이름 4개로 조합한다.
 					long time = System.currentTimeMillis(); 
