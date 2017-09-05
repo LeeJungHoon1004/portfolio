@@ -475,17 +475,17 @@ public class BasicShape extends JFrame {
 			// VideoFileList vfl = new VideoFileList(path, path, flags, path,
 			// filecontents);
 			fileNames[i] = tmp[1];
-			System.out.println("비디오팬에서 받은 파일이름 :" + fileNames[i]);
 			imgpath[i] = path + "/" + fileNames[i];
+//			System.out.println("비디오팬에서 받은 파일이름 :" + fileNames[i]);
 
-			System.out.println("url 데이터 : " + urls[i]);
-			System.out.println("fileNames 데이터 : " + fileNames[i]);
-			System.out.println("urlButtons 데이터 : " + urlButtons[i]);
-			System.out.println("fileSize 데이터 : " + fileSize[i]);
-			System.out.println("filecontents 데이터 : " + filecontents[i]);
-			System.out.println("imgpath 데이터 :" + imgpath[i]);
-			System.out.println("====================");
-			System.out.println("운동영상 배열에 데이터 넣기 완료");
+//			System.out.println("url 데이터 : " + urls[i]);
+//			System.out.println("fileNames 데이터 : " + fileNames[i]);
+//			System.out.println("urlButtons 데이터 : " + urlButtons[i]);
+//			System.out.println("fileSize 데이터 : " + fileSize[i]);
+//			System.out.println("filecontents 데이터 : " + filecontents[i]);
+//			System.out.println("imgpath 데이터 :" + imgpath[i]);
+//			System.out.println("====================");
+//			System.out.println("운동영상 배열에 데이터 넣기 완료");
 
 			try {
 				File f = new File(imgpath[i]);
@@ -499,8 +499,8 @@ public class BasicShape extends JFrame {
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
+			
 			System.out.println("운동영상 배열 포문 지남.");
-
 		}
 
 		return vflList;

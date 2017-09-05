@@ -2,11 +2,8 @@ package Client;
 
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -16,7 +13,6 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -28,8 +24,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
 import Server.FileList;
 
 //오브젝트 스트림 = 객체직렬화 / 객체직렬화 소켓통신
@@ -62,7 +60,7 @@ public class AddPictureBoard extends JDialog {
 	private JButton findPicture = new JButton("사진");
 	private JLabel titleLabel = new JLabel("글제목:");
 	private JTextField picturePath = new JTextField();
-	private JTextField comment = new JTextField();
+	private JTextArea comment = new JTextArea();
 	private JTextField titleField = new JTextField();
 
 	private JPanel picturePan = new JPanel();
@@ -90,6 +88,9 @@ public class AddPictureBoard extends JDialog {
 		titlePan.add(titleLabel, BorderLayout.WEST);
 		titlePan.add(titleField, BorderLayout.EAST);
 
+		comment.setLineWrap(true);        //활성화, 자동 줄 바꿈 기능 
+		comment.setWrapStyleWord(true);
+		
 		dataPan.add(PahtPan, BorderLayout.NORTH);
 		dataPan.add(titlePan, BorderLayout.CENTER);
 		dataPan.add(comment, BorderLayout.SOUTH);

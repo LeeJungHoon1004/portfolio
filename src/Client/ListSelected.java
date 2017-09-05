@@ -16,9 +16,7 @@ public class ListSelected extends JDialog {
 
 	private TitledBorder tborder = new TitledBorder("");
 	
-	private ImageIcon imgIcon;
-	private JLabel img = new JLabel(imgIcon);
-	//private JLabel writer = new JLabel();
+	private JLabel img = new JLabel();
 	private JLabel title = new JLabel();
 	private JLabel comment = new JLabel();
 	private JScrollPane sc = new JScrollPane(comment);
@@ -27,8 +25,7 @@ public class ListSelected extends JDialog {
 	private void compInit() {
 		setLayout(new BorderLayout(3, 3));
 		
-		img.setPreferredSize(new Dimension(500,250));
-		//writer.setPreferredSize(new Dimension(50,50));
+		img.setPreferredSize(new Dimension(500,430));
 		title.setPreferredSize(new Dimension(120, 50));
 		comment.setPreferredSize(new Dimension(500,150));
 		
@@ -36,7 +33,6 @@ public class ListSelected extends JDialog {
 		pan.setBorder(tborder);
 		comment.setBorder(tborder);
 		
-		//pan.add(writer);
 		pan.add(title);
 		
 		add(img,BorderLayout.NORTH);
@@ -45,14 +41,13 @@ public class ListSelected extends JDialog {
 		
 	}
 	
-	public ListSelected(PictureBoardPan parent,String img,String title,String comment) {
+	public ListSelected(PictureBoardPan parent,String img,String title,String comment,String writer) {
 		
-		this.imgIcon = new ImageIcon(img);
-		//this.writer.setText(writer);
-		this.title.setText(title);
+		this.img.setIcon(new ImageIcon(img));
+		this.title.setText("제목 : "+title+"글쓴이 : "+writer);
 		this.comment.setText(comment);
 		this.setBackground(Color.WHITE);
-		setSize(500, 500);
+		setSize(600, 700);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 

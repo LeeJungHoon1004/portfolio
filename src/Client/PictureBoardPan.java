@@ -4,6 +4,7 @@ package Client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -78,8 +79,7 @@ public class PictureBoardPan extends JPanel {
 		this.dis = dis;
 		this.dos = dos;
 		this.fl = fl;
-		System.out.println("아진짜");
-		System.out.println(fl.size());
+		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
@@ -116,7 +116,6 @@ public class PictureBoardPan extends JPanel {
 		
 		add(floor1, BorderLayout.CENTER);
 		add(floor2, BorderLayout.SOUTH);
-
 	}
 
 	public void eventInit() {
@@ -166,36 +165,31 @@ public class PictureBoardPan extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				
 				index = list.getSelectedIndex();
-				
+				System.out.println(list.getSelectedIndex());
 				String img = "C:/4W/PictureBoardPan"+"/"+fl.get(index).getFileName();
 				String title = fl.get(index).getTitle();
 				String comment = fl.get(index).getContents();
+				String writer = fl.get(index).getId();
 				
-				new ListSelected(self, img,title,comment).setVisible(true);
+				new ListSelected(self, img,title,comment,writer).setVisible(true);
 			}
 		});
 
 	}
 
 	public void renew() {//갱신 메소드
+		
 		dlm = new DefaultListModel();
-		System.out.println(fl.size());
-		for(int i=0;i<fl.size();i++) {
-			String filename = fl.get(i).getFileName();
-			String title = fl.get(i).getTitle();
-			
-			JLabel lb = new JLabel();
-			lb.setIcon(new ImageIcon(filename));
-			lb.setText(title);
-			
-			dlm.addElement(lb);
+		String path = "C:/4W/PictureBoardPan";
+		for(FileList tmp : fl) {
+			dlm.addElement(tmp);
 		}
+		
 		list = new JList(dlm);
-
 		sc = new JScrollPane(list);
-		list.setCellRenderer(new CellRenderer(fl));
+		//list.setModel(dlm);
+		list.setCellRenderer(new CellRenderer());
 	}
-
 
 
 }
