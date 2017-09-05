@@ -89,6 +89,14 @@ public class BasicShape extends JFrame {
 
 	// ========ComboList Variable====================
 
+	public ArrayList<FileList> getFl() {
+		return fl;
+	}
+
+	public void setFl(ArrayList<FileList> fl) {
+		this.fl = fl;
+	}
+	
 	public ArrayList<VideoFileList> getVflList() {
 		return vflList;
 	}
@@ -279,20 +287,19 @@ public class BasicShape extends JFrame {
 		//videoPan.setPreferredSize(new Dimension(965, 1000));
 		this.video.setPreferredSize(new Dimension(965, 1600));
 		this.videoPan.add(video);
-
+		System.out.println("운동영상 무사히 완성");
 		// ---------커뮤니티
 		
 		pbp = new PictureBoardPan(self,client, dis,dos,fl);
 		imgPanel = new JPanel();
 		picSc = new JScrollPane(imgPanel);// 스크롤
 		picSc.getVerticalScrollBar().setUnitIncrement(16);
-	
-		
 		pbp.setBackground(Color.white);
 		imgPanel.setBackground(Color.white);
 		this.pbp.setPreferredSize(new Dimension(975, 640));
 		this.imgPanel.add(pbp);
-
+		System.out.println("커뮤니티팬 무사히 완성");
+		
 		this.lbID.setIcon(iconid);
 		this.lbPW.setIcon(iconpw);
 
@@ -737,10 +744,10 @@ public class BasicShape extends JFrame {
 		}
 		
 		fl = receivedCommunityData();//커뮤니티 패널 데이터 받기
+		System.out.println("\n"+"자 이제 픽쳐보드팬에 데이터좀 넣자");
+		System.out.println(fl.get(0).getContents());
 		
 		// receiveDataAfterLogin();//물컵 데이터 받기
-	
-		System.out.println("@@@@@@@@@@@@@@");
 		comp();
 		eventInit();
 
