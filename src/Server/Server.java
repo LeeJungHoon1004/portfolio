@@ -87,7 +87,7 @@ class ConnectionThread extends Thread {
 		this.dos = dos;
 	}
 
-	public ConnectionThread(Socket socket, ArrayList<VideoFileList> receivedvflList) {
+	public ConnectionThread(Socket socket ) {
 		try {
 			this.socket = socket;
 
@@ -239,19 +239,22 @@ class ConnectionThread extends Thread {
 					byte [] fileContents = null;
 					FileList fl = new FileList(id, title , contents ,filename ,  fileSize , fileContents); 
 					fl=(FileList) ois.readObject();
+					System.out.println(fl.getId()); //보낸사람아이디
 					System.out.println(fl.getTitle()); //string 제목
 					System.out.println(fl.getContents()); //string 내용
 					System.out.println(fl.getFileName()); //클라이언트에서받은 파일이름(이미지)
 					System.out.println(fl.getFileSize()); //파일의 크기(int)
 					System.out.println(fl.getFileContents()); //내용물
 					
-					//파일받은뒤에 파일이름을 .. 수신시각과 조합해서 변경해줘야 안겹친다.
-					
+					//파일받은뒤에 파일이름을 
+					//파일이름 = 수신시각+id+저장경로+파일이름 4개로 조합한다.
 					long time = System.currentTimeMillis(); 
 					SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 					String str = dayTime.format(new Date(time));
+					//static필드에 저장되있는경로를 이용하여 저장될 장소를 만든다. 
 					//파일이름을 변경한후 다시 파일자료로 묶는다.
-					String newFileName =str + "/"+ fl.getFileName() ;
+					String newFileName =str + "/"+id+"/"+fl.getFileName() ;
+					
 					System.out.println(newFileName);
 					
 
@@ -432,8 +435,8 @@ public class Server extends JFrame {
 	private String urlImageFileName[] = new String[25];
 	private String urlPath[] = new String[25];
 	private VideoFileList[] vflList = new VideoFileList[25];
-	private String ServerdirectoryPath;
-	private String ServerdirectoryPathPosting;
+	public static String ServerdirectoryPathVideo;
+	public static String ServerdirectoryPathPosting;
 	// homePan에다가 부착함.
 	// articlePan
 	private JPanel articleWholePan = new JPanel(new BorderLayout());
@@ -474,7 +477,7 @@ public class Server extends JFrame {
 		// model = new DefaultTableModel(userColumn, 0);
 		userTable = new JTable(model);
 		listJS = new JScrollPane(userTable);
-
+		
 		userTable.getColumn("글번호").setPreferredWidth(30);
 		userTable.getColumn("ID(작성자)").setPreferredWidth(280);
 		userTable.getColumn("글제목(title)").setPreferredWidth(100);
@@ -584,7 +587,7 @@ public class Server extends JFrame {
 
 	public void eventInit() {
 
-		File home = new File(ServerdirectoryPath);
+		File home = new File(ServerdirectoryPathVideo);
 
 		// yogaButton1에대한 이벤트처리입니다.
 		this.yogaButton1.addActionListener(new ActionListener() {
@@ -1631,10 +1634,11 @@ public class Server extends JFrame {
 	// 생성자
 	public Server() {
 
+		
 		// 프로그램의 공통파일 만들기!
-		ServerdirectoryPath = "C:/4weeksWorkoutServer";
+		ServerdirectoryPathVideo = "C:/4weeksWorkoutServer";
 		// 파일 객체 생성
-		File file = new File(ServerdirectoryPath);
+		File file = new File(ServerdirectoryPathVideo);
 		// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
 		if (!file.exists()) {
 			// 디렉토리 생성 메서드
@@ -1643,6 +1647,7 @@ public class Server extends JFrame {
 		}
 		
 		ServerdirectoryPathPosting ="C:/4weeksWorkoutServerPosting";
+		
 		File file2 = new File(ServerdirectoryPathPosting);
 		// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
 		if (!file2.exists()) {
@@ -1663,6 +1668,7 @@ public class Server extends JFrame {
 	}
 
 	public static void main(String[] args) throws Exception {
+		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
@@ -1677,7 +1683,7 @@ public class Server extends JFrame {
 		ServerSocket server = new ServerSocket(40000);
 		new Server();
 		while (true) {
-			new ConnectionThread(server.accept(), receivedvflList).start();
+			new ConnectionThread(server.accept() ).start();
 
 		}
 

@@ -274,31 +274,19 @@ public class BasicShape extends JFrame {
 		video = new VideoPan(self, client, vflList, urls, fileNames);
 		videoPan = new JPanel();
 		videoSc = new JScrollPane(videoPan);
+		videoSc.getVerticalScrollBar().setUnitIncrement(16);
 		videoPan.setBackground(Color.white);
 		//videoPan.setPreferredSize(new Dimension(965, 1000));
 		this.video.setPreferredSize(new Dimension(965, 1600));
 		this.videoPan.add(video);
 
 		// ---------커뮤니티
-		System.out.println("!");
-		System.out.println("클라이언트 연결상태 확인 " + client.isConnected());
-		try {
-			dis = new DataInputStream(client.getInputStream());
-			dos = new DataOutputStream(client.getOutputStream());
-		} catch (Exception e) {
-			System.out.println("BasicShape의 CompInit에서 dis,dos를 소켓과 다시 연결하는 과정에서 오류발생.");
-			e.printStackTrace();
-		}
+		
 		pbp = new PictureBoardPan(self,client, dis,dos,fl);
-		System.out.println("!!");
-		
 		imgPanel = new JPanel();
-		
-		System.out.println("!!!");
-		
 		picSc = new JScrollPane(imgPanel);// 스크롤
-		
-		System.out.println("!!!!");
+		picSc.getVerticalScrollBar().setUnitIncrement(16);
+	
 		
 		pbp.setBackground(Color.white);
 		imgPanel.setBackground(Color.white);
@@ -552,7 +540,7 @@ public class BasicShape extends JFrame {
 			//dos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("커뮤니티 데이터 받기 실패");
+			System.out.println(" 데이터 받기 실패");
 		}
 
 		return fl;
