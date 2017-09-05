@@ -69,7 +69,7 @@ public class BasicShape extends JFrame {
 
 	// 운동영상 어레이리스트
 	private ArrayList<VideoFileList> vflList;
-
+	
 	private String[] urls = new String[25];
 	private String[] splitN = new String[25];
 	private String[] urlButtons = new String[25];
@@ -451,7 +451,7 @@ public class BasicShape extends JFrame {
 			
 			vflList = (ArrayList<VideoFileList>) ois.readObject();
 			
-			System.out.println("ois로 리스트 전달받기 성공");
+			System.out.println("ois로 vfl리스트 전달받기 성공");
 			System.out.println(vflList.size());
 
 			System.out.println("베이직 쉐이프 운동영상 언마셜링 성공");
@@ -522,20 +522,20 @@ public class BasicShape extends JFrame {
 
 			// 2.서버에서 데이터를 받습니다 (2.ServerRam to ClientRam)
 			ois = new ObjectInputStream(client.getInputStream());
-			ArrayList <FileList> receivedPostingList = new ArrayList <FileList>();
-			receivedPostingList = (ArrayList <FileList>) ois.readObject();
+			 fl = new ArrayList <FileList>();
+			 fl = (ArrayList <FileList>) ois.readObject();
 
-			for(int i = 0 ; i< receivedPostingList.size(); i++){
+			for(int i = 0 ; i< fl.size(); i++){
 				System.out.println("+++++++커뮤니티데이터+++++++");
-			System.out.println(receivedPostingList.get(i).getTitle()); // 제목
-			System.out.println(receivedPostingList.get(i).getContents());// 코멘트
-			System.out.println(receivedPostingList.get(i).getFileName());// 파일이름
-			System.out.println(receivedPostingList.get(i).getFileSize());// 파일의 크기(int)
-			System.out.println(receivedPostingList.get(i).getFileContents());// 파일의 내용물(byte [])
-			System.out.println(receivedPostingList.get(i).getId());
+			System.out.println(fl.get(i).getTitle()); // 제목
+			System.out.println(fl.get(i).getContents());// 코멘트
+			System.out.println(fl.get(i).getFileName());// 파일이름
+			System.out.println(fl.get(i).getFileSize());// 파일의 크기(int)
+			System.out.println(fl.get(i).getFileContents());// 파일의 내용물(byte [])
+			System.out.println(fl.get(i).getId());
 			
-			fileContents = receivedPostingList.get(i).getFileContents();
-			File f = new File("C:/4W/PictureBoardPan" + "/" + receivedPostingList.get(i).getFileName());
+			fileContents = fl.get(i).getFileContents();
+			File f = new File("C:/4W/PictureBoardPan" + "/" + fl.get(i).getFileName());
 			fos = new FileOutputStream(f);
 			bos = new BufferedOutputStream(fos);
 			dos = new DataOutputStream(bos);
@@ -746,6 +746,7 @@ public class BasicShape extends JFrame {
 		fl = receivedCommunityData();//커뮤니티 패널 데이터 받기
 		System.out.println("\n"+"자 이제 픽쳐보드팬에 데이터좀 넣자");
 		System.out.println(fl.get(0).getContents());
+		
 		
 		// receiveDataAfterLogin();//물컵 데이터 받기
 		comp();
