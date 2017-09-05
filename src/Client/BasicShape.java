@@ -154,10 +154,12 @@ public class BasicShape extends JFrame {
 	private JLabel profilename = new JLabel();
 	private JLabel profilePhoto = new JLabel();
 	private JButton logout = new JButton("로그아웃");
-	private String result;
+	private String result = null;
 	// 카드레이아웃 여기있음
 	private CardLayout card = new CardLayout();
 	private BasicShape self = this;
+
+
 	private JPanel mainPan = new JPanel(card);
 	private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
 	// COMPNENT - homePan
@@ -169,7 +171,7 @@ public class BasicShape extends JFrame {
 	private JPanel homePan = new JPanel(new GridLayout(1, 1));
 	private JScrollPane homeSc = new JScrollPane(homePan);
 
-	private String name = getName();
+	private String name ;
 	private String userID = null;
 	private String userPW = null;
 
@@ -205,6 +207,14 @@ public class BasicShape extends JFrame {
 	private JScrollPane planSc = new JScrollPane(planPan);// 스크롤
 
 	// ===========================================================================
+	public BasicShape getSelf() {
+		return self;
+	}
+
+	public void setSelf(BasicShape self) {
+		this.self = self;
+	}
+		
 	public Socket getClient() {
 		return client;
 	}
@@ -246,7 +256,13 @@ public class BasicShape extends JFrame {
 		this.userPW = userPW;
 	}
 
-	public String getName() {
+	public String getName1() {
+
+		System.out.println("BS의 겟네임호출");
+		return name;
+	}
+	
+	public String broughtName() {
 
 		try {
 			name = dis.readUTF();
@@ -272,10 +288,12 @@ public class BasicShape extends JFrame {
 		// bmi.setBorder(tborder);
 		this.homePan.add(imgSlide);
 		// this.homePan.add(bmi);
-
+		this.homeSc.getVerticalScrollBar().setUnitIncrement(16);
+		
 		// 목표(plan) 새로운 목표 패널임 (달력들어간거)
 		planPan.setBackground(Color.white);
 		this.planPan.add(plan);
+		this.planSc.getVerticalScrollBar().setUnitIncrement(16);
 
 		// ---------운동
 
@@ -336,7 +354,7 @@ public class BasicShape extends JFrame {
 		planPan.setBackground(Color.WHITE);
 		imgPanel.setBackground(Color.white);
 
-		profilename.setText(name + " 님 환영합니다!");
+//		profilename.setText(name + " 님 환영합니다!");
 		namePan.add(profilename);
 		logoutPan.add(logout);
 
@@ -430,7 +448,7 @@ public class BasicShape extends JFrame {
 	public void clientConnect() {
 
 		try {
-			client = new Socket("192.168.53.4", 40000);
+			client = new Socket("121.130.235.209", 40000);
 			dos = new DataOutputStream(client.getOutputStream());
 			dis = new DataInputStream(client.getInputStream());
 			System.out.println("초기연결성공");
@@ -596,13 +614,16 @@ public class BasicShape extends JFrame {
 
 				// 서버에 계정 보냄.△△△△△△△
 				if (result.equals("로그인성공")) {
-
-					profilename.setText(getName() + " 님 환영합니다!");
+					self.setName(broughtName()); //이름 초기화.
+					System.out.println("이벤트이닛 name :" + name);
+					System.out.println(self.getName1());
+					profilename.setText(name + " 님 환영합니다!");
+					
 					card.show(self.profilePan, "loginAfter");
 					// receiveDataAfterLogin();
 
 				} else if (result.equals("로그인실패")) {
-
+ 
 					card.show(self.profilePan, "loginBefore");
 				}
 				// 프로필창 로그인여부에 따라 다름.△△△△△△△
@@ -690,11 +711,12 @@ public class BasicShape extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//로그인이후시점에는 result이 로그인성공
 				//로그아웃한이후시점에는 result가 null로 채워져있다.
+				System.out.println(result);
 				if(result.equals("로그인성공")){
 					
 				}
 					
-				else{
+				else if(result.equals("로그인성공")){
 					JOptionPane.showMessageDialog(null,"로그인먼저해주세요");
 					return;
 				}
@@ -751,7 +773,7 @@ public class BasicShape extends JFrame {
 		// receiveDataAfterLogin();//물컵 데이터 받기
 		comp();
 		eventInit();
-
+		
 		setVisible(true);
 
 	}
@@ -792,4 +814,6 @@ public class BasicShape extends JFrame {
 		new BasicShape();
 
 	}// main end
+
+	
 }

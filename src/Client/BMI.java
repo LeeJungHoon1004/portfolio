@@ -24,6 +24,8 @@ import javax.swing.border.TitledBorder;
 
 public class BMI extends JPanel {
 
+	private PlanPan parent ;
+	
 	private  TitledBorder tborder = new TitledBorder("");
 	
 	private JLabel stature = new JLabel("키 : ");
@@ -38,7 +40,7 @@ public class BMI extends JPanel {
 	private JPanel genderPan = new JPanel();
 	private JPanel radioPan = new JPanel(new GridLayout(1, 2));
 	// ==============△△△BMI측정 데이터입력UI△△△=========================
-	private String name;
+	private String name ;
 	private double result;
 	private String grade;
 	private ImageIcon img = new ImageIcon("bmi비만도.jpg");
@@ -95,12 +97,15 @@ public class BMI extends JPanel {
 				gradeBMI();
 				
 				resultPan.setBounds(100, 530, 720, 100);
-				
+				System.out.println(parent.getMyname());
+				name = parent.getMyname();
+				System.out.println(parent.getMyname());
+				//System.out.println(name);
 				result1.setFont(f);
 				result2.setFont(f);
 				result1.setHorizontalTextPosition(SwingConstants.CENTER);
 				result1.setText(name + " 님의 BMI 결과는"+result + " % 이므로 "+grade + " 입니다.");
-				
+			
 				resultPan.setBorder(tborder);
 				resultPan.add(result1);
 				
@@ -133,23 +138,13 @@ public class BMI extends JPanel {
 		return grade;
 	}// end
 
-	public String ConnectClient() {
-		try {
-			client = new Socket("192.168.53.4",40000);
-			dis = new DataInputStream(client.getInputStream());
-		} catch (Exception e) {
-			System.out.println("bmi 초기연결 실패");
-		}
-		try {
-			name = dis.readUTF();
-		}catch(Exception e1) {
-			System.out.println("bmi 이름데이터받기 실패");
-		}
-		return name;
-	}
+	
 	
 
-	public BMI() {
+	public BMI(PlanPan parent) {
+		this.parent = parent;
+		
+		
 		this.setBackground(Color.WHITE);
 		compInit();
 		eventInit();

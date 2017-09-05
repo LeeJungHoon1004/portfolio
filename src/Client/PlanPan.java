@@ -29,15 +29,22 @@ public class PlanPan extends JPanel {
 
 	private BasicShape parent ;
 	private PlanPan self = this;
-	
-
-
-	
+	private String myname;
 	private Socket client;
 	private DataOutputStream dos;
 	private DataInputStream dis;
 
 	
+
+
+	public String getMyname() {
+		return myname;
+	}
+
+
+	public void setMyname(String myname) {
+		this.myname = myname;
+	}
 
 
 	private TitledBorder tborder = new TitledBorder("");
@@ -56,7 +63,7 @@ public class PlanPan extends JPanel {
 	private JPanel cupPan = new JPanel(new GridLayout(1, 5));
 	private JPanel cupPan2 = new JPanel(new GridLayout(1, 5));
 
-	private BMI bmi = new BMI();
+	private BMI bmi = new BMI(self);
 
 
 
@@ -542,6 +549,9 @@ public class PlanPan extends JPanel {
 				//예 /아니오 처리.
 				//	System.out.println(Boolean.valueOf(changecup1).toString());
 				if (parent.getClient() != null) {
+					myname = parent.getName1();
+					System.out.println("PlanPan에서 name출력 :"+ myname);
+					System.out.println(myname);
 
 					int Question = JOptionPane.showConfirmDialog(null, "저장하시겠습니까 ? ",
 							"저장",JOptionPane.OK_OPTION);
@@ -601,16 +611,17 @@ public class PlanPan extends JPanel {
 
 
 	//생성자
-	public PlanPan(BasicShape self) {
-		 
+	public PlanPan(BasicShape parent) {
+	
+		this.parent =  parent;
 		this.setBackground(Color.WHITE);
 		this.setLayout(new GridLayout(2,1));
 		this.setSize(900, 900);
-
+		
 		this.compInit();
 		this.eventInit();
 		this.setVisible(true);
-
+		
 	}
 
 
