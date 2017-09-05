@@ -78,7 +78,8 @@ public class PictureBoardPan extends JPanel {
 		this.dis = dis;
 		this.dos = dos;
 		this.fl = fl;
-		
+		System.out.println("아진짜");
+		System.out.println(fl.size());
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
@@ -178,13 +179,14 @@ public class PictureBoardPan extends JPanel {
 
 	public void renew() {//갱신 메소드
 		dlm = new DefaultListModel();
+		System.out.println(fl.size());
 		for(int i=0;i<fl.size();i++) {
 			String filename = fl.get(i).getFileName();
-			String coment = fl.get(i).getContents();
+			String title = fl.get(i).getTitle();
 			
 			JLabel lb = new JLabel();
 			lb.setIcon(new ImageIcon(filename));
-			lb.setText(coment);
+			lb.setText(title);
 			
 			dlm.addElement(lb);
 		}
