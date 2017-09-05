@@ -18,7 +18,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -49,8 +51,6 @@ public class PictureBoardPan extends JPanel {
 	private DataInputStream dis = null;
 	private ObjectInputStream ois = null;
 
-//	private String userID;
-//	private String userPW;
 	private int index;// jlist 선택한 인덱스 번호
 	private TitledBorder tborder = new TitledBorder("");
 	
@@ -61,109 +61,14 @@ public class PictureBoardPan extends JPanel {
 	private JButton remove = new JButton("글삭제");
 
 	private ArrayList<FileList> fl;
+	private DefaultListModel dlm;
 	private JList list;
-	//private DefaultListModel dlm;
 	private JScrollPane sc;
 	private CellRenderer cellrender;
 	private int cnt = 0;
 	private String[] title;
 	private String[] contents;
 	private String[] fileName;
-
-	public void compInit() {
-		setLayout(new BorderLayout(1, 1));
-
-//		list = new JList(dlm);
-//		sc = new JScrollPane(list);
-//		list.setCellRenderer(new CellRenderer());
-		renew();
-		
-		sc.setPreferredSize(new Dimension(970, 500));
-		floor2.setPreferredSize(new Dimension(970,90));
-		sc.setBorder(tborder);
-		
-		floor1.add(sc);
-		floor2.add(upload);
-		floor2.add(remove);
-
-		floor1.setBackground(Color.white);
-		floor2.setBackground(Color.white);
-		
-		add(floor1, BorderLayout.CENTER);
-		add(floor2, BorderLayout.SOUTH);
-
-	}
-
-	public void eventInit() {
-		upload.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cnt++;
-				
-				new AddPictureBoard(parent ,self,client, dis, dos).setVisible(true);
-				// JDialog 보이기!
-				
-				renew();//renew 안에 unmarshalling도 들어있음.
-				//repaint();
-
-			}
-		});
-		
-//		 remove.addActionListener(new ActionListener() {
-//			 public void actionPerformed(ActionEvent e) {
-//				 int index = list.getSelectedIndex(); // 선택된 항목의 인덱스를 가져온다.
-//				 // 인덱스는 0부터 시작
-//		
-//				 try {
-//					 dos.writeUTF("리스트 삭제");
-//					 dos.writeInt(index);//삭제할 리스트의 프라이머리 번호
-//				 } catch (Exception e1) {
-//					 System.out.println("삭제 실패");
-//				 } // 서버에 게시글 없앤다고 보냄.
-//		
-//				 list.remove(index); // 리스트모델에서 선택된 항목을 지운다.
-//				 
-//				 if (dlm.getSize() == 0) { // 리스트모델의 사이즈가 0이되면 삭제버튼을 누를 수 없게 한다.
-//					 // btnDel.setEnabled(false);
-//				 }
-//				 if (index == dlm.getSize()) { // 인덱스와 리스트모델의 마지막항목이 같으면
-//					 index--; // 즉,선택된 인덱스가 리스트의 마지막 항목이었으면
-//				 } // 인덱스를 -1해서 인덱스를 옮겨준다.
-//				 list.setSelectedIndex(index); //
-//				 list.ensureIndexIsVisible(index);
-//		
-//				 JOptionPane.showMessageDialog(null, "게시글이 삭제되었습니다");
-//				 
-//				 renew();
-//				 //삭제후 갱신
-//		 		}
-//		 });
-
-		list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				
-				index = list.getSelectedIndex();
-				
-				String img = "C:/4W/PictureBoardPan"+"/"+fl.get(index).getFileName();
-				String title = fl.get(index).getTitle();
-				String comment = fl.get(index).getContents();
-				
-				new ListSelected(self, img,title,comment).setVisible(true);
-			}
-		});
-
-	}
-
-	public void renew() {//갱신 메소드
-		
-	//	dlm = new DefaultListModel();
-//		for(int i=0;i<dlm.getSize();i++){
-//			dlm.addElement(new CellRenderer(title, filename));
-//		}
-		list = new JList();
-
-		sc = new JScrollPane(list);
-		list.setCellRenderer(new CellRenderer(fl));
-	}
 
 
 	public PictureBoardPan(BasicShape parent,Socket client,DataInputStream dis, DataOutputStream dos,
@@ -191,5 +96,104 @@ public class PictureBoardPan extends JPanel {
 		compInit();
 		eventInit();
 	}
+	
+	public void compInit() {
+		setLayout(new BorderLayout(1, 1));
+
+		renew();
+		
+		sc.setPreferredSize(new Dimension(970, 500));
+		floor2.setPreferredSize(new Dimension(970,90));
+		sc.setBorder(tborder);
+		
+		floor1.add(sc);
+		floor2.add(upload);
+		floor2.add(remove);
+
+		floor1.setBackground(Color.white);
+		floor2.setBackground(Color.white);
+		
+		add(floor1, BorderLayout.CENTER);
+		add(floor2, BorderLayout.SOUTH);
+
+	}
+
+	public void eventInit() {
+		upload.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cnt++;
+				
+				new AddPictureBoard(parent ,self,client, dis, dos).setVisible(true);
+				// JDialog 보이기!
+				
+				renew();//renew 안에 unmarshalling도 들어있음.
+
+			}
+		});
+		
+		 remove.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 int index = list.getSelectedIndex(); // 선택된 항목의 인덱스를 가져온다.
+				 // 인덱스는 0부터 시작
+		
+				 try {
+					 dos.writeUTF("리스트 삭제");
+					 dos.writeInt(index);//삭제할 리스트의 프라이머리 번호
+				 } catch (Exception e1) {
+					 System.out.println("삭제 실패");
+				 } // 서버에 게시글 없앤다고 보냄.
+		
+				 list.remove(index); // 리스트모델에서 선택된 항목을 지운다.
+				 
+				 if (dlm.getSize() == 0) { // 리스트모델의 사이즈가 0이되면 삭제버튼을 누를 수 없게 한다.
+					 // btnDel.setEnabled(false);
+				 }
+				 if (index == dlm.getSize()) { // 인덱스와 리스트모델의 마지막항목이 같으면
+					 index--; // 즉,선택된 인덱스가 리스트의 마지막 항목이었으면
+				 } // 인덱스를 -1해서 인덱스를 옮겨준다.
+				 list.setSelectedIndex(index); //
+				 list.ensureIndexIsVisible(index);
+		
+				 JOptionPane.showMessageDialog(null, "게시글이 삭제되었습니다");
+				 
+				 renew();
+				 //삭제후 갱신
+		 		}
+		 });
+
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				
+				index = list.getSelectedIndex();
+				
+				String img = "C:/4W/PictureBoardPan"+"/"+fl.get(index).getFileName();
+				String title = fl.get(index).getTitle();
+				String comment = fl.get(index).getContents();
+				
+				new ListSelected(self, img,title,comment).setVisible(true);
+			}
+		});
+
+	}
+
+	public void renew() {//갱신 메소드
+		dlm = new DefaultListModel();
+		for(int i=0;i<fl.size();i++) {
+			String filename = fl.get(i).getFileName();
+			String coment = fl.get(i).getContents();
+			
+			JLabel lb = new JLabel();
+			lb.setIcon(new ImageIcon(filename));
+			lb.setText(coment);
+			
+			dlm.addElement(lb);
+		}
+		list = new JList(dlm);
+
+		sc = new JScrollPane(list);
+		list.setCellRenderer(new CellRenderer(fl));
+	}
+
+
 
 }
