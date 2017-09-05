@@ -447,13 +447,15 @@ public class BasicShape extends JFrame {
 
 	public ArrayList<VideoFileList> receiveData() {
 		try {
+			
 			dos.writeUTF("url데이터발신");
-
+			
 			ois = new ObjectInputStream(client.getInputStream());
-
+			
 			vflList = new ArrayList<VideoFileList>();
+			
 			vflList = (ArrayList<VideoFileList>) ois.readObject();
-
+			
 			System.out.println("ois로 리스트 전달받기 성공");
 			System.out.println(vflList.size());
 

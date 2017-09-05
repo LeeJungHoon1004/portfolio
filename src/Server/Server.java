@@ -1595,7 +1595,7 @@ public class Server extends JFrame {
 					System.out.println("url갱신버튼 누를때 에러 발생.");
 					e1.printStackTrace();
 				}
-				new UrlDialog(self).setVisible(true);
+				
 			}
 
 		});
@@ -1621,7 +1621,7 @@ public class Server extends JFrame {
 					System.out.println("url전송버튼 누를때 DB에서 받은 receivedList를 쓰레드로 넘겨주는 지점에서 에러발생");
 
 				}
-
+				new UrlDialog(self).setVisible(true);
 			}
 
 		});
