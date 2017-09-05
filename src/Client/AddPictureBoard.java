@@ -161,22 +161,13 @@ public class AddPictureBoard extends JDialog {
 		try {
 
 			dos.writeUTF("커뮤니티에게시글추가");
-
-			String id =null;
 			
 			String title = null;
 			String contents = null;
 			String fileName = null;
 			int fileSize = 0;
 			byte[] fileContents = null;
-		//	File home = new File("L:/김현수/클라이언트");
-		//	File[] files = home.listFiles();
-
-		//	for (File tmp : files) {
-		//		System.out.println(tmp.getAbsolutePath() + " : " + tmp.length());
-		//		System.out.println(tmp.getAbsolutePath() + " : " + tmp.getName());
-		//	}
-
+	
 			File targetFile = new File(picturePath.getText());
 			title = titleField.getText();
 			contents = comment.getText();
@@ -187,8 +178,6 @@ public class AddPictureBoard extends JDialog {
 			fis = new FileInputStream(targetFile);
 			fis.read(fileContents);
 			fis.close();
-			// System.out.println("1번째 파일 :" + fileName + "의 파일 사이즈 :" +fileSize + " : " +
-			// "의 파일 내용물 :" + fileContents );
 			oos = new ObjectOutputStream(client.getOutputStream());
 			// 파일a제목 , 파일a내용 , 타겟팅한 파일의 이름 , 파일크기 , 파일을 바이트배열로 담아서 내용묶음
 			FileList fl1 = new FileList(id, title, contents, fileName, fileSize, fileContents);
