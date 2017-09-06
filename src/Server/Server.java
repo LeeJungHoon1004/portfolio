@@ -229,7 +229,7 @@ class ConnectionThread extends Thread {
 				}
 
 				else if(cmd.equals("커뮤니티에게시글추가")){
-					File home = new File("C:/4weeksWorkoutServerPosting");
+					File home = new File(Server.ServerdirectoryPathPosting);
 					ois = new ObjectInputStream(socket.getInputStream());
 					//클라이언트에서 커뮤니티 게시판에서 받은 데이터를 저장함
 					//
@@ -310,11 +310,17 @@ class ConnectionThread extends Thread {
 					String id = "김현수";
 					String title = "커뮤니티자료제목1";
 					String contents = "커뮤니티자료내용1";
+					 
+				//	targetFile[9] = new File(home.getPath() + "/" + urlImageFileName[9]);
 					String fileName= "d1.jpg";
 					int fileSize = 0;
 					byte[] fileContents = null;
-					File home = new File("C:/4weeksWorkoutServerPosting");
+					
+					File home = new File(Server.ServerdirectoryPathPosting);
+				//	targetPictureFile[0] = new File(home.getPath()+"/"+urlImageFileName)
+							
 					File[] files = home.listFiles();
+					System.out.println(files.length);
 					for(File tmp : files){
 						
 						fileName = tmp.getName();
@@ -433,6 +439,11 @@ public class Server extends JFrame {
 	private JButton urlRenewalButton = new JButton("URL갱신");
 	private JButton urlConfirmButton = new JButton("URL확인");
 
+	//Article.. community Variable
+	private File [] targetPictureFile ;
+	
+	
+	//URL.. thumbNail Variable
 	public static ArrayList<VideoFileList> receivedvflList;
 	private String[] buttonName = new String[25];
 	private int[] fileSize = new int[25];
@@ -1644,24 +1655,26 @@ public class Server extends JFrame {
 
 		
 		// 프로그램의 공통파일 만들기!
-		ServerdirectoryPathVideo = "C:/4weeksWorkoutServer";
+		// 운동의 썸네일 이미지파일저장소
+		ServerdirectoryPathVideo = "C:/4weeksWorkoutServerVideoPan";
 		// 파일 객체 생성
 		File file = new File(ServerdirectoryPathVideo);
 		// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
 		if (!file.exists()) {
 			// 디렉토리 생성 메서드
 			file.mkdirs();
-			System.out.println("created directory : C:/4weeksWorkoutServer successfully!");
+			System.out.println("created directory : C:/4weeksWorkoutServer/VideoPan successfully!");
 		}
 		
-		ServerdirectoryPathPosting ="C:/4weeksWorkoutServerPosting";
+		//커뮤니티에서 업로드받은 이미지파일 저장소
+		ServerdirectoryPathPosting ="C:/4weeksWorkoutServerPictureBoardPan";
 		
 		File file2 = new File(ServerdirectoryPathPosting);
 		// !표를 붙여주어 파일이 존재하지 않는 경우의 조건을 걸어줌
 		if (!file2.exists()) {
 			// 디렉토리 생성 메서드
 			file2.mkdirs();
-			System.out.println("created directory : C:/4weeksWorkoutServerPosting successfully!");
+			System.out.println("created directory : C:/4weeksWorkoutServerPictureBoardPan successfully!");
 		}
 		this.setSize(1200, 750);
 		this.setTitle("서버");
