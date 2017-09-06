@@ -56,6 +56,7 @@ public class PictureBoardPan extends JPanel {
 	private int index;// jlist 선택한 인덱스 번호
 	private TitledBorder tborder = new TitledBorder("");
 	
+	private JLabel firstLabel = new JLabel();
 	private JPanel floor1 = new JPanel();
 	private JPanel floor2 = new JPanel();
 	
@@ -108,6 +109,13 @@ public class PictureBoardPan extends JPanel {
 		floor2.setPreferredSize(new Dimension(970,90));
 		sc.setBorder(tborder);
 		
+		String text ="\t\t\t"+"제목"+"\t\t\t\t\t\t\t"+"작성자"+"\t\t\t\t\t\t\t\t"+"글번호";
+		text = text.replaceAll("\t","        ");
+		//↑이걸 써야지 Jlabel에 \t이 된다.
+		//그냥 \t 을 띄어쓰기로 바꿔서 적용한다 인듯.
+		firstLabel.setText(text);
+		
+		floor1.add(firstLabel);
 		floor1.add(sc);
 		floor2.add(upload);
 		floor2.add(remove);

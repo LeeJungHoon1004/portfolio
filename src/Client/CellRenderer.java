@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.DefaultListCellRenderer;
@@ -28,7 +29,7 @@ public class CellRenderer extends DefaultListCellRenderer {
 
 	}
 
-	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+	public JPanel getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 			boolean cellHasFocus)
 	{  
 		
@@ -38,12 +39,12 @@ public class CellRenderer extends DefaultListCellRenderer {
 		//FileList로 다운캐스팅하고등록해보니까 어설프긴한데 나오긴나와..
 		//서버쪽에서 데이터를 보낸순서대로 나온다. 
 		String path = "C:/4W/PictureBoardPan";
+		JPanel pan  = new JPanel(new GridLayout(1,4));
 		JLabel label = new JLabel();
-		JLabel lb = new JLabel();
-		JPanel pan = new JPanel();
+		JLabel label1 = new JLabel();
+		JLabel label2 = new JLabel();
+		JLabel label3 = new JLabel();
 //		fl= (ArrayList<FileList>)value; //여기서 value 가 Server.FileList 로 나오는데 어레이리스트로 캐스팅안된다고함.
-//    label.setIcon(new ImageIcon(path+"/"+fl.get(index).getFileName()));
-//    label.setText(fl.get(index).getTitle());
 		
 		fl = (FileList)value;
 		
@@ -52,14 +53,15 @@ public class CellRenderer extends DefaultListCellRenderer {
 		Image changedImg= originImg.getScaledInstance(150, 80, Image.SCALE_SMOOTH );
 		ImageIcon image = new ImageIcon(changedImg);
 		
-		
-		lb.setText(Integer.toString(index+1)+"|");
 		label.setIcon(image);
-		label.setText("\t" +fl.getTitle()+ "\t\t"+ fl.getId()+ "\t\t\t\t\t" + "|" + Integer.toString(index+1) );
+		label1.setText(fl.getTitle());
+		label2.setText(fl.getId());
+		label3.setText(Integer.toString(index+1));
 		
-		
-		//pan.add(lb,BorderLayout.WEST);
-		//pan.add(label,BorderLayout.EAST);
+		pan.add(label,BorderLayout.WEST);
+		pan.add(label1,BorderLayout.CENTER);
+		pan.add(label2,BorderLayout.CENTER);
+		pan.add(label3,BorderLayout.EAST);
 		
     if (isSelected) {
     	pan.setBackground(Color.GRAY);
@@ -69,6 +71,6 @@ public class CellRenderer extends DefaultListCellRenderer {
 		pan.setForeground(Color.BLACK);
 	}
 
-    return label;
+    return pan;
 	}
 }
