@@ -39,7 +39,7 @@ public class ListSelected extends JDialog {
 		title.setPreferredSize(new Dimension(120, 50));
 		comment.setPreferredSize(new Dimension(500,150));
 		
-		title.setHorizontalTextPosition(SwingConstants.WEST);
+		title.setHorizontalTextPosition(SwingConstants.CENTER);
 		
 		img.setBorder(tborder);
 		pan.setBorder(tborder);
