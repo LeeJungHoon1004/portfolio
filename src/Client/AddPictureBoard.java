@@ -185,8 +185,6 @@ public class AddPictureBoard extends JDialog {
 			// 파일a제목 , 파일a내용 , 타겟팅한 파일의 이름 , 파일크기 , 파일을 바이트배열로 담아서 내용묶음
 			FileList fl1 = new FileList(id, title, contents, fileName, fileSize, fileContents);
 			oos.writeObject(fl1);
-		//	fileName = "d1.JPG";
-		//	targetFile = new File(home.getPath() + "/" + fileName);
 			// ====================================================파일1개 보내기
 
 		} catch (Exception e1) {
@@ -209,8 +207,6 @@ public class AddPictureBoard extends JDialog {
 		compInit();
 		eventInit();
 
-		// pack();
-		// 왜 pack을하면 지정한 사이즈로 나오지 않고 달라질까..?
 		setModal(true);
 	}
 

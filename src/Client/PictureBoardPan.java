@@ -7,6 +7,10 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
@@ -170,10 +174,17 @@ public class PictureBoardPan extends JPanel {
 		 		}
 		 });
 
-		 list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
+		 
+		 list.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
 				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
 				index = list.getSelectedIndex();
 				System.out.println(list.getSelectedIndex());
 				String img = "C:/4W/PictureBoardPan"+"/"+fl.get(index).getFileName();
@@ -182,6 +193,32 @@ public class PictureBoardPan extends JPanel {
 				String writer = fl.get(index).getId();
 				
 				new ListSelected(self, img,title,comment,writer).setVisible(true);
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				index = list.getSelectedIndex();
+				System.out.println(list.getSelectedIndex());
+				String img = "C:/4W/PictureBoardPan"+"/"+fl.get(index).getFileName();
+				String title = fl.get(index).getTitle();
+				String comment = fl.get(index).getContents();
+				String writer = fl.get(index).getId();
+				
+				new ListSelected(self, img,title,comment,writer).setVisible(true);
+				
 			}
 		});
 
