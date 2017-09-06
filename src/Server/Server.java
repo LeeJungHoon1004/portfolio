@@ -313,7 +313,7 @@ class ConnectionThread extends Thread {
 					String fileName= "d1.jpg";
 					int fileSize = 0;
 					byte[] fileContents = null;
-					File home = new File("C:/tmp");
+					File home = new File("C:/4weeksWorkoutServerPosting");
 					File[] files = home.listFiles();
 					for(File tmp : files){
 						
