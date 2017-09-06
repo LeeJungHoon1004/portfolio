@@ -2,6 +2,7 @@ package Client;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 
@@ -27,7 +28,7 @@ public class CellRenderer extends DefaultListCellRenderer {
 
 	}
 
-	public JPanel getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 			boolean cellHasFocus)
 	{  
 		
@@ -51,13 +52,14 @@ public class CellRenderer extends DefaultListCellRenderer {
 		Image changedImg= originImg.getScaledInstance(150, 80, Image.SCALE_SMOOTH );
 		ImageIcon image = new ImageIcon(changedImg);
 		
-		//System.out.println("¸®½ºÆ®" + fl.getTitle());
-		lb.setText(Integer.toString(index+1)+"|"+"     			     ");
-		label.setIcon(image);
-		label.setText("       "+fl.getTitle());
 		
-		pan.add(lb,BorderLayout.WEST);
-		pan.add(label,BorderLayout.CENTER);
+		lb.setText(Integer.toString(index+1)+"|");
+		label.setIcon(image);
+		label.setText("\t" +fl.getTitle()+ "\t\t"+ fl.getId()+ "\t\t\t\t\t" + "|" + Integer.toString(index+1) );
+		
+		
+		//pan.add(lb,BorderLayout.WEST);
+		//pan.add(label,BorderLayout.EAST);
 		
     if (isSelected) {
     	pan.setBackground(Color.GRAY);
@@ -67,6 +69,6 @@ public class CellRenderer extends DefaultListCellRenderer {
 		pan.setForeground(Color.BLACK);
 	}
 
-    return pan;
+    return label;
 	}
 }

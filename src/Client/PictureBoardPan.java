@@ -182,14 +182,12 @@ public class PictureBoardPan extends JPanel {
 	public void renew() {//갱신 메소드
 		
 		dlm = new DefaultListModel();
-		String path = "C:/4W/PictureBoardPan";
 		for(FileList tmp : fl) {
 			dlm.addElement(tmp);
 		}
 		
 		list = new JList(dlm);
 		sc = new JScrollPane(list);
-		//list.setModel(dlm);
 		list.setCellRenderer(new CellRenderer());
 	}
 
