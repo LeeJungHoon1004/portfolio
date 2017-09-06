@@ -155,7 +155,8 @@ public class PlanPan extends JPanel {
 		}
 		combolist1.setPreferredSize(new Dimension(320, 50));
 		combolist1.setEditable(false);
-
+		combolist1.setSelectedIndex(0);
+		
 		Object[] action2 = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기",
 				"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트",
 				"6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기",
@@ -167,7 +168,8 @@ public class PlanPan extends JPanel {
 		}
 		combolist2.setPreferredSize(new Dimension(320, 50));
 		combolist2.setEditable(false);
-
+		combolist2.setSelectedIndex(1);
+		
 		Object[] action3 = { "1.밥먹을때 젓가락만 이용하기 ", "2.운동30분 하기", "3.일어나서 스트레칭 하기", 
 				"4.집에갈때 계단이용하기 ", "5.스쿼트  30개씩 3세트",
 				"6.플랭크 1분 3세트", "7.저녁안먹기", "8.샤워하며 마사지하기", 
@@ -180,7 +182,8 @@ public class PlanPan extends JPanel {
 		combolist3.setPreferredSize(new Dimension(320, 50));
 		combolist3.setEditable(false);
 
-
+		combolist3.setSelectedIndex(2);
+		
 		this.add(panelNorth);
 		panelNorth.add(paneldivide);
 		this.add(panelSouth);
