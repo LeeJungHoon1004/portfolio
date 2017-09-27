@@ -18,11 +18,11 @@ import javax.swing.JTextField;
 public class myGoalPan extends JPanel {
 	static DrawingPanel drawingPanel =new DrawingPanel();;
    public void compInit() {
-	   this.setLayout(new BorderLayout());
+	   this.setLayout(new BorderLayout()); 
 	  ControlPanel controlPanel = new ControlPanel();
        
       this.add(controlPanel, BorderLayout.SOUTH);
-      this.add(drawingPanel, BorderLayout.CENTER);
+      this.add(drawingPanel, BorderLayout.CENTER); 
       this.setPreferredSize(new Dimension(920, 900));
       // myGoalPanel.add(drawingPanel, BorderLayout.CENTER);
    }
@@ -41,17 +41,17 @@ public class myGoalPan extends JPanel {
    // "입력" 버튼을 눌렀을때 작동 할 리스터등록
    // frame.pack();
 
-   public static void main(String[] args) {
-	   JFrame f = new JFrame();
-	   
-	   f.setSize(1000,400);
-	   f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
-	   f.setLocationRelativeTo(null);
-	   myGoalPan goalPan = new myGoalPan();
-	   f.add(goalPan);
-	   f.setVisible(true);
-      
-   }
+//   public static void main(String[] args) {
+//	   JFrame f = new JFrame();
+//	   
+//	   f.setSize(1000,400);
+//	   f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
+//	   f.setLocationRelativeTo(null);
+//	   myGoalPan goalPan = new myGoalPan();
+//	   f.add(goalPan);
+//	   f.setVisible(true);
+//      
+//   }
 }
 // 그래피를 그리는 패널 클래스
 

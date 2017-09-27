@@ -32,7 +32,7 @@ public class ComboPan extends JPanel{
 	private Socket client;
 	private DataOutputStream dos;
 	private DataInputStream dis;
-
+	
 	// ----------------소켓
 	private  TitledBorder tborder = new TitledBorder("");
 	private Font font = new Font("나무", Font.ITALIC, 30);
@@ -75,15 +75,21 @@ public class ComboPan extends JPanel{
 
 
 	//컵 이미지와 아이콘 생성
-	private Image goalimg = new ImageIcon("목표.jpg").getImage().getScaledInstance(330, 150,
+	//getClass().getResource("/images/타이틀3.jpg")
+	//"목표.jpg"
+	private Image goalimg = new ImageIcon(getClass().getResource("/images/목표.jpg")).getImage().getScaledInstance(330, 150,
 			java.awt.Image.SCALE_SMOOTH); // 
-	private Image waterinformimg = new ImageIcon("waterinform.jpg").getImage().getScaledInstance(300, 300,
+	
+	//"waterinform.jpg"
+	private Image waterinformimg = new ImageIcon(getClass().getResource("/images/waterinform.jpg")).getImage().getScaledInstance(300, 300,
 			java.awt.Image.SCALE_SMOOTH); 
 
-
-	private Image cupimage = new ImageIcon("empty2.png").getImage().getScaledInstance(50, 80,
+	//"empty2.png"
+	private Image cupimage = new ImageIcon(getClass().getResource("/images/empty2.png")).getImage().getScaledInstance(50, 80,
 			java.awt.Image.SCALE_SMOOTH); // 빈컵이미지
-	private Image fullcupimage = new ImageIcon("full2.png").getImage().getScaledInstance(50, 80,
+
+	//"full2.png"
+	private Image fullcupimage = new ImageIcon(getClass().getResource("/images/full2.png")).getImage().getScaledInstance(50, 80,
 			java.awt.Image.SCALE_SMOOTH); // 물들어있는컵
 
 	private JPanel cupPan = new JPanel(new GridLayout(1, 5));
@@ -260,7 +266,6 @@ public class ComboPan extends JPanel{
 					self.icon1.setImage(fullcupimage);
 				} else {
 					self.icon1.setImage(cupimage);
-
 				}
 				self.cupb1.setIcon(icon1);
 			}

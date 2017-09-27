@@ -5,7 +5,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -108,7 +107,6 @@ public class BasicShape extends JFrame {
 	private Container cp = this.getContentPane();
 	private JLabel title = new JLabel();
 
-	private Font font = new Font("바탕", Font.ITALIC, 30);
 	private JButton homeBt = new JButton("홈");
 	// private JButton dailyBt = new JButton("목표");
 	private JButton planBt = new JButton("목표");
@@ -122,20 +120,24 @@ public class BasicShape extends JFrame {
 
 	private JLabel passionlabel = new JLabel();
 
-	private Image passionimg = new ImageIcon("끼.jpg").getImage().getScaledInstance(187, 130,
-			java.awt.Image.SCALE_SMOOTH);
+	
+	
+	//private Image passionimg = new ImageIcon(getClass().getResource("/images/끼.jpg")).getImage().getScaledInstance(187, 130,java.awt.Image.SCALE_SMOOTH);
+	//("끼.jpg") 를 폴더안에 그림파일넣고 이렇게 바꿈 (getClass().getResource("/images/끼.jpg"))
+	private Image passionimg = new ImageIcon(getClass().getResource("/images/끼.jpg")).getImage().getScaledInstance(187, 130,java.awt.Image.SCALE_SMOOTH);
+	//private Image passionimg = new ImageIcon("끼.jpg").getImage().getScaledInstance(187, 130,java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon passionicon = new ImageIcon(passionimg);
 
 	// ▽▽▽▽▽▽▽▽▽▽프로필 바뀜▽▽▽▽▽▽▽▽▽▽▽▽
 	// 로그아웃 중일때
 	private JLabel lbID = new JLabel();
 	private JLabel lbPW = new JLabel();
-
-	private Image idimage = new ImageIcon("ID (3).jpg").getImage().getScaledInstance(98, 30,
-			java.awt.Image.SCALE_SMOOTH);
+	
+	private Image idimage = new ImageIcon(getClass().getResource("/images/ID (3).jpg")).getImage().getScaledInstance(98, 30,java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon iconid = new ImageIcon(idimage);
-
-	private Image pwimage = new ImageIcon("PW (2).jpg").getImage().getScaledInstance(98, 30,
+	//("PW (2).jpg")
+	
+	private Image pwimage = new ImageIcon(getClass().getResource("/images/PW (2).jpg")).getImage().getScaledInstance(98, 30,
 			java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon iconpw = new ImageIcon(pwimage);
 	private JTextField inputID = new JTextField();
@@ -163,7 +165,8 @@ public class BasicShape extends JFrame {
 	private JPanel mainPan = new JPanel(card);
 	private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
 	// COMPNENT - homePan
-	private Image titleimage = new ImageIcon("타이틀3.jpg").getImage().getScaledInstance(1194, 100,
+	//("타이틀3.jpg")
+	private Image titleimage = new ImageIcon(getClass().getResource("/images/타이틀3.jpg")).getImage().getScaledInstance(1194, 100,
 			java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon titleicon = new ImageIcon(titleimage);
 
@@ -191,6 +194,8 @@ public class BasicShape extends JFrame {
 	private myGoalPan mygoalpan = new myGoalPan();
 	private JScrollPane mygoalPanSc = new JScrollPane(mygoalpan);
 
+	
+
 	// COMPNENT - videoPan
 	private JPanel videoPan;
 	private VideoPan video;
@@ -198,7 +203,7 @@ public class BasicShape extends JFrame {
 
 	// COMPNENT - imgBoardPan
 	private JPanel imgPanel;
-	private PictureBoardPan pbp;
+	private PictureBoardPan pbp; 
 	private JScrollPane picSc;// 스크롤
 
 	// COMPNENT - planPan
@@ -643,6 +648,7 @@ public class BasicShape extends JFrame {
 				// client = null;
 				self.userID = null;
 				self.userPW = null;
+				self.name =null;
 				result=null;//result 에 "로그인성공"으로 채워져있던값을비움.
 				System.out.println("성공적으로 소켓종료");
 				inputID.setText("");
@@ -749,7 +755,7 @@ public class BasicShape extends JFrame {
 
 	public BasicShape() {
 
-		setTitle("기본shape테스트");
+		setTitle("클라이언트");
 		setSize(1200, 750);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

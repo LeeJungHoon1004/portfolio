@@ -25,7 +25,6 @@ public class ImagePreview extends JComponent implements PropertyChangeListener {
 	private ImageIcon icon;
 
 	public ImagePreview(JFileChooser fc) {
-
 		fc.addPropertyChangeListener(this);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 	}

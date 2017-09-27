@@ -4,6 +4,7 @@ package Client;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
@@ -43,7 +44,12 @@ public class BMI extends JPanel {
 	private String name ;
 	private double result;
 	private String grade;
-	private ImageIcon img = new ImageIcon("bmiºñ¸¸µµ.jpg");
+	
+//	private Image passionimg = new ImageIcon(getClass().getResource("/images/³¢.jpg")).getImage().getScaledInstance(187, 130,java.awt.Image.SCALE_SMOOTH);
+	//private Image passionimg = new ImageIcon("³¢.jpg").getImage().getScaledInstance(187, 130,java.awt.Image.SCALE_SMOOTH);
+//	private ImageIcon passionicon = new ImageIcon(passionimg);
+	private Image bmiimg = new ImageIcon(getClass().getResource("/images/bmi.jpg")).getImage().getScaledInstance(800, 400, java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon img = new ImageIcon(bmiimg);
 	private JLabel imgResult = new JLabel(img);
 	private JLabel result1 = new JLabel();
 	private JLabel result2 = new JLabel();
@@ -97,9 +103,10 @@ public class BMI extends JPanel {
 				gradeBMI();
 				
 				resultPan.setBounds(100, 530, 720, 100);
-				System.out.println(parent.getMyname());
-				name = parent.getMyname();
-				System.out.println(parent.getMyname());
+			
+				
+				name = parent.getParent1().getName1();
+				System.out.println(name);
 				//System.out.println(name);
 				result1.setFont(f);
 				result2.setFont(f);
@@ -143,8 +150,6 @@ public class BMI extends JPanel {
 
 	public BMI(PlanPan parent) {
 		this.parent = parent;
-		
-		
 		this.setBackground(Color.WHITE);
 		compInit();
 		eventInit();

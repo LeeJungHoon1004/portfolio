@@ -35,15 +35,17 @@ public class PlanPan extends JPanel {
 	private DataInputStream dis;
 
 	
+	
 
 
-	public String getMyname() {
-		return myname;
+
+	public BasicShape getParent1() {
+		return parent;
 	}
 
 
-	public void setMyname(String myname) {
-		this.myname = myname;
+	public void setParent(BasicShape parent) {
+		this.parent = parent;
 	}
 
 
@@ -74,8 +76,8 @@ public class PlanPan extends JPanel {
 	private JButton buttonUpload = new JButton("체크완료 >_<"); // 체크완료 버튼
 
 	private JLabel goallabel = new JLabel("");
-	private JLabel emptylabel = new JLabel("                                           ");
-	private JLabel emptylabel2 = new JLabel("                                           ");
+	private JLabel emptylabel = new JLabel("");
+	private JLabel emptylabel2 = new JLabel("");
 
 	private JLabel waterinformlabel = new JLabel("");
 
@@ -94,21 +96,20 @@ public class PlanPan extends JPanel {
 	private JButton cupb9 = new JButton();
 	private JButton cupb10 = new JButton();
 
-
-	//컵 이미지와 아이콘 생성
-	private Image goalimg = new ImageIcon("목표.jpg").getImage().getScaledInstance(330, 180,
+	//"목표.jpg"
+	private Image goalimg = new ImageIcon(getClass().getResource("/images/목표.jpg")).getImage().getScaledInstance(330, 180,
 			java.awt.Image.SCALE_SMOOTH); // 
-	private Image waterinformimg = new ImageIcon("waterinform.jpg").getImage().getScaledInstance(300, 300,
+	//"waterinform.jpg"
+	private Image waterinformimg = new ImageIcon(getClass().getResource("/images/waterinform.jpg")).getImage().getScaledInstance(300, 300,
 			java.awt.Image.SCALE_SMOOTH); 
 
 
-
-	private Image cupimage = new ImageIcon("empty2.png").getImage().getScaledInstance(50, 80,
+	//"empty2.png"
+	private Image cupimage = new ImageIcon(getClass().getResource("/images/empty2.png")).getImage().getScaledInstance(50, 80,
 			java.awt.Image.SCALE_SMOOTH); // 빈컵이미지
-	private Image fullcupimage = new ImageIcon("full2.png").getImage().getScaledInstance(50, 80,
+	//"full2.png"
+	private Image fullcupimage = new ImageIcon(getClass().getResource("/images/full2.png")).getImage().getScaledInstance(50, 80,
 			java.awt.Image.SCALE_SMOOTH); // 물들어있는컵
-
-
 
 	private ImageIcon icongoal = new ImageIcon(goalimg);
 	private ImageIcon iconwaterinform = new ImageIcon(waterinformimg);

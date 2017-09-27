@@ -5,7 +5,12 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import java.net.URL;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 //javafx example jar file  ..
 public class ImageSlide extends JPanel {
@@ -14,14 +19,23 @@ public class ImageSlide extends JPanel {
 	JLabel labelpicture3 = new JLabel();
 	Timer tm;
 	int x = 0;
-	// Images Path In Array
-	String[] list = { "img8.jpg", // 0
-			"img18.jpg", // 1
-			"img14.jpg"// 2
-	};
 	
-	String[] list2 = {"img13.jpg","img17.jpg","img20.jpg"};
-	String[] list3 = {"img19.jpg","img1.jpg","img4.jpg"};
+	private Image titleimage = new ImageIcon(getClass().getResource("/images/타이틀3.jpg")).getImage().getScaledInstance(1194, 100,
+			java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon titleicon = new ImageIcon(titleimage);
+	
+	// Images Path In Array
+	String[] list = { "/images/img8.jpg", // 0
+			"/images/img18.jpg", // 1
+			"/images/img14.jpg"// 2
+	};
+	URL[] url = { getClass().getResource(list[0]), getClass().getResource(list[1]), getClass().getResource(list[2])};
+	
+	String[] list2 = {"/images/img13.jpg","/images/img17.jpg","/images/img20.jpg"};
+	URL[] url2 = { getClass().getResource(list2[0]),getClass().getResource(list2[1]) ,getClass().getResource(list2[2]) };
+	
+	String[] list3 = {"/images/img19.jpg","/images/img1.jpg","/images/img4.jpg"};
+	URL[] url3 = { getClass().getResource(list2[0]),getClass().getResource(list2[1]) ,getClass().getResource(list2[2]) };
 	// 생성자
 	public ImageSlide() {
 		this.setBackground(Color.WHITE);
@@ -70,9 +84,9 @@ public class ImageSlide extends JPanel {
 		// 이미지 아이콘에 경로에 잡혀있는 이미지들을 넣어서 등록한다.
 		// img라는 객체에 아이콘에 경로에 잡혀있는 이미지들을 get하여 넣고
 		// newimg 로 재탄생 시킨다 . ( String 파일네임을 인자값으로넣음)
-		ImageIcon icon = new ImageIcon(list[i]);
-		ImageIcon icon2 = new ImageIcon(list2[i]);
-		ImageIcon icon3 = new ImageIcon(list3[i]);
+		ImageIcon icon = new ImageIcon(url[i]);
+		ImageIcon icon2 = new ImageIcon(url2[i]);
+		ImageIcon icon3 = new ImageIcon(url3[i]);
 		// System.out.println(icon.getIconWidth()); // 이미지의 실제 픽셀 가로길이
 		// System.out.println(icon.getIconHeight()); // 이미지의 실제 픽셀 세로길이
 		Image img = icon.getImage();

@@ -49,7 +49,10 @@ public class VideoPan extends JPanel {
 	private TitledBorder dance = new TitledBorder("");
 	private TitledBorder smi = new TitledBorder("");
 	// ===========================================================
-	private ImageIcon imgE1 = new ImageIcon("KakaoTalk_20170820_180152201.jpg");
+
+	private Image imge1 = new ImageIcon(getClass().getResource("/images/KakaoTalk_20170820_180152201.jpg")).getImage().getScaledInstance(610, 279,
+			java.awt.Image.SCALE_SMOOTH);
+	private ImageIcon imgE1 = new ImageIcon(imge1);
 	private JLabel encourage = new JLabel(imgE1);
 	private JButton renew = new JButton("°»½Å");
 	private JPanel renewPan = new JPanel();

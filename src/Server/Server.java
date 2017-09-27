@@ -388,7 +388,9 @@ public class Server extends JFrame {
 	private JPanel mainPan = new JPanel(card);
 	private JPanel profilePan = new JPanel(card);// 로그인전후 바뀔 프로필패널
 	// COMPNENT - homePan
-	private Image titleimage = new ImageIcon("타이틀06.jpg").getImage().getScaledInstance(1194, 100,
+
+	private Image titleimage = new ImageIcon(getClass().getResource(""
+			+ "/타이틀06.jpg")).getImage().getScaledInstance(1194, 100,
 			java.awt.Image.SCALE_SMOOTH);
 	private ImageIcon titleicon = new ImageIcon(titleimage);
 

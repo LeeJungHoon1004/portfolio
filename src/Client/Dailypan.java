@@ -95,22 +95,25 @@ public class Dailypan extends JPanel {
 	// ------------------------
 
 	private String result;
-
-	private Image confirmimg = new ImageIcon("goal.jpg").getImage().getScaledInstance(300, 150,
+	
+	//getClass().getResource("/images/타이틀3.jpg")
+	//"goal.jpg"
+	private Image confirmimg = new ImageIcon(getClass().getResource("/images/goal.jpg")).getImage().getScaledInstance(300, 150,
 			java.awt.Image.SCALE_SMOOTH); // 빈컵이미지
-
-	private Image water_effect = new ImageIcon("waterInform.jpg").getImage().getScaledInstance(500, 500,
+	//"waterInform.jpg"
+	private Image water_effect = new ImageIcon(getClass().getResource("/images/waterInform.jpg")).getImage().getScaledInstance(500, 500,
 			java.awt.Image.SCALE_SMOOTH);
-
-	private Image cupimage = new ImageIcon("empty2.png").getImage().getScaledInstance(50, 80,
+	//"empty2.png"
+	private Image cupimage = new ImageIcon(getClass().getResource("/images/empty2.png")).getImage().getScaledInstance(50, 80,
 			java.awt.Image.SCALE_SMOOTH); // 빈컵이미지
-	private Image fullcupimage = new ImageIcon("full2.png").getImage().getScaledInstance(50, 80,
+	//"full2.png"
+	private Image fullcupimage = new ImageIcon(getClass().getResource("/images/full2.png")).getImage().getScaledInstance(50, 80,
 			java.awt.Image.SCALE_SMOOTH); // 물들어있는컵
-
-	private Image water_Sign = new ImageIcon("waterSign.jpg").getImage().getScaledInstance(500, 500,
+	//"waterSign.jpg"
+	private Image water_Sign = new ImageIcon(getClass().getResource("/images/waterSign.jpg")).getImage().getScaledInstance(500, 500,
 			java.awt.Image.SCALE_SMOOTH);
-
-	private Image dreamImage = new ImageIcon("규정.jpg").getImage().getScaledInstance(600, 200,
+	//"규정.jpg"
+	private Image dreamImage = new ImageIcon(getClass().getResource("/images/규정.jpg")).getImage().getScaledInstance(600, 200,
 			java.awt.Image.SCALE_SMOOTH);
 
 	private ImageIcon iconconfirm = new ImageIcon(confirmimg);
